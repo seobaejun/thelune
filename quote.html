@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="THE LUNE">
+
+    <!-- Site Title -->
+    <title>견적내기 - THE LUNE</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/glass-button.css">
+    <link rel="stylesheet" href="assets/css/quote.css">
+    
+    <style>
+        /* 견적 요약 버튼 호버 효과 */
+        .quote-actions-final a:hover,
+        .quote-actions-final button:hover {
+            background: #ff3d24 !important;
+            border-color: #ff3d24 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 61, 36, 0.3);
+        }
+        
+        .quote-actions-final button:last-child:hover {
+            background: #e6351f !important;
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+</head>
+
+<body>
+
+    <!-- Start Header Section -->
+    <header class="ak-site_header ak-style1 ak-sticky_header" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100vw !important; z-index: 9999 !important; box-sizing: border-box !important;">
+        <div class="ak-main_header" style="width: 100% !important; max-width: none !important;">
+            <div class="container" style="max-width: 1400px !important; width: 100% !important; margin: 0 auto !important; padding: 0 20px !important; box-sizing: border-box !important;">
+                <div class="ak-main_header_in" style="display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 5px !important; width: 100% !important;">
+                    <div class="ak-main-header-left" style="flex-shrink: 0 !important; margin-right: 5px !important;">
+                        <a class="ak-site_branding lune-logo" href="index.html">
+                            <img src="assets/img/logo.png" alt="THE LUNE Logo" style="height: 40px !important;">
+                        </a>
+                    </div>
+                    <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important; margin: 0 5px !important; overflow: visible !important;">
+                        <div class="ak-nav ak-medium" style="width: 100% !important;">
+                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; justify-content: center !important; gap: 0px !important; padding: 0 !important; margin: 0 !important; white-space: nowrap !important; overflow: visible !important; flex-wrap: nowrap !important;">
+                                <li><a href="index.html#about" style="font-size: 14px !important; padding: 8px 5px !important; white-space: nowrap !important;">회사소개</a></li>
+                                <li><a href="index.html#services" style="font-size: 14px !important; padding: 8px 5px !important; white-space: nowrap !important;">모델소개</a></li>
+                                <li><a href="index.html#gallery" style="font-size: 14px !important; padding: 8px 5px !important; white-space: nowrap !important;">갤러리</a></li>
+                                <li><a href="index.html#blog" style="font-size: 14px !important; padding: 8px 5px !important; white-space: nowrap !important;">홍보센터</a></li>
+                                <li><a href="index.html#contact" style="font-size: 14px !important; padding: 8px 5px !important; white-space: nowrap !important;">전시장</a></li>
+                                <li><a href="index.html#contact" style="font-size: 14px !important; padding: 8px 5px !important; white-space: nowrap !important;">문의하기</a></li>
+                                <li><a href="quote.html" class="active" style="font-size: 14px !important; padding: 8px 5px !important; white-space: nowrap !important;">견적내기</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ak-main-header-right" style="flex-shrink: 0 !important; margin-left: 5px !important;">
+                        <div class="ak-header_btn">
+                            <div class="d-flex align-items-center" style="gap: 8px !important;">
+                                <div class="heartbeat-icon">
+                                    <a href="tel:031-943-4488">
+                                        <span class="ak-heartbeat-btn"><img src="assets/img/phone.svg" alt="..."></span>
+                                    </a>
+                                </div>
+                                <a href="tel:031-943-4488" class="phone text-hover-animaiton white" style="font-size: 14px !important;">031-943-4488</a>
+                                <div class="language-selector">
+                                    <button class="lang-btn active" onclick="setLanguage('ko')" style="font-size: 12px !important; padding: 4px 6px !important;">KOR</button>
+                                    <button class="lang-btn" onclick="setLanguage('en')" style="font-size: 12px !important; padding: 4px 6px !important;">ENG</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header Section -->
+
+    <!-- Start Quote Page -->
+    <div class="quote-page" style="padding-top: 90px !important;">
+        <div class="ak-height-125 ak-height-lg-80"></div>
+        
+        <!-- Quote Header -->
+        <div class="quote-header">
+            <div class="container">
+                <div class="quote-title-section">
+                    <h1>THE LUNE 카니발 견적내기</h1>
+                    <div class="quote-controls" style="display: flex; align-items: center; gap: 20px;">
+                        <a href="index.html" style="color: #ff3d24; text-decoration: none; font-weight: 600; font-size: 16px;">메인으로</a>
+                        <span onclick="resetQuote()" style="color: #ccc; cursor: pointer; font-size: 14px;">초기화</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote Form -->
+        <div class="quote-form">
+            <div class="container">
+                <form id="quoteForm">
+                    
+                    <!-- 유종 선택 -->
+                    <div class="quote-section">
+                        <h2>유종 선택</h2>
+                        <div class="section-content">
+                            <h3>유종</h3>
+                            <p>연료 유종을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="gasoline" name="fuel_type" value="gasoline" data-price="0" data-label="가솔린">
+                                    <label for="gasoline">
+                                        <span class="option-name">가솔린</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="hybrid_fuel" name="fuel_type" value="hybrid" data-price="4550000" data-label="하이브리드">
+                                    <label for="hybrid_fuel">
+                                        <span class="option-name">하이브리드</span>
+                                        <span class="option-price">+4,550,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 트림선택 -->
+                    <div class="quote-section">
+                        <h2>트림선택</h2>
+                        <div class="section-content">
+                            <h3>트림선택</h3>
+                            <p>트림을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="signature" name="trim_options" value="signature" data-price="51160000" data-label="시그니처">
+                                    <label for="signature">
+                                        <span class="option-name">시그니처</span>
+                                        <span class="option-price">+51,160,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="xline" name="trim_options" value="xline" data-price="51220000" data-label="X-LINE">
+                                    <label for="xline">
+                                        <span class="option-name">X-LINE</span>
+                                        <span class="option-price">+51,220,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 순정옵션 -->
+                    <div class="quote-section">
+                        <h2>순정옵션</h2>
+                        <div class="section-content">
+                            <h3>순정옵션</h3>
+                            <p>순정 옵션을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="full_option" name="genuine_options" value="full_option" data-price="0" data-label="풀 옵션" checked disabled>
+                                    <label for="full_option">
+                                        <span class="option-name">풀 옵션</span>
+                                        <span class="option-description">(스타일 / 드라이브 와이즈 / 모니터링 팩 / 스마트 커넥트 / HUD+빌트인 캠2 / BOSS 사운드 / 컴포트)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 외장컬러 -->
+                    <div class="quote-section">
+                        <h2>외장컬러</h2>
+                        <div class="section-content">
+                            <h3>외장컬러</h3>
+                            <p>차량 외장 색상을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="aurora_black_pearl" name="exterior_color" value="aurora_black_pearl" data-price="0" data-label="오로라 블랙 펄">
+                                    <label for="aurora_black_pearl">
+                                        <span class="option-name">오로라 블랙 펄</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="snow_white_pearl" name="exterior_color" value="snow_white_pearl" data-price="0" data-label="스노우 화이트 펄">
+                                    <label for="snow_white_pearl">
+                                        <span class="option-name">스노우 화이트 펄</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="ceramic_silver" name="exterior_color" value="ceramic_silver" data-price="0" data-label="세라믹 실버 (X-LINE)">
+                                    <label for="ceramic_silver">
+                                        <span class="option-name">세라믹 실버 (X-LINE)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 인테리어 -->
+                    <div class="quote-section">
+                        <h2>인테리어</h2>
+                        <div class="section-content">
+                            <h3>인테리어</h3>
+                            <p>내장 인테리어를 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="royal_interior" name="interior_options" value="royal_interior" data-price="0" data-label="로얄 인테리어">
+                                    <label for="royal_interior">
+                                        <span class="option-name">로얄 인테리어</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="coat_beige" name="interior_options" value="coat_beige" data-price="0" data-label="코트 베이지">
+                                    <label for="coat_beige">
+                                        <span class="option-name">코트 베이지</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="navy_gray" name="interior_options" value="navy_gray" data-price="0" data-label="네이비 그레이 (#EV전용)">
+                                    <label for="navy_gray">
+                                        <span class="option-name">네이비 그레이 (#EV전용)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 기본 전체 옵션 -->
+                    <div class="quote-section">
+                        <h2>기본 전체 옵션</h2>
+                        <div class="section-content">
+                            <h3>1 패키지</h3>
+                            <p>기본 패키지를 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="package1" name="package" value="package1" data-price="47840000" data-label="1 패키지 (기본 전체 옵션)">
+                                    <label for="package1">
+                                        <span class="option-name">1 패키지 (기본 전체 옵션)</span>
+                                        <span class="option-price">47,840,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 엔진선택 -->
+                    <div class="quote-section">
+                        <h2>엔진선택</h2>
+                        <div class="section-content">
+                            <h3>엔진선택</h3>
+                            <p>엔진을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="engine_gasoline" name="engine" value="gasoline" data-price="0">
+                                    <label for="engine_gasoline">
+                                        <span class="option-name">가솔린</span>
+                                        <span class="option-price">+0원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="engine_hybrid" name="engine" value="hybrid" data-price="4550000">
+                                    <label for="engine_hybrid">
+                                        <span class="option-name">하이브리드</span>
+                                        <span class="option-price">+4,550,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 차량색상 -->
+                    <div class="quote-section">
+                        <h2>차량색상</h2>
+                        <div class="section-content">
+                            <h3>차량색상</h3>
+                            <p>차량 등급마다 선택할 수 있는 색상에 차이가 있습니다</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="color_white" name="color" value="white" data-price="100000">
+                                    <label for="color_white">
+                                        <span class="option-name">스노우 화이트 펄(SWP)</span>
+                                        <span class="option-price">+100,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="color_silver" name="color" value="silver" data-price="0">
+                                    <label for="color_silver">
+                                        <span class="option-name">아이보리 실버(ISG)</span>
+                                        <span class="option-price">+0원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="color_black" name="color" value="black" data-price="0">
+                                    <label for="color_black">
+                                        <span class="option-name">오로라 블랙 펄(ABP)</span>
+                                        <span class="option-price">+0원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- 추가옵션 -->
+                    <div class="quote-section">
+                        <h2>추가옵션</h2>
+                        <div class="section-content">
+                            <h3>추가옵션</h3>
+                            <p>기본옵션을 제외한 추가옵션입니다</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="add_side_screen" name="additional_options" value="side_screen" data-price="1500000" data-label="전용 사이드 스크린">
+                                    <label for="add_side_screen">
+                                        <span class="option-name">전용 사이드 스크린</span>
+                                        <span class="option-price">+1,500,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="add_dcs_module" name="additional_options" value="dcs_module" data-price="900000" data-label="DCS 모듈">
+                                    <label for="add_dcs_module">
+                                        <span class="option-name">DCS 모듈</span>
+                                        <span class="option-price">+900,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="add_hsd_front" name="additional_options" value="hsd_front" data-price="2200000" data-label="HSD Front형 브레이크 SET">
+                                    <label for="add_hsd_front">
+                                        <span class="option-name">HSD Front형 브레이크 SET</span>
+                                        <span class="option-price">+2,200,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="add_hsd_rear" name="additional_options" value="hsd_rear" data-price="2200000" data-label="HSD Rear형 브레이크 SET">
+                                    <label for="add_hsd_rear">
+                                        <span class="option-name">HSD Rear형 브레이크 SET</span>
+                                        <span class="option-price">+2,200,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 견적 요약 -->
+                    <div class="quote-section">
+                        <h2>견적 요약</h2>
+                        <div class="section-content">
+                            <div class="quote-summary-final">
+                                <div class="total-price-final">
+                                    <div class="price-label">총 합계:</div>
+                                    <div class="price-value">
+                                        <input type="text" id="totalPriceBottom" value="0" readonly>
+                                        <span>원</span>
+                                    </div>
+                                </div>
+                                <div class="quote-actions-final" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px;">
+                                    <a href="tel:031-943-4488" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">전화 상담</a>
+                                    <a href="https://pf.kakao.com/_XGpExj" target="_blank" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">채팅 상담</a>
+                                    <button onclick="showQuote()" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">견적서 보기</button>
+                                    <button onclick="printQuote()" style="background: #ff3d24; color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">견적서 다운로드</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Quote Summary Sidebar -->
+        <div class="quote-summary-sidebar" id="quoteSidebar">
+            <div class="summary-content">
+                <h3>선택된 옵션</h3>
+                <div class="selected-options" id="selectedOptions">
+                    <p>옵션을 선택해주세요.</p>
+                </div>
+                <div class="summary-total">
+                    <div class="total-label">총 합계</div>
+                    <div class="total-amount" id="sidebarTotal">0원</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Quote Page -->
+
+    <!-- Start Footer -->
+    <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+            <div style="display: flex; flex-wrap: wrap; margin: 0 -15px;">
+                <!-- Company Info -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <a href="index.html" style="display: inline-block; margin-bottom: 20px;">
+                            <img src="assets/img/logo.png" alt="THE LUNE Logo" style="height: 40px; width: auto;">
+                        </a>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px; line-height: 1.6;">프리미엄 리무진 서비스</div>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">평일: 09:00 - 18:00</div>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">빠른 링크</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 10px;"><a href="index.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">홈</a></li>
+                            <li style="margin-bottom: 10px;"><a href="index.html#about" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">회사소개</a></li>
+                            <li style="margin-bottom: 10px;"><a href="index.html#services" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">모델소개</a></li>
+                            <li style="margin-bottom: 10px;"><a href="index.html#gallery" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">갤러리</a></li>
+                            <li style="margin-bottom: 10px;"><a href="quote.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">견적내기</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">서비스</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 10px;"><a href="index.html#services" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">4인승 리무진</a></li>
+                            <li style="margin-bottom: 10px;"><a href="index.html#services" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">6인승 리무진</a></li>
+                            <li style="margin-bottom: 10px;"><a href="index.html#services" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">9인승 리무진</a></li>
+                            <li style="margin-bottom: 10px;"><a href="index.html#contact" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">전시장 방문</a></li>
+                            <li style="margin-bottom: 10px;"><a href="quote.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">맞춤 견적</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Contact & Social -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">위치 & 연락처</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 10px;"><a href="mailto:thelune1@naver.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">thelune1@naver.com</a></li>
+                            <li style="margin-bottom: 10px;"><a href="tel:031-943-4488" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">031-943-4488</a></li>
+                            <li style="margin-bottom: 20px; color: rgba(255, 255, 255, 0.8);">경기도 파주시 탄현면 축현산단로 21-41</li>
+                        </ul>
+                        <div style="display: flex; gap: 15px; margin-top: 20px;">
+                            <a href="https://www.instagram.com/dh_auto_lune/" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(255, 61, 36, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                    <g clip-path="url(#clip0_365_2391)">
+                                        <path d="M15.9833 4.94233C15.9459 4.09218 15.8084 3.50772 15.6114 3.00127C15.4083 2.46369 15.0957 1.9824 14.6862 1.58229C14.2861 1.17596 13.8016 0.860229 13.2703 0.660239C12.7609 0.463301 12.1795 0.325823 11.3294 0.28834C10.4729 0.247682 10.201 0.238281 8.02866 0.238281C5.85636 0.238281 5.58446 0.247682 4.73114 0.285165C3.881 0.322648 3.29654 0.460248 2.79021 0.657064C2.25251 0.860229 1.77121 1.17279 1.37111 1.58229C0.964783 1.9824 0.649169 2.46687 0.449057 2.99822C0.252119 3.50772 0.114641 4.08901 0.0771582 4.93915C0.0365009 5.79564 0.0270996 6.06754 0.0270996 8.23984C0.0270996 10.4121 0.0365009 10.684 0.0739838 11.5374C0.111467 12.3875 0.249067 12.972 0.446005 13.4784C0.649169 14.016 0.964783 14.4973 1.37111 14.8974C1.77121 15.3037 2.25568 15.6195 2.78704 15.8195C3.29654 16.0164 3.87783 16.1539 4.72809 16.1913C5.58129 16.229 5.85331 16.2382 8.02561 16.2382C10.1979 16.2382 10.4698 16.229 11.3231 16.1913C12.1733 16.1539 12.7577 16.0164 13.2641 15.8195C14.3393 15.4037 15.1895 14.5536 15.6052 13.4784C15.802 12.9689 15.9396 12.3875 15.9771 11.5374C16.0146 10.684 16.024 10.4121 16.024 8.23984C16.024 6.06754 16.0208 5.79564 15.9833 4.94233ZM14.5425 11.4749C14.5081 12.2563 14.3768 12.6782 14.2674 12.9595C13.9986 13.6566 13.4454 14.2098 12.7483 14.4786C12.467 14.588 12.042 14.7193 11.2637 14.7536C10.4198 14.7912 10.1667 14.8005 8.03184 14.8005C5.89702 14.8005 5.64075 14.7912 4.79988 14.7536C4.01848 14.7193 3.59652 14.588 3.31522 14.4786C2.96835 14.3504 2.65261 14.1472 2.39634 13.8816C2.13066 13.6221 1.9275 13.3096 1.7993 12.9627C1.6899 12.6814 1.55865 12.2563 1.52434 11.478C1.48674 10.6341 1.47746 10.3809 1.47746 8.24607C1.47746 6.11125 1.48674 5.85498 1.52434 5.01424C1.55865 4.23284 1.6899 3.81088 1.7993 3.52957C1.9275 3.18258 2.13066 2.86697 2.39951 2.61057C2.65884 2.34489 2.9714 2.14173 3.31839 2.01365C3.5997 1.90426 4.02483 1.773 4.80306 1.73857C5.64697 1.70109 5.9002 1.69169 8.03489 1.69169C10.1729 1.69169 10.426 1.70109 11.2668 1.73857C12.0482 1.773 12.4702 1.90426 12.7515 2.01365C13.0984 2.14173 13.4141 2.34489 13.6704 2.61057C13.9361 2.87002 14.1392 3.18258 14.2674 3.52957C14.3768 3.81088 14.5081 4.23589 14.5425 5.01424C14.58 5.85815 14.5894 6.11125 14.5894 8.24607C14.5894 10.3809 14.58 10.6309 14.5425 11.4749Z" fill="white"/>
+                                        <path d="M8.02864 4.12988C5.75951 4.12988 3.91846 5.97082 3.91846 8.24006C3.91846 10.5093 5.75951 12.3502 8.02864 12.3502C10.2979 12.3502 12.1388 10.5093 12.1388 8.24006C12.1388 5.97082 10.2979 4.12988 8.02864 4.12988ZM8.02864 10.9062C6.55655 10.9062 5.36246 9.71227 5.36246 8.24006C5.36246 6.76785 6.55655 5.57389 8.02864 5.57389C9.50085 5.57389 10.6948 6.76785 10.6948 8.24006C10.6948 9.71227 9.50085 10.9062 8.02864 10.9062Z" fill="white"/>
+                                        <path d="M13.261 3.96735C13.261 4.49724 12.8313 4.92689 12.3013 4.92689C11.7714 4.92689 11.3418 4.49724 11.3418 3.96735C11.3418 3.43734 11.7714 3.00781 12.3013 3.00781C12.8313 3.00781 13.261 3.43734 13.261 3.96735Z" fill="white"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_365_2391">
+                                            <rect width="16" height="16" fill="white" transform="translate(-0.000976562 0.238281)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/dhautokr?locale=ko_KR" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(255, 61, 36, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 11.993 2.92547 15.3027 6.75 15.9028V10.3125H4.71875V8H6.75V6.2375C6.75 4.2325 7.94438 3.125 9.77172 3.125C10.6467 3.125 11.5625 3.28125 11.5625 3.28125V5.25H10.5538C9.56 5.25 9.25 5.86672 9.25 6.5V8H11.4688L11.1141 10.3125H9.25V15.9028C13.0745 15.3027 16 11.993 16 8Z" fill="white"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.youtube.com/@dhauto5713" target="_blank" title="YouTube" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(255, 61, 36, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                    <path d="M15.841 4.258c-.185-.695-.73-1.24-1.425-1.425C13.255 2.535 8 2.535 8 2.535s-5.255 0-6.416.298c-.695.185-1.24.73-1.425 1.425C-.139 5.419-.139 7.835-.139 7.835s0 2.416.298 3.577c.185.695.73 1.24 1.425 1.425C2.745 13.135 8 13.135 8 13.135s5.255 0 6.416-.298c.695-.185 1.24-.73 1.425-1.425.298-1.161.298-3.577.298-3.577s0-2.416-.298-3.577zM6.4 10.135V5.535l4.267 2.3L6.4 10.135z" fill="white"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <div style="height: 30px;"></div>
+            <div style="height: 2px; background: #ff3d24; margin: 30px 0;"></div>
+            <div style="height: 20px;"></div>
+            
+            <!-- Copyright -->
+            <div style="background: rgba(0, 0, 0, 0.5); padding: 20px 0; border-top: 1px solid rgba(255, 61, 36, 0.2); display: flex; justify-content: center; align-items: center;">
+                <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">
+                    <p style="margin: 0; color: rgba(255, 255, 255, 0.7);">Copyright ©2025 THE LUNE. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- JS Files -->
+    <script src="assets/js/plugins/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/swiper.min.js"></script>
+    <script src="assets/js/plugins/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/quote.js?v=3.0"></script>
+
+</body>
+
+</html>
