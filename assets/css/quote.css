@@ -530,17 +530,43 @@ html, body {
 .quote-summary-sidebar {
     position: fixed;
     top: 200px;
-    right: 80px;
-    width: 300px;
-    background: rgba(0, 0, 0, 0.9);
+    right: 30px;
+    width: 320px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 61, 36, 0.3);
-    border-radius: 15px;
+    border-radius: 12px;
     padding: 25px;
-    backdrop-filter: blur(15px);
     z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     max-height: calc(100vh - 250px);
-    overflow-y: hidden;
-    transition: top 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar-header h3 {
+    color: var(--white-color);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 61, 36, 0.3);
+    padding-bottom: 15px;
+}
+
+
+.total-price {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 61, 36, 0.3);
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
 .summary-content h3 {

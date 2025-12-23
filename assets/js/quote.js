@@ -7,12 +7,7 @@ let totalPrice = 0;
 let selectedOptions = {};
 let selectedSeatType = null; // 선택된 좌석 유형 추적
 
-// Initialize quote page
-document.addEventListener('DOMContentLoaded', function() {
-    initializeQuotePage();
-    setupEventListeners();
-    updatePriceDisplay();
-});
+// Initialize quote page - moved to main DOMContentLoaded listener
 
 // Initialize quote page
 function initializeQuotePage() {
@@ -36,9 +31,36 @@ function initializeQuotePage() {
 // Setup event listeners
 function setupEventListeners() {
     // Add event listeners to all form inputs
-    const inputs = document.querySelectorAll('#quoteForm input[type="radio"], #quoteForm input[type="checkbox"]');
+    setupFormEventListeners('#quoteForm');
+    setupFormEventListeners('#quote6SeatForm');
+    
+    // Add event listeners to buttons
+    setupButtonListeners();
+    
+    console.log('Event listeners setup complete');
+}
+
+// Setup event listeners for a specific form
+function setupFormEventListeners(formSelector) {
+    const form = document.querySelector(formSelector);
+    if (!form) {
+        console.log(`Form not found: ${formSelector}`);
+        return;
+    }
+    
+    const inputs = form.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+    let listenerCount = 0;
     
     inputs.forEach(input => {
+        // Check if listener already exists by checking for data attribute
+        if (input.dataset.listenerAttached === 'true') {
+            return; // Skip if listener already attached
+        }
+        
+        // Mark as having listener attached
+        input.dataset.listenerAttached = 'true';
+        
+        // Add event listeners
         if (input.type === 'radio') {
             // For radio buttons, use click event to handle deselection
             input.addEventListener('click', handleRadioClick);
@@ -46,12 +68,11 @@ function setupEventListeners() {
             // For checkboxes, use change event
             input.addEventListener('change', handleOptionChange);
         }
+        
+        listenerCount++;
     });
     
-    // Add event listeners to buttons
-    setupButtonListeners();
-    
-    console.log('Event listeners setup complete');
+    console.log(`Event listeners setup for ${formSelector} (${listenerCount} inputs)`);
 }
 
 // Handle radio button clicks (for deselection functionality)
@@ -154,6 +175,29 @@ function setupButtonListeners() {
         });
         console.log('Show 6-seat options button listener added');
     }
+    
+    // 6인승 Show quote button
+    const showQuoteBtn6Seat = document.getElementById('showQuoteBtn6Seat');
+    if (showQuoteBtn6Seat) {
+        showQuoteBtn6Seat.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('6-seat show quote button clicked');
+            showQuote();
+        });
+        console.log('6-seat show quote button listener added');
+    }
+    
+    // 6인승 Download PDF button
+    const downloadPDFBtn6Seat = document.getElementById('downloadPDFBtn6Seat');
+    if (downloadPDFBtn6Seat) {
+        downloadPDFBtn6Seat.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('6-seat download PDF button clicked');
+            downloadQuotePDF();
+        });
+        console.log('6-seat download PDF button listener added');
+    }
+    
 }
 
 // Handle option change
@@ -237,23 +281,25 @@ function calculateTotalPrice() {
 function updatePriceDisplay() {
     const formattedPrice = formatPrice(totalPrice);
     
-    // Update main price input (if exists)
-    const totalPriceInput = document.getElementById('totalPrice');
-    if (totalPriceInput) {
-        totalPriceInput.value = formattedPrice;
-    }
-    
-    // Update bottom price input
+    // Update bottom price input (4인승)
     const totalPriceBottomInput = document.getElementById('totalPriceBottom');
     if (totalPriceBottomInput) {
         totalPriceBottomInput.value = formattedPrice;
     }
     
-    // Update sidebar total
-    const sidebarTotal = document.getElementById('sidebarTotal');
+    // Update bottom price input (6인승)
+    const totalPriceBottomInput6Seat = document.getElementById('totalPriceBottom6Seat');
+    if (totalPriceBottomInput6Seat) {
+        totalPriceBottomInput6Seat.value = formattedPrice;
+    }
+    
+    // Update sidebar total (span element)
+    const sidebarTotal = document.getElementById('totalPrice');
     if (sidebarTotal) {
         sidebarTotal.textContent = formattedPrice + '원';
     }
+    
+    console.log('Price display updated:', formattedPrice);
 }
 
 // Update selected options display
@@ -347,40 +393,7 @@ function resetQuoteOptions() {
     console.log('Quote options reset for seat type change');
 }
 
-// Setup sidebar scroll handler
-function setupSidebarScrollHandler() {
-    let isScrollHandlerAdded = false;
-    
-    if (!isScrollHandlerAdded) {
-        window.addEventListener('scroll', handleSidebarScroll);
-        isScrollHandlerAdded = true;
-        console.log('Sidebar scroll handler added');
-    }
-}
-
-// Handle sidebar scroll position
-function handleSidebarScroll() {
-    const quoteSidebar = document.getElementById('quoteSidebar');
-    const quoteOptions = document.getElementById('quoteOptions');
-    
-    if (!quoteSidebar || !quoteOptions || quoteSidebar.style.display === 'none') {
-        return;
-    }
-    
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const quoteOptionsTop = quoteOptions.offsetTop;
-    const minTop = 200; // 카드 영역을 피하기 위한 최소 상단 여백
-    const maxTop = quoteOptionsTop - 100; // 유종선택 섹션 위치
-    
-    // 스크롤 위치에 따라 사이드바 위치 조정
-    if (scrollTop < maxTop) {
-        // 유종선택 섹션이 보이는 경우
-        quoteSidebar.style.top = Math.max(minTop, maxTop - scrollTop) + 'px';
-    } else {
-        // 유종선택 섹션을 지나친 경우
-        quoteSidebar.style.top = minTop + 'px';
-    }
-}
+// Sidebar functions removed
 
 // Show quote
 function showQuote() {
@@ -509,10 +522,16 @@ function show4SeatQuoteOptions() {
     console.log('show4SeatQuoteOptions() called');
     
     const quoteOptions = document.getElementById('quoteOptions');
+    const quote6SeatOptions = document.getElementById('quote6SeatOptions');
     const show4SeatBtn = document.getElementById('show4SeatOptions');
     const show6SeatBtn = document.getElementById('show6SeatOptions');
     
     if (quoteOptions && show4SeatBtn) {
+        // 6인승 옵션 숨기기
+        if (quote6SeatOptions) {
+            quote6SeatOptions.style.display = 'none';
+        }
+        
         // 좌석 유형이 변경되었다면 옵션 초기화
         if (selectedSeatType && selectedSeatType !== '4seat') {
             resetQuoteOptions();
@@ -525,16 +544,12 @@ function show4SeatQuoteOptions() {
         show4SeatBtn.disabled = true;
         show4SeatBtn.style.cursor = 'default';
         
-        // 사이드바 미리 준비 (표시는 나중에)
-        const quoteSidebar = document.getElementById('quoteSidebar');
-        if (quoteSidebar) {
-            quoteSidebar.style.display = 'block';
-            quoteSidebar.style.opacity = '0';
-        }
+        // Show sidebar
+        showSidebar();
         
         // 6인승 버튼을 다시 선택 가능하게 설정
         if (show6SeatBtn) {
-            show6SeatBtn.innerHTML = '카니발 6인승 견적내기';
+            show6SeatBtn.innerHTML = '견적 문의';
             show6SeatBtn.style.background = 'rgba(139, 69, 19, 0.95)';
             show6SeatBtn.style.opacity = '1';
             show6SeatBtn.disabled = false;
@@ -546,11 +561,8 @@ function show4SeatQuoteOptions() {
         
         // 다음 프레임에서 처리 (레이아웃 안정화)
         requestAnimationFrame(() => {
-            // 사이드바 표시 및 스크롤 핸들러 설정
-            if (quoteSidebar) {
-                quoteSidebar.style.opacity = '1';
-                setupSidebarScrollHandler();
-            }
+            // 4인승 form에 이벤트 리스너 설정
+            setupFormEventListeners('#quoteForm');
             
             // 스크롤 이동 (단순화)
             setTimeout(() => {
@@ -573,10 +585,16 @@ function show6SeatQuoteOptions() {
     console.log('show6SeatQuoteOptions() called');
     
     const quoteOptions = document.getElementById('quoteOptions');
+    const quote6SeatOptions = document.getElementById('quote6SeatOptions');
     const show4SeatBtn = document.getElementById('show4SeatOptions');
     const show6SeatBtn = document.getElementById('show6SeatOptions');
     
-    if (quoteOptions && show6SeatBtn) {
+    if (quote6SeatOptions && show6SeatBtn) {
+        // 4인승 옵션 숨기기
+        if (quoteOptions) {
+            quoteOptions.style.display = 'none';
+        }
+        
         // 좌석 유형이 변경되었다면 옵션 초기화
         if (selectedSeatType && selectedSeatType !== '6seat') {
             resetQuoteOptions();
@@ -589,36 +607,29 @@ function show6SeatQuoteOptions() {
         show6SeatBtn.disabled = true;
         show6SeatBtn.style.cursor = 'default';
         
-        // 사이드바 미리 준비 (표시는 나중에)
-        const quoteSidebar = document.getElementById('quoteSidebar');
-        if (quoteSidebar) {
-            quoteSidebar.style.display = 'block';
-            quoteSidebar.style.opacity = '0';
-        }
+        // Show sidebar
+        showSidebar();
         
         // 4인승 버튼을 다시 선택 가능하게 설정
         if (show4SeatBtn) {
-            show4SeatBtn.innerHTML = '카니발 4인승 견적내기';
+            show4SeatBtn.innerHTML = '견적 문의';
             show4SeatBtn.style.background = 'rgba(139, 69, 19, 0.95)';
             show4SeatBtn.style.opacity = '1';
             show4SeatBtn.disabled = false;
             show4SeatBtn.style.cursor = 'pointer';
         }
         
-        // 즉시 옵션 표시 (애니메이션 최소화)
-        quoteOptions.style.display = 'block';
+        // 6인승 옵션 표시 (애니메이션 최소화)
+        quote6SeatOptions.style.display = 'block';
         
         // 다음 프레임에서 처리 (레이아웃 안정화)
         requestAnimationFrame(() => {
-            // 사이드바 표시 및 스크롤 핸들러 설정
-            if (quoteSidebar) {
-                quoteSidebar.style.opacity = '1';
-                setupSidebarScrollHandler();
-            }
+            // 6인승 form에 이벤트 리스너 설정
+            setupFormEventListeners('#quote6SeatForm');
             
             // 스크롤 이동 (단순화)
             setTimeout(() => {
-                quoteOptions.scrollIntoView({ 
+                quote6SeatOptions.scrollIntoView({ 
                     behavior: 'smooth', 
                     block: 'start' 
                 });
@@ -628,7 +639,7 @@ function show6SeatQuoteOptions() {
         console.log('6-seat quote options shown');
         showNotification('6인승 견적 옵션이 표시되었습니다. 원하는 옵션을 선택해주세요!', 'success');
     } else {
-        console.error('Quote options or button not found');
+        console.error('6-seat quote options or button not found');
     }
 }
 
@@ -1470,6 +1481,7 @@ window.closeSimpleModal = closeSimpleModal;
 window.toggleFullOptionDetails = toggleFullOptionDetails;
 window.togglePackage1Details = togglePackage1Details;
 window.show4SeatQuoteOptions = show4SeatQuoteOptions;
+window.show4SeatQuoteOptions = show4SeatQuoteOptions;
 window.show6SeatQuoteOptions = show6SeatQuoteOptions;
 window.setLanguage = setLanguage;
 
@@ -1485,5 +1497,48 @@ window.testButtons = function() {
 // Initialize quote functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Quote system initialized - Version 2.0 - Updated Quote Format');
-    initializeQuoteSystem();
+    
+    // Initialize sidebar
+    hideSidebar();
+    
+    // 기존 초기화 함수들 호출
+    initializeQuotePage();
+    setupEventListeners();
+    updatePriceDisplay();
+    
+    // 6인승 버튼 이벤트 리스너 추가
+    const showQuoteBtn6Seat = document.getElementById('showQuoteBtn6Seat');
+    const downloadPDFBtn6Seat = document.getElementById('downloadPDFBtn6Seat');
+    
+    if (showQuoteBtn6Seat) {
+        showQuoteBtn6Seat.addEventListener('click', function() {
+            console.log('6인승 견적서 보기 버튼 클릭됨');
+            showQuote();
+        });
+    }
+    
+    if (downloadPDFBtn6Seat) {
+        downloadPDFBtn6Seat.addEventListener('click', function() {
+            console.log('6인승 PDF 다운로드 버튼 클릭됨');
+            downloadQuotePDF();
+        });
+    }
 });
+
+// Show sidebar when options are displayed
+function showSidebar() {
+    const sidebar = document.getElementById('quoteSidebar');
+    if (sidebar) {
+        sidebar.style.display = 'block';
+        console.log('Sidebar displayed');
+    }
+}
+
+// Hide sidebar when options are hidden
+function hideSidebar() {
+    const sidebar = document.getElementById('quoteSidebar');
+    if (sidebar) {
+        sidebar.style.display = 'none';
+        console.log('Sidebar hidden');
+    }
+}
