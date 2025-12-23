@@ -81,26 +81,58 @@ function handleRadioClick(event) {
 
 // Setup button event listeners
 function setupButtonListeners() {
-    // Reset button
-    const resetBtn = document.querySelector('[onclick="resetQuote()"]');
-    if (resetBtn) {
-        resetBtn.removeAttribute('onclick');
-        resetBtn.addEventListener('click', resetQuote);
-    }
+    console.log('Setting up button listeners...');
     
     // Show quote button
-    const showQuoteBtn = document.querySelector('[onclick="showQuote()"]');
+    const showQuoteBtn = document.getElementById('showQuoteBtn');
     if (showQuoteBtn) {
-        showQuoteBtn.removeAttribute('onclick');
-        showQuoteBtn.addEventListener('click', showQuote);
+        showQuoteBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Show quote button clicked');
+            showQuote();
+        });
+        console.log('Show quote button listener added');
+    } else {
+        console.error('Show quote button not found');
     }
     
-    // Print quote button
-    const printQuoteBtn = document.querySelector('[onclick="printQuote()"]');
-    if (printQuoteBtn) {
-        printQuoteBtn.removeAttribute('onclick');
-        printQuoteBtn.addEventListener('click', printQuote);
+    // Download PDF button
+    const downloadPDFBtn = document.getElementById('downloadPDFBtn');
+    if (downloadPDFBtn) {
+        downloadPDFBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Download PDF button clicked');
+            downloadQuotePDF();
+        });
+        console.log('Download PDF button listener added');
+    } else {
+        console.error('Download PDF button not found');
     }
+    
+    // Reset button
+    const resetBtn = document.querySelector('[onclick*="resetQuote"]');
+    if (resetBtn) {
+        resetBtn.removeAttribute('onclick');
+        resetBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Reset button clicked');
+            resetQuote();
+        });
+        console.log('Reset button listener added');
+    }
+    
+    // Full option item click
+    const fullOptionItem = document.getElementById('fullOptionItem');
+    if (fullOptionItem) {
+        fullOptionItem.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFullOptionDetails();
+        });
+        console.log('Full option item click listener added');
+    }
+    
+    // Package1 item click listener removed - details are always visible now
 }
 
 // Handle option change
@@ -111,13 +143,14 @@ function handleOptionChange(event) {
     const price = parseInt(input.dataset.price) || 0;
     
     if (input.type === 'radio') {
-        // For radio buttons, allow deselection by clicking again
-        if (input.checked && selectedOptions[sectionName] && selectedOptions[sectionName].element === input) {
-            // If clicking the same radio button that's already selected, deselect it
-            input.checked = false;
-            delete selectedOptions[sectionName];
-        } else if (input.checked) {
-            // New selection
+        // For radio buttons, only one selection per section
+        if (input.checked) {
+            // Clear previous selection in this section
+            if (selectedOptions[sectionName]) {
+                delete selectedOptions[sectionName];
+            }
+            
+            // Set new selection
             selectedOptions[sectionName] = {
                 name: optionName,
                 price: price,
@@ -274,49 +307,256 @@ function resetQuote() {
 
 // Show quote
 function showQuote() {
+    console.log('=== showQuote() called ===');
+    console.log('Selected options count:', Object.keys(selectedOptions).length);
+    console.log('Selected options:', selectedOptions);
+    
     if (Object.keys(selectedOptions).length === 0) {
-        showNotification('먼저 옵션을 선택해주세요.', 'warning');
+        alert('먼저 옵션을 선택해주세요.');
         return;
     }
     
-    // Create quote modal
-    createQuoteModal();
+    // Prevent multiple calls
+    if (document.getElementById('quoteModal')) {
+        console.log('Modal already exists, removing it first');
+        document.getElementById('quoteModal').remove();
+    }
+    
+    try {
+        console.log('Creating quote modal...');
+        createSimpleQuoteModal();
+        console.log('Quote modal created successfully');
+    } catch (error) {
+        console.error('Error creating quote modal:', error);
+        alert('견적서 표시 중 오류가 발생했습니다: ' + error.message);
+    }
+}
+
+// Create simple quote modal
+function createSimpleQuoteModal() {
+    console.log('Creating simple modal...');
+    
+    // Create modal HTML
+    const modalHTML = `
+        <div id="quoteModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999999; display: flex; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 10px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; color: black;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 style="margin: 0; color: #ff3d24;">THE LUNE 견적서</h2>
+                    <button onclick="closeSimpleModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+                </div>
+                <div>
+                    <h3>선택된 옵션</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #f5f5f5;">
+                                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">항목</th>
+                                <th style="padding: 10px; border: 1px solid #ddd; text-align: right;">가격</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${Object.entries(selectedOptions).map(([key, option]) => `
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">${option.name}</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">${formatPrice(option.price)}원</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                        <tfoot>
+                            <tr style="background: #ff3d24; color: white; font-weight: bold;">
+                                <td style="padding: 10px; border: 1px solid #ddd;">총 합계</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">${formatPrice(totalPrice)}원</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="closeSimpleModal()" style="background: #ccc; color: black; padding: 10px 20px; border: none; border-radius: 5px; margin-right: 10px; cursor: pointer;">닫기</button>
+                    <button onclick="downloadQuotePDF()" style="background: #ff3d24; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">PDF 다운로드</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    console.log('Simple modal added to DOM');
+}
+
+// Close simple modal
+function closeSimpleModal() {
+    const modal = document.getElementById('quoteModal');
+    if (modal) {
+        modal.remove();
+        console.log('Simple modal closed');
+    }
+}
+
+// Toggle full option details
+function toggleFullOptionDetails() {
+    const detailsDiv = document.getElementById('fullOptionDetails');
+    const toggleArrow = document.getElementById('toggleArrow');
+    
+    if (detailsDiv && toggleArrow) {
+        if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+            detailsDiv.style.display = 'block';
+            toggleArrow.innerHTML = '▲';
+            console.log('Full option details shown');
+        } else {
+            detailsDiv.style.display = 'none';
+            toggleArrow.innerHTML = '▼';
+            console.log('Full option details hidden');
+        }
+    }
+}
+
+// Toggle package1 details
+function togglePackage1Details() {
+    const detailsDiv = document.getElementById('package1Details');
+    const toggleArrow = document.getElementById('package1Arrow');
+    
+    if (detailsDiv && toggleArrow) {
+        if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+            detailsDiv.style.display = 'block';
+            toggleArrow.innerHTML = '▲';
+            console.log('Package1 details shown');
+        } else {
+            detailsDiv.style.display = 'none';
+            toggleArrow.innerHTML = '▼';
+            console.log('Package1 details hidden');
+        }
+    }
 }
 
 // Download PDF quote
 function downloadQuotePDF() {
+    console.log('=== downloadQuotePDF() called ===');
+    
+    if (Object.keys(selectedOptions).length === 0) {
+        alert('먼저 옵션을 선택해주세요.');
+        return;
+    }
+    
+    // Check if libraries are loaded
+    if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
+        console.error('PDF libraries not loaded');
+        alert('PDF 라이브러리가 로드되지 않았습니다. 페이지를 새로고침해주세요.');
+        return;
+    }
+    
+    try {
+        alert('PDF를 생성하고 있습니다. 잠시만 기다려주세요...');
+        
+        // Create a simple PDF content
+        const content = `
+            <div style="font-family: Arial, sans-serif; padding: 20px; background: white; color: black;">
+                <h1 style="color: #ff3d24; text-align: center;">THE LUNE 견적서</h1>
+                <p style="text-align: center;">견적일: ${new Date().toLocaleDateString('ko-KR')}</p>
+                <hr>
+                <h2>선택된 옵션</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f5f5f5;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">항목</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">가격</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${Object.entries(selectedOptions).map(([key, option]) => `
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">${option.name}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">${formatPrice(option.price)}원</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                    <tfoot>
+                        <tr style="background: #ff3d24; color: white;">
+                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">총 합계</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: right; font-weight: bold;">${formatPrice(totalPrice)}원</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <hr>
+                <p style="text-align: center; margin-top: 30px;">
+                    <strong>THE LUNE</strong><br>
+                    경기도 파주시 탄현면 축현산단로 21-41<br>
+                    전화: 031-943-4488 | 이메일: thelune1@naver.com
+                </p>
+            </div>
+        `;
+        
+        // Create temporary element
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = content;
+        tempDiv.style.position = 'absolute';
+        tempDiv.style.left = '-9999px';
+        tempDiv.style.width = '800px';
+        document.body.appendChild(tempDiv);
+        
+        // Generate PDF
+        html2canvas(tempDiv).then(canvas => {
+            document.body.removeChild(tempDiv);
+            
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 210;
+            const pageHeight = 295;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+            
+            const fileName = `THE_LUNE_견적서_${new Date().toISOString().slice(0, 10)}.pdf`;
+            pdf.save(fileName);
+            
+            alert('PDF 다운로드가 완료되었습니다!');
+            
+        }).catch(error => {
+            console.error('PDF generation error:', error);
+            document.body.removeChild(tempDiv);
+            alert('PDF 생성 중 오류가 발생했습니다: ' + error.message);
+        });
+        
+    } catch (error) {
+        console.error('Error in downloadQuotePDF:', error);
+        alert('PDF 다운로드 중 오류가 발생했습니다: ' + error.message);
+    }
+}
+
+// Print quote (legacy function for compatibility)
+function printQuote() {
     if (Object.keys(selectedOptions).length === 0) {
         showNotification('먼저 옵션을 선택해주세요.', 'warning');
         return;
     }
     
-    // Create printable content for PDF
+    // Create printable content
     const printContent = generatePrintContent();
     
-    // Open print window for PDF download
+    // Open print window
     const printWindow = window.open('', '_blank');
     printWindow.document.write(printContent);
     printWindow.document.close();
+    printWindow.print();
     
-    // Wait for content to load, then trigger print dialog
-    setTimeout(() => {
-        printWindow.print();
-    }, 500);
-    
-    showNotification('견적서 PDF 다운로드를 시작합니다.', 'info');
-}
-
-// Print quote (legacy function for compatibility)
-function printQuote() {
-    downloadQuotePDF();
+    showNotification('견적서를 출력합니다.', 'info');
 }
 
 // Create quote modal
 function createQuoteModal() {
+    console.log('createQuoteModal() called');
+    
     // Remove existing modal if any
     const existingModal = document.getElementById('quoteModal');
     if (existingModal) {
+        console.log('Removing existing modal');
         existingModal.remove();
+    }
+    
+    // Double check that modal doesn't exist
+    if (document.getElementById('quoteModal')) {
+        console.log('Modal still exists after removal, aborting');
+        return;
     }
     
     // Create modal
@@ -324,20 +564,20 @@ function createQuoteModal() {
     modal.id = 'quoteModal';
     modal.className = 'quote-modal';
     modal.innerHTML = `
-        <div class="modal-overlay" onclick="closeQuoteModal()"></div>
+        <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
                 <h3>THE LUNE 견적서</h3>
-                <button class="modal-close" onclick="closeQuoteModal()">&times;</button>
+                <button class="modal-close" onclick="window.closeQuoteModal()">&times;</button>
             </div>
             <div class="modal-body">
                 ${generateQuoteContent()}
             </div>
             <div class="modal-footer">
-                <button class="glass-button secondary-glass-button" onclick="closeQuoteModal()">
+                <button class="glass-button secondary-glass-button" onclick="window.closeQuoteModal()">
                     <span class="glass-button-text">닫기</span>
                 </button>
-                <button class="glass-button primary-glass-button" onclick="downloadQuotePDF()">
+                <button class="glass-button primary-glass-button" onclick="window.printQuote()">
                     <span class="glass-button-text">📄 PDF 다운로드</span>
                 </button>
             </div>
@@ -353,10 +593,11 @@ function createQuoteModal() {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                z-index: 9999;
+                z-index: 999999;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                pointer-events: auto;
             }
             .modal-overlay {
                 position: absolute;
@@ -422,9 +663,32 @@ function createQuoteModal() {
     
     // Add modal to body
     document.body.appendChild(modal);
+    console.log('Modal added to body');
+    
+    // Add overlay click event (only close when clicking the overlay, not the content)
+    const overlay = modal.querySelector('.modal-overlay');
+    const modalContent = modal.querySelector('.modal-content');
+    
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            // Only close if clicking directly on the overlay, not on modal content
+            if (e.target === overlay) {
+                console.log('Overlay clicked, closing modal');
+                closeQuoteModal();
+            }
+        });
+    }
+    
+    // Prevent modal content clicks from bubbling to overlay
+    if (modalContent) {
+        modalContent.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
     
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
+    console.log('Modal setup complete');
 }
 
 // Close quote modal
@@ -522,6 +786,126 @@ function generateQuoteContent() {
                 font-size: 18px;
             }
         </style>
+    `;
+    
+    return content;
+}
+
+// Generate PDF content (optimized for PDF generation)
+function generatePDFContent() {
+    const currentDate = new Date();
+    const quoteNumber = 'TL' + currentDate.getFullYear() + (currentDate.getMonth() + 1).toString().padStart(2, '0') + currentDate.getDate().toString().padStart(2, '0') + '-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    
+    let content = `
+        <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+            <!-- Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #ff3d24;">
+                <div style="font-size: 28px; font-weight: bold; color: #ff3d24;">THE LUNE</div>
+                <div style="text-align: right; font-size: 14px;">
+                    <div><strong>견적번호:</strong> ${quoteNumber}</div>
+                    <div><strong>견적일자:</strong> ${currentDate.toLocaleDateString('ko-KR')}</div>
+                    <div><strong>유효기간:</strong> ${new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('ko-KR')}</div>
+                </div>
+            </div>
+            
+            <!-- Title -->
+            <div style="text-align: center; font-size: 24px; font-weight: bold; color: #333; margin: 30px 0; padding: 15px; background: #f8f9fa; border-left: 5px solid #ff3d24;">
+                카니발 하이리무진 견적서
+            </div>
+            
+            <!-- Customer Info -->
+            <div style="background: #fff; padding: 20px; border: 1px solid #ddd; margin-bottom: 30px;">
+                <h4 style="color: #ff3d24; margin-bottom: 15px;">고객 정보</h4>
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div style="width: 120px; font-weight: bold; color: #555;">고객명:</div>
+                    <div style="flex: 1; border-bottom: 1px dotted #ccc; padding-bottom: 2px; min-height: 20px;"></div>
+                </div>
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div style="width: 120px; font-weight: bold; color: #555;">연락처:</div>
+                    <div style="flex: 1; border-bottom: 1px dotted #ccc; padding-bottom: 2px; min-height: 20px;"></div>
+                </div>
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div style="width: 120px; font-weight: bold; color: #555;">이메일:</div>
+                    <div style="flex: 1; border-bottom: 1px dotted #ccc; padding-bottom: 2px; min-height: 20px;"></div>
+                </div>
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div style="width: 120px; font-weight: bold; color: #555;">주소:</div>
+                    <div style="flex: 1; border-bottom: 1px dotted #ccc; padding-bottom: 2px; min-height: 20px;"></div>
+                </div>
+            </div>
+            
+            <!-- Items Table -->
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 2px solid #ff3d24;">
+                <thead>
+                    <tr style="background: linear-gradient(135deg, #ff3d24, #e6351f); color: white;">
+                        <th style="padding: 15px 12px; text-align: center; font-weight: bold; font-size: 14px; width: 10%;">번호</th>
+                        <th style="padding: 15px 12px; text-align: center; font-weight: bold; font-size: 14px; width: 50%;">상품명 / 옵션</th>
+                        <th style="padding: 15px 12px; text-align: center; font-weight: bold; font-size: 14px; width: 15%;">수량</th>
+                        <th style="padding: 15px 12px; text-align: center; font-weight: bold; font-size: 14px; width: 25%;">금액</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+    
+    Object.entries(selectedOptions).forEach(([key, option], index) => {
+        content += `
+            <tr>
+                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #eee;">${index + 1}</td>
+                <td style="padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-weight: 500;">${option.name}</td>
+                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #eee;">1</td>
+                <td style="padding: 12px; text-align: right; border-bottom: 1px solid #eee; font-weight: bold; color: #ff3d24;">${formatPrice(option.price)}원</td>
+            </tr>
+        `;
+    });
+    
+    const subtotal = totalPrice;
+    const tax = Math.floor(totalPrice * 0.1);
+    const total = subtotal + tax;
+    
+    content += `
+                </tbody>
+                <tfoot style="background: #f8f9fa; border: 2px solid #ff3d24;">
+                    <tr>
+                        <td colspan="3" style="text-align: right; padding: 12px; font-weight: bold;">소계</td>
+                        <td style="padding: 12px; text-align: right; font-weight: bold; color: #ff3d24;">${formatPrice(subtotal)}원</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right; padding: 12px; font-weight: bold;">부가세 (10%)</td>
+                        <td style="padding: 12px; text-align: right; font-weight: bold; color: #ff3d24;">${formatPrice(tax)}원</td>
+                    </tr>
+                    <tr style="background: #ff3d24; color: white; font-weight: bold; font-size: 18px;">
+                        <td colspan="3" style="text-align: right; padding: 15px 12px; border: none;">총 견적금액</td>
+                        <td style="padding: 15px 12px; text-align: right; border: none;">${formatPrice(total)}원</td>
+                    </tr>
+                </tfoot>
+            </table>
+            
+            <!-- Terms -->
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-left: 4px solid #ff3d24;">
+                <h4 style="color: #ff3d24; margin-bottom: 15px;">견적 조건 및 유의사항</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li style="margin-bottom: 8px; font-size: 13px; color: #666;">본 견적서는 ${new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('ko-KR')}까지 유효합니다.</li>
+                    <li style="margin-bottom: 8px; font-size: 13px; color: #666;">최종 가격은 실제 차량 상태 및 추가 옵션에 따라 변동될 수 있습니다.</li>
+                    <li style="margin-bottom: 8px; font-size: 13px; color: #666;">부가세 별도 (부가세 포함 금액은 위 표 참조)</li>
+                    <li style="margin-bottom: 8px; font-size: 13px; color: #666;">작업 기간: 계약 후 약 2-3주 소요 (차량 상태에 따라 변동 가능)</li>
+                    <li style="margin-bottom: 8px; font-size: 13px; color: #666;">A/S 보증: 시공 완료 후 1년간 무상 A/S 제공</li>
+                    <li style="margin-bottom: 8px; font-size: 13px; color: #666;">계약금: 총 금액의 30% (계약 시 지불)</li>
+                    <li style="margin-bottom: 8px; font-size: 13px; color: #666;">잔금: 작업 완료 후 인도 시 지불</li>
+                </ul>
+            </div>
+            
+            <!-- Footer -->
+            <div style="margin-top: 40px; text-align: center; padding: 20px; background: #333; color: white; border-radius: 5px;">
+                <h3 style="color: #ff3d24; margin-bottom: 10px;">THE LUNE (더룬)</h3>
+                <div style="display: flex; justify-content: center; gap: 30px; font-size: 14px; flex-wrap: wrap;">
+                    <div>📍 경기도 파주시 탄현면 축현산단로 21-41</div>
+                    <div>📞 031-943-4488</div>
+                    <div>✉️ thelune1@naver.com</div>
+                </div>
+                <div style="margin-top: 15px; font-size: 12px; color: #ccc;">
+                    프리미엄 카니발 하이리무진 전문 업체 | 2023년 브랜드파워 1위 | 차량 인테리어 특허 보유
+                </div>
+            </div>
+        </div>
     `;
     
     return content;
@@ -877,7 +1261,19 @@ window.showQuote = showQuote;
 window.printQuote = printQuote;
 window.downloadQuotePDF = downloadQuotePDF;
 window.closeQuoteModal = closeQuoteModal;
+window.closeSimpleModal = closeSimpleModal;
+window.toggleFullOptionDetails = toggleFullOptionDetails;
+window.togglePackage1Details = togglePackage1Details;
 window.setLanguage = setLanguage;
+
+// Debug function
+window.testButtons = function() {
+    console.log('Testing button functions...');
+    console.log('showQuote:', typeof window.showQuote);
+    console.log('downloadQuotePDF:', typeof window.downloadQuotePDF);
+    console.log('Selected options:', selectedOptions);
+    console.log('Total price:', totalPrice);
+};
 
 // Initialize quote functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {

@@ -97,7 +97,7 @@
                     <h1>THE LUNE 카니발 견적내기</h1>
                     <div class="quote-controls" style="display: flex; align-items: center; gap: 20px;">
                         <a href="index.html" style="color: #ff3d24; text-decoration: none; font-weight: 600; font-size: 16px;">메인으로</a>
-                        <span onclick="resetQuote()" style="color: #ccc; cursor: pointer; font-size: 14px;">초기화</span>
+                        <span onclick="window.resetQuote()" style="color: #ccc; cursor: pointer; font-size: 14px;">초기화</span>
                     </div>
                 </div>
             </div>
@@ -116,14 +116,14 @@
                             <p>연료 유종을 선택해 주세요</p>
                             <div class="option-list">
                                 <div class="option-item">
-                                    <input type="checkbox" id="gasoline" name="fuel_type" value="gasoline" data-price="0" data-label="가솔린">
+                                    <input type="radio" id="gasoline" name="fuel_type" value="gasoline" data-price="0" data-label="가솔린">
                                     <label for="gasoline">
                                         <span class="option-name">가솔린</span>
                                         <span class="option-price">기본 포함</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="hybrid_fuel" name="fuel_type" value="hybrid" data-price="4550000" data-label="하이브리드">
+                                    <input type="radio" id="hybrid_fuel" name="fuel_type" value="hybrid" data-price="4550000" data-label="하이브리드">
                                     <label for="hybrid_fuel">
                                         <span class="option-name">하이브리드</span>
                                         <span class="option-price">+4,550,000원</span>
@@ -141,14 +141,14 @@
                             <p>트림을 선택해 주세요</p>
                             <div class="option-list">
                                 <div class="option-item">
-                                    <input type="checkbox" id="signature" name="trim_options" value="signature" data-price="51160000" data-label="시그니처">
+                                    <input type="radio" id="signature" name="trim_options" value="signature" data-price="51160000" data-label="시그니처">
                                     <label for="signature">
                                         <span class="option-name">시그니처</span>
                                         <span class="option-price">+51,160,000원</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="xline" name="trim_options" value="xline" data-price="51220000" data-label="X-LINE">
+                                    <input type="radio" id="xline" name="trim_options" value="xline" data-price="51220000" data-label="X-LINE">
                                     <label for="xline">
                                         <span class="option-name">X-LINE</span>
                                         <span class="option-price">+51,220,000원</span>
@@ -162,16 +162,74 @@
                     <div class="quote-section">
                         <h2>순정옵션</h2>
                         <div class="section-content">
-                            <h3>순정옵션</h3>
-                            <p>순정 옵션을 선택해 주세요</p>
+                            <h3>기본전체옵션</h3>
+                            <p>기본전체옵션을 확인해 주세요</p>
                             <div class="option-list">
-                                <div class="option-item">
+                                <div class="option-item" id="fullOptionItem" style="cursor: pointer;">
                                     <input type="checkbox" id="full_option" name="genuine_options" value="full_option" data-price="0" data-label="풀 옵션" checked disabled>
-                                    <label for="full_option">
+                                    <label for="full_option" style="cursor: pointer; width: 100%;">
                                         <span class="option-name">풀 옵션</span>
                                         <span class="option-description">(스타일 / 드라이브 와이즈 / 모니터링 팩 / 스마트 커넥트 / HUD+빌트인 캠2 / BOSS 사운드 / 컴포트)</span>
                                         <span class="option-price">기본 포함</span>
+                                        <span id="toggleArrow" style="float: right; font-size: 14px; color: #ff3d24;">▼</span>
                                     </label>
+                                </div>
+                                
+                                <!-- 풀 옵션 상세 내용 -->
+                                <div id="fullOptionDetails" style="display: none; margin-top: 15px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #ff3d24;">
+                                    <h4 style="color: #ff3d24; margin-bottom: 15px; font-size: 16px;">기본 전체 옵션 상세 내용</h4>
+                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; font-size: 14px;">
+                                        <div style="font-weight: bold; color: #333;">루프</div>
+                                        <div>카니발 전용 Hi-Roof</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">1열</div>
+                                        <div>1열 벤치 보조 가죽 시트<br>2열 VVP 회전 / 등 받이 전자 의전 시트 (헤드리 시트/열선/통풍/안마/충전포트)<br>라커지 체 플로어</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">2열</div>
+                                        <div></div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">4열</div>
+                                        <div>4열 상용 시트 전자 후 수납 및 설치</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">테이블</div>
+                                        <div>하츠 파티션 장착 (수납형 등받이)</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">트림</div>
+                                        <div>도어 트림업 4PS / 전장 트림업, 플롤 트림업 / 라커지 트림업, 트렁크 트림업</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">바닥재</div>
+                                        <div>최고급 오토 바닥 히팅 우드 플로어</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">무드등</div>
+                                        <div>전장 무드 무드등, 사이드 엠비언트 무드등</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">TV</div>
+                                        <div>27인치 스마트 TV</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">도어스커트</div>
+                                        <div>2열 자동 도어 스커트</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">바디킷</div>
+                                        <div>AG 바디킷 (에어댐 장착)</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">구성</div>
+                                        <div>올 그레인 4EA / 올레 그레인 4EA</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">커튼</div>
+                                        <div>하니콤 블라인드</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">사이드스텝</div>
+                                        <div>자동식 사이드 스텝</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">핸들</div>
+                                        <div>DOS 핸들 장착</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">스타라이트</div>
+                                        <div>파이버 타입</div>
+                                        
+                                        <div style="font-weight: bold; color: #333;">그외</div>
+                                        <div>스피커 커버, 프리미엄 턴팅</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -185,21 +243,21 @@
                             <p>차량 외장 색상을 선택해 주세요</p>
                             <div class="option-list">
                                 <div class="option-item">
-                                    <input type="checkbox" id="aurora_black_pearl" name="exterior_color" value="aurora_black_pearl" data-price="0" data-label="오로라 블랙 펄">
+                                    <input type="radio" id="aurora_black_pearl" name="exterior_color" value="aurora_black_pearl" data-price="0" data-label="오로라 블랙 펄">
                                     <label for="aurora_black_pearl">
                                         <span class="option-name">오로라 블랙 펄</span>
                                         <span class="option-price">기본 포함</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="snow_white_pearl" name="exterior_color" value="snow_white_pearl" data-price="0" data-label="스노우 화이트 펄">
+                                    <input type="radio" id="snow_white_pearl" name="exterior_color" value="snow_white_pearl" data-price="0" data-label="스노우 화이트 펄">
                                     <label for="snow_white_pearl">
                                         <span class="option-name">스노우 화이트 펄</span>
                                         <span class="option-price">기본 포함</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="ceramic_silver" name="exterior_color" value="ceramic_silver" data-price="0" data-label="세라믹 실버 (X-LINE)">
+                                    <input type="radio" id="ceramic_silver" name="exterior_color" value="ceramic_silver" data-price="0" data-label="세라믹 실버 (X-LINE)">
                                     <label for="ceramic_silver">
                                         <span class="option-name">세라믹 실버 (X-LINE)</span>
                                         <span class="option-price">기본 포함</span>
@@ -217,21 +275,21 @@
                             <p>내장 인테리어를 선택해 주세요</p>
                             <div class="option-list">
                                 <div class="option-item">
-                                    <input type="checkbox" id="royal_interior" name="interior_options" value="royal_interior" data-price="0" data-label="로얄 인테리어">
+                                    <input type="radio" id="royal_interior" name="interior_options" value="royal_interior" data-price="0" data-label="로얄 인테리어">
                                     <label for="royal_interior">
                                         <span class="option-name">로얄 인테리어</span>
                                         <span class="option-price">기본 포함</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="coat_beige" name="interior_options" value="coat_beige" data-price="0" data-label="코트 베이지">
+                                    <input type="radio" id="coat_beige" name="interior_options" value="coat_beige" data-price="0" data-label="코트 베이지">
                                     <label for="coat_beige">
                                         <span class="option-name">코트 베이지</span>
                                         <span class="option-price">기본 포함</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="navy_gray" name="interior_options" value="navy_gray" data-price="0" data-label="네이비 그레이 (#EV전용)">
+                                    <input type="radio" id="navy_gray" name="interior_options" value="navy_gray" data-price="0" data-label="네이비 그레이 (#EV전용)">
                                     <label for="navy_gray">
                                         <span class="option-name">네이비 그레이 (#EV전용)</span>
                                         <span class="option-price">기본 포함</span>
@@ -254,6 +312,65 @@
                                         <span class="option-name">1 패키지 (기본 전체 옵션)</span>
                                         <span class="option-price">47,840,000원</span>
                                     </label>
+                                </div>
+                                
+                                <!-- 패키지 상세 내용 -->
+                                <div style="margin-top: 10px; padding: 15px; font-size: 15px;">
+                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; line-height: 1.4;">
+                                        <div style="font-weight: bold; color: #666;">루프</div>
+                                        <div>카니발 전용 Hi-Roof</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">1열</div>
+                                        <div>1열 벤치 보조 가죽 시트</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">2열</div>
+                                        <div>2열 VVP 회전 / 등 받이 전자 의전 시트 (헤드리 시트/열선/통풍/안마/충전포트)</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;"></div>
+                                        <div>라커지 체 플로어</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">4열</div>
+                                        <div>4열 상용 시트 전자 후 수납 및 설치</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">테이블</div>
+                                        <div>하츠 파티션 장착 (수납형 등받이)</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">트림</div>
+                                        <div>도어 트림업 4PS / 전장 트림업, 플롤 트림업 / 라커지 트림업, 트렁크 트림업</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">바닥재</div>
+                                        <div>최고급 오토 바닥 히팅 우드 플로어</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">무드등</div>
+                                        <div>전장 무드 무드등, 사이드 엠비언트 무드등</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">TV</div>
+                                        <div>27인치 스마트 TV</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">도어스커트</div>
+                                        <div>2열 자동 도어 스커트</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">바디킷</div>
+                                        <div>AG 바디킷 (에어댐 장착)</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">구성</div>
+                                        <div>올 그레인 4EA / 올레 그레인 4EA</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">커튼</div>
+                                        <div>하니콤 블라인드</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">사이드스텝</div>
+                                        <div>자동식 사이드 스텝</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">핸들</div>
+                                        <div>DOS 핸들 장착</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">스타라이트</div>
+                                        <div>파이버 타입</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">그외</div>
+                                        <div>스피커 커버, 프리미엄 턴팅</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -327,31 +444,52 @@
                             <p>기본옵션을 제외한 추가옵션입니다</p>
                             <div class="option-list">
                                 <div class="option-item">
-                                    <input type="checkbox" id="add_side_screen" name="additional_options" value="side_screen" data-price="1500000" data-label="전용 사이드 스크린">
-                                    <label for="add_side_screen">
-                                        <span class="option-name">전용 사이드 스크린</span>
-                                        <span class="option-price">+1,500,000원</span>
+                                    <input type="checkbox" id="add_ag_auto_side_step" name="additional_options" value="ag_auto_side_step" data-price="2200000" data-label="AG 자동 사이드 스텝">
+                                    <label for="add_ag_auto_side_step">
+                                        <span class="option-name">AG 자동 사이드 스텝</span>
+                                        <span class="option-price">+2,200,000원</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="add_dcs_module" name="additional_options" value="dcs_module" data-price="900000" data-label="DCS 모듈">
-                                    <label for="add_dcs_module">
-                                        <span class="option-name">DCS 모듈</span>
-                                        <span class="option-price">+900,000원</span>
+                                    <input type="checkbox" id="add_dos_handle" name="additional_options" value="dos_handle" data-price="1050000" data-label="DOS 핸들">
+                                    <label for="add_dos_handle">
+                                        <span class="option-name">DOS 핸들</span>
+                                        <span class="option-price">+1,050,000원</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="add_hsd_front" name="additional_options" value="hsd_front" data-price="2200000" data-label="HSD Front형 브레이크 SET">
-                                    <label for="add_hsd_front">
+                                    <input type="checkbox" id="add_hsd_front_brake" name="additional_options" value="hsd_front_brake" data-price="2200000" data-label="HSD Front형 브레이크 SET">
+                                    <label for="add_hsd_front_brake">
                                         <span class="option-name">HSD Front형 브레이크 SET</span>
                                         <span class="option-price">+2,200,000원</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="checkbox" id="add_hsd_rear" name="additional_options" value="hsd_rear" data-price="2200000" data-label="HSD Rear형 브레이크 SET">
-                                    <label for="add_hsd_rear">
+                                    <input type="checkbox" id="add_hsd_rear_brake" name="additional_options" value="hsd_rear_brake" data-price="2200000" data-label="HSD Rear형 브레이크 SET">
+                                    <label for="add_hsd_rear_brake">
                                         <span class="option-name">HSD Rear형 브레이크 SET</span>
                                         <span class="option-price">+2,200,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="add_side_screen" name="additional_options" value="side_screen" data-price="1500000" data-label="하츠 캠핑">
+                                    <label for="add_side_screen">
+                                        <span class="option-name">하츠 캠핑</span>
+                                        <span class="option-price">+1,500,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="add_dz_handle" name="additional_options" value="dz_handle" data-price="900000" data-label="D컷 핸들">
+                                    <label for="add_dz_handle">
+                                        <span class="option-name">D컷 핸들</span>
+                                        <span class="option-price">+900,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="checkbox" id="add_hsd_system_set" name="additional_options" value="hsd_system_set" data-price="1500000" data-label="HSD 서스펜션 SET">
+                                    <label for="add_hsd_system_set">
+                                        <span class="option-name">HSD 서스펜션 SET</span>
+                                        <span class="option-price">+1,500,000원</span>
                                     </label>
                                 </div>
                             </div>
@@ -373,8 +511,8 @@
                                 <div class="quote-actions-final" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px;">
                                     <a href="tel:031-943-4488" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">전화 상담</a>
                                     <a href="https://pf.kakao.com/_XGpExj" target="_blank" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">채팅 상담</a>
-                                    <button onclick="showQuote()" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">견적서 보기</button>
-                                    <button onclick="downloadQuotePDF()" style="background: #ff3d24; color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">📄 PDF 다운로드</button>
+                                    <button id="showQuoteBtn" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">견적서 보기</button>
+                                    <button id="downloadPDFBtn" style="background: #ff3d24; color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">📄 PDF 다운로드</button>
                                 </div>
                             </div>
                         </div>
@@ -504,7 +642,10 @@
     <script src="assets/js/plugins/swiper.min.js"></script>
     <script src="assets/js/plugins/aos.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/quote.js?v=3.0"></script>
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="assets/js/quote.js?v=4.0"></script>
 
 </body>
 
