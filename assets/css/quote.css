@@ -529,9 +529,8 @@ html, body {
 /* Quote Summary Sidebar */
 .quote-summary-sidebar {
     position: fixed;
-    top: 50%;
+    top: 200px;
     right: 80px;
-    transform: translateY(-50%);
     width: 300px;
     background: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(255, 61, 36, 0.3);
@@ -539,8 +538,9 @@ html, body {
     padding: 25px;
     backdrop-filter: blur(15px);
     z-index: 1000;
-    max-height: 70vh;
-    overflow-y: auto;
+    max-height: calc(100vh - 250px);
+    overflow-y: hidden;
+    transition: top 0.3s ease;
 }
 
 .summary-content h3 {
@@ -556,7 +556,7 @@ html, body {
 .selected-options {
     margin-bottom: 25px;
     max-height: 300px;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .selected-option {
@@ -788,28 +788,7 @@ html, body {
     animation-delay: 0.2s;
 }
 
-/* Scrollbar Styling */
-.quote-summary-sidebar::-webkit-scrollbar,
-.selected-options::-webkit-scrollbar {
-    width: 6px;
-}
-
-.quote-summary-sidebar::-webkit-scrollbar-track,
-.selected-options::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-}
-
-.quote-summary-sidebar::-webkit-scrollbar-thumb,
-.selected-options::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 3px;
-}
-
-.quote-summary-sidebar::-webkit-scrollbar-thumb:hover,
-.selected-options::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 61, 36, 0.8);
-}
+/* Scrollbar Styling - Removed for sidebar elements */
 
 /* Footer Styles */
 footer {

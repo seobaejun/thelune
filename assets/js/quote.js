@@ -5,6 +5,7 @@
 // Global variables
 let totalPrice = 0;
 let selectedOptions = {};
+let selectedSeatType = null; // 선택된 좌석 유형 추적
 
 // Initialize quote page
 document.addEventListener('DOMContentLoaded', function() {
@@ -133,6 +134,26 @@ function setupButtonListeners() {
     }
     
     // Package1 item click listener removed - details are always visible now
+    
+    // Show 4-seat options button
+    const show4SeatBtn = document.getElementById('show4SeatOptions');
+    if (show4SeatBtn) {
+        show4SeatBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            show4SeatQuoteOptions();
+        });
+        console.log('Show 4-seat options button listener added');
+    }
+    
+    // Show 6-seat options button
+    const show6SeatBtn = document.getElementById('show6SeatOptions');
+    if (show6SeatBtn) {
+        show6SeatBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            show6SeatQuoteOptions();
+        });
+        console.log('Show 6-seat options button listener added');
+    }
 }
 
 // Handle option change
@@ -305,6 +326,62 @@ function resetQuote() {
     }
 }
 
+// Reset quote options (좌석 유형 변경 시 사용)
+function resetQuoteOptions() {
+    console.log('resetQuoteOptions() called - seat type changed');
+    
+    // Reset form without confirmation
+    const form = document.getElementById('quoteForm');
+    if (form) {
+        form.reset();
+    }
+    
+    // Reset variables
+    selectedOptions = {};
+    totalPrice = 0;
+    
+    // Update displays
+    updatePriceDisplay();
+    updateSelectedOptionsDisplay();
+    
+    console.log('Quote options reset for seat type change');
+}
+
+// Setup sidebar scroll handler
+function setupSidebarScrollHandler() {
+    let isScrollHandlerAdded = false;
+    
+    if (!isScrollHandlerAdded) {
+        window.addEventListener('scroll', handleSidebarScroll);
+        isScrollHandlerAdded = true;
+        console.log('Sidebar scroll handler added');
+    }
+}
+
+// Handle sidebar scroll position
+function handleSidebarScroll() {
+    const quoteSidebar = document.getElementById('quoteSidebar');
+    const quoteOptions = document.getElementById('quoteOptions');
+    
+    if (!quoteSidebar || !quoteOptions || quoteSidebar.style.display === 'none') {
+        return;
+    }
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const quoteOptionsTop = quoteOptions.offsetTop;
+    const minTop = 200; // 카드 영역을 피하기 위한 최소 상단 여백
+    const maxTop = quoteOptionsTop - 100; // 유종선택 섹션 위치
+    
+    // 스크롤 위치에 따라 사이드바 위치 조정
+    if (scrollTop < maxTop) {
+        // 유종선택 섹션이 보이는 경우
+        quoteSidebar.style.top = Math.max(minTop, maxTop - scrollTop) + 'px';
+    } else {
+        // 유종선택 섹션을 지나친 경우
+        quoteSidebar.style.top = minTop + 'px';
+    }
+}
+
 // Show quote
 function showQuote() {
     console.log('=== showQuote() called ===');
@@ -424,6 +501,134 @@ function togglePackage1Details() {
             toggleArrow.innerHTML = '▼';
             console.log('Package1 details hidden');
         }
+    }
+}
+
+// Show 4-seat quote options
+function show4SeatQuoteOptions() {
+    console.log('show4SeatQuoteOptions() called');
+    
+    const quoteOptions = document.getElementById('quoteOptions');
+    const show4SeatBtn = document.getElementById('show4SeatOptions');
+    const show6SeatBtn = document.getElementById('show6SeatOptions');
+    
+    if (quoteOptions && show4SeatBtn) {
+        // 좌석 유형이 변경되었다면 옵션 초기화
+        if (selectedSeatType && selectedSeatType !== '4seat') {
+            resetQuoteOptions();
+        }
+        selectedSeatType = '4seat';
+        
+        // 즉시 버튼 상태 변경 (사용자 피드백)
+        show4SeatBtn.innerHTML = '4인승 견적 선택됨 ✓';
+        show4SeatBtn.style.background = 'linear-gradient(135deg, #28a745, #20a039)';
+        show4SeatBtn.disabled = true;
+        show4SeatBtn.style.cursor = 'default';
+        
+        // 사이드바 미리 준비 (표시는 나중에)
+        const quoteSidebar = document.getElementById('quoteSidebar');
+        if (quoteSidebar) {
+            quoteSidebar.style.display = 'block';
+            quoteSidebar.style.opacity = '0';
+        }
+        
+        // 6인승 버튼을 다시 선택 가능하게 설정
+        if (show6SeatBtn) {
+            show6SeatBtn.innerHTML = '카니발 6인승 견적내기';
+            show6SeatBtn.style.background = 'rgba(139, 69, 19, 0.95)';
+            show6SeatBtn.style.opacity = '1';
+            show6SeatBtn.disabled = false;
+            show6SeatBtn.style.cursor = 'pointer';
+        }
+        
+        // 즉시 옵션 표시 (애니메이션 최소화)
+        quoteOptions.style.display = 'block';
+        
+        // 다음 프레임에서 처리 (레이아웃 안정화)
+        requestAnimationFrame(() => {
+            // 사이드바 표시 및 스크롤 핸들러 설정
+            if (quoteSidebar) {
+                quoteSidebar.style.opacity = '1';
+                setupSidebarScrollHandler();
+            }
+            
+            // 스크롤 이동 (단순화)
+            setTimeout(() => {
+                quoteOptions.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 100);
+        });
+        
+        console.log('4-seat quote options shown');
+        showNotification('4인승 견적 옵션이 표시되었습니다. 원하는 옵션을 선택해주세요!', 'success');
+    } else {
+        console.error('Quote options or button not found');
+    }
+}
+
+// Show 6-seat quote options
+function show6SeatQuoteOptions() {
+    console.log('show6SeatQuoteOptions() called');
+    
+    const quoteOptions = document.getElementById('quoteOptions');
+    const show4SeatBtn = document.getElementById('show4SeatOptions');
+    const show6SeatBtn = document.getElementById('show6SeatOptions');
+    
+    if (quoteOptions && show6SeatBtn) {
+        // 좌석 유형이 변경되었다면 옵션 초기화
+        if (selectedSeatType && selectedSeatType !== '6seat') {
+            resetQuoteOptions();
+        }
+        selectedSeatType = '6seat';
+        
+        // 즉시 버튼 상태 변경 (사용자 피드백)
+        show6SeatBtn.innerHTML = '6인승 견적 선택됨 ✓';
+        show6SeatBtn.style.background = 'linear-gradient(135deg, #28a745, #20a039)';
+        show6SeatBtn.disabled = true;
+        show6SeatBtn.style.cursor = 'default';
+        
+        // 사이드바 미리 준비 (표시는 나중에)
+        const quoteSidebar = document.getElementById('quoteSidebar');
+        if (quoteSidebar) {
+            quoteSidebar.style.display = 'block';
+            quoteSidebar.style.opacity = '0';
+        }
+        
+        // 4인승 버튼을 다시 선택 가능하게 설정
+        if (show4SeatBtn) {
+            show4SeatBtn.innerHTML = '카니발 4인승 견적내기';
+            show4SeatBtn.style.background = 'rgba(139, 69, 19, 0.95)';
+            show4SeatBtn.style.opacity = '1';
+            show4SeatBtn.disabled = false;
+            show4SeatBtn.style.cursor = 'pointer';
+        }
+        
+        // 즉시 옵션 표시 (애니메이션 최소화)
+        quoteOptions.style.display = 'block';
+        
+        // 다음 프레임에서 처리 (레이아웃 안정화)
+        requestAnimationFrame(() => {
+            // 사이드바 표시 및 스크롤 핸들러 설정
+            if (quoteSidebar) {
+                quoteSidebar.style.opacity = '1';
+                setupSidebarScrollHandler();
+            }
+            
+            // 스크롤 이동 (단순화)
+            setTimeout(() => {
+                quoteOptions.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 100);
+        });
+        
+        console.log('6-seat quote options shown');
+        showNotification('6인승 견적 옵션이 표시되었습니다. 원하는 옵션을 선택해주세요!', 'success');
+    } else {
+        console.error('Quote options or button not found');
     }
 }
 
@@ -1264,6 +1469,8 @@ window.closeQuoteModal = closeQuoteModal;
 window.closeSimpleModal = closeSimpleModal;
 window.toggleFullOptionDetails = toggleFullOptionDetails;
 window.togglePackage1Details = togglePackage1Details;
+window.show4SeatQuoteOptions = show4SeatQuoteOptions;
+window.show6SeatQuoteOptions = show6SeatQuoteOptions;
 window.setLanguage = setLanguage;
 
 // Debug function
