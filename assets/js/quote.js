@@ -283,23 +283,32 @@ function showQuote() {
     createQuoteModal();
 }
 
-// Print quote
-function printQuote() {
+// Download PDF quote
+function downloadQuotePDF() {
     if (Object.keys(selectedOptions).length === 0) {
         showNotification('먼저 옵션을 선택해주세요.', 'warning');
         return;
     }
     
-    // Create printable content
+    // Create printable content for PDF
     const printContent = generatePrintContent();
     
-    // Open print window
+    // Open print window for PDF download
     const printWindow = window.open('', '_blank');
     printWindow.document.write(printContent);
     printWindow.document.close();
-    printWindow.print();
     
-    showNotification('견적서를 출력합니다.', 'info');
+    // Wait for content to load, then trigger print dialog
+    setTimeout(() => {
+        printWindow.print();
+    }, 500);
+    
+    showNotification('견적서 PDF 다운로드를 시작합니다.', 'info');
+}
+
+// Print quote (legacy function for compatibility)
+function printQuote() {
+    downloadQuotePDF();
 }
 
 // Create quote modal
@@ -328,8 +337,8 @@ function createQuoteModal() {
                 <button class="glass-button secondary-glass-button" onclick="closeQuoteModal()">
                     <span class="glass-button-text">닫기</span>
                 </button>
-                <button class="glass-button primary-glass-button" onclick="printQuote()">
-                    <span class="glass-button-text">출력</span>
+                <button class="glass-button primary-glass-button" onclick="downloadQuotePDF()">
+                    <span class="glass-button-text">📄 PDF 다운로드</span>
                 </button>
             </div>
         </div>
@@ -866,6 +875,7 @@ function setLanguage(lang) {
 window.resetQuote = resetQuote;
 window.showQuote = showQuote;
 window.printQuote = printQuote;
+window.downloadQuotePDF = downloadQuotePDF;
 window.closeQuoteModal = closeQuoteModal;
 window.setLanguage = setLanguage;
 
