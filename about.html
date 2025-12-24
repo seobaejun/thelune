@@ -18,6 +18,89 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/glass-button.css" />
     <link rel="stylesheet" href="assets/css/galaxy.css" />
+    <style>
+        /* Avenir 폰트 정의 */
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Book.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Roman.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+        
+        /* 폰트 적용 - 영어는 세리프, 한글은 Avenir */
+        * {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+        }
+        
+        /* 영어 텍스트용 클래식 세리프 폰트 */
+        .english-serif {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: uppercase !important;
+        }
+        
+        .english-serif-light {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.02em !important;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.01em !important;
+        }
+        
+        .avenir-light {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 300 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-book {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-roman {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-black {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.01em !important;
+        }
+        
+        p, span, div {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -84,7 +167,7 @@
                                 </div>
                             </a>
                             <div class="language-selector" style="display: flex !important; align-items: center !important; gap: 3px !important; color: white !important; font-size: 14px !important;">
-                                <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #f0ead2 !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
+                                <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #bcb8b1 !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
                                 <span style="color: white !important; margin: 0 2px !important;">/</span>
                                 <button class="lang-btn" onclick="switchLanguage('en')" style="background: none !important; border: none !important; color: white !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important;">ENG</button>
                             </div>
@@ -101,7 +184,7 @@
     <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/10월 29일 the lune 카니발3161.jpg') center/cover; padding: 290px 0 240px;">
         <div class="container">
             <div class="ak-page-title-content text-center">
-                <h1 style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">회사소개</h1>
+                <h1 class="avenir-black" style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">회사소개</h1>
                 <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 0;">THE LUNE에 대해 알아보세요</p>
             </div>
         </div>
@@ -147,7 +230,7 @@
             <div class="row">
                 <div class="col-12" data-aos="fade-up">
                     <div style="text-align: center; margin-bottom: 40px;">
-                        <h2 id="typing-text" style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 30px; line-height: 1.3; min-height: 120px;">
+                        <h2 id="typing-text" style="color: white; font-size: 42px; font-weight: 400; margin-bottom: 30px; line-height: 1.3; min-height: 120px;">
                             <span class="typing-cursor">|</span>
                         </h2>
                         <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8; max-width: 800px; margin: 0 auto;">
@@ -226,29 +309,29 @@
     <section style="padding: 100px 0; background: #070a15;">
         <div class="container">
             <div class="text-center" style="margin-bottom: 80px;" data-aos="fade-up">
-                <h2 style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">HISTORY</h2>
+                <h2 class="english-serif" style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">HISTORY</h2>
                 <p style="color: rgba(255,255,255,0.8); font-size: 16px;">THE LUNE의 성장 스토리</p>
             </div>
             
             <!-- 2015-2017 -->
             <div class="row" style="margin-bottom: 60px;" data-aos="fade-up">
                 <div class="col-lg-4" style="padding-right: 30px;">
-                    <h3 style="color: #f0ead2; font-size: 60px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(240, 234, 210, 0.3); line-height: 1.2; white-space: nowrap; word-break: keep-all;">2015 - 2017</h3>
+                    <h3 class="avenir-black" style="color: #bcb8b1; font-size: 60px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(188, 184, 177, 0.3); line-height: 1.2; white-space: nowrap; word-break: keep-all;">2015 - 2017</h3>
                 </div>
                 <div class="col-lg-8">
-                    <div style="border-left: 3px solid #f0ead2; padding-left: 30px;">
+                    <div style="border-left: 3px solid #bcb8b1; padding-left: 30px;">
                         <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2015</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2015</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">룬커스텀 창업</p>
                         </div>
                         <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2015</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2015</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">LUNE 브랜드 출시</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">기아 카니발, 현대차 쏠라티, 벤츠 스프린터 기술 개발</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);"><span style="filter: blur(3px); display: inline-block;">ㅇㅇ</span>생명 <span style="filter: blur(3px); display: inline-block;">ㅇㅇㅇ</span>회장 케딜락 에스컬레이드 차량 실내 인테리어</p>
                         </div>
                         <div style="margin-bottom: 25px;">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2015</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2015</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">SKT 5G정보통신 차량 제작(SKT 5G TV광고 방영차량)</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);"><span style="filter: blur(3px); display: inline-block;">ㅇㅇ</span>그룹 <span style="filter: blur(3px); display: inline-block;">ㅇㅇㅇ</span> 회장 벤츠 스프린터 실내 인테리어</p>
                         </div>
@@ -259,25 +342,25 @@
             <!-- 2018-2020 -->
             <div class="row" style="margin-bottom: 60px;" data-aos="fade-up">
                 <div class="col-lg-4" style="padding-right: 30px;">
-                    <h3 style="color: #f0ead2; font-size: 60px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(240, 234, 210, 0.3); line-height: 1.2; white-space: nowrap; word-break: keep-all;">2018 - 2020</h3>
+                    <h3 class="avenir-black" style="color: #bcb8b1; font-size: 60px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(188, 184, 177, 0.3); line-height: 1.2; white-space: nowrap; word-break: keep-all;">2018 - 2020</h3>
                 </div>
                 <div class="col-lg-8">
-                    <div style="border-left: 3px solid #f0ead2; padding-left: 30px;">
+                    <div style="border-left: 3px solid #bcb8b1; padding-left: 30px;">
                         <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2018</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2018</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">연구개발 전담부서 - 한국산업기술진흥협회 인증</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">(주)와이즈오토 벤츠 스프린터 실내 인테리어 개발, 공급 계약</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">(주)메<span style="filter: blur(3px); display: inline-block;">ㅇㅇ</span>카 카니발 <span style="filter: blur(3px); display: inline-block;">ㅇ</span>하이리무진 파츠 공급 계약</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">아시아경제TV 클로즈업 기업현장 1186회차 방영</p>
                         </div>
                         <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2019</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2019</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">벤처기업인증</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">벤츠 스프린터 부산국제보트쇼 (주)와이즈오토 공동출품</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">삼성전자 <span style="filter: blur(3px); display: inline-block;">ㅇㅇㅇ</span> 부회장 의전차량(기아 그랜버드)실내 인테리어</p>
                         </div>
                         <div style="margin-bottom: 25px;">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2020</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2020</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">3D CNC 고속가공기 확충</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">특장관련 특허 5개 출원, 등록</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">ISO 9001 품질경영시스템 획득 - 한국국제규격인증</p>
@@ -292,12 +375,12 @@
             <!-- 2021-2023 -->
             <div class="row" data-aos="fade-up">
                 <div class="col-lg-4" style="padding-right: 30px;">
-                    <h3 style="color: #f0ead2; font-size: 60px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(240, 234, 210, 0.3); line-height: 1.2; white-space: nowrap; word-break: keep-all;">2021 - 2023</h3>
+                    <h3 class="avenir-black" style="color: #bcb8b1; font-size: 60px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(188, 184, 177, 0.3); line-height: 1.2; white-space: nowrap; word-break: keep-all;">2021 - 2023</h3>
                 </div>
                 <div class="col-lg-8">
-                    <div style="border-left: 3px solid #f0ead2; padding-left: 30px;">
+                    <div style="border-left: 3px solid #bcb8b1; padding-left: 30px;">
                         <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2021</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2021</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">하<span style="filter: blur(3px); display: inline-block;">ㅇㅇㅇ</span>로 <span style="filter: blur(3px); display: inline-block;">ㅇㅇㅇ</span> 회장 벤츠 스프린터 의전용 차량공급</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">N<span style="filter: blur(3px); display: inline-block;">ㅇㅇㅇ</span>트 <span style="filter: blur(3px); display: inline-block;">ㅇㅇㅇ</span> 의장 벤츠 스프린터 의전용 차량공급</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">새마을 <span style="filter: blur(3px); display: inline-block;">금고중앙회</span> <span style="filter: blur(3px); display: inline-block;">박차훈</span> 회장 벤츠 스프린터 의전용 차량공급</p>
@@ -307,12 +390,12 @@
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">삼선전자 주식회사 임원 의전차량 차량제작, 관리 계약체결</p>
                         </div>
                         <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2022</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2022</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">이노비즈(INNO-BIZ) 인증</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">지상파 드라마 촬영협찬 및 종합편성채널 CF방영</p>
                         </div>
                         <div style="margin-bottom: 25px;">
-                            <span style="color: #f0ead2; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(240, 234, 210, 0.3);">2023</span>
+                            <span style="color: #bcb8b1; font-weight: 600; font-size: 20px; text-shadow: 0 0 8px rgba(188, 184, 177, 0.3);">2023</span>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">ISO 45001 안전보건경영시스템 획득 - 한국국제규격인증</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">인증중고차 사업부 전시장 오픈 - 용인 오토허브</p>
                             <p style="color: rgba(255,255,255,0.9); margin: 10px 0; line-height: 1.8; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">"더트라이브"와 골프 리무진 서비스 제휴</p>
@@ -355,8 +438,8 @@
                     <div data-glow class="glow-blue" style="padding: 50px 40px; height: 100%; min-height: 350px;">
                         <div data-glow></div>
                         <div style="position: relative; z-index: 10;">
-                            <span style="color: #f0ead2; font-size: 16px; font-weight: 600; letter-spacing: 2px;">VALUE 01</span>
-                            <h3 style="color: white; font-size: 32px; font-weight: 700; margin: 25px 0; line-height: 1.3;">
+                            <span class="english-serif" style="color: #bcb8b1; font-size: 16px; font-weight: 600; letter-spacing: 2px;">VALUE 01</span>
+                            <h3 class="english-serif" style="color: white; font-size: 32px; font-weight: 700; margin: 25px 0; line-height: 1.3;">
                                 REVEALING POTENTIAL
                             </h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 17px; line-height: 1.8;">
@@ -369,8 +452,8 @@
                     <div data-glow class="glow-purple" style="padding: 50px 40px; height: 100%; min-height: 350px;">
                         <div data-glow></div>
                         <div style="position: relative; z-index: 10;">
-                            <span style="color: #f0ead2; font-size: 16px; font-weight: 600; letter-spacing: 2px;">VALUE 02</span>
-                            <h3 style="color: white; font-size: 32px; font-weight: 700; margin: 25px 0; line-height: 1.3;">ESSENTIAL</h3>
+                            <span class="english-serif" style="color: #bcb8b1; font-size: 16px; font-weight: 600; letter-spacing: 2px;">VALUE 02</span>
+                            <h3 class="english-serif" style="color: white; font-size: 32px; font-weight: 700; margin: 25px 0; line-height: 1.3;">ESSENTIAL</h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 17px; line-height: 1.8;">
                                 차량과 탑승자가 가진 잠재적 가치를 더 빛내줄 수 있도록 차량 내부의 공간을 군더더기 없이 본질에 충실한 디자인으로 구성합니다.
                             </p>
@@ -381,8 +464,8 @@
                     <div data-glow class="glow-green" style="padding: 50px 40px; height: 100%; min-height: 350px;">
                         <div data-glow></div>
                         <div style="position: relative; z-index: 10;">
-                            <span style="color: #f0ead2; font-size: 16px; font-weight: 600; letter-spacing: 2px;">VALUE 03</span>
-                            <h3 style="color: white; font-size: 32px; font-weight: 700; margin: 25px 0; line-height: 1.3;">EXCLUSIVE</h3>
+                            <span class="english-serif" style="color: #bcb8b1; font-size: 16px; font-weight: 600; letter-spacing: 2px;">VALUE 03</span>
+                            <h3 class="english-serif" style="color: white; font-size: 32px; font-weight: 700; margin: 25px 0; line-height: 1.3;">EXCLUSIVE</h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 17px; line-height: 1.8;">
                                 오로지 탑승자만을 위해 맞춰진 독점적인 디자인과 옵션 구성으로 퍼스트 클래스급의 경험을 선사합니다.
                             </p>
@@ -398,12 +481,12 @@
     <section style="padding: 100px 0; background: #111;">
         <div class="container">
             <div class="text-center" style="margin-bottom: 80px;" data-aos="fade-up">
-                <h2 style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">CI INTRODUCTION</h2>
+                <h2 class="english-serif" style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">CI INTRODUCTION</h2>
             </div>
             
             <div class="row">
                 <div class="col-lg-6" style="margin-bottom: 50px;" data-aos="fade-right">
-                    <h3 style="color: #f0ead2; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Brand Name</h3>
+                    <h3 class="english-serif" style="color: #bcb8b1; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Brand Name</h3>
                     <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8; margin-bottom: 15px;">
                         First Class + 특별한 경험
                     </p>
@@ -413,7 +496,7 @@
                     </p>
                 </div>
                 <div class="col-lg-6" style="margin-bottom: 50px;" data-aos="fade-left">
-                    <h3 style="color: #f0ead2; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Logo</h3>
+                    <h3 class="english-serif" style="color: #bcb8b1; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Logo</h3>
                     <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
                         로고는 룬을 상징하는 대표적인 디자인 요소로, 룬의 아이덴티티를 구축하고 전체 이미지를 형상하는<br>
                         가장 중요한 역할을 합니다. 로고에 포함된 곡선의 형태는 탑승자와 공간의 가치를 상징하며,<br>
@@ -421,18 +504,18 @@
                     </p>
                 </div>
                 <div class="col-lg-6" style="margin-bottom: 50px;" data-aos="fade-right">
-                    <h3 style="color: #f0ead2; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Clear Space</h3>
+                    <h3 class="english-serif" style="color: #bcb8b1; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Clear Space</h3>
                     <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
                         최소 공간 규정은 매체 적용 시 각종 텍스트 정보와 시각적 표시물로부터 보호되어야 할 최소한의 공간 규정입니다.
                     </p>
                 </div>
                 <div class="col-lg-6" style="margin-bottom: 50px;" data-aos="fade-left">
-                    <h3 style="color: #f0ead2; font-size: 32px; font-weight: 700; margin-bottom: 30px;">Color</h3>
+                    <h3 class="english-serif" style="color: #bcb8b1; font-size: 32px; font-weight: 700; margin-bottom: 30px;">Color</h3>
                     <div class="row">
                         <div class="col-6" style="margin-bottom: 20px;">
-                            <div style="background: rgb(70, 63, 58); height: 60px; border-radius: 5px; margin-bottom: 10px;"></div>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 14px; margin: 0; font-weight: 600;">Deep Brown</p>
-                            <p style="color: rgba(255,255,255,0.6); font-size: 12px; margin: 5px 0 0 0;">CMYK 0 10 17 73<br>RGB 70 63 58</p>
+                            <div style="background: rgb(188, 184, 177); height: 60px; border-radius: 5px; margin-bottom: 10px;"></div>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 14px; margin: 0; font-weight: 600;">Warm Beige</p>
+                            <p style="color: rgba(255,255,255,0.6); font-size: 12px; margin: 5px 0 0 0;">CMYK 0 2 6 26<br>RGB 188 184 177</p>
                         </div>
                         <div class="col-6" style="margin-bottom: 20px;">
                             <div style="background: rgb(95, 110, 170); height: 60px; border-radius: 5px; margin-bottom: 10px;"></div>
@@ -460,21 +543,21 @@
     <section style="padding: 100px 0; background: #0a0a0a;">
         <div class="container">
             <div class="text-center" style="margin-bottom: 80px;" data-aos="fade-up">
-                <h2 style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">SHOWROOM</h2>
+                <h2 class="english-serif" style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">SHOWROOM</h2>
             </div>
             <div class="row" style="margin: 0 -10px;">
                 <div class="col-lg-4 col-md-12" style="padding: 0 10px; margin-bottom: 40px;" data-aos="fade-up" data-aos-delay="0">
                     <div data-glow class="glow-blue" style="padding: 50px 40px; height: 100%; min-height: 300px;">
                         <div data-glow></div>
                         <div style="position: relative; z-index: 10;">
-                            <span style="color: #f0ead2; font-size: 16px; font-weight: 600; letter-spacing: 2px;">SHOWROOM 01</span>
+                            <span class="english-serif" style="color: #bcb8b1; font-size: 16px; font-weight: 600; letter-spacing: 2px;">SHOWROOM 01</span>
                             <h3 style="color: white; font-size: 28px; font-weight: 700; margin: 25px 0;">THE LUNE 본사</h3>
                             <div style="margin-bottom: 15px;">
-                                <span style="color: #f0ead2; font-size: 14px; font-weight: 600;">주소</span>
+                                <span style="color: #bcb8b1; font-size: 14px; font-weight: 600;">주소</span>
                                 <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0 0; line-height: 1.6;">경기도 파주시 탄현면 축현산단로 21-41</p>
                             </div>
                             <div>
-                                <span style="color: #f0ead2; font-size: 14px; font-weight: 600;">전화</span>
+                                <span style="color: #bcb8b1; font-size: 14px; font-weight: 600;">전화</span>
                                 <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0 0;">
                                     <a href="tel:031-943-4488" style="color: rgba(255,255,255,0.8); text-decoration: none;">031-943-4488</a>
                                 </p>
@@ -486,14 +569,14 @@
                     <div data-glow class="glow-purple" style="padding: 50px 40px; height: 100%; min-height: 300px;">
                         <div data-glow></div>
                         <div style="position: relative; z-index: 10;">
-                            <span style="color: #f0ead2; font-size: 16px; font-weight: 600; letter-spacing: 2px;">SHOWROOM 02</span>
+                            <span class="english-serif" style="color: #bcb8b1; font-size: 16px; font-weight: 600; letter-spacing: 2px;">SHOWROOM 02</span>
                             <h3 style="color: white; font-size: 28px; font-weight: 700; margin: 25px 0;">안산 전시장</h3>
                             <div style="margin-bottom: 15px;">
-                                <span style="color: #f0ead2; font-size: 14px; font-weight: 600;">주소</span>
+                                <span style="color: #bcb8b1; font-size: 14px; font-weight: 600;">주소</span>
                                 <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0 0; line-height: 1.6;">경기 안산시 단원구 원포공원2로 24, 215호</p>
                             </div>
                             <div>
-                                <span style="color: #f0ead2; font-size: 14px; font-weight: 600;">전화</span>
+                                <span style="color: #bcb8b1; font-size: 14px; font-weight: 600;">전화</span>
                                 <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0 0;">
                                     <a href="tel:010-9599-9263" style="color: rgba(255,255,255,0.8); text-decoration: none;">010-9599-9263</a>
                                 </p>
@@ -505,14 +588,14 @@
                     <div data-glow class="glow-green" style="padding: 50px 40px; height: 100%; min-height: 300px;">
                         <div data-glow></div>
                         <div style="position: relative; z-index: 10;">
-                            <span style="color: #f0ead2; font-size: 16px; font-weight: 600; letter-spacing: 2px;">SHOWROOM 03</span>
+                            <span class="english-serif" style="color: #bcb8b1; font-size: 16px; font-weight: 600; letter-spacing: 2px;">SHOWROOM 03</span>
                             <h3 style="color: white; font-size: 28px; font-weight: 700; margin: 25px 0;">부산 전시장</h3>
                             <div style="margin-bottom: 15px;">
-                                <span style="color: #f0ead2; font-size: 14px; font-weight: 600;">주소</span>
+                                <span style="color: #bcb8b1; font-size: 14px; font-weight: 600;">주소</span>
                                 <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0 0; line-height: 1.6;">부산 금정구 금사로 160 3층</p>
                             </div>
                             <div>
-                                <span style="color: #f0ead2; font-size: 14px; font-weight: 600;">전화</span>
+                                <span style="color: #bcb8b1; font-size: 14px; font-weight: 600;">전화</span>
                                 <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0 0;">
                                     <span style="color: rgba(255,255,255,0.6);">준비 중</span>
                                 </p>
@@ -529,7 +612,7 @@
     <section style="padding: 100px 0; background: #111;">
         <div class="container">
             <div class="text-center" style="margin-bottom: 80px;" data-aos="fade-up">
-                <h2 style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">PATENTS</h2>
+                <h2 class="english-serif" style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 20px;">PATENTS</h2>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6" style="margin-bottom: 30px;" data-aos="fade-up">
@@ -653,13 +736,13 @@
     <section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 100px 0; position: relative; overflow: hidden;">
         <div class="container">
             <div class="text-center" style="margin-bottom: 80px;" data-aos="fade-up">
-                <h2 style="color: #f0ead2; font-size: 48px; font-weight: 700; margin-bottom: 20px;">ORGANIZATION</h2>
+                <h2 class="english-serif" style="color: #bcb8b1; font-size: 48px; font-weight: 700; margin-bottom: 20px;">ORGANIZATION</h2>
                 <p style="color: rgba(255,255,255,0.8); font-size: 18px;">THE LUNE의 조직구조</p>
             </div>
 
             <!-- 조직도 이미지 -->
-            <div class="organization-chart" data-aos="fade-up" data-aos-delay="200" style="text-align: center; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
-                <img src="assets/img/조직도.png" alt="THE LUNE 조직도" style="width: 100%; max-width: 1300px; height: auto; border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); transform: scale(1.08);">
+            <div class="organization-chart" data-aos="fade-up" data-aos-delay="200" style="text-align: center; width: 100vw; margin: 0; padding: 0; position: relative; left: 50%; transform: translateX(-50%); display: flex; justify-content: center; align-items: center;">
+                <img src="assets/img/조직도.png" alt="THE LUNE 조직도" style="width: 90vw; max-width: none; height: auto; border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
             </div>
         </div>
 
@@ -717,7 +800,7 @@
                         </ul>
                     
                         <div style="display: flex; gap: 15px; margin-top: 20px;">
-                        <a href="https://www.instagram.com/dh_auto_lune/" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(240, 234, 210, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                        <a href="https://www.instagram.com/dh_auto_lune/" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <g clip-path="url(#clip0_365_2391)">
                                     <path d="M15.9833 4.94233C15.9459 4.09218 15.8084 3.50772 15.6114 3.00127C15.4083 2.46369 15.0957 1.9824 14.6862 1.58229C14.2861 1.17596 13.8016 0.860229 13.2703 0.660239C12.7609 0.463301 12.1795 0.325823 11.3294 0.28834C10.4729 0.247682 10.201 0.238281 8.02866 0.238281C5.85636 0.238281 5.58446 0.247682 4.73114 0.285165C3.881 0.322648 3.29654 0.460248 2.79021 0.657064C2.25251 0.860229 1.77121 1.17279 1.37111 1.58229C0.964783 1.9824 0.649169 2.46687 0.449057 2.99822C0.252119 3.50772 0.114641 4.08901 0.0771582 4.93915C0.0365009 5.79564 0.0270996 6.06754 0.0270996 8.23984C0.0270996 10.4121 0.0365009 10.684 0.0739838 11.5374C0.111467 12.3875 0.249067 12.972 0.446005 13.4784C0.649169 14.016 0.964783 14.4973 1.37111 14.8974C1.77121 15.3037 2.25568 15.6195 2.78704 15.8195C3.29654 16.0164 3.87783 16.1539 4.72809 16.1913C5.58129 16.229 5.85331 16.2382 8.02561 16.2382C10.1979 16.2382 10.4698 16.229 11.3231 16.1913C12.1733 16.1539 12.7577 16.0164 13.2641 15.8195C14.3393 15.4037 15.1895 14.5536 15.6052 13.4784C15.802 12.9689 15.9396 12.3875 15.9771 11.5374C16.0146 10.684 16.024 10.4121 16.024 8.23984C16.024 6.06754 16.0208 5.79564 15.9833 4.94233ZM14.5425 11.4749C14.5081 12.2563 14.3768 12.6782 14.2674 12.9595C13.9986 13.6566 13.4454 14.2098 12.7483 14.4786C12.467 14.588 12.042 14.7193 11.2637 14.7536C10.4198 14.7912 10.1667 14.8005 8.03184 14.8005C5.89702 14.8005 5.64075 14.7912 4.79988 14.7536C4.01848 14.7193 3.59652 14.588 3.31522 14.4786C2.96835 14.3504 2.65261 14.1472 2.39634 13.8816C2.13066 13.6221 1.9275 13.3096 1.7993 12.9627C1.6899 12.6814 1.55865 12.2563 1.52434 11.478C1.48674 10.6341 1.47746 10.3809 1.47746 8.24607C1.47746 6.11125 1.48674 5.85498 1.52434 5.01424C1.55865 4.23284 1.6899 3.81088 1.7993 3.52957C1.9275 3.18258 2.13066 2.86697 2.39951 2.61057C2.65884 2.34489 2.9714 2.14173 3.31839 2.01365C3.5997 1.90426 4.02483 1.773 4.80306 1.73857C5.64697 1.70109 5.9002 1.69169 8.03489 1.69169C10.1729 1.69169 10.426 1.70109 11.2668 1.73857C12.0482 1.773 12.4702 1.90426 12.7515 2.01365C13.0984 2.14173 13.4141 2.34489 13.6704 2.61057C13.9361 2.87002 14.1392 3.18258 14.2674 3.52957C14.3768 3.81088 14.5081 4.23589 14.5425 5.01424C14.58 5.85815 14.5894 6.11125 14.5894 8.24607C14.5894 10.3809 14.58 10.6309 14.5425 11.4749Z" fill="white"/>
@@ -731,12 +814,12 @@
                                 </defs>
                             </svg>
                         </a>
-                        <a href="https://www.facebook.com/dhautokr?locale=ko_KR" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(240, 234, 210, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                        <a href="https://www.facebook.com/dhautokr?locale=ko_KR" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <path d="M16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 11.993 2.92547 15.3027 6.75 15.9028V10.3125H4.71875V8H6.75V6.2375C6.75 4.2325 7.94438 3.125 9.77172 3.125C10.6467 3.125 11.5625 3.28125 11.5625 3.28125V5.25H10.5538C9.56 5.25 9.25 5.86672 9.25 6.5V8H11.4688L11.1141 10.3125H9.25V15.9028C13.0745 15.3027 16 11.993 16 8Z" fill="white"/>
                             </svg>
                         </a>
-                        <a href="https://www.youtube.com/@dhauto5713" target="_blank" title="YouTube" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(240, 234, 210, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                        <a href="https://www.youtube.com/@dhauto5713" target="_blank" title="YouTube" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 61, 36, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M15.841 4.258c-.185-.695-.73-1.24-1.425-1.425C13.255 2.535 8 2.535 8 2.535s-5.255 0-6.416.298c-.695.185-1.24.73-1.425 1.425C-.139 5.419-.139 7.835-.139 7.835s0 2.416.298 3.577c.185.695.73 1.24 1.425 1.425C2.745 13.135 8 13.135 8 13.135s5.255 0 6.416-.298c.695-.185 1.24-.73 1.425-1.425.298-1.161.298-3.577.298-3.577s0-2.416-.298-3.577zM6.4 10.135V5.535l4.267 2.3L6.4 10.135z" fill="white"/>
                             </svg>
@@ -747,7 +830,7 @@
             
             <!-- Divider -->
             <div style="height: 30px;"></div>
-            <div style="height: 2px; background: #f0ead2; margin: 30px 0;"></div>
+            <div style="height: 2px; background: #bcb8b1; margin: 30px 0;"></div>
             <div style="height: 20px;"></div>
             
             <!-- Copyright -->
@@ -783,7 +866,7 @@
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
             });
-            event.target.style.color = '#f0ead2';
+            event.target.style.color = '#bcb8b1';
             event.target.style.fontWeight = '600';
             
             // 실제 언어 변경 로직은 여기에 추가
@@ -801,13 +884,13 @@
             function type() {
                 if (i < text.length) {
                     const currentText = text.substring(0, i + 1);
-                    element.innerHTML = '<span class="typing-text">' + currentText + '</span><span class="typing-cursor">|</span>';
+                    element.innerHTML = '<span class="typing-text" style="font-weight: 400;">' + currentText + '</span><span class="typing-cursor">|</span>';
                     i++;
                     setTimeout(type, speed);
                 } else {
                     // 타이핑 완료 후 커서 제거
                     setTimeout(() => {
-                        element.innerHTML = '<span class="typing-text">' + text + '</span>';
+                        element.innerHTML = '<span class="typing-text" style="font-weight: 400;">' + text + '</span>';
                     }, 1000);
                 }
             }
