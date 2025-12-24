@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "thelune-site",
   "cleanUrls": true,
   "trailingSlash": false
 }
