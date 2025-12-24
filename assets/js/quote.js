@@ -431,7 +431,7 @@ function createSimpleQuoteModal() {
         <div id="quoteModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999999; display: flex; align-items: center; justify-content: center;">
             <div style="background: white; padding: 30px; border-radius: 10px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; color: black;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2 style="margin: 0; color: #ff3d24;">THE LUNE 견적서</h2>
+                    <h2 style="margin: 0; color: #bcb8b1;">THE LUNE 견적서</h2>
                     <button onclick="closeSimpleModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
                 </div>
                 <div>
@@ -452,7 +452,7 @@ function createSimpleQuoteModal() {
                             `).join('')}
                         </tbody>
                         <tfoot>
-                            <tr style="background: #ff3d24; color: white; font-weight: bold;">
+                            <tr style="background: #bcb8b1; color: white; font-weight: bold;">
                                 <td style="padding: 10px; border: 1px solid #ddd;">총 합계</td>
                                 <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">${formatPrice(totalPrice)}원</td>
                             </tr>
@@ -461,7 +461,7 @@ function createSimpleQuoteModal() {
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button onclick="closeSimpleModal()" style="background: #ccc; color: black; padding: 10px 20px; border: none; border-radius: 5px; margin-right: 10px; cursor: pointer;">닫기</button>
-                    <button onclick="downloadQuotePDF()" style="background: #ff3d24; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">PDF 다운로드</button>
+                    <button onclick="downloadQuotePDF()" style="background: #bcb8b1; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">PDF 다운로드</button>
                 </div>
             </div>
         </div>
@@ -550,7 +550,7 @@ function show4SeatQuoteOptions() {
         // 6인승 버튼을 다시 선택 가능하게 설정
         if (show6SeatBtn) {
             show6SeatBtn.innerHTML = '견적 문의';
-            show6SeatBtn.style.background = 'rgba(139, 69, 19, 0.95)';
+            show6SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
             show6SeatBtn.style.opacity = '1';
             show6SeatBtn.disabled = false;
             show6SeatBtn.style.cursor = 'pointer';
@@ -613,7 +613,7 @@ function show6SeatQuoteOptions() {
         // 4인승 버튼을 다시 선택 가능하게 설정
         if (show4SeatBtn) {
             show4SeatBtn.innerHTML = '견적 문의';
-            show4SeatBtn.style.background = 'rgba(139, 69, 19, 0.95)';
+            show4SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
             show4SeatBtn.style.opacity = '1';
             show4SeatBtn.disabled = false;
             show4SeatBtn.style.cursor = 'pointer';
@@ -665,7 +665,7 @@ function downloadQuotePDF() {
         // Create a simple PDF content
         const content = `
             <div style="font-family: Arial, sans-serif; padding: 20px; background: white; color: black;">
-                <h1 style="color: #ff3d24; text-align: center;">THE LUNE 견적서</h1>
+                <h1 style="color: #bcb8b1; text-align: center;">THE LUNE 견적서</h1>
                 <p style="text-align: center;">견적일: ${new Date().toLocaleDateString('ko-KR')}</p>
                 <hr>
                 <h2>선택된 옵션</h2>
@@ -685,7 +685,7 @@ function downloadQuotePDF() {
                         `).join('')}
                     </tbody>
                     <tfoot>
-                        <tr style="background: #ff3d24; color: white;">
+                        <tr style="background: #bcb8b1; color: white;">
                             <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">총 합계</td>
                             <td style="padding: 10px; border: 1px solid #ddd; text-align: right; font-weight: bold;">${formatPrice(totalPrice)}원</td>
                         </tr>
@@ -827,7 +827,7 @@ function createQuoteModal() {
             .modal-content {
                 position: relative;
                 background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-                border: 1px solid rgba(255, 61, 36, 0.3);
+                border: 1px solid rgba(188, 184, 177, 0.3);
                 border-radius: 15px;
                 max-width: 600px;
                 width: 90%;
@@ -840,7 +840,7 @@ function createQuoteModal() {
                 justify-content: space-between;
                 align-items: center;
                 padding: 20px 30px;
-                border-bottom: 1px solid rgba(255, 61, 36, 0.3);
+                border-bottom: 1px solid rgba(188, 184, 177, 0.3);
             }
             .modal-header h3 {
                 margin: 0;
@@ -869,7 +869,7 @@ function createQuoteModal() {
                 justify-content: flex-end;
                 gap: 15px;
                 padding: 20px 30px;
-                border-top: 1px solid rgba(255, 61, 36, 0.3);
+                border-top: 1px solid rgba(188, 184, 177, 0.3);
             }
         </style>
     `;
@@ -965,7 +965,7 @@ function generateQuoteContent() {
                 text-align: center;
                 margin-bottom: 30px;
                 padding-bottom: 20px;
-                border-bottom: 1px solid rgba(255, 61, 36, 0.3);
+                border-bottom: 1px solid rgba(188, 184, 177, 0.3);
             }
             .quote-summary-content .company-info h4 {
                 color: var(--primary-color);
@@ -989,12 +989,12 @@ function generateQuoteContent() {
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             .quote-table th {
-                background: rgba(255, 61, 36, 0.1);
+                background: rgba(188, 184, 177, 0.1);
                 color: var(--primary-color);
                 font-weight: 600;
             }
             .quote-table .total-row {
-                background: rgba(255, 61, 36, 0.1);
+                background: rgba(188, 184, 177, 0.1);
                 color: var(--primary-color);
             }
             .quote-table .total-row td {
@@ -1015,8 +1015,8 @@ function generatePDFContent() {
     let content = `
         <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
             <!-- Header -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #ff3d24;">
-                <div style="font-size: 28px; font-weight: bold; color: #ff3d24;">THE LUNE</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #bcb8b1;">
+                <div style="font-size: 28px; font-weight: bold; color: #bcb8b1;">THE LUNE</div>
                 <div style="text-align: right; font-size: 14px;">
                     <div><strong>견적번호:</strong> ${quoteNumber}</div>
                     <div><strong>견적일자:</strong> ${currentDate.toLocaleDateString('ko-KR')}</div>
@@ -1025,13 +1025,13 @@ function generatePDFContent() {
             </div>
             
             <!-- Title -->
-            <div style="text-align: center; font-size: 24px; font-weight: bold; color: #333; margin: 30px 0; padding: 15px; background: #f8f9fa; border-left: 5px solid #ff3d24;">
+            <div style="text-align: center; font-size: 24px; font-weight: bold; color: #333; margin: 30px 0; padding: 15px; background: #f8f9fa; border-left: 5px solid #bcb8b1;">
                 카니발 하이리무진 견적서
             </div>
             
             <!-- Customer Info -->
             <div style="background: #fff; padding: 20px; border: 1px solid #ddd; margin-bottom: 30px;">
-                <h4 style="color: #ff3d24; margin-bottom: 15px;">고객 정보</h4>
+                <h4 style="color: #bcb8b1; margin-bottom: 15px;">고객 정보</h4>
                 <div style="display: flex; margin-bottom: 10px;">
                     <div style="width: 120px; font-weight: bold; color: #555;">고객명:</div>
                     <div style="flex: 1; border-bottom: 1px dotted #ccc; padding-bottom: 2px; min-height: 20px;"></div>
@@ -1051,9 +1051,9 @@ function generatePDFContent() {
             </div>
             
             <!-- Items Table -->
-            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 2px solid #ff3d24;">
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 2px solid #bcb8b1;">
                 <thead>
-                    <tr style="background: linear-gradient(135deg, #ff3d24, #e6351f); color: white;">
+                    <tr style="background: linear-gradient(135deg, #bcb8b1, #a8a49e); color: white;">
                         <th style="padding: 15px 12px; text-align: center; font-weight: bold; font-size: 14px; width: 10%;">번호</th>
                         <th style="padding: 15px 12px; text-align: center; font-weight: bold; font-size: 14px; width: 50%;">상품명 / 옵션</th>
                         <th style="padding: 15px 12px; text-align: center; font-weight: bold; font-size: 14px; width: 15%;">수량</th>
@@ -1068,7 +1068,7 @@ function generatePDFContent() {
                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid #eee;">${index + 1}</td>
                 <td style="padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-weight: 500;">${option.name}</td>
                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid #eee;">1</td>
-                <td style="padding: 12px; text-align: right; border-bottom: 1px solid #eee; font-weight: bold; color: #ff3d24;">${formatPrice(option.price)}원</td>
+                <td style="padding: 12px; text-align: right; border-bottom: 1px solid #eee; font-weight: bold; color: #bcb8b1;">${formatPrice(option.price)}원</td>
             </tr>
         `;
     });
@@ -1079,16 +1079,16 @@ function generatePDFContent() {
     
     content += `
                 </tbody>
-                <tfoot style="background: #f8f9fa; border: 2px solid #ff3d24;">
+                <tfoot style="background: #f8f9fa; border: 2px solid #bcb8b1;">
                     <tr>
                         <td colspan="3" style="text-align: right; padding: 12px; font-weight: bold;">소계</td>
-                        <td style="padding: 12px; text-align: right; font-weight: bold; color: #ff3d24;">${formatPrice(subtotal)}원</td>
+                        <td style="padding: 12px; text-align: right; font-weight: bold; color: #bcb8b1;">${formatPrice(subtotal)}원</td>
                     </tr>
                     <tr>
                         <td colspan="3" style="text-align: right; padding: 12px; font-weight: bold;">부가세 (10%)</td>
-                        <td style="padding: 12px; text-align: right; font-weight: bold; color: #ff3d24;">${formatPrice(tax)}원</td>
+                        <td style="padding: 12px; text-align: right; font-weight: bold; color: #bcb8b1;">${formatPrice(tax)}원</td>
                     </tr>
-                    <tr style="background: #ff3d24; color: white; font-weight: bold; font-size: 18px;">
+                    <tr style="background: #bcb8b1; color: white; font-weight: bold; font-size: 18px;">
                         <td colspan="3" style="text-align: right; padding: 15px 12px; border: none;">총 견적금액</td>
                         <td style="padding: 15px 12px; text-align: right; border: none;">${formatPrice(total)}원</td>
                     </tr>
@@ -1096,8 +1096,8 @@ function generatePDFContent() {
             </table>
             
             <!-- Terms -->
-            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-left: 4px solid #ff3d24;">
-                <h4 style="color: #ff3d24; margin-bottom: 15px;">견적 조건 및 유의사항</h4>
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-left: 4px solid #bcb8b1;">
+                <h4 style="color: #bcb8b1; margin-bottom: 15px;">견적 조건 및 유의사항</h4>
                 <ul style="margin: 0; padding-left: 20px;">
                     <li style="margin-bottom: 8px; font-size: 13px; color: #666;">본 견적서는 ${new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('ko-KR')}까지 유효합니다.</li>
                     <li style="margin-bottom: 8px; font-size: 13px; color: #666;">최종 가격은 실제 차량 상태 및 추가 옵션에 따라 변동될 수 있습니다.</li>
@@ -1111,7 +1111,7 @@ function generatePDFContent() {
             
             <!-- Footer -->
             <div style="margin-top: 40px; text-align: center; padding: 20px; background: #333; color: white; border-radius: 5px;">
-                <h3 style="color: #ff3d24; margin-bottom: 10px;">THE LUNE (더룬)</h3>
+                <h3 style="color: #bcb8b1; margin-bottom: 10px;">THE LUNE (더룬)</h3>
                 <div style="display: flex; justify-content: center; gap: 30px; font-size: 14px; flex-wrap: wrap;">
                     <div>📍 경기도 파주시 탄현면 축현산단로 21-41</div>
                     <div>📞 031-943-4488</div>
@@ -1150,12 +1150,12 @@ function generatePrintContent() {
                     align-items: center;
                     margin-bottom: 30px;
                     padding-bottom: 20px;
-                    border-bottom: 3px solid #ff3d24;
+                    border-bottom: 3px solid #bcb8b1;
                 }
                 .company-logo {
                     font-size: 28px;
                     font-weight: bold;
-                    color: #ff3d24;
+                    color: #bcb8b1;
                 }
                 .quote-info {
                     text-align: right;
@@ -1169,7 +1169,7 @@ function generatePrintContent() {
                     margin: 30px 0;
                     padding: 15px;
                     background: #f8f9fa;
-                    border-left: 5px solid #ff3d24;
+                    border-left: 5px solid #bcb8b1;
                 }
                 .customer-info {
                     background: #fff;
@@ -1195,10 +1195,10 @@ function generatePrintContent() {
                     width: 100%;
                     border-collapse: collapse;
                     margin: 20px 0;
-                    border: 2px solid #ff3d24;
+                    border: 2px solid #bcb8b1;
                 }
                 th {
-                    background: linear-gradient(135deg, #ff3d24, #e6351f);
+                    background: linear-gradient(135deg, #bcb8b1, #a8a49e);
                     color: white;
                     padding: 15px 12px;
                     text-align: center;
@@ -1217,15 +1217,15 @@ function generatePrintContent() {
                 .price {
                     text-align: right !important;
                     font-weight: bold;
-                    color: #ff3d24;
+                    color: #bcb8b1;
                 }
                 .total-section {
                     background: #f8f9fa;
-                    border: 2px solid #ff3d24;
+                    border: 2px solid #bcb8b1;
                     margin-top: 20px;
                 }
                 .total-row {
-                    background: #ff3d24;
+                    background: #bcb8b1;
                     color: white;
                     font-weight: bold;
                     font-size: 18px;
@@ -1238,10 +1238,10 @@ function generatePrintContent() {
                     margin-top: 30px;
                     padding: 20px;
                     background: #f8f9fa;
-                    border-left: 4px solid #ff3d24;
+                    border-left: 4px solid #bcb8b1;
                 }
                 .terms h4 {
-                    color: #ff3d24;
+                    color: #bcb8b1;
                     margin-bottom: 15px;
                 }
                 .terms ul {
@@ -1262,7 +1262,7 @@ function generatePrintContent() {
                     border-radius: 5px;
                 }
                 .company-footer h3 {
-                    color: #ff3d24;
+                    color: #bcb8b1;
                     margin-bottom: 10px;
                 }
                 .contact-info {
@@ -1290,7 +1290,7 @@ function generatePrintContent() {
             <div class="quote-title">카니발 하이리무진 견적서</div>
             
             <div class="customer-info">
-                <h4 style="color: #ff3d24; margin-bottom: 15px;">고객 정보</h4>
+                <h4 style="color: #bcb8b1; margin-bottom: 15px;">고객 정보</h4>
                 <div class="info-row">
                     <div class="info-label">고객명:</div>
                     <div class="info-value"></div>
@@ -1400,7 +1400,7 @@ function showNotification(message, type = 'info') {
                 color: white;
                 padding: 15px 20px;
                 border-radius: 8px;
-                border-left: 4px solid #ff3d24;
+                border-left: 4px solid #bcb8b1;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
                 z-index: 10000;
                 display: flex;

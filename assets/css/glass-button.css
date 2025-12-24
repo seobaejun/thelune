@@ -40,7 +40,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50px;
-    background: rgba(255, 61, 36, 0.3);
+    background: rgba(188, 184, 177, 0.3);
     filter: blur(15px);
     opacity: 0;
     transition: all 0.3s ease;
@@ -50,7 +50,7 @@
 /* Hover Effects */
 .glass-button:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 61, 36, 0.5);
+    border-color: rgba(188, 184, 177, 0.5);
 }
 
 .glass-button:hover + .glass-button-shadow {
@@ -85,16 +85,16 @@
 
 /* Hero Section Buttons */
 .glass-button.hero-glass-button {
-    background: rgba(255, 61, 36, 0.2);
-    border: 2px solid rgba(255, 61, 36, 0.7);
+    background: rgba(188, 184, 177, 0.2);
+    border: 2px solid rgba(188, 184, 177, 0.7);
     color: var(--white-color);
 }
 .glass-button.hero-glass-button:hover {
-    background: rgba(255, 61, 36, 0.4);
+    background: rgba(188, 184, 177, 0.4);
     border: 2px solid var(--primary-color);
 }
 .glass-button.hero-glass-button + .glass-button-shadow {
-    background: rgba(255, 61, 36, 0.5);
+    background: rgba(188, 184, 177, 0.5);
 }
 
 /* Primary Buttons */
@@ -104,31 +104,31 @@
     color: var(--white-color);
 }
 .glass-button.primary-glass-button:hover {
-    background: rgba(255, 61, 36, 0.8);
+    background: rgba(188, 184, 177, 0.8);
     border: 2px solid var(--primary-color);
 }
 .glass-button.primary-glass-button + .glass-button-shadow {
-    background: rgba(255, 61, 36, 0.7);
+    background: rgba(188, 184, 177, 0.7);
 }
 
 /* Secondary Buttons */
 .glass-button.secondary-glass-button {
     background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 61, 36, 0.7);
+    border: 2px solid rgba(188, 184, 177, 0.7);
     color: var(--white-color);
 }
 .glass-button.secondary-glass-button:hover {
-    background: rgba(255, 61, 36, 0.2);
+    background: rgba(188, 184, 177, 0.2);
     border: 2px solid var(--primary-color);
 }
 .glass-button.secondary-glass-button + .glass-button-shadow {
-    background: rgba(255, 61, 36, 0.4);
+    background: rgba(188, 184, 177, 0.4);
 }
 
 /* More Buttons */
 .glass-button.more-glass-button {
     background: transparent;
-    border: 2.5px solid rgba(255, 61, 36, 0.8);
+    border: 2.5px solid rgba(188, 184, 177, 0.8);
     color: var(--primary-color);
 }
 .glass-button.more-glass-button .glass-button-text {
@@ -136,12 +136,12 @@
     font-size: 14px; /* Slightly smaller font */
 }
 .glass-button.more-glass-button:hover {
-    background: rgba(255, 61, 36, 0.1);
+    background: rgba(188, 184, 177, 0.1);
     border: 2.5px solid var(--primary-color);
     color: var(--white-color);
 }
 .glass-button.more-glass-button + .glass-button-shadow {
-    background: rgba(255, 61, 36, 0.3);
+    background: rgba(188, 184, 177, 0.3);
 }
 
 /* Submit Buttons */
@@ -155,11 +155,11 @@
     padding: 14px 20px;
 }
 .glass-button.submit-glass-button:hover {
-    background: rgba(255, 61, 36, 0.8);
+    background: rgba(188, 184, 177, 0.8);
     border-color: var(--primary-color);
 }
 .glass-button.submit-glass-button + .glass-button-shadow {
-    background: rgba(255, 61, 36, 0.7);
+    background: rgba(188, 184, 177, 0.7);
 }
 
 /* Hero Section Overlay */
@@ -331,17 +331,17 @@
 
 /* Common Button Override for Glass Style */
 .common-btn {
-    background: rgba(255, 61, 36, 0.2) !important;
+    background: rgba(188, 184, 177, 0.2) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 61, 36, 0.5) !important;
+    border: 1px solid rgba(188, 184, 177, 0.5) !important;
     color: var(--white-color) !important;
     border-radius: 50px !important;
     transition: all 0.3s ease !important;
 }
 
 .common-btn:hover {
-    background: rgba(255, 61, 36, 0.4) !important;
+    background: rgba(188, 184, 177, 0.4) !important;
     border-color: var(--primary-color) !important;
     transform: translateY(-3px) !important;
 }
