@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견적 문의 - THE LUNE</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/quote.css">
+</head>
+<body>
+    <!-- Start Header -->
+    <header class="header-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-6 col-6">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/img/logo.png" alt="THE LUNE Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-6 col-6">
+                    <div class="header-right">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="index.html">홈</a></li>
+                                <li><a href="about.html">회사소개</a></li>
+                                <li><a href="services.html">서비스</a></li>
+                                <li><a href="quote.html" class="active">견적문의</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header-contact">
+                            <a href="tel:031-943-4488" class="contact-btn">
+                                <span>📞 031-943-4488</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Start Quote Page -->
+    <div class="quote-page" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); min-height: 100vh; padding: 100px 0 50px 0;">
+        <div class="container" style="max-width: 1800px; margin: 0 auto; padding: 0 20px;">
+            <div class="row justify-content-center">
+                <!-- 4인승과 6인승 카드 -->
+                <div style="display: flex; justify-content: center; gap: 50px; margin-bottom: 50px; flex-wrap: wrap;">
+                    <!-- 4인승 카드 -->
+                    <div style="width: 700px; height: 750px; background: #1a1a1a; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" onclick="show4SeatQuoteOptions()" id="show4SeatOptions">
+                        <div style="width: 100%; height: 100%; background-image: url('assets/img/견적4인승.png'); background-size: cover; background-position: center -80px; background-repeat: no-repeat; position: relative;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); display: flex; align-items: end; padding: 40px;">
+                                <div>
+                                    <h3 style="color: white; font-size: 28px; font-weight: bold; margin-bottom: 15px;">카니발 4인승</h3>
+                                    <button style="background: #ff3d24; color: white; padding: 12px 30px; border: none; border-radius: 25px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">견적내기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6인승 카드 -->
+                    <div style="width: 700px; height: 750px; background: #1a1a1a; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" onclick="show6SeatQuoteOptions()" id="show6SeatOptions">
+                        <div style="width: 100%; height: 100%; background-image: url('assets/img/견적6인승.png'); background-size: cover; background-position: center -100px; background-repeat: no-repeat; position: relative;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); display: flex; align-items: end; padding: 40px;">
+                                <div>
+                                    <h3 style="color: white; font-size: 28px; font-weight: bold; margin-bottom: 15px;">카니발 6인승</h3>
+                                    <button style="background: #ff3d24; color: white; padding: 12px 30px; border: none; border-radius: 25px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">견적내기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4인승 견적 옵션들 (처음에는 숨김) -->
+                <div id="quote4SeatOptions" style="display: none; position: relative;">
+                    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                        <form id="quote4SeatForm">
+                    
+                    <!-- 유종 선택 -->
+                    <div class="quote-section">
+                        <h2>유종 선택</h2>
+                        <div class="section-content">
+                            <h3>유종</h3>
+                            <p>연료 유종을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="gasoline_4seat" name="fuel_type_4seat" value="gasoline" data-price="0" data-label="가솔린">
+                                    <label for="gasoline_4seat">
+                                        <span class="option-name">가솔린</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="hybrid_fuel_4seat" name="fuel_type_4seat" value="hybrid" data-price="4550000" data-label="하이브리드">
+                                    <label for="hybrid_fuel_4seat">
+                                        <span class="option-name">하이브리드</span>
+                                        <span class="option-price">+4,550,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 트림선택 -->
+                    <div class="quote-section">
+                        <h2>트림선택</h2>
+                        <div class="section-content">
+                            <h3>트림선택</h3>
+                            <p>트림을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="signature_4seat" name="trim_options_4seat" value="signature" data-price="51160000" data-label="시그니처">
+                                    <label for="signature_4seat">
+                                        <span class="option-name">시그니처</span>
+                                        <span class="option-price">+51,160,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="xline_4seat" name="trim_options_4seat" value="xline" data-price="51220000" data-label="X-LINE">
+                                    <label for="xline_4seat">
+                                        <span class="option-name">X-LINE</span>
+                                        <span class="option-price">+51,220,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 순정옵션 -->
+                    <div class="quote-section">
+                        <h2>순정옵션</h2>
+                        <div class="section-content">
+                            <h3>기본전체옵션</h3>
+                            <p>기본전체옵션을 확인해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="full_option_4seat" name="genuine_options_4seat" value="full_option" data-price="0" data-label="풀 옵션" checked disabled>
+                                    <label for="full_option_4seat" style="cursor: pointer; width: 100%;">
+                                        <span class="option-name">풀 옵션</span>
+                                        <span class="option-description">(스타일 / 드라이브 와이즈 / 모니터링 팩 / 스마트 커넥트 / HUD+빌트인 캠2 / BOSS 사운드 / 컴포트)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 외장컬러 -->
+                    <div class="quote-section">
+                        <h2>외장컬러</h2>
+                        <div class="section-content">
+                            <h3>외장컬러</h3>
+                            <p>차량 외장 색상을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="aurora_black_pearl_4seat" name="exterior_color_4seat" value="aurora_black_pearl" data-price="0" data-label="오로라 블랙 펄">
+                                    <label for="aurora_black_pearl_4seat">
+                                        <span class="option-name">오로라 블랙 펄</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="snow_white_pearl_4seat" name="exterior_color_4seat" value="snow_white_pearl" data-price="0" data-label="스노우 화이트 펄">
+                                    <label for="snow_white_pearl_4seat">
+                                        <span class="option-name">스노우 화이트 펄</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="ceramic_silver_4seat" name="exterior_color_4seat" value="ceramic_silver" data-price="0" data-label="세라믹 실버 (X-LINE)">
+                                    <label for="ceramic_silver_4seat">
+                                        <span class="option-name">세라믹 실버 (X-LINE)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="navy_gray_4seat" name="exterior_color_4seat" value="navy_gray" data-price="0" data-label="네이비 그레이 (HEV전용)">
+                                    <label for="navy_gray_4seat">
+                                        <span class="option-name">네이비 그레이 (HEV전용)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 인테리어 -->
+                    <div class="quote-section">
+                        <h2>인테리어</h2>
+                        <div class="section-content">
+                            <h3>인테리어</h3>
+                            <p>인테리어 옵션을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="interior_black_4seat" name="interior_options_4seat" value="black" data-price="0" data-label="블랙 인테리어">
+                                    <label for="interior_black_4seat">
+                                        <span class="option-name">블랙 인테리어</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="interior_beige_4seat" name="interior_options_4seat" value="beige" data-price="0" data-label="베이지 인테리어">
+                                    <label for="interior_beige_4seat">
+                                        <span class="option-name">베이지 인테리어</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 기본 컨버전 옵션 -->
+                    <div class="quote-section">
+                        <h2>기본 컨버전 옵션</h2>
+                        <div class="section-content">
+                            <h3>1 패키지</h3>
+                            <p>기본 패키지를 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="package1_4seat" name="package_4seat" value="package1" data-price="32840000" data-label="1 패키지 (기본 전체 옵션)">
+                                    <label for="package1_4seat">
+                                        <span class="option-name">1 패키지 (기본 전체 옵션)</span>
+                                        <span class="option-price">+32,840,000원</span>
+                                    </label>
+                                </div>
+                                
+                                <!-- 패키지 상세 내용 -->
+                                <div style="margin-top: 10px; padding: 15px; font-size: 15px;">
+                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; line-height: 1.4;">
+                                        <div style="font-weight: bold; color: #666;">루프</div>
+                                        <div>카니발 전용 Hi-Roof</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">1열</div>
+                                        <div>1열 벤치 보조 가죽 시트</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">2열</div>
+                                        <div>2열 VVP 회전 / 등 받이 전자 의전 시트 (헤드리 시트/열선/통풍/안마/충전포트)</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">3열</div>
+                                        <div>라커지 체 플로어</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">4열</div>
+                                        <div>4열 상용 시트 전자 후 수납 및 설치</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">테이블</div>
+                                        <div>하츠 파티션 장착 (수납형 등받이)</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">트림</div>
+                                        <div>도어 트림업 4PS / 전장 트림업, 플롤 트림업 / 라커지 트림업, 트렁크 트림업</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">바닥재</div>
+                                        <div>최고급 오토 바닥 히팅 우드 플로어</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">무드등</div>
+                                        <div>전장 무드 무드등, 사이드 엠비언트 무드등</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">TV</div>
+                                        <div>27인치 스마트 TV</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">도어스커트</div>
+                                        <div>2열 자동 도어 스커트</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">바디킷</div>
+                                        <div>AG 바디킷 (에어댐 장착)</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">구성</div>
+                                        <div>올 그레인 4EA / 올레 그레인 4EA</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">커튼</div>
+                                        <div>하니콤 블라인드</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">사이드스텝</div>
+                                        <div>자동식 사이드 스텝</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">핸들</div>
+                                        <div>DOS 핸들 장착</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">스타라이트</div>
+                                        <div>파이버 타입</div>
+                                        
+                                        <div style="font-weight: bold; color: #666;">그외</div>
+                                        <div>스피커 커버, 프리미엄 턴팅</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 추가 옵션 -->
+                    <div class="quote-section">
+                        <h2>추가 옵션</h2>
+                        <div class="section-content">
+                            <h3>추가</h3>
+                            <p>추가 옵션을 선택해 주세요</p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                                <!-- 왼쪽 열 -->
+                                <div class="option-list">
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_ag_auto_side_step_4seat" name="additional_options_4seat" value="ag_auto_side_step" data-price="2200000" data-label="AG 자동 사이드 스텝">
+                                        <label for="add_ag_auto_side_step_4seat">
+                                            <span class="option-name">AG 자동 사이드 스텝</span>
+                                            <span class="option-price">+2,200,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_dos_handle_4seat" name="additional_options_4seat" value="dos_handle" data-price="1050000" data-label="DOS 핸들">
+                                        <label for="add_dos_handle_4seat">
+                                            <span class="option-name">DOS 핸들</span>
+                                            <span class="option-price">+1,050,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_hsd_front_brake_4seat" name="additional_options_4seat" value="hsd_front_brake" data-price="2200000" data-label="HSD Front형 브레이크 SET">
+                                        <label for="add_hsd_front_brake_4seat">
+                                            <span class="option-name">HSD Front형 브레이크 SET</span>
+                                            <span class="option-price">+2,200,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_hsd_rear_brake_4seat" name="additional_options_4seat" value="hsd_rear_brake" data-price="2200000" data-label="HSD Rear형 브레이크 SET">
+                                        <label for="add_hsd_rear_brake_4seat">
+                                            <span class="option-name">HSD Rear형 브레이크 SET</span>
+                                            <span class="option-price">+2,200,000원</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- 오른쪽 열 -->
+                                <div class="option-list">
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_side_screen_4seat" name="additional_options_4seat" value="side_screen" data-price="1500000" data-label="하츠 캠핑">
+                                        <label for="add_side_screen_4seat">
+                                            <span class="option-name">하츠 캠핑</span>
+                                            <span class="option-price">+1,500,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_dz_handle_4seat" name="additional_options_4seat" value="dz_handle" data-price="900000" data-label="D컷 핸들">
+                                        <label for="add_dz_handle_4seat">
+                                            <span class="option-name">D컷 핸들</span>
+                                            <span class="option-price">+900,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_hsd_system_set_4seat" name="additional_options_4seat" value="hsd_system_set" data-price="1500000" data-label="HSD 서스펜션 SET">
+                                        <label for="add_hsd_system_set_4seat">
+                                            <span class="option-name">HSD 서스펜션 SET</span>
+                                            <span class="option-price">+1,500,000원</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 견적 요약 -->
+                    <div class="quote-section">
+                        <h2>견적 요약</h2>
+                        <div class="section-content">
+                            <div class="quote-summary-final">
+                                <div class="total-price-final">
+                                    <div class="price-label">총 합계:</div>
+                                    <div class="price-value">
+                                        <input type="text" id="totalPriceBottom4Seat" value="0" readonly>
+                                        <span>원</span>
+                                    </div>
+                                </div>
+                                <div class="quote-actions-final" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px;">
+                                    <a href="tel:031-943-4488" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">전화 상담</a>
+                                    <a href="https://pf.kakao.com/_XGpExj" target="_blank" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">채팅 상담</a>
+                                    <button id="showQuoteBtn4Seat" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">견적서 보기</button>
+                                    <button id="downloadPDFBtn4Seat" style="background: #ff3d24; color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">📄 PDF 다운로드</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 6인승 견적 옵션들 (처음에는 숨김) -->
+                <div id="quote6SeatOptions" style="display: none; position: relative;">
+                    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                        <form id="quote6SeatForm">
+                    
+                    <!-- 유종 선택 -->
+                    <div class="quote-section">
+                        <h2>유종 선택</h2>
+                        <div class="section-content">
+                            <h3>유종</h3>
+                            <p>연료 유종을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="gasoline_6seat" name="fuel_type_6seat" value="gasoline" data-price="0" data-label="가솔린">
+                                    <label for="gasoline_6seat">
+                                        <span class="option-name">가솔린</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="hybrid_fuel_6seat" name="fuel_type_6seat" value="hybrid" data-price="4550000" data-label="하이브리드">
+                                    <label for="hybrid_fuel_6seat">
+                                        <span class="option-name">하이브리드</span>
+                                        <span class="option-price">+4,550,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 트림선택 -->
+                    <div class="quote-section">
+                        <h2>트림선택</h2>
+                        <div class="section-content">
+                            <h3>트림선택</h3>
+                            <p>트림을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="signature_6seat" name="trim_options_6seat" value="signature" data-price="51160000" data-label="시그니처">
+                                    <label for="signature_6seat">
+                                        <span class="option-name">시그니처</span>
+                                        <span class="option-price">+51,160,000원</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="xline_6seat" name="trim_options_6seat" value="xline" data-price="51220000" data-label="X-LINE">
+                                    <label for="xline_6seat">
+                                        <span class="option-name">X-LINE</span>
+                                        <span class="option-price">+51,220,000원</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 순정옵션 -->
+                    <div class="quote-section">
+                        <h2>순정옵션</h2>
+                        <div class="section-content">
+                            <h3>기본전체옵션</h3>
+                            <p>기본전체옵션을 확인해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="checkbox" id="full_option_6seat" name="genuine_options_6seat" value="full_option" data-price="0" data-label="풀 옵션" checked disabled>
+                                    <label for="full_option_6seat" style="cursor: pointer; width: 100%;">
+                                        <span class="option-name">풀 옵션</span>
+                                        <span class="option-description">(스타일 / 드라이브 와이즈 / 모니터링 팩 / 스마트 커넥트 / HUD+빌트인 캠2 / BOSS 사운드 / 컴포트)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 외장컬러 -->
+                    <div class="quote-section">
+                        <h2>외장컬러</h2>
+                        <div class="section-content">
+                            <h3>외장컬러</h3>
+                            <p>차량 외장 색상을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="aurora_black_pearl_6seat" name="exterior_color_6seat" value="aurora_black_pearl" data-price="0" data-label="오로라 블랙 펄">
+                                    <label for="aurora_black_pearl_6seat">
+                                        <span class="option-name">오로라 블랙 펄</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="snow_white_pearl_6seat" name="exterior_color_6seat" value="snow_white_pearl" data-price="0" data-label="스노우 화이트 펄">
+                                    <label for="snow_white_pearl_6seat">
+                                        <span class="option-name">스노우 화이트 펄</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="ceramic_silver_6seat" name="exterior_color_6seat" value="ceramic_silver" data-price="0" data-label="세라믹 실버 (X-LINE)">
+                                    <label for="ceramic_silver_6seat">
+                                        <span class="option-name">세라믹 실버 (X-LINE)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="navy_gray_6seat" name="exterior_color_6seat" value="navy_gray" data-price="0" data-label="네이비 그레이 (HEV전용)">
+                                    <label for="navy_gray_6seat">
+                                        <span class="option-name">네이비 그레이 (HEV전용)</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 인테리어 -->
+                    <div class="quote-section">
+                        <h2>인테리어</h2>
+                        <div class="section-content">
+                            <h3>인테리어</h3>
+                            <p>인테리어 옵션을 선택해 주세요</p>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" id="interior_black_6seat" name="interior_options_6seat" value="black" data-price="0" data-label="블랙 인테리어">
+                                    <label for="interior_black_6seat">
+                                        <span class="option-name">블랙 인테리어</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="interior_beige_6seat" name="interior_options_6seat" value="beige" data-price="0" data-label="베이지 인테리어">
+                                    <label for="interior_beige_6seat">
+                                        <span class="option-name">베이지 인테리어</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 기본 컨버전 옵션 -->
+                    <div class="quote-section">
+                        <h2>기본 컨버전 옵션</h2>
+                        <div class="section-content">
+                            <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                                <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; font-size: 14px; line-height: 1.6;">
+                                    <div style="font-weight: bold; color: #ff3d24;">루프</div>
+                                    <div>카니발 전용 Hi-Roof</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">1열</div>
+                                    <div>1열 버킷 나파 가죽 시트</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">2열</div>
+                                    <div>2열 VVIP 8WAY 전동 마사지 의전 시트 (헤드레 시트/풀신/롤업/안마/정전도트)</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">3열</div>
+                                    <div>3열 절단 전동 시트 (180도 각각 풀업/절신/롤업/접속)</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">4열</div>
+                                    <div>4열 상향 시트 유치</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">트리밍</div>
+                                    <div>도어 트리밍 4PS / 전창 트리밍, 출입 트리밍 / 러기지 트리밍, 트렁크 트리밍</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">바닥재</div>
+                                    <div>최고급 오토 바닥 히팅 우드 플로어</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">무드등</div>
+                                    <div>전장 메인 무드등, 사이드 엠비언트 무드등</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">TV</div>
+                                    <div>27인치 스마트 TV</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">도어스커트</div>
+                                    <div>2열 자동등 도어 스커트</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">발전/팬용</div>
+                                    <div>기본 발전 방음 패드 시공</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">구성</div>
+                                    <div>올 구성 6EA / 하리구성 4EA</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">커튼</div>
+                                    <div>주름 커튼</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">사이드스텝</div>
+                                    <div>고정식 사이드 스텝</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">스타라이트</div>
+                                    <div>파이버 튜브링</div>
+                                    
+                                    <div style="font-weight: bold; color: #ff3d24;">그외</div>
+                                    <div>프리미엄 튜닝 - <span style="color: #ff3d24; font-weight: bold;">₩32,840,000</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 전체전 옵션 선택 -->
+                    <div class="quote-section">
+                        <h2>전체전 옵션 선택</h2>
+                        <div class="section-content">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                                <!-- 왼쪽 열 -->
+                                <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px;">
+                                    <div style="margin-bottom: 15px;">
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">바닥 종류</div>
+                                        <div style="font-size: 14px;">(우드 플로링 / 생상)</div>
+                                    </div>
+                                    <div style="margin-bottom: 15px;">
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">컬러</div>
+                                        <div style="font-size: 14px;">(커피 / 생상)</div>
+                                    </div>
+                                    <div style="margin-bottom: 15px;">
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">시트</div>
+                                        <div style="font-size: 14px;">(트리밍 생상)</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">도어</div>
+                                        <div style="font-size: 14px;">(트리밍 생상 A,B,C)</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 오른쪽 열 -->
+                                <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px;">
+                                    <div style="margin-bottom: 15px;">
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">전장</div>
+                                        <div style="font-size: 14px;">(트리밍 생상)</div>
+                                    </div>
+                                    <div style="margin-bottom: 15px;">
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">폰 헤드</div>
+                                        <div style="font-size: 14px;">(트리밍 생상)</div>
+                                    </div>
+                                    <div style="margin-bottom: 15px;">
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">라이저</div>
+                                        <div style="font-size: 14px;">(트리밍 생상)</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: bold; color: #ff3d24; margin-bottom: 5px;">트링크</div>
+                                        <div style="font-size: 14px;">(트리밍 생상)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 추가 옵션 -->
+                    <div class="quote-section">
+                        <h2>추가 옵션</h2>
+                        <div class="section-content">
+                            <h3>추가</h3>
+                            <p>추가 옵션을 선택해 주세요</p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                                <!-- 왼쪽 열 -->
+                                <div class="option-list">
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_ag_auto_side_step_6seat" name="additional_options_6seat" value="ag_auto_side_step" data-price="2200000" data-label="AG 자동 사이드 스텝">
+                                        <label for="add_ag_auto_side_step_6seat">
+                                            <span class="option-name">AG 자동 사이드 스텝</span>
+                                            <span class="option-price">+2,200,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_dos_handle_6seat" name="additional_options_6seat" value="dos_handle" data-price="1050000" data-label="DOS 핸들">
+                                        <label for="add_dos_handle_6seat">
+                                            <span class="option-name">DOS 핸들</span>
+                                            <span class="option-price">+1,050,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_hsd_front_brake_6seat" name="additional_options_6seat" value="hsd_front_brake" data-price="2200000" data-label="HSD Front형 브레이크 SET">
+                                        <label for="add_hsd_front_brake_6seat">
+                                            <span class="option-name">HSD Front형 브레이크 SET</span>
+                                            <span class="option-price">+2,200,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_hsd_rear_brake_6seat" name="additional_options_6seat" value="hsd_rear_brake" data-price="2200000" data-label="HSD Rear형 브레이크 SET">
+                                        <label for="add_hsd_rear_brake_6seat">
+                                            <span class="option-name">HSD Rear형 브레이크 SET</span>
+                                            <span class="option-price">+2,200,000원</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- 오른쪽 열 -->
+                                <div class="option-list">
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_side_screen_6seat" name="additional_options_6seat" value="side_screen" data-price="1500000" data-label="하츠 캠핑">
+                                        <label for="add_side_screen_6seat">
+                                            <span class="option-name">하츠 캠핑</span>
+                                            <span class="option-price">+1,500,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_dz_handle_6seat" name="additional_options_6seat" value="dz_handle" data-price="900000" data-label="D컷 핸들">
+                                        <label for="add_dz_handle_6seat">
+                                            <span class="option-name">D컷 핸들</span>
+                                            <span class="option-price">+900,000원</span>
+                                        </label>
+                                    </div>
+                                    <div class="option-item">
+                                        <input type="checkbox" id="add_hsd_system_set_6seat" name="additional_options_6seat" value="hsd_system_set" data-price="1500000" data-label="HSD 서스펜션 SET">
+                                        <label for="add_hsd_system_set_6seat">
+                                            <span class="option-name">HSD 서스펜션 SET</span>
+                                            <span class="option-price">+1,500,000원</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 견적 요약 -->
+                    <div class="quote-section">
+                        <h2>견적 요약</h2>
+                        <div class="section-content">
+                            <div class="quote-summary-final">
+                                <div class="total-price-final">
+                                    <div class="price-label">총 합계:</div>
+                                    <div class="price-value">
+                                        <input type="text" id="totalPriceBottom6Seat" value="0" readonly>
+                                        <span>원</span>
+                                    </div>
+                                </div>
+                                <div class="quote-actions-final" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px;">
+                                    <a href="tel:031-943-4488" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">전화 상담</a>
+                                    <a href="https://pf.kakao.com/_XGpExj" target="_blank" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; text-decoration: none; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">채팅 상담</a>
+                                    <button id="showQuoteBtn6Seat" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: 2px solid rgba(255, 61, 36, 0.7); cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">견적서 보기</button>
+                                    <button id="downloadPDFBtn6Seat" style="background: #ff3d24; color: white; padding: 15px 25px; border-radius: 0; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; min-width: 140px; text-align: center;">📄 PDF 다운로드</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Quote Page -->
+
+    <!-- Quote Summary Sidebar -->
+    <div class="quote-summary-sidebar" id="quoteSidebar" style="display: none;">
+        <div class="sidebar-header">
+            <h3>선택된 옵션</h3>
+        </div>
+        <div class="selected-options" id="selectedOptions">
+            <p class="no-options">선택된 옵션이 없습니다.</p>
+        </div>
+        <div class="total-price">
+            <div class="price-row">
+                <span>총 가격:</span>
+                <span id="totalPrice">0원</span>
+            </div>
+        </div>
+    </div>
+    <!-- End Quote Summary Sidebar -->
+
+    <!-- Start Footer -->
+    <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+            <div style="display: flex; flex-wrap: wrap; margin: 0 -15px;">
+                <!-- Company Info -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <a href="index.html" style="display: inline-block; margin-bottom: 20px;">
+                            <img src="assets/img/logo.png" alt="THE LUNE Logo" style="height: 40px; width: auto;">
+                        </a>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px; line-height: 1.6;">프리미엄 리무진 서비스</div>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">평일: 09:00 - 18:00</div>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">토요일: 09:00 - 15:00</div>
+                        <div style="color: rgba(255, 255, 255, 0.8);">일요일 및 공휴일: 휴무</div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <h4 style="color: #ffffff; margin-bottom: 20px; font-size: 18px; font-weight: 600;">연락처</h4>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">📞 031-943-4488</div>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">📱 010-8959-4488</div>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">📧 thelune2024@naver.com</div>
+                        <div style="color: rgba(255, 255, 255, 0.8);">💬 카카오톡 ID: thelune2024</div>
+                    </div>
+                </div>
+
+                <!-- Address Info -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <h4 style="color: #ffffff; margin-bottom: 20px; font-size: 18px; font-weight: 600;">주소</h4>
+                        <div style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">
+                            경기도 파주시 월롱면<br>
+                            덕은리 1131-7
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
+                    <div>
+                        <h4 style="color: #ffffff; margin-bottom: 20px; font-size: 18px; font-weight: 600;">소셜 미디어</h4>
+                        <div style="display: flex; gap: 15px;">
+                            <a href="https://pf.kakao.com/_XGpExj" target="_blank" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">카카오톡</a>
+                            <a href="tel:031-943-4488" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">전화상담</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; text-align: center;">
+                <div style="color: rgba(255, 255, 255, 0.6); font-size: 14px;">
+                    © 2024 THE LUNE. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="assets/js/quote.js"></script>
+</body>
+</html>
