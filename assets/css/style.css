@@ -1406,7 +1406,7 @@ kbd {
 .text-hover-animaiton .menu-text {
   display: -ms-flexbox;
   overflow: hidden;
-  text-shadow: 0 60px 0 var(--primary-color);
+  text-shadow: 0 60px 0 #bcb8b1;
   display: flex;
 }
 .text-hover-animaiton .menu-text.black {
@@ -2580,7 +2580,18 @@ kbd {
     color: #fff;
   }
   .ak-nav .ak-nav_list a:hover {
-    color: #fff;
+    color: #bcb8b1 !important;
+  }
+  
+  /* 네비게이션 호버 브랜드 컬러 강제 적용 */
+  .ak-nav .ak-nav_list > li > a:hover,
+  .ak-nav .ak-nav_list li a:hover,
+  .text-hover-animaiton:hover,
+  .ak-nav a:hover,
+  .ak-main_header .ak-nav a:hover,
+  .ak-site_header .ak-nav a:hover {
+    color: #bcb8b1 !important;
+    transition: color 0.3s ease !important;
   }
   .ak-nav .menu-item-has-children {
     position: relative;
@@ -2654,7 +2665,18 @@ kbd {
     color: #fff;
   }
   .ak-nav .ak-nav_list a:hover {
-    color: #fff;
+    color: #bcb8b1 !important;
+  }
+  
+  /* 네비게이션 호버 브랜드 컬러 강제 적용 */
+  .ak-nav .ak-nav_list > li > a:hover,
+  .ak-nav .ak-nav_list li a:hover,
+  .text-hover-animaiton:hover,
+  .ak-nav a:hover,
+  .ak-main_header .ak-nav a:hover,
+  .ak-site_header .ak-nav a:hover {
+    color: #bcb8b1 !important;
+    transition: color 0.3s ease !important;
   }
   .ak-site_header.ak-style1 .ak-main_header_in {
     height: 80px;
@@ -5279,6 +5301,27 @@ kbd {
     image-rendering: auto;
     image-rendering: -webkit-optimize-contrast;
     -ms-interpolation-mode: bicubic;
+}
+
+/* 네비게이션 호버 브랜드 컬러 최우선 적용 */
+.ak-nav .ak-nav_list a:hover,
+.ak-nav .ak-nav_list > li > a:hover,
+.ak-nav .ak-nav_list li a:hover,
+.text-hover-animaiton:hover,
+.ak-nav a:hover,
+.ak-main_header .ak-nav a:hover,
+.ak-site_header .ak-nav a:hover,
+.ak-main_header .ak-nav .ak-nav_list a:hover,
+.ak-site_header .ak-nav .ak-nav_list a:hover,
+.ak-main_header .ak-nav .ak-nav_list > li > a:hover,
+.ak-site_header .ak-nav .ak-nav_list > li > a:hover {
+    color: #bcb8b1 !important;
+    transition: color 0.3s ease !important;
+}
+
+/* text-hover-animaiton 클래스 브랜드 컬러 적용 */
+.text-hover-animaiton .menu-text {
+    text-shadow: 0 60px 0 #bcb8b1 !important;
 }
 
 /*# sourceMappingURL=style.css.map */
