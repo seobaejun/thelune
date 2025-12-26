@@ -65,52 +65,145 @@
     <section style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/choose-us.png') center/cover; padding: 120px 0 80px;">
         <div class="container">
             <div class="text-center">
-                <h1 style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">전시장</h1>
-                <p style="color: rgba(255,255,255,0.8); font-size: 18px;">THE LUNE 전시장 정보</p>
+                <!-- 제목과 서브 문구 삭제 -->
             </div>
         </div>
     </section>
 
-    <section style="padding: 100px 0; background: #0a0a0a;">
+    <!-- 전시장 선택 버튼 섹션 -->
+    <section style="padding: 80px 0; background: #0a0a0a;">
         <div class="container">
+            <div class="text-center" style="margin-bottom: 60px;">
+                <h2 style="color: #bcb8b1; font-size: 42px; font-weight: 700; margin-bottom: 20px;">전시장 위치</h2>
+                <p style="color: rgba(255,255,255,0.8); font-size: 18px;">방문하실 전시장을 선택해주세요</p>
+            </div>
+            
+            <!-- 전시장 버튼들 -->
+            <div class="row justify-content-center" style="margin-bottom: 60px;">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <button class="showroom-btn active" data-location="headquarters" style="width: 100%; padding: 20px; background: linear-gradient(135deg, #bcb8b1, #a8a49e); border: none; border-radius: 10px; color: white; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(188, 184, 177, 0.3);">
+                        THE LUNE 본사
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <button class="showroom-btn" data-location="ansan" style="width: 100%; padding: 20px; background: rgba(255,255,255,0.1); border: 2px solid rgba(188, 184, 177, 0.3); border-radius: 10px; color: rgba(255,255,255,0.8); font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        안산 전시장
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <button class="showroom-btn" data-location="busan" style="width: 100%; padding: 20px; background: rgba(255,255,255,0.1); border: 2px solid rgba(188, 184, 177, 0.3); border-radius: 10px; color: rgba(255,255,255,0.8); font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        부산 전시장
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 전시장 정보 표시 영역 -->
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <div style="margin-bottom: 50px;">
-                        <h2 style="color: #bcb8b1; font-size: 36px; font-weight: 700; margin-bottom: 30px;">전시장 안내</h2>
-                        <div style="margin-bottom: 30px;">
-                            <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">위치</h4>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
-                                경기도 파주시 탄현면 축현산단로 21-41
-                            </p>
+                    <div id="showroom-info">
+                        <!-- 본사 정보 (기본 표시) -->
+                        <div class="location-info active" data-location="headquarters">
+                            <h3 style="color: #bcb8b1; font-size: 32px; font-weight: 700; margin-bottom: 30px;">THE LUNE 본사</h3>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">📍 위치</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    경기도 파주시 탄현면 축현산단로 21-41
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">📞 연락처</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    031-943-4488
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">🕒 운영시간</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    평일: 09:00 - 18:00<br>
+                                    토요일: 09:00 - 17:00<br>
+                                    일요일: 휴무
+                                </p>
+                            </div>
+                            <a href="contact.html" class="glass-button" style="display: inline-block; margin-top: 30px;">
+                                <span class="glass-button-text">방문 예약하기</span>
+                            </a>
                         </div>
-                        <div style="margin-bottom: 30px;">
-                            <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">🕒 운영시간</h4>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
-                                평일: 09:00 - 18:00<br>
-                                토요일: 09:00 - 17:00<br>
-                                일요일: 휴무
-                            </p>
+                        
+                        <!-- 안산 전시장 정보 -->
+                        <div class="location-info" data-location="ansan" style="display: none;">
+                            <h3 style="color: #bcb8b1; font-size: 32px; font-weight: 700; margin-bottom: 30px;">안산 전시장</h3>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">📍 위치</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    경기 안산시 단원구 원포공원2로 24, 215호
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">📞 연락처</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    010-9599-9263
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">🕒 운영시간</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    평일: 09:00 - 18:00<br>
+                                    토요일: 09:00 - 17:00<br>
+                                    일요일: 휴무
+                                </p>
+                            </div>
+                            <a href="contact.html" class="glass-button" style="display: inline-block; margin-top: 30px;">
+                                <span class="glass-button-text">방문 예약하기</span>
+                            </a>
                         </div>
-                        <div style="margin-bottom: 40px;">
-                            <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">연락처</h4>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
-                                전화: 031-943-4488<br>
-                                이메일: thelune1@naver.com
-                            </p>
+                        
+                        <!-- 부산 전시장 정보 -->
+                        <div class="location-info" data-location="busan" style="display: none;">
+                            <h3 style="color: #bcb8b1; font-size: 32px; font-weight: 700; margin-bottom: 30px;">부산 전시장</h3>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">📍 위치</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    부산 금정구 금사로 160 3층
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">📞 연락처</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    문의: 031-943-4488
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: white; font-size: 20px; font-weight: 600; margin-bottom: 15px;">🕒 운영시간</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.8;">
+                                    평일: 09:00 - 18:00<br>
+                                    토요일: 09:00 - 17:00<br>
+                                    일요일: 휴무
+                                </p>
+                            </div>
+                            <a href="contact.html" class="glass-button" style="display: inline-block; margin-top: 30px;">
+                                <span class="glass-button-text">방문 예약하기</span>
+                            </a>
                         </div>
-                        <a href="contact.html" class="glass-button">
-                            <span class="glass-button-text">방문 예약하기</span>
-                        </a>
                     </div>
                 </div>
+                
+                <!-- 구글 지도 영역 -->
                 <div class="col-lg-6">
-                    <div style="text-align: center;">
-                        <img src="assets/img/6월 4일 고양 로케이션 DH auto 화이트 카니발6323.jpg" alt="THE LUNE 전시장" style="max-width: 100%; height: auto; border-radius: 10px;">
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; height: 500px;">
+                        <div id="google-map" style="width: 100%; height: 100%; border-radius: 10px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                            <p style="color: rgba(255,255,255,0.6); font-size: 16px; text-align: center;">
+                                구글 지도 API 키를 입력해주세요<br>
+                                <small style="font-size: 14px;">Google Maps API Key Required</small>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Footer Separator Line -->
+    <div style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(188, 184, 177, 0.3) 50%, transparent 100%); margin: 0;"></div>
 
     <!-- Footer (동일한 구조) -->
     <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
@@ -119,49 +212,48 @@
                 <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
                     <div style="margin-bottom: 30px;">
                         <img src="assets/img/logo.png" alt="THE LUNE" style="height: 40px; margin-bottom: 20px;">
-                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-                            THE LUNE은 프리미엄 차량 인테리어 전문 기업으로, 고객의 특별한 요구사항을 만족시키는 맞춤형 서비스를 제공합니다.
-                        </p>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px; line-height: 1.6;">프리미엄 차량 인테리어 서비스</div>
+                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">평일: 09:00 - 18:00</div>
                     </div>
                 </div>
                 <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
                         <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">빠른 링크</h4>
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 10px;"><a href="about.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">회사소개</a></li>
-                        <li style="margin-bottom: 10px;"><a href="services.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">모델소개</a></li>
-                        <li style="margin-bottom: 10px;"><a href="gallery.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">갤러리</a></li>
-                        <li style="margin-bottom: 10px;"><a href="contact.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">문의하기</a></li>
+                        <li style="margin-bottom: 10px;"><a href="about.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">회사소개</a></li>
+                        <li style="margin-bottom: 10px;"><a href="services.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">모델소개</a></li>
+                        <li style="margin-bottom: 10px;"><a href="gallery.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">갤러리</a></li>
+                        <li style="margin-bottom: 10px;"><a href="contact.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">문의하기</a></li>
                     </ul>
                 </div>
                 <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
                         <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">서비스</h4>
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">커스텀 디자인</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">인증 및 특허</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">브랜드 파워</a></li>
-                        <li style="margin-bottom: 10px;"><a href="quote.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">견적 문의</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">커스텀 디자인</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">인증 및 특허</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">브랜드 파워</a></li>
+                        <li style="margin-bottom: 10px;"><a href="quote.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">견적 문의</a></li>
                     </ul>
                 </div>
                 <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
                         <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">위치 & 연락처</h4>
                     <div style="margin-bottom: 15px;">
-                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0; line-height: 1.6;">
+                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
                             경기도 파주시 탄현면 축현산단로 21-41
                         </p>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">
+                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
                             031-943-4488
                         </p>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">
+                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
                             thelune1@naver.com
                         </p>
                     </div>
                     <div style="margin-bottom: 20px;">
-                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">
-                            🕒 평일: 09:00 - 18:00
+                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
+                            평일: 09:00 - 18:00
                         </p>
                     </div>
                     <div style="display: flex; gap: 10px; margin-top: 20px;">
@@ -216,6 +308,82 @@
             event.target.style.fontWeight = '600';
             console.log('Language switched to:', lang);
         }
+
+        // 전시장 선택 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const showroomBtns = document.querySelectorAll('.showroom-btn');
+            const locationInfos = document.querySelectorAll('.location-info');
+
+            showroomBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetLocation = this.getAttribute('data-location');
+                    
+                    // 모든 버튼 스타일 초기화
+                    showroomBtns.forEach(b => {
+                        b.style.background = 'rgba(255,255,255,0.1)';
+                        b.style.border = '2px solid rgba(188, 184, 177, 0.3)';
+                        b.style.color = 'rgba(255,255,255,0.8)';
+                        b.style.boxShadow = 'none';
+                        b.classList.remove('active');
+                    });
+                    
+                    // 선택된 버튼 스타일 적용
+                    this.style.background = 'linear-gradient(135deg, #bcb8b1, #a8a49e)';
+                    this.style.border = 'none';
+                    this.style.color = 'white';
+                    this.style.boxShadow = '0 5px 15px rgba(188, 184, 177, 0.3)';
+                    this.classList.add('active');
+                    
+                    // 모든 정보 숨기기
+                    locationInfos.forEach(info => {
+                        info.style.display = 'none';
+                        info.classList.remove('active');
+                    });
+                    
+                    // 선택된 정보 표시
+                    const targetInfo = document.querySelector(`.location-info[data-location="${targetLocation}"]`);
+                    if (targetInfo) {
+                        targetInfo.style.display = 'block';
+                        targetInfo.classList.add('active');
+                    }
+                    
+                    // 구글 지도 업데이트 (API 키가 있을 때)
+                    updateGoogleMap(targetLocation);
+                });
+            });
+        });
+
+        // 구글 지도 업데이트 함수
+        function updateGoogleMap(location) {
+            const mapElement = document.getElementById('google-map');
+            
+            // 각 전시장의 지도/이미지 정보
+            const locations = {
+                headquarters: {
+                    iframe: `<div style="height: 100%; overflow: hidden; border-radius: 10px;">
+                        <img src="assets/img/6월 4일 고양 로케이션 DH auto 화이트 카니발6323.jpg" alt="THE LUNE 본사" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                    </div>`,
+                    address: '경기도 파주시 탄현면 축현산단로 21-41'
+                },
+                ansan: {
+                    iframe: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3173.748176824927!2d126.8118279!3d37.3011017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b6e684fb7956b%3A0xc26adbe12f641bb3!2z6rK96riw64-EIOyViOyCsOyLnCDri6jsm5Dqtawg7JuQ7Y-s6rO17JuQMuuhnCAyNCAyMTXtmLg!5e0!3m2!1sko!2skr!4v1766748099493!5m2!1sko!2skr" width="100%" height="100%" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
+                    address: '경기 안산시 단원구 원포공원2로 24, 215호'
+                },
+                busan: {
+                    iframe: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3259.2378017882766!2d129.1165479!3d35.2254499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356892326b4323b7%3A0x27a3cb18c1cd9c1d!2z67aA7IKw6rSR7Jet7IucIOq4iOygleq1rCDquIjsgqzroZwgMTYwIDPsuLU!5e0!3m2!1sko!2skr!4v1766748159318!5m2!1sko!2skr" width="100%" height="100%" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
+                    address: '부산 금정구 금사로 160 3층'
+                }
+            };
+            
+            // 선택된 전시장의 지도 표시
+            mapElement.innerHTML = locations[location].iframe;
+        }
+
+        // 페이지 로드 시 기본 지도 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            updateGoogleMap('headquarters');
+        });
     </script>
+
 </body>
 </html>
