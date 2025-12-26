@@ -17,6 +17,90 @@
     <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/glass-button.css" />
+    
+    <style>
+        /* Avenir 폰트 정의 */
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Book.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Roman.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+        
+        /* 폰트 적용 - 영어는 세리프, 한글은 Avenir */
+        * {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+        }
+        
+        /* 영어 텍스트용 클래식 세리프 폰트 */
+        .english-serif {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: uppercase !important;
+        }
+        
+        .english-serif-light {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.02em !important;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.01em !important;
+        }
+        
+        .avenir-light {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 300 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-book {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-roman {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-black {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.01em !important;
+        }
+        
+        p, span, div {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -117,7 +201,7 @@
                             <img src="assets/img/4인승.jpg" alt="LUNE CARNIVAL 4" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 30px;">
-                            <h3 style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 4</h3>
+                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 4</h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
                                 4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.
                             </p>
@@ -133,7 +217,7 @@
                             <img src="assets/img/6인승.jpg" alt="LUNE CARNIVAL 6" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 30px;">
-                            <h3 style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 6</h3>
+                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 6</h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
                                 6인승 프리미엄 모델로 넓은 공간과 럭셔리한 인테리어를 자랑합니다.
                             </p>
@@ -149,7 +233,7 @@
                             <img src="assets/img/9인승.jpg" alt="LUNE CARNIVAL 9" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 30px;">
-                            <h3 style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 9</h3>
+                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 9</h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
                                 9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.
                             </p>

@@ -13,6 +13,595 @@
     <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/glass-button.css" />
+    
+    <style>
+        /* Avenir 폰트 정의 */
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Book.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Roman.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+        
+        /* 폰트 적용 - 영어는 세리프, 한글은 Avenir */
+        * {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+        }
+        
+        /* 영어 텍스트용 클래식 세리프 폰트 */
+        .english-serif {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: uppercase !important;
+        }
+        
+        .english-serif-light {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.02em !important;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.01em !important;
+        }
+        
+        .avenir-light {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 300 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-book {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-roman {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0em !important;
+        }
+        
+        .avenir-black {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.01em !important;
+        }
+        
+        p, span, div {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+        }
+        /* Circular Gallery Styles - Enhanced Implementation */
+        .circular-gallery-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 2000px;
+        }
+        
+        .circular-gallery-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: none; /* Remove transition for smoother animation */
+        }
+        
+        .gallery-item {
+            position: absolute;
+            width: 500px;
+            height: 300px;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -150px;
+            transition: opacity 0.3s linear;
+            transform-style: preserve-3d;
+        }
+        
+        .gallery-item-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item-inner:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-item img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: white;
+        }
+        
+        .gallery-item-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .gallery-item-subtitle {
+            font-size: 14px;
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .gallery-item-credit {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+        
+        
+        /* Loading state */
+        .gallery-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #bcb8b1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Enhanced responsive design */
+        @media (max-width: 1200px) {
+            .gallery-item {
+                width: 450px;
+                height: 270px;
+                margin-left: -225px;
+                margin-top: -135px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-item {
+                width: 400px;
+                height: 240px;
+                margin-left: -200px;
+                margin-top: -120px;
+            }
+            
+            .gallery-item-title {
+                font-size: 18px;
+            }
+            
+            .gallery-item-subtitle {
+                font-size: 13px;
+            }
+            
+            .gallery-item-overlay {
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 320px;
+                height: 200px;
+                margin-left: -160px;
+                margin-top: -100px;
+            }
+            
+            .gallery-item-title {
+                font-size: 16px;
+            }
+            
+            .gallery-item-subtitle {
+                font-size: 12px;
+            }
+        }
+        
+        /* Performance optimizations */
+        .gallery-item * {
+            will-change: transform, opacity;
+        }
+        
+        .circular-gallery-inner {
+            will-change: transform;
+        }
+        
+        /* Accessibility improvements */
+        .gallery-item:focus-within .gallery-item-inner {
+            outline: 2px solid #bcb8b1;
+            outline-offset: 2px;
+        }
+        
+        /* Dark theme support */
+        @media (prefers-color-scheme: dark) {
+            .gallery-item-inner {
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+
+        /* Category Cards Styles - Matching Models Page */
+        .category-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .category-card-inner {
+            background: rgba(188,184,177,0.1);
+            border: 1px solid rgba(188,184,177,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-card:hover .category-card-inner {
+            background: rgba(188,184,177,0.15);
+            border-color: rgba(188,184,177,0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .category-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-image img {
+            transform: scale(1.05);
+        }
+
+        .category-content {
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .category-card:hover .category-title {
+            color: #bcb8b1;
+        }
+
+        .category-description {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex: 1;
+        }
+
+        .category-button {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(188, 184, 177, 0.2), rgba(188, 184, 177, 0.1));
+            border: 1px solid rgba(188, 184, 177, 0.3);
+            color: #bcb8b1;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .category-button:hover {
+            background: linear-gradient(135deg, rgba(188, 184, 177, 0.3), rgba(188, 184, 177, 0.2));
+            border-color: rgba(188, 184, 177, 0.5);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(188, 184, 177, 0.2);
+        }
+
+        /* Category Modal Styles */
+        .category-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .category-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow: hidden;
+            border: 1px solid rgba(188, 184, 177, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .category-modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid rgba(188, 184, 177, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(188, 184, 177, 0.1);
+        }
+
+        .category-modal-header h3 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .category-modal-close {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 30px;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .category-modal-close:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .category-modal-body {
+            padding: 30px;
+            max-height: calc(90vh - 100px);
+            overflow-y: auto;
+        }
+
+        .category-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .category-gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .category-gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .category-gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .category-gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            padding: 15px;
+            color: white;
+        }
+
+        .category-gallery-item-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .category-gallery-item-description {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .category-empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .category-empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .category-empty-state h4 {
+            color: rgba(255,255,255,0.8);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .category-empty-state p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments for category cards */
+        @media (max-width: 768px) {
+            .category-image {
+                height: 200px;
+            }
+            
+            .category-content {
+                padding: 25px 20px;
+            }
+            
+            .category-title {
+                font-size: 20px;
+            }
+            
+            .category-description {
+                font-size: 13px;
+            }
+            
+            .category-modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+            
+            .category-modal-header {
+                padding: 20px;
+            }
+            
+            .category-modal-body {
+                padding: 20px;
+            }
+            
+            .category-gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-image {
+                height: 180px;
+            }
+            
+            .category-content {
+                padding: 20px 15px;
+            }
+            
+            .category-title {
+                font-size: 18px;
+            }
+            
+            .category-description {
+                font-size: 12px;
+            }
+            
+            .category-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="preloader" class="preloader-content ">
@@ -87,7 +676,7 @@
         <div class="nav-bar-border"></div>
     </header>
 
-    <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/6월 4일 고양 로케이션 DH auto 화이트 카니발6323.jpg') center/cover; padding: 120px 0 80px;">
+    <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/6월 4일 고양 로케이션 DH auto 화이트 카니발6323.jpg') center/cover; padding: 150px 0 100px;">
         <div class="container">
             <div class="ak-page-title-content text-center">
                 <h1 style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">갤러리</h1>
@@ -95,6 +684,106 @@
             </div>
         </div>
     </section>
+
+    <!-- Circular Gallery Section -->
+    <section style="padding: 50px 0; background: #0a0a0a; min-height: 80vh; position: relative; overflow: hidden;">
+        <div class="container-fluid" style="max-width: none; padding: 0;">
+            <!-- Circular Gallery Container -->
+            <div id="circular-gallery" style="height: 80vh; width: 100%; position: relative; perspective: 2000px;">
+                <!-- Gallery items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Gallery Section -->
+    <section style="padding: 100px 0; background: #111; position: relative;">
+        <div class="container-fluid" style="max-width: 1600px; padding: 0 15px;">
+            <div class="text-center" style="margin-bottom: 80px;">
+                <h2 class="english-serif" style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">GALLERY</h2>
+            </div>
+            
+            <div class="row" style="margin: 0 -8px;">
+                <!-- 4인승 카테고리 -->
+                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
+                    <div class="category-card" onclick="location.href='gallery-4seater.html'">
+                        <div class="category-card-inner">
+                            <div class="category-image">
+                                <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg" alt="4인승 갤러리">
+                            </div>
+                            <div class="category-content">
+                                <h3 class="category-title">4인승</h3>
+                                <p class="category-description">프리미엄 4인승 모델의 럭셔리 인테리어와 최고급 마감재를 확인하세요.</p>
+                                <div class="category-button">갤러리 보기</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6인승 카테고리 -->
+                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
+                    <div class="category-card" onclick="location.href='gallery-6seater.html'">
+                        <div class="category-card-inner">
+                            <div class="category-image">
+                                <img src="assets/img/6인승/4월 19일 dh auto 카니발0663.jpg" alt="6인승 갤러리">
+                            </div>
+                            <div class="category-content">
+                                <h3 class="category-title">6인승</h3>
+                                <p class="category-description">편안한 6인승 모델의 프리미엄 공간과 세련된 디자인을 감상하세요.</p>
+                                <div class="category-button">갤러리 보기</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 시트 카테고리 -->
+                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
+                    <div class="category-card" onclick="location.href='gallery-seats.html'">
+                        <div class="category-card-inner">
+                            <div class="category-image">
+                                <img src="assets/img/시트 색깔/브라운.jpg" alt="시트 갤러리">
+                            </div>
+                            <div class="category-content">
+                                <h3 class="category-title">시트</h3>
+                                <p class="category-description">최고급 가죽 시트와 인체공학적 디자인의 완벽한 조화를 만나보세요.</p>
+                                <div class="category-button">갤러리 보기</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 핸들 카테고리 -->
+                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
+                    <div class="category-card" onclick="location.href='gallery-steering.html'">
+                        <div class="category-card-inner">
+                            <div class="category-image">
+                                <img src="assets/img/핸들/5월 15일 dh auto 카니발 핸들1304.jpg" alt="핸들 갤러리">
+                            </div>
+                            <div class="category-content">
+                                <h3 class="category-title">핸들</h3>
+                                <p class="category-description">프리미엄 스티어링 휠과 첨단 컨트롤 시스템의 세부사항을 확인하세요.</p>
+                                <div class="category-button">갤러리 보기</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Modal -->
+    <div id="categoryModal" class="category-modal" onclick="closeCategoryModal()">
+        <div class="category-modal-content" onclick="event.stopPropagation()">
+            <div class="category-modal-header">
+                <h3 id="modalTitle">카테고리 갤러리</h3>
+                <button class="category-modal-close" onclick="closeCategoryModal()">&times;</button>
+            </div>
+            <div class="category-modal-body">
+                <div id="categoryGalleryGrid" class="category-gallery-grid">
+                    <!-- Images will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Footer (동일한 구조) -->
@@ -213,6 +902,712 @@
             event.target.style.fontWeight = '600';
             console.log('Language switched to:', lang);
         }
+
+        // Enhanced Circular Gallery Implementation
+        class CircularGallery {
+            constructor(container, items, options = {}) {
+                this.container = container;
+                this.items = items;
+                this.radius = options.radius || 600;
+                this.autoRotateSpeed = options.autoRotateSpeed || 0.05;
+                
+                // State management
+                this.rotation = 0;
+                this.isScrolling = false;
+                this.isLoading = true;
+                this.scrollTimeout = null;
+                this.animationFrame = null;
+                this.loadedImages = 0;
+                
+                // Bind methods
+                this.handleScroll = this.handleScroll.bind(this);
+                this.handleResize = this.handleResize.bind(this);
+                this.autoRotate = this.autoRotate.bind(this);
+                
+                this.init();
+            }
+            
+            async init() {
+                this.showLoading();
+                await this.preloadImages();
+                this.createGallery();
+                this.bindEvents();
+                this.startAutoRotation();
+                this.hideLoading();
+            }
+            
+            showLoading() {
+                this.container.innerHTML = `
+                    <div class="circular-gallery-container">
+                        <div class="gallery-loading">
+                            <div class="loading-spinner"></div>
+                            <div>갤러리 로딩 중...</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            hideLoading() {
+                const loading = this.container.querySelector('.gallery-loading');
+                if (loading) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => loading.remove(), 300);
+                }
+            }
+            
+            preloadImages() {
+                return new Promise((resolve) => {
+                    const imagePromises = this.items.map(item => {
+                        return new Promise((imgResolve) => {
+                            const img = new Image();
+                            img.onload = () => {
+                                this.loadedImages++;
+                                imgResolve();
+                            };
+                            img.onerror = () => {
+                                console.warn(`Failed to load image: ${item.photo.url}`);
+                                this.loadedImages++;
+                                imgResolve();
+                            };
+                            img.src = item.photo.url;
+                        });
+                    });
+                    
+                    Promise.all(imagePromises).then(() => {
+                        this.isLoading = false;
+                        resolve();
+                    });
+                });
+            }
+            
+            createGallery() {
+                this.anglePerItem = 360 / this.items.length;
+                
+                // Create gallery structure
+                this.container.innerHTML = `
+                    <div class="circular-gallery-container">
+                        <div class="circular-gallery-inner" id="gallery-inner">
+                            ${this.items.map((item, index) => this.createGalleryItem(item, index)).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                this.galleryInner = document.getElementById('gallery-inner');
+                this.updateGallery();
+            }
+            
+            createGalleryItem(item, index) {
+                return `
+                    <div class="gallery-item" 
+                         data-index="${index}"
+                         role="group"
+                         aria-label="${item.common}">
+                        <div class="gallery-item-inner">
+                            <img src="${item.photo.url}" 
+                                 alt="${item.photo.text}" 
+                                 style="object-position: ${item.photo.pos || 'center'};"
+                                 loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <h2 class="gallery-item-title">${item.common}</h2>
+                                <em class="gallery-item-subtitle">${item.binomial}</em>
+                                <p class="gallery-item-credit">Photo by: ${item.photo.by}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            bindEvents() {
+                // Scroll-based rotation with passive listener
+                window.addEventListener('scroll', this.handleScroll, { passive: true });
+                
+                // Resize handler for responsive behavior
+                window.addEventListener('resize', this.handleResize, { passive: true });
+                
+                // Keyboard navigation with faster rotation
+                this.container.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') {
+                        this.rotation -= 36; // Faster rotation (360/10 = 36 degrees)
+                        this.updateGallery();
+                    } else if (e.key === 'ArrowRight') {
+                        this.rotation += 36;
+                        this.updateGallery();
+                    }
+                });
+            }
+            
+            handleScroll() {
+                this.isScrolling = true;
+                
+                if (this.scrollTimeout) {
+                    clearTimeout(this.scrollTimeout);
+                }
+                
+                // Calculate scroll-based rotation with enhanced sensitivity
+                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollProgress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+                const scrollRotation = scrollProgress * 360 * 3; // Triple rotation for more dynamic effect
+                this.rotation = scrollRotation;
+                
+                this.scrollTimeout = setTimeout(() => {
+                    this.isScrolling = false;
+                }, 150);
+            }
+            
+            handleResize() {
+                // Adjust radius based on screen size for wider layout
+                const screenWidth = window.innerWidth;
+                if (screenWidth < 480) {
+                    this.radius = 500;
+                } else if (screenWidth < 768) {
+                    this.radius = 600;
+                } else if (screenWidth < 1200) {
+                    this.radius = 700;
+                } else {
+                    this.radius = 800;
+                }
+                this.updateGallery();
+            }
+            
+            startAutoRotation() {
+                this.animationFrame = requestAnimationFrame(this.autoRotate);
+            }
+            
+            autoRotate() {
+                if (!this.isScrolling && !this.isLoading) {
+                    this.rotation += this.autoRotateSpeed;
+                }
+                this.updateGallery();
+                this.animationFrame = requestAnimationFrame(this.autoRotate);
+            }
+            
+            updateGallery() {
+                if (!this.galleryInner) return;
+                
+                // Update container rotation with smooth transform and hardware acceleration
+                this.galleryInner.style.transform = `rotateY(${this.rotation}deg)`;
+                this.galleryInner.style.willChange = 'transform';
+                
+                // Update individual item opacity and positioning
+                const galleryItems = this.container.querySelectorAll('.gallery-item');
+                galleryItems.forEach((item, index) => {
+                    const itemAngle = index * this.anglePerItem;
+                    const totalRotation = this.rotation % 360;
+                    const relativeAngle = (itemAngle + totalRotation + 360) % 360;
+                    const normalizedAngle = Math.abs(relativeAngle > 180 ? 360 - relativeAngle : relativeAngle);
+                    
+                    // Enhanced opacity calculation for smoother transitions
+                    const opacity = Math.max(0.4, 1 - (normalizedAngle / 160)); // Improved visibility range
+                    
+                    // Calculate scale based on position (front items larger)
+                    const scale = 0.85 + (0.15 * (1 - normalizedAngle / 180)); // Smoother scaling
+                    
+                    // Apply transforms with hardware acceleration
+                    item.style.transform = `rotateY(${itemAngle}deg) translateZ(${this.radius}px) scale(${scale})`;
+                    item.style.opacity = opacity;
+                    item.style.willChange = 'transform, opacity';
+                    
+                    // Add z-index for proper layering
+                    item.style.zIndex = Math.round(opacity * 100);
+                });
+            }
+            
+            // Public methods for external control
+            rotateTo(angle) {
+                this.rotation = angle;
+                this.updateGallery();
+            }
+            
+            rotateToItem(itemIndex) {
+                const targetAngle = -(itemIndex * this.anglePerItem);
+                this.rotateTo(targetAngle);
+            }
+            
+            pause() {
+                if (this.animationFrame) {
+                    cancelAnimationFrame(this.animationFrame);
+                    this.animationFrame = null;
+                }
+            }
+            
+            resume() {
+                if (!this.animationFrame) {
+                    this.startAutoRotation();
+                }
+            }
+            
+            destroy() {
+                // Clean up event listeners and animation frames
+                if (this.animationFrame) {
+                    cancelAnimationFrame(this.animationFrame);
+                }
+                if (this.scrollTimeout) {
+                    clearTimeout(this.scrollTimeout);
+                }
+                
+                window.removeEventListener('scroll', this.handleScroll);
+                window.removeEventListener('resize', this.handleResize);
+                
+                // Clear container
+                this.container.innerHTML = '';
+            }
+        }
+
+        // Enhanced Gallery Data with Rich Content
+        const galleryItems = [
+            {
+                common: "LUNE CARNIVAL 4",
+                binomial: "Premium 4-Seater Interior Design",
+                photo: {
+                    url: "assets/img/10월 29일 the lune 카니발0009.jpg",
+                    text: "LUNE CARNIVAL 4 프리미엄 4인승 인테리어 - 최고급 가죽 시트와 우드 패널로 완성된 럭셔리 공간",
+                    pos: "center",
+                    by: "THE LUNE Design Studio"
+                }
+            },
+            {
+                common: "LUNE CARNIVAL 6",
+                binomial: "Premium 6-Seater Luxury Configuration",
+                photo: {
+                    url: "assets/img/10월 29일 the lune 카니발3161.jpg",
+                    text: "LUNE CARNIVAL 6 프리미엄 6인승 - 비즈니스 클래스 수준의 편안함과 고급스러운 마감재",
+                    pos: "center",
+                    by: "THE LUNE Design Studio"
+                }
+            },
+            {
+                common: "LUNE CARNIVAL 7",
+                binomial: "Premium 7-Seater Family Luxury",
+                photo: {
+                    url: "assets/img/10월 29일 the lune 카니발3232-1.jpg",
+                    text: "LUNE CARNIVAL 7 프리미엄 7인승 - 가족을 위한 최고의 편안함과 안전성을 제공하는 인테리어",
+                    pos: "center",
+                    by: "THE LUNE Design Studio"
+                }
+            },
+            {
+                common: "LUNE CARNIVAL 9",
+                binomial: "Premium 9-Seater Executive Class",
+                photo: {
+                    url: "assets/img/10월 29일 the lune 카니발5320.jpg",
+                    text: "LUNE CARNIVAL 9 프리미엄 9인승 - 대형 그룹을 위한 최고급 편의시설과 럭셔리 인테리어",
+                    pos: "center",
+                    by: "THE LUNE Design Studio"
+                }
+            },
+            {
+                common: "PREMIUM INTERIOR",
+                binomial: "Bespoke Luxury Interior Craftsmanship",
+                photo: {
+                    url: "assets/img/10월 29일 the lune 카니발5337.jpg",
+                    text: "프리미엄 인테리어 디자인 - 고객 맞춤형 럭셔리 소재와 정교한 수공예 마감",
+                    pos: "center",
+                    by: "THE LUNE Craftsmen"
+                }
+            },
+            {
+                common: "LUXURY SEATING",
+                binomial: "Ergonomic Premium Seating Solutions",
+                photo: {
+                    url: "assets/img/10월 29일 the lune 카니발7409.jpg",
+                    text: "럭셔리 시트 디자인 - 인체공학적 설계와 최고급 나파 가죽으로 완성된 편안함",
+                    pos: "center",
+                    by: "THE LUNE Seating Division"
+                }
+            },
+            {
+                common: "CUSTOM DESIGN",
+                binomial: "Personalized Luxury Modifications",
+                photo: {
+                    url: "assets/img/10월 29일 the lune 카니발8463.jpg",
+                    text: "커스텀 디자인 - 고객의 개성과 취향을 반영한 완전 맞춤형 인테리어 솔루션",
+                    pos: "center",
+                    by: "THE LUNE Custom Division"
+                }
+            },
+            {
+                common: "EXTERIOR ELEGANCE",
+                binomial: "Sophisticated Exterior Aesthetics",
+                photo: {
+                    url: "assets/img/6월 4일 고양 로케이션 DH auto 화이트 카니발6323.jpg",
+                    text: "외관 디자인 - 세련된 외관과 완벽한 마감으로 완성된 프리미엄 차량의 품격",
+                    pos: "center",
+                    by: "THE LUNE Exterior Team"
+                }
+            },
+            {
+                common: "HERITAGE CRAFTSMANSHIP",
+                binomial: "Traditional Korean Luxury Aesthetics",
+                photo: {
+                    url: "assets/img/hero-bg-1.jpg",
+                    text: "전통 장인정신 - 한국의 전통미와 현대적 럭셔리가 조화를 이룬 독창적 디자인",
+                    pos: "center",
+                    by: "THE LUNE Heritage Collection"
+                }
+            },
+            {
+                common: "INNOVATION SHOWCASE",
+                binomial: "Cutting-Edge Technology Integration",
+                photo: {
+                    url: "assets/img/hero-bg-2.jpg",
+                    text: "혁신 기술 - 최첨단 기술과 럭셔리 디자인의 완벽한 융합",
+                    pos: "center",
+                    by: "THE LUNE Innovation Lab"
+                }
+            }
+        ];
+
+        // Enhanced Gallery Initialization
+        let galleryInstance = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryContainer = document.getElementById('circular-gallery');
+            if (galleryContainer) {
+                // Initialize with responsive radius for wider layout
+                const getResponsiveRadius = () => {
+                    const screenWidth = window.innerWidth;
+                    if (screenWidth < 480) return 500;
+                    if (screenWidth < 768) return 600;
+                    if (screenWidth < 1200) return 700;
+                    return 800;
+                };
+                
+                // Create gallery instance
+                galleryInstance = new CircularGallery(galleryContainer, galleryItems, {
+                    radius: getResponsiveRadius(),
+                    autoRotateSpeed: 0.08 // Faster rotation for better engagement
+                });
+                
+                // Add intersection observer for performance
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            galleryInstance?.resume();
+                        } else {
+                            galleryInstance?.pause();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                observer.observe(galleryContainer);
+                
+                // Add visibility change handler
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        galleryInstance?.pause();
+                    } else {
+                        galleryInstance?.resume();
+                    }
+                });
+                
+                // Add focus/blur handlers for accessibility
+                window.addEventListener('focus', () => galleryInstance?.resume());
+                window.addEventListener('blur', () => galleryInstance?.pause());
+                
+                // Cleanup on page unload
+                window.addEventListener('beforeunload', () => {
+                    galleryInstance?.destroy();
+                });
+                
+                console.log('🎨 Circular Gallery initialized with', galleryItems.length, 'items');
+            }
+        });
+        
+        // Global gallery controls (for debugging or external control)
+        window.galleryControls = {
+            pause: () => galleryInstance?.pause(),
+            resume: () => galleryInstance?.resume(),
+            rotateTo: (angle) => galleryInstance?.rotateTo(angle),
+            rotateToItem: (index) => galleryInstance?.rotateToItem(index)
+        };
+
+        // Category Gallery Data with Real Images
+        const categoryData = {
+            '4seater': {
+                title: '4인승 갤러리',
+                description: '프리미엄 4인승 모델의 럭셔리 인테리어',
+                images: [
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내1407.jpg',
+                        title: '4인승 프리미엄 인테리어 1',
+                        description: '최고급 가죽 시트와 우드 패널이 조화를 이룬 럭셔리 공간'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내1414.jpg',
+                        title: '4인승 프리미엄 인테리어 2',
+                        description: '편안한 승차감을 위한 인체공학적 시트 디자인'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내1775.jpg',
+                        title: '4인승 프리미엄 인테리어 3',
+                        description: '세련된 조명과 고급 마감재로 완성된 실내'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내3114.jpg',
+                        title: '4인승 프리미엄 인테리어 4',
+                        description: '넓은 공간감과 프라이버시를 보장하는 디자인'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내3843.jpg',
+                        title: '4인승 프리미엄 인테리어 5',
+                        description: '비즈니스 클래스 수준의 편의시설과 마감'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내4117.jpg',
+                        title: '4인승 프리미엄 인테리어 6',
+                        description: '고급스러운 색상 조합과 정교한 디테일'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내4161.jpg',
+                        title: '4인승 프리미엄 인테리어 7',
+                        description: '최첨단 엔터테인먼트 시스템과 편의기능'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내4890.jpg',
+                        title: '4인승 프리미엄 인테리어 8',
+                        description: '완벽한 마감과 세심한 디테일이 돋보이는 공간'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내5204.jpg',
+                        title: '4인승 프리미엄 인테리어 9',
+                        description: '럭셔리 브랜드 수준의 품격 있는 인테리어'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내5523.jpg',
+                        title: '4인승 프리미엄 인테리어 10',
+                        description: '편안함과 고급스러움이 완벽하게 조화된 공간'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내5963.jpg',
+                        title: '4인승 프리미엄 인테리어 11',
+                        description: '프리미엄 소재와 정밀한 수공예 마감'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg',
+                        title: '4인승 프리미엄 인테리어 12',
+                        description: '최고급 나파 가죽과 천연 소재의 조화'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내8632.jpg',
+                        title: '4인승 프리미엄 인테리어 13',
+                        description: '세련된 디자인과 실용성을 겸비한 공간'
+                    },
+                    {
+                        url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내8643.jpg',
+                        title: '4인승 프리미엄 인테리어 14',
+                        description: 'VIP를 위한 최상급 편의시설과 마감재'
+                    }
+                ]
+            },
+            '6seater': {
+                title: '6인승 갤러리',
+                description: '편안한 6인승 모델의 프리미엄 공간',
+                images: [
+                    {
+                        url: 'assets/img/6인승/4월 19일 dh auto 카니발0663.jpg',
+                        title: '6인승 프리미엄 인테리어 1',
+                        description: '넓은 공간과 편안한 시트 배치로 완성된 6인승 모델'
+                    },
+                    {
+                        url: 'assets/img/6인승/4월 19일 dh auto 카니발1935.jpg',
+                        title: '6인승 프리미엄 인테리어 2',
+                        description: '가족 단위 이용에 최적화된 공간 구성'
+                    },
+                    {
+                        url: 'assets/img/6인승/4월 19일 dh auto 카니발2216.jpg',
+                        title: '6인승 프리미엄 인테리어 3',
+                        description: '고급스러운 마감재와 세련된 디자인'
+                    },
+                    {
+                        url: 'assets/img/6인승/4월 19일 dh auto 카니발2217.jpg',
+                        title: '6인승 프리미엄 인테리어 4',
+                        description: '편안함과 실용성을 동시에 만족하는 인테리어'
+                    },
+                    {
+                        url: 'assets/img/6인승/4월 19일 dh auto 카니발2222.jpg',
+                        title: '6인승 프리미엄 인테리어 5',
+                        description: '프리미엄 소재와 정교한 마감으로 완성된 공간'
+                    },
+                    {
+                        url: 'assets/img/6인승/4월 19일 dh auto 카니발4273.jpg',
+                        title: '6인승 프리미엄 인테리어 6',
+                        description: '최첨단 편의시설과 럭셔리 디자인의 조화'
+                    },
+                    {
+                        url: 'assets/img/6인승/4월 19일 dh auto 카니발9114.jpg',
+                        title: '6인승 프리미엄 인테리어 7',
+                        description: '비즈니스와 레저 모두에 적합한 다목적 공간'
+                    }
+                ]
+            },
+            'seats': {
+                title: '시트 갤러리',
+                description: '최고급 가죽 시트와 다양한 색상 옵션',
+                images: [
+                    {
+                        url: 'assets/img/시트 색깔/아이보리.jpg',
+                        title: '아이보리 시트',
+                        description: '고급스럽고 깔끔한 아이보리 컬러의 프리미엄 가죽 시트'
+                    },
+                    {
+                        url: 'assets/img/시트 색깔/블랙.jpg',
+                        title: '블랙 시트',
+                        description: '클래식하고 세련된 블랙 컬러의 최고급 나파 가죽 시트'
+                    },
+                    {
+                        url: 'assets/img/시트 색깔/네이비.jpg',
+                        title: '네이비 시트',
+                        description: '품격 있는 네이비 컬러로 완성된 프리미엄 시트'
+                    },
+                    {
+                        url: 'assets/img/시트 색깔/브라운.jpg',
+                        title: '브라운 시트',
+                        description: '따뜻하고 고급스러운 브라운 컬러의 천연 가죽 시트'
+                    },
+                    {
+                        url: 'assets/img/시트 색깔/꼬냑.jpg',
+                        title: '꼬냑 시트',
+                        description: '럭셔리한 꼬냑 컬러로 완성된 프리미엄 가죽 시트'
+                    },
+                    {
+                        url: 'assets/img/시트 색깔/그레이.jpg',
+                        title: '그레이 시트',
+                        description: '모던하고 세련된 그레이 컬러의 고급 시트'
+                    }
+                ]
+            },
+            'steering': {
+                title: '핸들 갤러리',
+                description: '프리미엄 스티어링 휠과 컨트롤 시스템',
+                images: [
+                    {
+                        url: 'assets/img/핸들/5월 15일 dh auto 카니발 핸들1304.jpg',
+                        title: '프리미엄 스티어링 휠 1',
+                        description: '고급 가죽으로 마감된 프리미엄 스티어링 휠'
+                    },
+                    {
+                        url: 'assets/img/핸들/5월 15일 dh auto 카니발 핸들9625.jpg',
+                        title: '프리미엄 스티어링 휠 2',
+                        description: '첨단 컨트롤 시스템이 적용된 멀티펑션 핸들'
+                    },
+                    {
+                        url: 'assets/img/핸들/4월 22일 dh auto 카니발 실내5963.jpg',
+                        title: '프리미엄 스티어링 휠 3',
+                        description: '인체공학적 설계와 고급 마감이 적용된 스티어링 휠'
+                    }
+                ]
+            }
+        };
+
+        // Category Modal Functions
+        function openCategoryModal(categoryId) {
+            const modal = document.getElementById('categoryModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const galleryGrid = document.getElementById('categoryGalleryGrid');
+            
+            const category = categoryData[categoryId];
+            if (!category) {
+                console.error('Category not found:', categoryId);
+                return;
+            }
+            
+            // Set modal title
+            modalTitle.textContent = category.title;
+            
+            // Clear previous content
+            galleryGrid.innerHTML = '';
+            
+            // Check if category has images
+            if (category.images && category.images.length > 0) {
+                // Create gallery items
+                category.images.forEach((image, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'category-gallery-item';
+                    galleryItem.innerHTML = `
+                        <img src="${image.url}" alt="${image.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <div class="category-gallery-item-overlay">
+                            <div class="category-gallery-item-title">${image.title}</div>
+                            <div class="category-gallery-item-description">${image.description}</div>
+                        </div>
+                    `;
+                    
+                    // Add click event for full-size view
+                    galleryItem.addEventListener('click', () => {
+                        openImageViewer(image.url, image.title);
+                    });
+                    
+                    galleryGrid.appendChild(galleryItem);
+                });
+            } else {
+                // Show empty state
+                galleryGrid.innerHTML = `
+                    <div class="category-empty-state">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                        </svg>
+                        <h4>이미지 준비 중</h4>
+                        <p>${category.description}<br>곧 다양한 이미지를 만나보실 수 있습니다.</p>
+                    </div>
+                `;
+            }
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Pause main gallery when modal is open
+            galleryInstance?.pause();
+        }
+
+        function closeCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Resume main gallery when modal is closed
+            galleryInstance?.resume();
+        }
+
+        function openImageViewer(imageUrl, imageTitle) {
+            // Create full-screen image viewer
+            const viewer = document.createElement('div');
+            viewer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.95);
+                z-index: 2000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            `;
+            
+            viewer.innerHTML = `
+                <div style="position: relative; max-width: 90%; max-height: 90%;">
+                    <img src="${imageUrl}" alt="${imageTitle}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    <div style="position: absolute; top: -50px; left: 0; color: white; font-size: 18px; font-weight: 600;">${imageTitle}</div>
+                    <div style="position: absolute; top: -50px; right: 0; color: white; font-size: 30px; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1);" onclick="this.parentElement.parentElement.remove()">&times;</div>
+                </div>
+            `;
+            
+            viewer.addEventListener('click', (e) => {
+                if (e.target === viewer) {
+                    viewer.remove();
+                }
+            });
+            
+            document.body.appendChild(viewer);
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCategoryModal();
+            }
+        });
     </script>
 </body>
 </html>
