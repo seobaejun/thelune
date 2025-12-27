@@ -94,16 +94,13 @@
             letter-spacing: -0.01em !important;
         }
 
-        .avenir-light { font-family: 'Avenir', sans-serif !important; font-weight: 300 !important; }
-        .avenir-book { font-family: 'Avenir', sans-serif !important; font-weight: 400 !important; }
-        .avenir-roman { font-family: 'Avenir', sans-serif !important; font-weight: 500 !important; }
-        .avenir-black { font-family: 'Avenir', sans-serif !important; font-weight: 700 !important; }
+        /* 중복 제거 - 위의 정의를 사용 */
 
         /* News Page Styles - 카드 그리드 레이아웃 */
 
         .news-category-section {
             background: #0f1419;
-            padding: 40px 0;
+            padding: 80px 0 40px 0;
         }
 
         .category-nav {
@@ -184,6 +181,37 @@
                 max-width: 500px;
                 padding: 0 15px;
             }
+
+            /* 모바일에서 히어로 섹션 높이 조정 */
+            .ak-page-title {
+                padding: 120px 0 100px !important;
+                min-height: 50vh !important;
+            }
+
+            .ak-page-title h1 {
+                font-size: 36px !important;
+            }
+
+            .ak-page-title p {
+                font-size: 16px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* 작은 모바일에서 더 작게 */
+            .ak-page-title {
+                padding: 100px 0 80px !important;
+                min-height: 40vh !important;
+            }
+
+            .ak-page-title h1 {
+                font-size: 32px !important;
+                margin-bottom: 15px !important;
+            }
+
+            .ak-page-title p {
+                font-size: 14px !important;
+            }
         }
 
         .news-card:hover {
@@ -238,28 +266,28 @@
         }
 
         .news-date {
-            color: #999;
+            color: #777; /* 조금 더 진한 색상 */
             font-size: 14px;
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
-            font-weight: 400;
+            font-weight: 400; /* 얇은 폰트로 변경 */
         }
 
         .news-title {
-            font-size: 20px; /* 제목 크기 증가 */
+            font-size: 22px; /* 제목 크기 더 증가 */
             font-weight: 600;
-            color: #333;
+            color: #222; /* 더 진한 색상 */
             margin-bottom: 12px;
-            line-height: 1.4;
+            line-height: 1.5; /* 줄 간격 증가 */
             min-height: 55px; /* 높이도 조금 증가 */
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
         }
 
         .news-title a {
-            color: #333;
+            color: #222; /* 더 진한 색상 */
             text-decoration: none;
             transition: color 0.3s ease;
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
-            font-weight: 700 !important;
+            font-weight: 400 !important; /* 더 얇은 폰트로 변경 */
         }
 
         .news-title a:hover {
@@ -268,16 +296,16 @@
         }
 
         .news-excerpt {
-            color: #666;
-            line-height: 1.6;
+            color: #444; /* 더 진한 색상으로 변경 */
+            line-height: 1.7; /* 줄 간격 약간 증가 */
             margin-bottom: 15px;
-            font-size: 15px; /* 본문 크기 증가 */
+            font-size: 16px; /* 본문 크기 증가 */
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
-            font-weight: 400 !important;
+            font-weight: 300 !important; /* 더 얇은 폰트로 변경 */
         }
 
         .bottom-cta {
@@ -375,7 +403,7 @@
     </header>
 
     <!-- Page Title -->
-    <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/hero-bg-2.jpg') center/cover; padding: 120px 0 80px;">
+    <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/hero-bg-2.jpg') center/cover; padding: 200px 0 160px;">
         <div class="container">
             <div class="text-center">
                 <h1 class="english-serif" style="font-size: 48px; margin-bottom: 20px; color: white;">NEWS</h1>
