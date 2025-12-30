@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>A/S접수 - THE LUNE</title>
+    <link rel="icon" href="assets/img/favicon.svg" />
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/glass-button.css" />
+    
+    <!-- Avenir Fonts -->
+    <style>
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Book.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Roman.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Black.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* Apply Avenir to Korean text */
+        body {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+        }
+
+        .avenir-light {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+            font-weight: 300 !important;
+        }
+
+        .avenir-book {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+            font-weight: 400 !important;
+        }
+
+        .avenir-roman {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+            font-weight: 500 !important;
+        }
+
+        .avenir-black {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+            font-weight: 700 !important;
+        }
+
+        /* English serif font styles */
+        .english-serif {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: uppercase !important;
+        }
+
+        .english-serif-light {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.02em !important;
+        }
+        
+        /* Contact Info Section Styles from Template */
+        .contact-info {
+            display: flex;
+            gap: 40px;
+        }
+        .contact-info .left-info {
+            max-width: 460px;
+            width: 100%;
+        }
+        .contact-info .right-info {
+            width: 100%;
+        }
+        
+        /* Info Card Styles for Bottom Section */
+        .info-card {
+            padding: 50px;
+            display: flex;
+            font-weight: 700;
+            line-height: normal;
+            font-size: 20px;
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+            justify-content: space-between;
+            color: #fff;
+            margin-bottom: 0 !important;
+        }
+        
+        .info-card p {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+            font-weight: 400 !important;
+        }
+        
+        .info-card div p {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+            font-weight: 400 !important;
+        }
+        
+        /* 모든 정보 카드 텍스트에 강제 적용 */
+        .info-card * {
+            font-family: 'Avenir', 'Malgun Gothic', '맑은 고딕', sans-serif !important;
+        }
+        
+        .info-card .english-serif-light {
+            font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
+        }
+        .info-card:nth-child(odd) {
+            background-color: #000;
+        }
+        .info-card:nth-child(even) {
+            background-color: transparent;
+        }
+
+        @media screen and (max-width: 767px) {
+            .contact-info {
+                flex-direction: column;
+            }
+            .contact-info .left-info {
+                width: 100%;
+            }
+            .contact-info .right-info {
+                width: 100%;
+            }
+            .info-card {
+                padding: 45px 15px;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        
+        
+        
+        .text-hover-animaiton:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 네비게이션 메뉴 호버 강제 적용 */
+        .ak-nav .ak-nav_list a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav .ak-nav_list > li > a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 네비게이션 메뉴 호버 개선 */
+        
+        
+        
+        
+        /* 호버 효과 개선 - 텍스트 잘림 방지 */
+        .text-hover-animaiton {
+            overflow: visible !important;
+            line-height: 1.5 !important;
+            padding: 12px 2px !important;
+            vertical-align: middle !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .text-hover-animaiton:hover {
+            color: #bcb8b1 !important;
+            transform: none !important;
+        }
+        
+        /* 네비게이션 메뉴 호버 강제 적용 */
+        .ak-nav .ak-nav_list a {
+            overflow: visible !important;
+            }
+        
+        .ak-nav .ak-nav_list a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav .ak-nav_list > li > a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 네비게이션 메뉴 호버 개선 */
+        .ak-nav_list li {
+            overflow: visible !important;
+        }
+        
+        .ak-nav_list {
+            overflow: visible !important;
+        }
+        
+        /* 네비게이션 컨테이너 overflow 설정 */
+        .ak-nav {
+            overflow: visible !important;
+        }
+        
+        .ak-main-header-center {
+            overflow: visible !important;
+        }
+        
+        /* A/S Service 백그라운드 텍스트 크기 조정 */
+        .ak-section-heading.ak-style-1 .background-text {
+            font-size: 80px !important;
+            white-space: nowrap !important;
+        }
+        </style>
+</head>
+<body>
+    <!-- Start Header Section -->
+    <header class="ak-site_header ak-style1 ak-sticky_header">
+        <div class="ak-main_header">
+            <div style="width: 100%; padding: 0 50px;">
+                <div class="ak-main_header_in" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
+                    <div class="ak-main-header-left">
+                        <a class="ak-site_branding lune-logo" href="index.html">
+                            <img src="assets/img/logo.png" alt="THE LUNE">
+                        </a>
+                    </div>
+                    <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
+                        <div class="ak-nav ak-medium">
+                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 30px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important;">
+                                <li><a href="about.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">회사소개</a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="services.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">모델소개</a>
+                                    <ul>
+                                        <li><a href="lune-carnival-4.html" class="text-hover-animaiton">LUNE CARNIVAL 4</a></li>
+                                        <li><a href="lune-carnival-7.html" class="text-hover-animaiton">LUNE CARNIVAL 6</a></li>
+                                        <li><a href="lune-carnival-9.html" class="text-hover-animaiton">LUNE CARNIVAL 9</a></li>
+                                        <li><a href="sprinter.html" class="text-hover-animaiton">SPRINTER</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="gallery.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">갤러리</a></li>
+                                <li><a href="news.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">홍보센터</a></li>
+                                <li><a href="showroom.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">전시장</a></li>
+                                <li><a href="quote.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">견적내기</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ak-main-header-right" style="display: flex !important; align-items: center !important; gap: 20px !important;">
+                        <div class="ak-header_btns" style="display: flex !important; align-items: center !important; gap: 20px !important;">
+                            <a href="contact.html" style="display: inline-block; padding: 8px 20px; border: 1px solid rgba(188, 184, 177, 0.5); border-radius: 4px; color: #ffffff !important; text-decoration: none !important; font-size: 15px !important; transition: all 0.3s ease;">
+                                문의하기
+                            </a>
+                            <a href="as.html" style="display: inline-block; padding: 8px 20px; border: 1px solid rgba(188, 184, 177, 0.5); border-radius: 4px; color: #ffffff !important; text-decoration: none !important; font-size: 15px !important; transition: all 0.3s ease;">A/S접수</a>
+                            <a href="tel:031-943-4488">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="heartbeat-icon">
+                                        <span class="ak-heartbeat-btn"><img src="assets/img/phone.svg" alt="..."></span>
+                                    </div>
+                                    <h6 style="color: white !important; margin: 0 !important; font-size: 16px !important; white-space: nowrap !important;">031-943-4488</h6>
+                                </div>
+                            </a>
+                            <div class="language-selector" style="display: flex !important; align-items: center !important; gap: 3px !important; color: white !important; font-size: 14px !important;">
+                                <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #bcb8b1 !important; cursor: pointer !important; padding: 12px 2px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
+                                <span style="color: white !important; margin: 0 2px !important;">/</span>
+                                <button class="lang-btn" onclick="switchLanguage('en')" style="background: none !important; border: none !important; color: white !important; cursor: pointer !important; padding: 12px 2px !important; font-size: 14px !important;">ENG</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-bar-border"></div>
+    </header>
+    <!-- End Header Section -->
+
+    <section style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/hero-bg-2.jpg') center/cover; padding: 200px 0 160px;">
+        <div class="container">
+            <div class="text-center">
+                <!-- 텍스트 삭제됨 -->
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 100px 0; background: #0a0a0a;">
+        <div class="container">
+            <div class="row align-items-start">
+                <!-- Left Side: Contact Info -->
+                <div class="col-lg-6">
+                    <div class="left-info" data-aos="fade-right" style="padding: 0;">
+                        <div class="content">
+                            <div class="ak-section-heading ak-style-1">
+                                <div class="background-text">A/S</div>
+                                <h2 class="ak-section-title english-serif">A/S</h2>
+                                <p class="ak-section-subtitle">IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Info Image -->
+                    <div style="margin-top: 60px;" data-aos="fade-left">
+                        <img src="assets/img/as.png" alt="A/S Service" style="width: 100%; max-width: 100%; height: auto; display: block;">
+                    </div>
+                </div>
+                
+                <!-- Right Side: Contact Form -->
+                <div class="col-lg-6">
+                    <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; padding: 40px;">
+                        <h3 style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 30px;" class="avenir-roman">A/S 접수 양식</h3>
+                        <form id="asForm" enctype="multipart/form-data">
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">이름<span style="color: #ff6b6b;">(필수)</span></label>
+                                <input type="text" name="name" required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">이메일<span style="color: #ff6b6b;">(필수)</span></label>
+                                <input type="email" name="email" required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                                <span class="error-message" style="color: #ff6b6b; font-size: 12px; display: none; margin-top: 5px;">이메일이 올바르지 않습니다</span>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">연락처<span style="color: #ff6b6b;">(필수)</span></label>
+                                <input type="tel" name="phone" required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                                <span class="error-message" style="color: #ff6b6b; font-size: 12px; display: none; margin-top: 5px;">연락처가 올바르지 않습니다</span>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">접수차종</label>
+                                <select name="vehicle_type" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                                    <option value="">접수차종을 선택해주세요.</option>
+                                    <option value="carnival_limousine">카니발 하이리무진</option>
+                                    <option value="sprinter">스프린터</option>
+                                    <option value="small_van">소형 벤(카니발V클레스,스타리아)</option>
+                                    <option value="medium_van">중형 벤(스프린터,쏠라티,르노마스터)</option>
+                                    <option value="large_van">대형 벤(에스컬레이드,네비게이터,서버벤)</option>
+                                    <option value="other">기타</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">차량번호</label>
+                                <input type="text" name="vehicle_number" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">최초등록일(자동차등록증 기준)</label>
+                                <input type="text" name="registration_date" placeholder="예: 2024-01-15" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">구입처(지점)</label>
+                                <input type="text" name="purchase_location" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">구입당시 세일즈 담당자</label>
+                                <input type="text" name="sales_person" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">A/S접수 내용(최대한 디테일하게 작성)</label>
+                                <textarea name="as_content" rows="5" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px; resize: vertical;"></textarea>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">첨부파일(증상이 표현된 이미지 또는 동영상)</label>
+                                <div id="fileUploadArea" style="border: 2px dashed rgba(188,184,177,0.3); border-radius: 5px; padding: 20px; text-align: center; background: rgba(0,0,0,0.3);">
+                                    <input type="file" id="fileInput" name="attachments[]" multiple accept="image/*,video/*,.zip" style="display: none;">
+                                    <div id="fileList" style="margin-bottom: 10px;"></div>
+                                    <button type="button" onclick="document.getElementById('fileInput').click()" style="padding: 10px 20px; background: rgba(188,184,177,0.2); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; cursor: pointer; font-size: 14px;">파일 업로드</button>
+                                    <p style="color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 10px; margin-bottom: 0;">첨부파일은 최대 20MB까지 등록 가능합니다. 1개 이상의 파일인 경우, 압축하여 zip 파일로 첨부해주세요.</p>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">
+                                    <input type="checkbox" name="privacy_agree" required style="margin-right: 8px;">
+                                    개인정보 수집 및 이용 동의 <span style="color: #ff6b6b;">(필수)</span>
+                                    <a href="#" onclick="openPrivacyModal(); return false;" style="color: #bcb8b1; text-decoration: underline; margin-left: 5px;">보기</a>
+                                </label>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">자동등록 방지</label>
+                                <div style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px;">
+                                    <div id="captchaDisplay" style="flex: 1; text-align: center; font-size: 24px; font-weight: bold; color: white; letter-spacing: 5px; padding: 10px; background: rgba(188,184,177,0.1); border-radius: 5px;">1234</div>
+                                    <button type="button" onclick="refreshCaptcha()" style="padding: 8px 15px; background: rgba(188,184,177,0.2); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; cursor: pointer; font-size: 12px;">새로고침</button>
+                                </div>
+                                <input type="text" id="captchaInput" name="captcha" placeholder="자동등록방지 숫자를 순서대로 입력하세요." required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px; margin-top: 10px;">
+                            </div>
+                            <button type="submit" class="glass-button" style="width: 100%;">
+                                <span class="glass-button-text">접수하기</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Separator Line -->
+    <div style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(188, 184, 177, 0.3) 50%, transparent 100%); margin: 0;"></div>
+
+    <!-- Start Footer -->
+    <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
+        <div style="width: 100%; padding: 0 50px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%;">
+                
+                <!-- Left: Logo Only -->
+                <div style="flex: 0 0 auto; padding: 0 15px; margin-bottom: 30px;">
+                    <a href="index.html" style="display: inline-block;">
+                        <img src="assets/img/logo.png" alt="THE LUNE Logo" style="height: 50px; width: auto;">
+                    </a>
+                </div>
+                
+                <!-- Center: Company Information -->
+                <div style="flex: 1; padding: 0 30px; margin-bottom: 30px; text-align: center;">
+                    <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center;">CONTACT US</h4>
+                    <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 6px; font-size: 15px; line-height: 1.5;">주식회사 더 룬 대표 : 이용석</div>
+                    <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 6px; font-size: 15px; line-height: 1.5;">사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41</div>
+                    <div style="color: rgba(255, 255, 255, 0.8); font-size: 15px; line-height: 1.5;">대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com</div>
+                </div>
+                
+                <!-- Right: Menu and Follow Us -->
+                <div style="flex: 0 0 auto; padding: 0 15px; margin-bottom: 30px; display: flex; gap: 120px; align-items: flex-start;">
+                    <!-- Menu Section -->
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 15px; text-align: left;">MENU</h4>
+                        <div style="text-align: left;">
+                            <div style="margin-bottom: 3px;"><a href="about.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">회사소개</a></div>
+                            <div style="margin-bottom: 3px;"><a href="services.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">모델소개</a></div>
+                            <div style="margin-bottom: 3px;"><a href="gallery.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">갤러리</a></div>
+                            <div style="margin-bottom: 3px;"><a href="news.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">홍보센터</a></div>
+                            <div><a href="showroom.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">전시장</a></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Follow Us Section -->
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 15px; text-align: left;">FOLLOW US</h4>
+                        <div style="display: flex; gap: 10px; justify-content: flex-start;">
+                            <a href="https://www.instagram.com/dh_auto_lune/" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                    <g clip-path="url(#clip0_365_2391)">
+                                        <path d="M15.9833 4.94233C15.9459 4.09218 15.8084 3.50772 15.6114 3.00127C15.4083 2.46369 15.0957 1.9824 14.6862 1.58229C14.2861 1.17596 13.8016 0.860229 13.2703 0.660239C12.7609 0.463301 12.1795 0.325823 11.3294 0.28834C10.4729 0.247682 10.201 0.238281 8.02866 0.238281C5.85636 0.238281 5.58446 0.247682 4.73114 0.285165C3.881 0.322648 3.29654 0.460248 2.79021 0.657064C2.25251 0.860229 1.77121 1.17279 1.37111 1.58229C0.964783 1.9824 0.649169 2.46687 0.449057 2.99822C0.252119 3.50772 0.114641 4.08901 0.0771582 4.93915C0.0365009 5.79564 0.0270996 6.06754 0.0270996 8.23984C0.0270996 10.4121 0.0365009 10.684 0.0739838 11.5374C0.111467 12.3875 0.249067 12.972 0.446005 13.4784C0.649169 14.016 0.964783 14.4973 1.37111 14.8974C1.77121 15.3037 2.25568 15.6195 2.78704 15.8195C3.29654 16.0164 3.87783 16.1539 4.72809 16.1913C5.58129 16.229 5.85331 16.2382 8.02561 16.2382C10.1979 16.2382 10.4698 16.229 11.3231 16.1913C12.1733 16.1539 12.7577 16.0164 13.2641 15.8195C14.3393 15.4037 15.1895 14.5536 15.6052 13.4784C15.802 12.9689 15.9396 12.3875 15.9771 11.5374C16.0146 10.684 16.024 10.4121 16.024 8.23984C16.024 6.06754 16.0208 5.79564 15.9833 4.94233ZM14.5425 11.4749C14.5081 12.2563 14.3768 12.6782 14.2674 12.9595C13.9986 13.6566 13.4454 14.2098 12.7483 14.4786C12.467 14.588 12.042 14.7193 11.2637 14.7536C10.4198 14.7912 10.1667 14.8005 8.03184 14.8005C5.89702 14.8005 5.64075 14.7912 4.79988 14.7536C4.01848 14.7193 3.59652 14.588 3.31522 14.4786C2.96835 14.3504 2.65261 14.1472 2.39634 13.8816C2.13066 13.6221 1.9275 13.3096 1.7993 12.9627C1.6899 12.6814 1.55865 12.2563 1.52434 11.478C1.48674 10.6341 1.47746 10.3809 1.47746 8.24607C1.47746 6.11125 1.48674 5.85498 1.52434 5.01424C1.55865 4.23284 1.6899 3.81088 1.7993 3.52957C1.9275 3.18258 2.13066 2.86697 2.39951 2.61057C2.65884 2.34489 2.9714 2.14173 3.31839 2.01365C3.5997 1.90426 4.02483 1.773 4.80306 1.73857C5.64697 1.70109 5.9002 1.69169 8.03489 1.69169C10.1729 1.69169 10.426 1.70109 11.2668 1.73857C12.0482 1.773 12.4702 1.90426 12.7515 2.01365C13.0984 2.14173 13.4141 2.34489 13.6704 2.61057C13.9361 2.87002 14.1392 3.18258 14.2674 3.52957C14.3768 3.81088 14.5081 4.23589 14.5425 5.01424C14.58 5.85815 14.5894 6.11125 14.5894 8.24607C14.5894 10.3809 14.58 10.6309 14.5425 11.4749Z" fill="white"/>
+                                        <path d="M8.02864 4.12988C5.75951 4.12988 3.91846 5.97082 3.91846 8.24006C3.91846 10.5093 5.75951 12.3502 8.02864 12.3502C10.2979 12.3502 12.1388 10.5093 12.1388 8.24006C12.1388 5.97082 10.2979 4.12988 8.02864 4.12988ZM8.02864 10.9062C6.55655 10.9062 5.36246 9.71227 5.36246 8.24006C5.36246 6.76785 6.55655 5.57389 8.02864 5.57389C9.50085 5.57389 10.6948 6.76785 10.6948 8.24006C10.6948 9.71227 9.50085 10.9062 8.02864 10.9062Z" fill="white"/>
+                                        <path d="M13.261 3.96735C13.261 4.49724 12.8313 4.92689 12.3013 4.92689C11.7714 4.92689 11.3418 4.49724 11.3418 3.96735C11.3418 3.43734 11.7714 3.00781 12.3013 3.00781C12.8313 3.00781 13.261 3.43734 13.261 3.96735Z" fill="white"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_365_2391">
+                                            <rect width="16" height="16" fill="white" transform="translate(-0.000976562 0.238281)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/dhautokr?locale=ko_KR" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 11.993 2.92547 15.3027 6.75 15.9028V10.3125H4.71875V8H6.75V6.2375C6.75 4.2325 7.94438 3.125 9.77172 3.125C10.6467 3.125 11.5625 3.28125 11.5625 3.28125V5.25H10.5538C9.56 5.25 9.25 5.86672 9.25 6.5V8H11.4688L11.1141 10.3125H9.25V15.9028C13.0745 15.3027 16 11.993 16 8Z" fill="white"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.youtube.com/@dhauto5713" target="_blank" title="YouTube" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                    <path d="M15.841 4.258c-.185-.695-.73-1.24-1.425-1.425C13.255 2.535 8 2.535 8 2.535s-5.255 0-6.416.298c-.695.185-1.24.73-1.425 1.425C-.139 5.419-.139 7.835-.139 7.835s0 2.416.298 3.577c.185.695.73 1.24 1.425 1.425C2.745 13.135 8 13.135 8 13.135s5.255 0 6.416-.298c.695-.185 1.24-.73 1.425-1.425.298-1.161.298-3.577.298-3.577s0-2.416-.298-3.577zM6.4 10.135V5.535l4.267 2.3L6.4 10.135z" fill="white"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <div style="height: 30px;"></div>
+            <div style="height: 2px; background: #bcb8b1; margin: 30px 0;"></div>
+            <div style="height: 20px;"></div>
+            
+            <!-- Copyright -->
+            <div style="background: rgba(0, 0, 0, 0.5); padding: 20px 0; border-top: 1px solid rgba(188, 184, 177, 0.2); display: flex; justify-content: center; align-items: center;">
+                <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">
+                    <p style="margin: 0; color: rgba(255, 255, 255, 0.7);">Copyright ©2025 THE LUNE. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; overflow-y: auto;">
+        <div style="position: relative; max-width: 800px; margin: 50px auto; background: #1a1a1a; border-radius: 10px; padding: 40px; color: white;">
+            <button onclick="closePrivacyModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 5px 15px;">×</button>
+            <h2 style="color: white; margin-bottom: 20px; font-size: 24px;">개인정보 수집 및 이용 동의</h2>
+            <div style="line-height: 1.8; font-size: 14px; color: rgba(255,255,255,0.9); max-height: 500px; overflow-y: auto;">
+                <p>해당 홈페이지에 맞는 개인정보처리방침을 입력합니다. '(주)DH-AUTO'는 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.</p>
+                <p>회사는 개인정보취급방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</p>
+                <p>회사는 개인정보취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 수집하는 개인정보 항목</h3>
+                <p>회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</p>
+                <p>ο 수집항목 : 이름, 생년월일, 성별, 로그인ID, 비밀번호, 비밀번호 질문과 답변, 자택 전화번호, 자택 주소, 휴대전화번호, 이메일, 직업, 회사명, 부서, 직책, 회사전화번호, 취미, 결혼여부, 기념일, 법정대리인정보, 주민등록번호, 서비스 이용기록, 접속 로그, 접속 IP 정보, 결제기록</p>
+                <p>ο 개인정보 수집방법 : 홈페이지(회원가입), 서면양식</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 개인정보의 수집 및 이용목적</h3>
+                <p>회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.</p>
+                <p>ο 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 콘텐츠 제공, 구매 및 요금 결제, 물품배송 또는 청구지 등 발송</p>
+                <p>ο 회원 관리</p>
+                <p>회원제 서비스 이용에 따른 본인확인, 개인 식별, 연령확인, 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 고지사항 전달</p>
+                <p>ο 마케팅 및 광고에 활용</p>
+                <p>접속 빈도 파악 또는 회원의 서비스 이용에 대한 통계</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 개인정보의 보유 및 이용기간</h3>
+                <p>회사는 개인정보 수집 및 이용목적이 달성된 후에는 예외 없이 해당 정보를 지체 없이 파기합니다.</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 개인정보의 파기절차 및 방법</h3>
+                <p>회사는 원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체없이 파기합니다. 파기절차 및 방법은 다음과 같습니다.</p>
+                <p>ο 파기절차</p>
+                <p>회원님이 회원가입 등을 위해 입력하신 정보는 목적이 달성된 후 별도의 DB로 옮겨져(종이의 경우 별도의 서류함) 내부 방침 및 기타 관련 법령에 의한 정보보호 사유에 따라(보유 및 이용기간 참조) 일정 기간 저장된 후 파기되어집니다.</p>
+                <p>별도 DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보유되어지는 이외의 다른 목적으로 이용되지 않습니다.</p>
+                <p>ο 파기방법</p>
+                <p>- 전자적 파일형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다.</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 개인정보 제공</h3>
+                <p>회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다.</p>
+                <p>- 이용자들이 사전에 동의한 경우</p>
+                <p>- 법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 수집한 개인정보의 위탁</h3>
+                <p>회사는 서비스 제공 및 향상을 위하여 아래와 같이 개인정보를 위탁하고 있으며, 관계 법령에 따라 위탁계약시 개인정보가 안전하게 관리될 수 있도록 필요한 사항을 규정하고 있습니다.</p>
+                <p>화사의 개인정보 수탁업체 및 위탁업무를 제공하지 않습니다.</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 이용자 및 법정대리인의 권리와 그 행사방법</h3>
+                <p>이용자 및 법정 대리인은 언제든지 등록되어 있는 자신 혹은 당해 만 14세 미만 아동의 개인정보를 조회하거나 수정할 수 있으며 가입해지를 요청할 수도 있습니다.</p>
+                <p>이용자 혹은 만 14세 미만 아동의 개인정보 조회?수정을 위해서는 '개인정보변경'(또는 '회원정보수정' 등)을 가입해지(동의철회)를 위해서는 "회원탈퇴"를 클릭하여 본인 확인 절차를 거치신 후 직접 열람, 정정 또는 탈퇴가 가능합니다. 혹은 개인정보관리책임자에게 서면, 전화 또는 이메일로 연락하시면 지체없이 조치하겠습니다.</p>
+                <p>귀하가 개인정보의 오류에 대한 정정을 요청하신 경우에는 정정을 완료하기 전까지 당해 개인정보를 이용 또는 제공하지 않습니다. 또한 잘못된 개인정보를 제3자에게 이미 제공한 경우에는 정정 처리결과를 제3자에게 지체없이 통지하여 정정이 이루어지도록 하겠습니다.</p>
+                <p>oo는 이용자 혹은 법정 대리인의 요청에 의해 해지 또는 삭제된 개인정보는 "oo가 수집하는 개인정보의 보유 및 이용기간"에 명시된 바에 따라 처리하고 그 외의 용도로 열람 또는 이용할 수 없도록 처리하고 있습니다.</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 개인정보 자동수집 장치의 설치, 운영 및 그 거부에 관한 사항</h3>
+                <p>회사는 귀하의 정보를 수시로 저장하고 찾아내는 '쿠키(cookie)' 등을 운용합니다. 쿠키란 oo의 웹사이트를 운영하는데 이용되는 서버가 귀하의 브라우저에 보내는 아주 작은 텍스트 파일로서 귀하의 컴퓨터 하드디스크에 저장됩니다. DH-AUTO는 다음과 같은 목적을 위해 쿠키를 사용합니다.</p>
+                <p>▶ 쿠키 등 사용 목적</p>
+                <p>- 회원과 비회원의 접속 빈도나 방문 시간 등을 분석, 이용자의 취향과 관심분야를 파악 및 자취 추적, 각종 이벤트 참여 정도 및 방문 회수 파악 등을 통한 타겟 마케팅 및 개인 맞춤 서비스 제공</p>
+                <p>귀하는 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서, 귀하는 웹브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.</p>
+                <p>▶ 쿠키 설정 거부 방법</p>
+                <p>예: 쿠키 설정을 거부하는 방법으로는 회원님이 사용하시는 웹 브라우저의 옵션을 선택함으로써 모든 쿠키를 허용하거나 쿠키를 저장할 때마다 확인을 거치거나, 모든 쿠키의 저장을 거부할 수 있습니다.</p>
+                <p>설정방법 예(인터넷 익스플로어의 경우): 웹 브라우저 상단의 도구 > 인터넷 옵션 > 개인정보</p>
+                <p>단, 귀하께서 쿠키 설치를 거부하였을 경우 서비스 제공에 어려움이 있을 수 있습니다.</p>
+                <h3 style="color: white; margin-top: 20px; margin-bottom: 10px;">■ 개인정보에 관한 민원서비스</h3>
+                <p>회사는 고객의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 관련 부서 및 개인정보관리책임자를 지정하고 있습니다.</p>
+                <p>고객서비스담당 부서 : 고객대응팀</p>
+                <p>전화번호 : 031-921-3301</p>
+                <p>개인정보관리책임자 성명 : DH-AUTO</p>
+                <p>귀하께서는 회사의 서비스를 이용하시며 발생하는 모든 개인정보보호 관련 민원을 개인정보관리책임자 혹은 담당부서로 신고하실 수 있습니다. 회사는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 드릴 것입니다.</p>
+                <p>기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.</p>
+                <p>1.개인분쟁조정위원회 (www.1336.or.kr/1336)</p>
+                <p>2.정보보호마크인증위원회 (www.eprivacy.or.kr/02-580-0533~4)</p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="closePrivacyModal()" style="padding: 12px 30px; background: rgba(188,184,177,0.2); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; cursor: pointer; font-size: 14px;">팝업 닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.style.color = 'white';
+                btn.style.fontWeight = 'normal';
+            });
+            event.target.style.color = '#bcb8b1';
+            event.target.style.fontWeight = '600';
+            console.log('Language switched to:', lang);
+        }
+
+        // Privacy Modal Functions
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Captcha Functions
+        let currentCaptcha = '';
+        function generateCaptcha() {
+            currentCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+            document.getElementById('captchaDisplay').textContent = currentCaptcha;
+        }
+
+        function refreshCaptcha() {
+            generateCaptcha();
+            document.getElementById('captchaInput').value = '';
+        }
+
+        function playCaptchaAudio() {
+            if (!currentCaptcha) {
+                generateCaptcha();
+            }
+            
+            // Web Speech API를 사용한 음성 읽기
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance();
+                utterance.text = currentCaptcha.split('').join(' ');
+                utterance.lang = 'ko-KR';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                
+                // 한국어 숫자 읽기
+                const numberMap = {
+                    '0': '영', '1': '일', '2': '이', '3': '삼', '4': '사',
+                    '5': '오', '6': '육', '7': '칠', '8': '팔', '9': '구'
+                };
+                
+                const koreanNumbers = currentCaptcha.split('').map(n => numberMap[n] || n).join(' ');
+                utterance.text = koreanNumbers;
+                
+                speechSynthesis.cancel(); // 이전 음성 취소
+                speechSynthesis.speak(utterance);
+            } else {
+                // Web Speech API를 지원하지 않는 경우
+                alert('캡차 숫자: ' + currentCaptcha);
+            }
+        }
+
+        // File Upload Functions
+        let selectedFiles = [];
+        const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput) {
+                fileInput.addEventListener('change', handleFileSelect);
+            }
+        });
+        
+        function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            const fileList = document.getElementById('fileList');
+            
+            // 기존 파일들의 총 크기 계산
+            let currentTotalSize = 0;
+            selectedFiles.forEach(f => currentTotalSize += f.size);
+            
+            // 새로 선택한 파일들 검증
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // 개별 파일 크기 체크 (20MB 미만)
+                if (file.size >= MAX_FILE_SIZE) {
+                    alert(`파일 "${file.name}"의 크기가 20MB를 초과합니다. (${(file.size / 1024 / 1024).toFixed(2)}MB)\n최대 20MB 미만의 파일만 업로드 가능합니다.`);
+                    e.target.value = '';
+                    return;
+                }
+                
+                // 중복 파일 체크
+                if (selectedFiles.find(f => f.name === file.name && f.size === file.size && f.lastModified === file.lastModified)) {
+                    continue; // 이미 추가된 파일은 건너뛰기
+                }
+                
+                // 전체 크기 체크 (20MB 미만)
+                const newTotalSize = currentTotalSize + file.size;
+                if (newTotalSize >= MAX_FILE_SIZE) {
+                    alert(`전체 파일 크기가 20MB를 초과합니다.\n현재: ${(currentTotalSize / 1024 / 1024).toFixed(2)}MB + 새 파일: ${(file.size / 1024 / 1024).toFixed(2)}MB = ${(newTotalSize / 1024 / 1024).toFixed(2)}MB\n최대 20MB 미만까지 업로드 가능합니다.`);
+                    e.target.value = '';
+                    return;
+                }
+                
+                selectedFiles.push(file);
+                currentTotalSize = newTotalSize;
+            }
+            
+            updateFileList();
+            e.target.value = ''; // 같은 파일 다시 선택 가능하도록
+        }
+
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            
+            if (selectedFiles.length === 0) {
+                return;
+            }
+            
+            let totalSize = 0;
+            selectedFiles.forEach((file, index) => {
+                totalSize += file.size;
+                const fileItem = document.createElement('div');
+                fileItem.id = 'file-item-' + index;
+                fileItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 5px; margin-bottom: 5px;';
+                
+                const fileSizeMB = (file.size / 1024 / 1024).toFixed(2);
+                const isUnderLimit = file.size < MAX_FILE_SIZE;
+                
+                fileItem.innerHTML = `
+                    <span style="color: ${isUnderLimit ? 'white' : '#ff6b6b'}; font-size: 14px;">
+                        ${file.name} (${fileSizeMB}MB)
+                        ${!isUnderLimit ? ' - 20MB 초과!' : ''}
+                    </span>
+                    <button type="button" onclick="removeFile(${index})" style="padding: 5px 10px; background: rgba(255,0,0,0.3); border: 1px solid rgba(255,0,0,0.5); border-radius: 3px; color: white; cursor: pointer; font-size: 12px;">삭제</button>
+                `;
+                fileList.appendChild(fileItem);
+            });
+            
+            // 전체 크기 표시
+            const totalSizeMB = (totalSize / 1024 / 1024).toFixed(2);
+            const totalSizeInfo = document.createElement('div');
+            totalSizeInfo.style.cssText = 'margin-top: 10px; padding: 8px; background: rgba(188,184,177,0.1); border-radius: 5px; text-align: center;';
+            totalSizeInfo.innerHTML = `<span style="color: ${totalSize < MAX_FILE_SIZE ? 'rgba(255,255,255,0.8)' : '#ff6b6b'}; font-size: 12px;">전체 용량: ${totalSizeMB}MB / 20MB</span>`;
+            fileList.appendChild(totalSizeInfo);
+            
+            // Update file input
+            const dt = new DataTransfer();
+            selectedFiles.forEach(file => dt.items.add(file));
+            document.getElementById('fileInput').files = dt.files;
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+        }
+
+        // Form Validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('asForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Email validation
+                    const email = document.querySelector('input[name="email"]').value;
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!email || !emailRegex.test(email)) {
+                        const emailError = document.querySelector('input[name="email"]').nextElementSibling;
+                        if (emailError) {
+                            emailError.style.display = 'block';
+                        }
+                        document.querySelector('input[name="email"]').focus();
+                        return;
+                    } else {
+                        const emailError = document.querySelector('input[name="email"]').nextElementSibling;
+                        if (emailError) {
+                            emailError.style.display = 'none';
+                        }
+                    }
+                    
+                    // Phone validation
+                    const phone = document.querySelector('input[name="phone"]').value;
+                    const phoneRegex = /^[0-9-]+$/;
+                    if (!phone || !phoneRegex.test(phone) || phone.replace(/[^0-9]/g, '').length < 10) {
+                        const phoneError = document.querySelector('input[name="phone"]').nextElementSibling;
+                        if (phoneError) {
+                            phoneError.style.display = 'block';
+                        }
+                        document.querySelector('input[name="phone"]').focus();
+                        return;
+                    } else {
+                        const phoneError = document.querySelector('input[name="phone"]').nextElementSibling;
+                        if (phoneError) {
+                            phoneError.style.display = 'none';
+                        }
+                    }
+                    
+                    // File size validation
+                    let totalFileSize = 0;
+                    selectedFiles.forEach(file => {
+                        totalFileSize += file.size;
+                        if (file.size >= MAX_FILE_SIZE) {
+                            alert(`파일 "${file.name}"의 크기가 20MB 이상입니다. (${(file.size / 1024 / 1024).toFixed(2)}MB)\n20MB 미만의 파일만 업로드 가능합니다.`);
+                            return;
+                        }
+                    });
+                    
+                    if (totalFileSize >= MAX_FILE_SIZE) {
+                        alert(`전체 파일 크기가 20MB 이상입니다. (${(totalFileSize / 1024 / 1024).toFixed(2)}MB)\n20MB 미만까지 업로드 가능합니다.`);
+                        return;
+                    }
+                    
+                    // Captcha validation
+                    const captchaInput = document.getElementById('captchaInput').value.trim();
+                    if (!captchaInput) {
+                        alert('자동등록 방지 숫자를 입력해주세요.');
+                        document.getElementById('captchaInput').focus();
+                        return;
+                    }
+                    
+                    if (captchaInput !== currentCaptcha) {
+                        alert('자동등록 방지 숫자가 올바르지 않습니다. 다시 확인해주세요.');
+                        generateCaptcha();
+                        document.getElementById('captchaInput').value = '';
+                        document.getElementById('captchaInput').focus();
+                        return;
+                    }
+                    
+                    // Privacy agreement check
+                    if (!document.querySelector('input[name="privacy_agree"]').checked) {
+                        alert('개인정보 수집 및 이용 동의는 필수입니다.');
+                        document.querySelector('input[name="privacy_agree"]').focus();
+                        return;
+                    }
+                    
+                    // 모든 검증 통과
+                    console.log('Form validation passed');
+                    console.log('Selected files:', selectedFiles);
+                    console.log('Total file size:', (totalFileSize / 1024 / 1024).toFixed(2) + 'MB');
+                    console.log('Captcha verified:', currentCaptcha);
+                    
+                    // Form submission (여기서는 실제 서버 전송 로직을 구현해야 함)
+                    alert('A/S 접수가 완료되었습니다.');
+                    // 실제로는 여기서 AJAX로 서버에 전송
+                    // const formData = new FormData(this);
+                    // fetch('your-endpoint', { method: 'POST', body: formData });
+                });
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCaptcha();
+        });
+    </script>
+</body>
+</html>
