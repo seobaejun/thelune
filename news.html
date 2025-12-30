@@ -357,19 +357,19 @@
     <!-- Header -->
     <header class="ak-site_header ak-style1 ak-sticky_header">
         <div class="ak-main_header">
-            <div class="container">
-                <div class="ak-main_header_in">
+            <div style="width: 100%; padding: 0 50px;">
+                <div class="ak-main_header_in" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                     <div class="ak-main-header-left">
                         <a class="ak-site_branding lune-logo" href="index.html">
                             <img src="assets/img/logo.png" alt="THE LUNE">
                         </a>
                     </div>
-                    <div class="ak-main-header-center">
+                    <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
                         <div class="ak-nav ak-medium">
-                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 0px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important;">
-                                <li><a href="about.html" class="text-hover-animaiton" style="font-size: 14px !important; padding: 12px 8px !important; line-height: 1.5 !important; overflow: visible !important;">회사소개</a></li>
+                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 30px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important;">
+                                <li><a href="about.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">회사소개</a></li>
                                 <li class="menu-item-has-children">
-                                    <a href="services.html" class="text-hover-animaiton" style="font-size: 14px !important; padding: 12px 8px !important; line-height: 1.5 !important; overflow: visible !important;">모델소개</a>
+                                    <a href="services.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">모델소개</a>
                                     <ul>
                                         <li><a href="lune-carnival-4.html" class="text-hover-animaiton">LUNE CARNIVAL 4</a></li>
                                         <li><a href="lune-carnival-7.html" class="text-hover-animaiton">LUNE CARNIVAL 7</a></li>
@@ -377,24 +377,32 @@
                                         <li><a href="sprinter.html" class="text-hover-animaiton">SPRINTER</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="gallery.html" class="text-hover-animaiton" style="font-size: 14px !important; padding: 12px 8px !important; line-height: 1.5 !important; overflow: visible !important;">갤러리</a></li>
-                                <li><a href="news.html" class="text-hover-animaiton" style="font-size: 14px !important; padding: 12px 8px !important; line-height: 1.5 !important; overflow: visible !important;">홍보센터</a></li>
-                                <li><a href="showroom.html" class="text-hover-animaiton" style="font-size: 14px !important; padding: 12px 8px !important; line-height: 1.5 !important; overflow: visible !important;">전시장</a></li>
-                                <li><a href="contact.html" class="text-hover-animaiton" style="font-size: 14px !important; padding: 12px 8px !important; line-height: 1.5 !important; overflow: visible !important;">문의하기</a></li>
-                                <li><a href="quote.html" class="text-hover-animaiton" style="font-size: 14px !important; padding: 12px 8px !important; line-height: 1.5 !important; overflow: visible !important;">견적내기</a></li>
+                                <li><a href="gallery.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">갤러리</a></li>
+                                <li><a href="news.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">홍보센터</a></li>
+                                <li><a href="showroom.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">전시장</a></li>
+                                <li><a href="quote.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">견적내기</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="ak-main-header-right" style="display: flex !important; align-items: center !important; gap: 5px !important;">
-                        <div class="ak-header_btns" style="display: flex !important; align-items: center !important; gap: 15px !important;">
+                    <div class="ak-main-header-right" style="display: flex !important; align-items: center !important; gap: 20px !important;">
+                        <div class="ak-header_btns" style="display: flex !important; align-items: center !important; gap: 20px !important;">
+                            <a href="contact.html" style="display: inline-block; padding: 8px 20px; border: 1px solid rgba(188, 184, 177, 0.5); border-radius: 4px; color: #ffffff !important; text-decoration: none !important; font-size: 15px !important; transition: all 0.3s ease;">
+                                문의하기
+                            </a>
+                            <div style="color: #ffffff !important; font-size: 15px !important; cursor: pointer !important;">A/S접수</div>
                             <a href="tel:031-943-4488">
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="heartbeat-icon">
                                         <span class="ak-heartbeat-btn"><img src="assets/img/phone.svg" alt="..."></span>
                                     </div>
-                                    <h6 class="avenir-roman">031-943-4488</h6>
+                                    <h6>031-943-4488</h6>
                                 </div>
                             </a>
+                            <div class="language-selector" style="display: flex !important; align-items: center !important; gap: 3px !important; color: white !important; font-size: 14px !important;">
+                                <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #bcb8b1 !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
+                                <span style="color: white !important; margin: 0 2px !important;">/</span>
+                                <button class="lang-btn" onclick="switchLanguage('en')" style="background: none !important; border: none !important; color: white !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important;">ENG</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -551,83 +559,82 @@
     <!-- Footer Separator Line -->
     <div style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(188, 184, 177, 0.3) 50%, transparent 100%); margin: 0;"></div>
 
-    <!-- Footer (동일한 구조) -->
+    <!-- Start Footer -->
     <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
-            <div style="display: flex; flex-wrap: wrap; margin: 0 -15px;">
-                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
-                    <div style="margin-bottom: 30px;">
-                        <img src="assets/img/logo.png" alt="THE LUNE" style="height: 40px; margin-bottom: 20px;">
-                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px; line-height: 1.6;">프리미엄 차량 인테리어 서비스</div>
-                        <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 10px;">평일: 09:00 - 18:00</div>
-                    </div>
+        <div style="width: 100%; padding: 0 50px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%;">
+                
+                <!-- Left: Logo Only -->
+                <div style="flex: 0 0 auto; padding: 0 15px; margin-bottom: 30px;">
+                    <a href="index.html" style="display: inline-block;">
+                        <img src="assets/img/logo.png" alt="THE LUNE Logo" style="height: 50px; width: auto;">
+                    </a>
                 </div>
-                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
-                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">빠른 링크</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 10px;"><a href="about.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">회사소개</a></li>
-                        <li style="margin-bottom: 10px;"><a href="services.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">모델소개</a></li>
-                        <li style="margin-bottom: 10px;"><a href="gallery.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">갤러리</a></li>
-                        <li style="margin-bottom: 10px;"><a href="contact.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">문의하기</a></li>
-                    </ul>
+                
+                <!-- Center: Company Information -->
+                <div style="flex: 1; padding: 0 30px; margin-bottom: 30px; text-align: center;">
+                    <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center;">CONTACT US</h4>
+                    <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 6px; font-size: 15px; line-height: 1.5;">주식회사 더 룬 대표 : 이용석</div>
+                    <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 6px; font-size: 15px; line-height: 1.5;">사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41</div>
+                    <div style="color: rgba(255, 255, 255, 0.8); font-size: 15px; line-height: 1.5;">대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com</div>
                 </div>
-                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
-                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">서비스</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">커스텀 디자인</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">인증 및 특허</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">브랜드 파워</a></li>
-                        <li style="margin-bottom: 10px;"><a href="quote.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">견적 문의</a></li>
-                    </ul>
-                </div>
-                <div style="flex: 0 0 25%; max-width: 25%; padding: 0 15px; margin-bottom: 30px;">
-                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px;">위치 & 연락처</h4>
-                    <div style="margin-bottom: 15px;">
-                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
-                            경기도 파주시 탄현면 축현산단로 21-41
-                        </p>
+                
+                <!-- Right: Menu and Follow Us -->
+                <div style="flex: 0 0 auto; padding: 0 15px; margin-bottom: 30px; display: flex; gap: 120px; align-items: flex-start;">
+                    <!-- Menu Section -->
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 15px; text-align: left;">MENU</h4>
+                        <div style="text-align: left;">
+                            <div style="margin-bottom: 3px;"><a href="about.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">회사소개</a></div>
+                            <div style="margin-bottom: 3px;"><a href="services.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">모델소개</a></div>
+                            <div style="margin-bottom: 3px;"><a href="gallery.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">갤러리</a></div>
+                            <div style="margin-bottom: 3px;"><a href="news.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">홍보센터</a></div>
+                            <div><a href="showroom.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">전시장</a></div>
+                        </div>
                     </div>
-                    <div style="margin-bottom: 15px;">
-                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
-                            031-943-4488
-                        </p>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
-                            thelune1@naver.com
-                        </p>
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <p style="color: rgba(255, 255, 255, 0.8); margin: 0;">
-                            평일: 09:00 - 18:00
-                        </p>
-                    </div>
-                    <div style="display: flex; gap: 10px; margin-top: 20px;">
-                        <a href="https://www.instagram.com/dh_auto_lune/" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                <path d="M8 1.94c2.136 0 2.389.008 3.233.047.78.036 1.204.166 1.486.275.374.145.64.318.92.598.28.28.453.546.598.92.109.282.239.706.275 1.486.039.844.047 1.097.047 3.233s-.008 2.389-.047 3.233c-.036.78-.166 1.204-.275 1.486-.145.374-.318.64-.598.92-.28.28-.546.453-.92.598-.282.109-.706.239-1.486.275-.844.039-1.097.047-3.233.047s-2.389-.008-3.233-.047c-.78-.036-1.204-.166-1.486-.275a2.478 2.478 0 01-.92-.598 2.478 2.478 0 01-.598-.92c-.109-.282-.239-.706-.275-1.486C1.449 10.889 1.441 10.636 1.441 8.5s.008-2.389.047-3.233c.036-.78.166-1.204.275-1.486.145-.374.318-.64.598-.92.28-.28.546-.453.92-.598.282-.109.706-.239 1.486-.275C5.611 1.949 5.864 1.941 8 1.941zM8 0.5C5.827 0.5 5.555.509 4.702.548c-.853.039-1.433.174-1.942.372-.526.204-.973.478-1.417.923-.445.444-.719.891-.923 1.417-.198.509-.333 1.089-.372 1.942C.009 5.955 0 6.227 0 8.5s.009 2.545.048 3.398c.039.853.174 1.433.372 1.942.204.526.478.973.923 1.417.444.445.891.719 1.417.923.509.198 1.089.333 1.942.372.853.039 1.125.048 3.398.048s2.545-.009 3.398-.048c.853-.039 1.433-.174 1.942-.372.526-.204.973-.478 1.417-.923.445-.444.719-.891.923-1.417.198-.509.333-1.089.372-1.942.039-.853.048-1.125.048-3.398s-.009-2.545-.048-3.398c-.039-.853-.174-1.433-.372-1.942a3.919 3.919 0 00-.923-1.417A3.919 3.919 0 0013.34.92c-.509-.198-1.089-.333-1.942-.372C10.545.509 10.273.5 8 .5z" fill="white"/>
-                                <path d="M8 4.378a4.122 4.122 0 100 8.244 4.122 4.122 0 000-8.244zM8 11.167a2.667 2.667 0 110-5.334 2.667 2.667 0 010 5.334zM13.23 4.192a.963.963 0 11-1.926 0 .963.963 0 011.926 0z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/dhautokr?locale=ko_KR" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                <path d="M16 8.5C16 4.358 12.418 1 8 1S0 4.358 0 8.5c0 3.75 2.925 6.84 6.719 7.406V10.75H4.688V8.5h2.03V6.844c0-1.99 1.22-3.094 3.094-3.094.875 0 1.781.156 1.781.156v1.938h-1c-1 0-1.312.625-1.312 1.25V8.5h2.219l-.344 2.25H9.281v5.156C13.075 15.34 16 12.25 16 8.5z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@dhauto5713" target="_blank" title="YouTube" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                <path d="M15.841 4.258c-.185-.695-.73-1.24-1.425-1.425C13.255 2.535 8 2.535 8 2.535s-5.255 0-6.416.298c-.695.185-1.24.73-1.425 1.425C-.139 5.419-.139 7.835-.139 7.835s0 2.416.298 3.577c.185.695.73 1.24 1.425 1.425C2.745 13.135 8 13.135 8 13.135s5.255 0 6.416-.298c.695-.185 1.24-.73 1.425-1.425.298-1.161.298-3.577.298-3.577s0-2.416-.298-3.577zM6.4 10.135V5.535l4.267 2.3L6.4 10.135z" fill="white"/>
-                            </svg>
-                        </a>
+                    
+                    <!-- Follow Us Section -->
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 15px; text-align: left;">FOLLOW US</h4>
+                        <div style="display: flex; gap: 10px; justify-content: flex-start;">
+                            <a href="https://www.instagram.com/dh_auto_lune/" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                    <g clip-path="url(#clip0_365_2391)">
+                                        <path d="M15.9833 4.94233C15.9459 4.09218 15.8084 3.50772 15.6114 3.00127C15.4083 2.46369 15.0957 1.9824 14.6862 1.58229C14.2861 1.17596 13.8016 0.860229 13.2703 0.660239C12.7609 0.463301 12.1795 0.325823 11.3294 0.28834C10.4729 0.247682 10.201 0.238281 8.02866 0.238281C5.85636 0.238281 5.58446 0.247682 4.73114 0.285165C3.881 0.322648 3.29654 0.460248 2.79021 0.657064C2.25251 0.860229 1.77121 1.17279 1.37111 1.58229C0.964783 1.9824 0.649169 2.46687 0.449057 2.99822C0.252119 3.50772 0.114641 4.08901 0.0771582 4.93915C0.0365009 5.79564 0.0270996 6.06754 0.0270996 8.23984C0.0270996 10.4121 0.0365009 10.684 0.0739838 11.5374C0.111467 12.3875 0.249067 12.972 0.446005 13.4784C0.649169 14.016 0.964783 14.4973 1.37111 14.8974C1.77121 15.3037 2.25568 15.6195 2.78704 15.8195C3.29654 16.0164 3.87783 16.1539 4.72809 16.1913C5.58129 16.229 5.85331 16.2382 8.02561 16.2382C10.1979 16.2382 10.4698 16.229 11.3231 16.1913C12.1733 16.1539 12.7577 16.0164 13.2641 15.8195C14.3393 15.4037 15.1895 14.5536 15.6052 13.4784C15.802 12.9689 15.9396 12.3875 15.9771 11.5374C16.0146 10.684 16.024 10.4121 16.024 8.23984C16.024 6.06754 16.0208 5.79564 15.9833 4.94233ZM14.5425 11.4749C14.5081 12.2563 14.3768 12.6782 14.2674 12.9595C13.9986 13.6566 13.4454 14.2098 12.7483 14.4786C12.467 14.588 12.042 14.7193 11.2637 14.7536C10.4198 14.7912 10.1667 14.8005 8.03184 14.8005C5.89702 14.8005 5.64075 14.7912 4.79988 14.7536C4.01848 14.7193 3.59652 14.588 3.31522 14.4786C2.96835 14.3504 2.65261 14.1472 2.39634 13.8816C2.13066 13.6221 1.9275 13.3096 1.7993 12.9627C1.6899 12.6814 1.55865 12.2563 1.52434 11.478C1.48674 10.6341 1.47746 10.3809 1.47746 8.24607C1.47746 6.11125 1.48674 5.85498 1.52434 5.01424C1.55865 4.23284 1.6899 3.81088 1.7993 3.52957C1.9275 3.18258 2.13066 2.86697 2.39951 2.61057C2.65884 2.34489 2.9714 2.14173 3.31839 2.01365C3.5997 1.90426 4.02483 1.773 4.80306 1.73857C5.64697 1.70109 5.9002 1.69169 8.03489 1.69169C10.1729 1.69169 10.426 1.70109 11.2668 1.73857C12.0482 1.773 12.4702 1.90426 12.7515 2.01365C13.0984 2.14173 13.4141 2.34489 13.6704 2.61057C13.9361 2.87002 14.1392 3.18258 14.2674 3.52957C14.3768 3.81088 14.5081 4.23589 14.5425 5.01424C14.58 5.85815 14.5894 6.11125 14.5894 8.24607C14.5894 10.3809 14.58 10.6309 14.5425 11.4749Z" fill="white"/>
+                                        <path d="M8.02864 4.12988C5.75951 4.12988 3.91846 5.97082 3.91846 8.24006C3.91846 10.5093 5.75951 12.3502 8.02864 12.3502C10.2979 12.3502 12.1388 10.5093 12.1388 8.24006C12.1388 5.97082 10.2979 4.12988 8.02864 4.12988ZM8.02864 10.9062C6.55655 10.9062 5.36246 9.71227 5.36246 8.24006C5.36246 6.76785 6.55655 5.57389 8.02864 5.57389C9.50085 5.57389 10.6948 6.76785 10.6948 8.24006C10.6948 9.71227 9.50085 10.9062 8.02864 10.9062Z" fill="white"/>
+                                        <path d="M13.261 3.96735C13.261 4.49724 12.8313 4.92689 12.3013 4.92689C11.7714 4.92689 11.3418 4.49724 11.3418 3.96735C11.3418 3.43734 11.7714 3.00781 12.3013 3.00781C12.8313 3.00781 13.261 3.43734 13.261 3.96735Z" fill="white"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_365_2391">
+                                            <rect width="16" height="16" fill="white" transform="translate(-0.000976562 0.238281)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/dhautokr?locale=ko_KR" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 11.993 2.92547 15.3027 6.75 15.9028V10.3125H4.71875V8H6.75V6.2375C6.75 4.2325 7.94438 3.125 9.77172 3.125C10.6467 3.125 11.5625 3.28125 11.5625 3.28125V5.25H10.5538C9.56 5.25 9.25 5.86672 9.25 6.5V8H11.4688L11.1141 10.3125H9.25V15.9028C13.0745 15.3027 16 11.993 16 8Z" fill="white"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.youtube.com/@dhauto5713" target="_blank" title="YouTube" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                    <path d="M15.841 4.258c-.185-.695-.73-1.24-1.425-1.425C13.255 2.535 8 2.535 8 2.535s-5.255 0-6.416.298c-.695.185-1.24.73-1.425 1.425C-.139 5.419-.139 7.835-.139 7.835s0 2.416.298 3.577c.185.695.73 1.24 1.425 1.425C2.745 13.135 8 13.135 8 13.135s5.255 0 6.416-.298c.695-.185 1.24-.73 1.425-1.425.298-1.161.298-3.577.298-3.577s0-2.416-.298-3.577zM6.4 10.135V5.535l4.267 2.3L6.4 10.135z" fill="white"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Divider -->
             <div style="height: 30px;"></div>
             <div style="height: 2px; background: #bcb8b1; margin: 30px 0;"></div>
             <div style="height: 20px;"></div>
+            
+            <!-- Copyright -->
             <div style="background: rgba(0, 0, 0, 0.5); padding: 20px 0; border-top: 1px solid rgba(188, 184, 177, 0.2); display: flex; justify-content: center; align-items: center;">
-                <div style="color: rgba(255, 255, 255, 0.8); margin: 0;">
-                    <p style="margin: 0; color: rgba(255, 255, 255, 0.8);" class="english-serif-light">Copyright ©2025 THE LUNE. All Rights Reserved.</p>
+                <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">
+                    <p style="margin: 0; color: rgba(255, 255, 255, 0.7);">Copyright ©2025 THE LUNE. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
