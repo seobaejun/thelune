@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Thememarch" />
+    <link rel="icon" href="assets/img/favicon.svg" />
+    <title>'주식회사 더 룬' 시그니쳐 타입모델 고객감동 이벤트 개최 - 홍보센터 | THE LUNE</title>
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/glass-button.css" />
+    
+    <style>
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Book.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Roman.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Avenir';
+            src: url('assets/fonts/AvenirLTStd-Black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+        
+        * {
+            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+        }
+        
+        body {
+            background: #0a0e1a;
+            color: #ffffff;
+        }
+        
+        .news-detail-section {
+            padding: 150px 0 100px;
+            background: #0a0e1a;
+        }
+        
+        .news-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        
+        .news-detail-header {
+            margin-bottom: 40px;
+        }
+        
+        .news-detail-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .news-detail-category {
+            background: #999;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .news-detail-date {
+            color: #777;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        .news-detail-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+        
+        .news-detail-info {
+            margin: 40px 0;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(188, 184, 177, 0.2);
+        }
+        
+        .news-detail-info-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        
+        .news-detail-info-content strong {
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .news-detail-content {
+            margin: 40px 0;
+        }
+        
+        .news-detail-image {
+            margin: 40px 0;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .news-detail-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        
+        .news-detail-content p {
+            font-size: 16px;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+        }
+        
+        .news-detail-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 60px 0;
+            padding: 30px 0;
+            border-top: 1px solid rgba(188, 184, 177, 0.2);
+            border-bottom: 1px solid rgba(188, 184, 177, 0.2);
+        }
+        
+        .news-nav-item {
+            flex: 1;
+        }
+        
+        .news-nav-item.prev {
+            text-align: left;
+        }
+        
+        .news-nav-item.next {
+            text-align: right;
+        }
+        
+        .news-nav-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .news-nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .news-nav-link:hover {
+            color: #bcb8b1;
+        }
+        
+        .news-nav-empty {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+        }
+        
+        .back-to-list {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .back-to-list a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 12px 30px;
+            border: 1px solid rgba(188, 184, 177, 0.3);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-list a:hover {
+            border-color: #bcb8b1;
+            color: #bcb8b1;
+        }
+        
+        .back-to-list img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        
+        /* 호버 효과 개선 - 텍스트 잘림 방지 */
+        .text-hover-animaiton {
+            overflow: visible !important;
+            line-height: 1.5 !important;
+            padding: 12px 2px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .text-hover-animaiton:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav .ak-nav_list a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav_list li {
+            overflow: visible !important;
+        }
+        
+        .ak-nav_list {
+            overflow: visible !important;
+        }
+        
+        .ak-nav {
+            overflow: visible !important;
+        }
+        
+        .ak-main-header-center {
+            overflow: visible !important;
+        }
+        
+        @media (max-width: 768px) {
+            .news-detail-container {
+                padding: 0 20px;
+            }
+            
+            .news-detail-title {
+                font-size: 28px;
+            }
+            
+            .news-detail-navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .news-nav-item {
+                text-align: left !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader-content">
+        <div class="loading-window">
+            <div class="car">
+                <div class="strike"></div>
+                <div class="strike strike2"></div>
+                <div class="strike strike3"></div>
+                <div class="strike strike4"></div>
+                <div class="strike strike5"></div>
+                <div class="car-detail spoiler"></div>
+                <div class="car-detail back"></div>
+                <div class="car-detail center"></div>
+                <div class="car-detail center1"></div>
+                <div class="car-detail front"></div>
+                <div class="car-detail wheel"></div>
+                <div class="car-detail wheel wheel2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Header Section -->
+    <header class="ak-site_header ak-style1 ak-sticky_header">
+        <div class="ak-main_header">
+            <div style="width: 100%; padding: 0 50px;">
+                <div class="ak-main_header_in" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
+                    <div class="ak-main-header-left">
+                        <a class="ak-site_branding lune-logo" href="index.html">
+                            <img src="assets/img/logo.png" alt="THE LUNE">
+                        </a>
+                    </div>
+                    <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
+                        <div class="ak-nav ak-medium">
+                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 30px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important;">
+                                <li><a href="about.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">회사소개</a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="services.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">모델소개</a>
+                                    <ul>
+                                        <li><a href="lune-carnival-4.html" class="text-hover-animaiton">LUNE CARNIVAL 4</a></li>
+                                        <li><a href="lune-carnival-7.html" class="text-hover-animaiton">LUNE CARNIVAL 6</a></li>
+                                        <li><a href="lune-carnival-9.html" class="text-hover-animaiton">LUNE CARNIVAL 9</a></li>
+                                        <li><a href="sprinter.html" class="text-hover-animaiton">SPRINTER</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="gallery.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">갤러리</a></li>
+                                <li><a href="news.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">홍보센터</a></li>
+                                <li><a href="showroom.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">전시장</a></li>
+                                <li><a href="quote.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">견적내기</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ak-main-header-right" style="display: flex !important; align-items: center !important; gap: 20px !important;">
+                        <div class="ak-header_btns" style="display: flex !important; align-items: center !important; gap: 20px !important;">
+                            <a href="contact.html" style="display: inline-block; padding: 8px 20px; border: 1px solid rgba(188, 184, 177, 0.5); border-radius: 4px; color: #ffffff !important; text-decoration: none !important; font-size: 15px !important; transition: all 0.3s ease;">
+                                문의하기
+                            </a>
+                            <div style="color: #ffffff !important; font-size: 15px !important; cursor: pointer !important;">A/S접수</div>
+                            <a href="tel:031-943-4488">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="heartbeat-icon">
+                                        <span class="ak-heartbeat-btn"><img src="assets/img/phone.svg" alt="..."></span>
+                                    </div>
+                                    <h6 style="color: white !important; margin: 0 !important; font-size: 16px !important; white-space: nowrap !important;">031-943-4488</h6>
+                                </div>
+                            </a>
+                            <div class="language-selector" style="display: flex !important; align-items: center !important; gap: 3px !important; color: white !important; font-size: 14px !important;">
+                                <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #bcb8b1 !important; cursor: pointer !important; padding: 12px 2px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
+                                <span style="color: white !important; margin: 0 2px !important;">/</span>
+                                <button class="lang-btn" onclick="switchLanguage('en')" style="background: none !important; border: none !important; color: white !important; cursor: pointer !important; padding: 12px 2px !important; font-size: 14px !important;">ENG</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-bar-border"></div>
+    </header>
+    <!-- End Header Section -->
+
+    <!-- News Detail Section -->
+    <section class="news-detail-section">
+        <div class="news-detail-container">
+            <article>
+                <!-- News Header -->
+                <div class="news-detail-header">
+                    <div class="news-detail-meta">
+                        <span class="news-detail-category">EVENT</span>
+                        <span class="news-detail-date">2025.08.22</span>
+                    </div>
+                    <h2 class="news-detail-title">'주식회사 더 룬' 시그니쳐 타입모델 고객감동 이벤트 개최</h2>
+                </div>
+
+                <!-- News Image -->
+                <div class="news-detail-image">
+                    <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="'주식회사 더 룬' 시그니쳐 타입모델 고객감동 이벤트 개최">
+                </div>
+
+                <!-- News Content -->
+                <div class="news-detail-content">
+                    <p>
+                        더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <div class="news-detail-navigation">
+                    <div class="news-nav-item prev">
+                        <div class="news-nav-label">이전</div>
+                        <a href="news-detail-2.html" class="news-nav-link">주식회사 더 룬, 룬 카니발 하이리무진 경험 가능한 전시장 오픈</a>
+                    </div>
+                    <div class="news-nav-item next">
+                        <div class="news-nav-label">다음</div>
+                        <a href="news-detail-4.html" class="news-nav-link">'주식회사 더 룬' '퍼스트클래스급' 카니발 하이리무진 Signature 라인업 공개</a>
+                    </div>
+                </div>
+
+                <!-- Back to List -->
+                <div class="back-to-list">
+                    <a href="news.html">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg);">
+                            <path d="M10 0L11.7625 1.7625L4.7875 8.75H20V11.25H4.7875L11.775 18.225L10 20L0 10L10 0Z" fill="currentColor"/>
+                        </svg>
+                        <span>BACK TO LIST</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Start Footer -->
+    <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
+        <div style="width: 100%; padding: 0 50px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%;">
+                
+                <!-- Left: Logo Only -->
+                <div style="flex: 0 0 auto; padding: 0 15px; margin-bottom: 30px;">
+                    <a href="index.html" style="display: inline-block;">
+                        <img src="assets/img/logo.png" alt="THE LUNE Logo" style="height: 50px; width: auto;">
+                    </a>
+                </div>
+                
+                <!-- Center: Company Information -->
+                <div style="flex: 1; padding: 0 30px; margin-bottom: 30px; text-align: center;">
+                    <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center;">CONTACT US</h4>
+                    <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 6px; font-size: 15px; line-height: 1.5;">주식회사 더 룬 대표 : 이용석</div>
+                    <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 6px; font-size: 15px; line-height: 1.5;">사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41</div>
+                    <div style="color: rgba(255, 255, 255, 0.8); font-size: 15px; line-height: 1.5;">대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com</div>
+                </div>
+                
+                <!-- Right: Menu and Follow Us -->
+                <div style="flex: 0 0 auto; padding: 0 15px; margin-bottom: 30px; display: flex; gap: 120px; align-items: flex-start;">
+                    <!-- Menu Section -->
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 15px; text-align: left;">MENU</h4>
+                        <div style="text-align: left;">
+                            <div style="margin-bottom: 3px;"><a href="about.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">회사소개</a></div>
+                            <div style="margin-bottom: 3px;"><a href="services.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">모델소개</a></div>
+                            <div style="margin-bottom: 3px;"><a href="gallery.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">갤러리</a></div>
+                            <div style="margin-bottom: 3px;"><a href="news.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">홍보센터</a></div>
+                            <div><a href="showroom.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; line-height: 1.4;">전시장</a></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Follow Us Section -->
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 18px; font-weight: 600; margin-bottom: 15px; text-align: left;">FOLLOW US</h4>
+                        <div style="display: flex; gap: 10px; justify-content: flex-start;">
+                            <a href="https://www.instagram.com/dh_auto_lune/" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                    <g clip-path="url(#clip0_365_2391)">
+                                        <path d="M15.9833 4.94233C15.9459 4.09218 15.8084 3.50772 15.6114 3.00127C15.4083 2.46369 15.0957 1.9824 14.6862 1.58229C14.2861 1.17596 13.8016 0.860229 13.2703 0.660239C12.7609 0.463301 12.1795 0.325823 11.3294 0.28834C10.4729 0.247682 10.201 0.238281 8.02866 0.238281C5.85636 0.238281 5.58446 0.247682 4.73114 0.285165C3.881 0.322648 3.29654 0.460248 2.79021 0.657064C2.25251 0.860229 1.77121 1.17279 1.37111 1.58229C0.964783 1.9824 0.649169 2.46687 0.449057 2.99822C0.252119 3.50772 0.114641 4.08901 0.0771582 4.93915C0.0365009 5.79564 0.0270996 6.06754 0.0270996 8.23984C0.0270996 10.4121 0.0365009 10.684 0.0739838 11.5374C0.111467 12.3875 0.249067 12.972 0.446005 13.4784C0.649169 14.016 0.964783 14.4973 1.37111 14.8974C1.77121 15.3037 2.25568 15.6195 2.78704 15.8195C3.29654 16.0164 3.87783 16.1539 4.72809 16.1913C5.58129 16.229 5.85331 16.2382 8.02561 16.2382C10.1979 16.2382 10.4698 16.229 11.3231 16.1913C12.1733 16.1539 12.7577 16.0164 13.2641 15.8195C14.3393 15.4037 15.1895 14.5536 15.6052 13.4784C15.802 12.9689 15.9396 12.3875 15.9771 11.5374C16.0146 10.684 16.024 10.4121 16.024 8.23984C16.024 6.06754 16.0208 5.79564 15.9833 4.94233ZM14.5425 11.4749C14.5081 12.2563 14.3768 12.6782 14.2674 12.9595C13.9986 13.6566 13.4454 14.2098 12.7483 14.4786C12.467 14.588 12.042 14.7193 11.2637 14.7536C10.4198 14.7912 10.1667 14.8005 8.03184 14.8005C5.89702 14.8005 5.64075 14.7912 4.79988 14.7536C4.01848 14.7193 3.59652 14.588 3.31522 14.4786C2.96835 14.3504 2.65261 14.1472 2.39634 13.8816C2.13066 13.6221 1.9275 13.3096 1.7993 12.9627C1.6899 12.6814 1.55865 12.2563 1.52434 11.478C1.48674 10.6341 1.47746 10.3809 1.47746 8.24607C1.47746 6.11125 1.48674 5.85498 1.52434 5.01424C1.55865 4.23284 1.6899 3.81088 1.7993 3.52957C1.9275 3.18258 2.13066 2.86697 2.39951 2.61057C2.65884 2.34489 2.9714 2.14173 3.31839 2.01365C3.5997 1.90426 4.02483 1.773 4.80306 1.73857C5.64697 1.70109 5.9002 1.69169 8.03489 1.69169C10.1729 1.69169 10.426 1.70109 11.2668 1.73857C12.0482 1.773 12.4702 1.90426 12.7515 2.01365C13.0984 2.14173 13.4141 2.34489 13.6704 2.61057C13.9361 2.87002 14.1392 3.18258 14.2674 3.52957C14.3768 3.81088 14.5081 4.23589 14.5425 5.01424C14.58 5.85815 14.5894 6.11125 14.5894 8.24607C14.5894 10.3809 14.58 10.6309 14.5425 11.4749Z" fill="white"/>
+                                        <path d="M8.02864 4.12988C5.75951 4.12988 3.91846 5.97082 3.91846 8.24006C3.91846 10.5093 5.75951 12.3502 8.02864 12.3502C10.2979 12.3502 12.1388 10.5093 12.1388 8.24006C12.1388 5.97082 10.2979 4.12988 8.02864 4.12988ZM8.02864 10.9062C6.55655 10.9062 5.36246 9.71227 5.36246 8.24006C5.36246 6.76785 6.55655 5.57389 8.02864 5.57389C9.50085 5.57389 10.6948 6.76785 10.6948 8.24006C10.6948 9.71227 9.50085 10.9062 8.02864 10.9062Z" fill="white"/>
+                                        <path d="M13.261 3.96735C13.261 4.49724 12.8313 4.92689 12.3013 4.92689C11.7714 4.92689 11.3418 4.49724 11.3418 3.96735C11.3418 3.43734 11.7714 3.00781 12.3013 3.00781C12.8313 3.00781 13.261 3.43734 13.261 3.96735Z" fill="white"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_365_2391">
+                                            <rect width="16" height="16" fill="white" transform="translate(-0.000976562 0.238281)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/dhautokr?locale=ko_KR" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 11.993 2.92547 15.3027 6.75 15.9028V10.3125H4.71875V8H6.75V6.2375C6.75 4.2325 7.94438 3.125 9.77172 3.125C10.6467 3.125 11.5625 3.28125 11.5625 3.28125V5.25H10.5538C9.56 5.25 9.25 5.86672 9.25 6.5V8H11.4688L11.1141 10.3125H9.25V15.9028C13.0745 15.3027 16 11.993 16 8Z" fill="white"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.youtube.com/@dhauto5713" target="_blank" title="YouTube" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(188, 184, 177, 0.1); border: 1px solid rgba(188, 184, 177, 0.3); border-radius: 50%; transition: all 0.3s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="="0 0 16 17" fill="none">
+                                    <path d="M15.841 4.258c-.185-.695-.73-1.24-1.425-1.425C13.255 2.535 8 2.535 8 2.535s-5.255 0-6.416.298c-.695.185-1.24.73-1.425 1.425C-.139 5.419-.139 7.835-.139 7.835s0 2.416.298 3.577c.185.695.73 1.24 1.425 1.425C2.745 13.135 8 13.135 8 13.135s5.255 0 6.416-.298c.695-.185 1.24-.73 1.425-1.425.298-1.161.298-3.577.298-3.577s0-2.416-.298-3.577zM6.4 10.135V5.535l4.267 2.3L6.4 10.135z" fill="white"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <div style="height: 30px;"></div>
+            <div style="height: 2px; background: #bcb8b1; margin: 30px 0;"></div>
+            <div style="height: 20px;"></div>
+            
+            <!-- Copyright -->
+            <div style="background: rgba(0, 0, 0, 0.5); padding: 20px 0; border-top: 1px solid rgba(188, 184, 177, 0.2); display: flex; justify-content: center; align-items: center;">
+                <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">
+                    <p style="margin: 0; color: rgba(255, 255, 255, 0.7);">Copyright ©2025 THE LUNE. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <span class="ak-scrollup">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 10L1.7625 11.7625L8.75 4.7875V20H11.25V4.7875L18.225 11.775L20 10L10 0L0 10Z"
+                fill="currentColor" />
+        </svg>
+    </span>
+
+    <!-- Script -->
+    <script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/SplitText.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.style.color = 'white';
+                btn.style.fontWeight = 'normal';
+            });
+            event.target.style.color = '#bcb8b1';
+            event.target.style.fontWeight = '600';
+            console.log('Language switched to:', lang);
+        }
+    </script>
+</body>
+</html>
+

@@ -150,12 +150,19 @@
         .news-card {
             background: white;
             border-radius: 15px;
-            overflow: hidden;
+            overflow: hidden; /* 카드 외곽은 hidden 유지 */
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             position: relative;
             width: 400px; /* 카드 크기 증가 */
+            height: 520px; /* 높이 줄임 */
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-card .news-content {
+            overflow: visible; /* 콘텐츠 영역은 visible로 텍스트 잘림 방지 */
         }
 
         /* 미디어 쿼리 제거 - 기본 설정만 사용 */
@@ -167,11 +174,22 @@
             }
             .news-card {
                 width: 420px; /* 2개씩 표시할 때도 크기 유지 */
+                height: 520px; /* 높이 줄임 */
+            }
+            
+            .news-card-link {
+                width: 420px;
             }
         }
 
         @media (max-width: 768px) {
             .news-card {
+                width: 100%;
+                max-width: 450px;
+                min-height: auto; /* 모바일에서는 자동 높이 */
+            }
+            
+            .news-card-link {
                 width: 100%;
                 max-width: 450px;
             }
@@ -214,6 +232,24 @@
             }
         }
 
+        /* 카드 전체 클릭 가능하도록 스타일 추가 */
+        .news-card-link {
+            text-decoration: none !important;
+            color: inherit !important;
+            display: block !important;
+            width: 400px;
+            height: auto;
+        }
+        
+        .news-card-link:hover .news-card {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .news-card-link .news-title a {
+            pointer-events: none;
+        }
+        
         .news-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -244,14 +280,32 @@
         }
 
         .news-content {
-            padding: 25px;
+            padding: 20px; /* 패딩 줄임 */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 콘텐츠를 위아래로 분산 */
+            min-height: 0; /* flexbox 오버플로우 방지 */
+        }
+        
+        .news-excerpt {
+            flex: 1;
+            min-height: 60px; /* 최소 높이 줄임 */
+            margin-bottom: 0; /* 하단 여백 제거 */
+            line-height: 1.5; /* 줄 간격 줄임 */
+            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+        }
+        
+        .news-title {
+            margin-bottom: 8px; /* 제목 하단 여백 줄임 */
+            min-height: 50px; /* 제목 최소 높이 줄임 */
         }
 
         .news-meta {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* 여백 줄임 */
         }
 
         .news-category {
@@ -276,9 +330,9 @@
             font-size: 22px; /* 제목 크기 더 증가 */
             font-weight: 600;
             color: #222; /* 더 진한 색상 */
-            margin-bottom: 12px;
-            line-height: 1.5; /* 줄 간격 증가 */
-            min-height: 55px; /* 높이도 조금 증가 */
+            margin-bottom: 8px; /* 여백 줄임 */
+            line-height: 1.4; /* 줄 간격 줄임 */
+            min-height: 50px; /* 높이 줄임 */
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
         }
 
@@ -297,15 +351,18 @@
 
         .news-excerpt {
             color: #444; /* 더 진한 색상으로 변경 */
-            line-height: 1.7; /* 줄 간격 약간 증가 */
-            margin-bottom: 15px;
-            font-size: 16px; /* 본문 크기 증가 */
+            line-height: 1.5; /* 줄 간격 줄임 */
+            margin-bottom: 0; /* 하단 여백 제거 */
+            font-size: 15px; /* 본문 크기 약간 줄임 */
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 3; /* 3줄까지만 표시 */
             -webkit-box-orient: vertical;
-            overflow: hidden;
+            overflow: hidden; /* 넘치는 텍스트 숨김 */
+            text-overflow: ellipsis; /* 말줄임표 표시 */
+            word-wrap: break-word; /* 긴 단어 줄바꿈 */
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
             font-weight: 300 !important; /* 더 얇은 폰트로 변경 */
+            max-height: calc(1.5em * 3); /* 3줄 높이 제한 (줄 간격 반영) */
         }
 
         .bottom-cta {
@@ -417,7 +474,24 @@
         .ak-main_header .ak-nav .ak-nav_list a[style*="color"]:hover {
             color: #bcb8b1 !important;
         }
-        </style>
+
+        /* 카드 전체 클릭 가능하도록 스타일 추가 */
+        .news-grid a {
+            text-decoration: none !important;
+            color: inherit !important;
+            display: block !important;
+        }
+        
+        .news-grid a:hover .news-card {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .news-grid a .news-title a {
+            pointer-events: none;
+        }
+
+            </style>
 </head>
 <body>
     <!-- Header -->
@@ -506,106 +580,118 @@
             <div class="news-grid" id="newsList">
                 
                 <!-- News Card 1 -->
-                <div class="news-card" data-category="press">
-                    <div class="news-image" style="background-image: url('assets/img/10월 29일 the lune 카니발0009.jpg');"></div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-category">PRESS</span>
-                            <span class="news-date">2025.08.22</span>
+                <a href="news-detail.html" class="news-card-link">
+                    <div class="news-card" data-category="press">
+                        <div class="news-image" style="background-image: url('assets/img/10월 29일 the lune 카니발0009.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">PRESS</span>
+                                <span class="news-date">2025.08.22</span>
+                            </div>
+                            <h3 class="news-title">
+                                <span class="avenir-black">VVIP를 위한 최적의 공간의 의전용 커스텀</span>
+                            </h3>
+                            <p class="news-excerpt avenir-book">
+                                '주식회사 더 룬'에서 론칭한 브랜드 'LUNE'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 '퍼스트클래스 급' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.
+                            </p>
                         </div>
-                        <h3 class="news-title">
-                            <a href="#" class="avenir-black">VVIP를 위한 최적의 공간의 의전용 커스텀</a>
-                        </h3>
-                        <p class="news-excerpt avenir-book">
-                            '주식회사 더 룬'에서 론칭한 브랜드 'LUNE'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 '퍼스트클래스 급' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.
-                        </p>
                     </div>
-                </div>
+                </a>
 
                 <!-- News Card 2 -->
-                <div class="news-card" data-category="blog">
-                    <div class="news-image" style="background-image: url('assets/img/10월 29일 the lune 카니발3161.jpg');"></div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-category blog">BLOG</span>
-                            <span class="news-date">2025.08.22</span>
+                <a href="news-detail-2.html" class="news-card-link">
+                    <div class="news-card" data-category="blog">
+                        <div class="news-image" style="background-image: url('assets/img/10월 29일 the lune 카니발3161.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category blog">BLOG</span>
+                                <span class="news-date">2025.08.22</span>
+                            </div>
+                            <h3 class="news-title">
+                                <span class="avenir-black">주식회사 더 룬, 룬 카니발 하이리무진 경험 가능한 전시장 오픈</span>
+                            </h3>
+                            <p class="news-excerpt avenir-book">
+                                더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
+                            </p>
                         </div>
-                        <h3 class="news-title">
-                            <a href="#" class="avenir-black">주식회사 더 룬, 룬 카니발 하이리무진 경험 가능한 전시장 오픈</a>
-                        </h3>
-                        <p class="news-excerpt avenir-book">
-                            더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
-                        </p>
                     </div>
-                </div>
+                </a>
 
                 <!-- News Card 3 -->
-                <div class="news-card" data-category="event">
-                    <div class="news-image" style="background-image: url('assets/img/10월 29일 the lune 카니발7409.jpg');"></div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-category event">EVENT</span>
-                            <span class="news-date">2025.08.22</span>
+                <a href="news-detail-3.html" class="news-card-link">
+                    <div class="news-card" data-category="event">
+                        <div class="news-image" style="background-image: url('assets/img/10월 29일 the lune 카니발7409.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category event">EVENT</span>
+                                <span class="news-date">2025.08.22</span>
+                            </div>
+                            <h3 class="news-title">
+                                <span class="avenir-black">'주식회사 더 룬' 시그니쳐 타입모델 고객감동 이벤트 개최</span>
+                            </h3>
+                            <p class="news-excerpt avenir-book">
+                                더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
+                            </p>
                         </div>
-                        <h3 class="news-title">
-                            <a href="#" class="avenir-black">'주식회사 더 룬' 시그니쳐 타입모델 고객감동 이벤트 개최</a>
-                        </h3>
-                        <p class="news-excerpt avenir-book">
-                            더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
-                        </p>
                     </div>
-                </div>
+                </a>
 
                 <!-- News Card 4 -->
-                <div class="news-card" data-category="notice">
-                    <div class="news-image" style="background-image: url('assets/img/10월 29일 the lune 카니발8463.jpg');"></div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-category notice">NOTICE</span>
-                            <span class="news-date">2025.08.22</span>
+                <a href="news-detail-4.html" class="news-card-link">
+                    <div class="news-card" data-category="notice">
+                        <div class="news-image" style="background-image: url('assets/img/갤러리/6월 4일 고양 로케이션 DH auto 화이트 카니발6323.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category notice">NOTICE</span>
+                                <span class="news-date">2025.08.22</span>
+                            </div>
+                            <h3 class="news-title">
+                                <span class="avenir-black">'주식회사 더 룬' '퍼스트클래스급' 카니발 하이리무진 Signature 라인업 공개</span>
+                            </h3>
+                            <p class="news-excerpt avenir-book">
+                                더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
+                            </p>
                         </div>
-                        <h3 class="news-title">
-                            <a href="#" class="avenir-black">'주식회사 더 룬' '퍼스트클래스급' 카니발 하이리무진 Signature 라인업 공개</a>
-                        </h3>
-                        <p class="news-excerpt avenir-book">
-                            더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
-                        </p>
                     </div>
-                </div>
+                </a>
 
                 <!-- News Card 5 -->
-                <div class="news-card" data-category="press">
-                    <div class="news-image" style="background-image: url('assets/img/hero-bg-1.jpg');"></div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-category">PRESS</span>
-                            <span class="news-date">2025.08.22</span>
+                <a href="news-detail-5.html" class="news-card-link">
+                    <div class="news-card" data-category="press">
+                        <div class="news-image" style="background-image: url('assets/img/hero-bg-1.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">PRESS</span>
+                                <span class="news-date">2025.08.22</span>
+                            </div>
+                            <h3 class="news-title">
+                                <span class="avenir-black">주식회사 더 룬 VIP 고객체험 서비스</span>
+                            </h3>
+                            <p class="news-excerpt avenir-book">
+                                더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
+                            </p>
                         </div>
-                        <h3 class="news-title">
-                            <a href="#" class="avenir-black">주식회사 더 룬 VIP 고객체험 서비스</a>
-                        </h3>
-                        <p class="news-excerpt avenir-book">
-                            더 룬의 맞춤형 업그레이드 프로그램은 '고객 맞춤', '규격화', '완벽함'이라는 세 가지 모토로 'LUNE'만의 특별함을 선사합니다.
-                        </p>
                     </div>
-                </div>
+                </a>
 
                 <!-- News Card 6 -->
-                <div class="news-card" data-category="press">
-                    <div class="news-image" style="background-image: url('assets/img/hero-bg-2.jpg');"></div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-category">PRESS</span>
-                            <span class="news-date">2025.08.22</span>
+                <a href="news-detail-6.html" class="news-card-link">
+                    <div class="news-card" data-category="press">
+                        <div class="news-image" style="background-image: url('assets/img/hero-bg-2.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">PRESS</span>
+                                <span class="news-date">2025.08.22</span>
+                            </div>
+                            <h3 class="news-title">
+                                <span class="avenir-black">'주식회사 더 룬' '퍼스트클래스급' 카니발 하이리무진 Signature 라인업 공개</span>
+                            </h3>
+                            <p class="news-excerpt avenir-book">
+                                '더 룬'에서 론칭한 브랜드 'LUNE'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 '퍼스트클래스 급' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.
+                            </p>
                         </div>
-                        <h3 class="news-title">
-                            <a href="#" class="avenir-black">'주식회사 더 룬' '퍼스트클래스급' 카니발 하이리무진 Signature 라인업 공개</a>
-                        </h3>
-                        <p class="news-excerpt avenir-book">
-                            '더 룬'에서 론칭한 브랜드 'LUNE'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 '퍼스트클래스 급' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.
-                        </p>
                     </div>
-                </div>
+                </a>
 
             </div>
         </div>
