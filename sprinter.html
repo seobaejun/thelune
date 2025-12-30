@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+
 <head>
+    <!-- Meta Tags -->
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Thememarch" />
+    <!-- Favicon Icon -->
     <link rel="icon" href="assets/img/favicon.svg" />
-    <title>시트 갤러리 - THE LUNE</title>
+    <!-- Site Title -->
+    <title>SPRINTER - THE LUNE</title>
     <link rel="stylesheet" href="assets/css/plugins/lightgallery.min.css" />
     <link rel="stylesheet" href="assets/css/plugins/swiper.min.css" />
     <link rel="stylesheet" href="assets/css/plugins/aos.css" />
@@ -44,12 +48,11 @@
             font-style: normal;
         }
         
-        /* 폰트 적용 - 영어는 세리프, 한글은 Avenir */
+        /* 폰트 적용 */
         * {
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
         }
         
-        /* 영어 텍스트용 클래식 세리프 폰트 */
         .english-serif {
             font-family: 'Times New Roman', 'Georgia', 'Playfair Display', serif !important;
             font-weight: 700 !important;
@@ -62,155 +65,264 @@
             font-weight: 400 !important;
             letter-spacing: 0.02em !important;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
-            font-weight: 900 !important;
-            letter-spacing: -0.01em !important;
-        }
-        
-        p, span, div {
-            font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
+
+        /* 모델 상세 페이지 스타일 */
+        body {
+            background: #0a0e1a;
         }
 
-        /* Gallery Grid Styles - 2 columns with minimal gaps */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 0;
-            max-width: 100%;
-            margin: 0;
-        }
-
-        .gallery-item {
+        .model-hero-section {
+            background: #0a0e1a;
+            padding: 200px 0 150px;
+            text-align: center;
             position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            background: rgba(188,184,177,0.1);
-            border: 1px solid rgba(188,184,177,0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            border-color: rgba(188,184,177,0.4);
+        .model-hero-section .model-tag {
+            font-size: 16px;
+            color: rgba(188, 184, 177, 0.7);
+            letter-spacing: 0.3em;
+            margin-bottom: 30px;
+            font-weight: 300;
+            text-transform: uppercase;
         }
 
-        .gallery-item img {
+        .model-hero-section h1 {
+            font-size: 72px;
+            color: #ffffff;
+            font-weight: 900;
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .model-hero-section .model-subtitle {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .model-content-section {
+            background: #0a0e1a;
+            padding: 0;
+        }
+
+        .model-section-with-image {
+            position: relative;
+            padding: 0;
+            margin-bottom: 150px;
+        }
+
+        .model-section-image {
             width: 100%;
-            height: 450px;
+            height: 600px;
             object-fit: cover;
-            transition: transform 0.3s ease;
-            background-color: rgba(188,184,177,0.05);
+            margin-bottom: 60px;
+            margin-top: 60px;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        .model-section-text-wrapper {
+            padding: 0 50px;
         }
 
-        .gallery-item-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-            padding: 20px;
-            color: white;
+        .model-section {
+            margin-bottom: 150px;
+            padding: 0 50px;
         }
 
-        .gallery-item-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .model-section:first-child {
+            margin-top: 100px;
         }
 
-        .gallery-item-description {
-            font-size: 14px;
-            opacity: 0.9;
-            line-height: 1.5;
+        .model-section-title {
+            font-size: 56px;
+            color: #ffffff;
+            font-weight: 900;
+            margin-bottom: 50px;
+            text-align: center;
+            line-height: 1.3;
         }
 
-        /* Lightbox styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
+        .model-section-subtitle {
+            font-size: 13px;
+            color: rgba(188, 184, 177, 0.5);
+            letter-spacing: 0.4em;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .model-section-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .model-section-content p {
+            font-size: 19px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 2;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .model-image-slider {
+            margin: 80px 0;
+            padding: 0;
+        }
+
+        .model-image-slider .swiper {
+            width: 100%;
+            height: 1000px;
+        }
+
+        .model-image-slider .swiper-slide {
+            overflow: hidden;
+        }
+
+        .model-image-slider .swiper-slide img {
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            object-fit: cover;
+        }
+
+        .model-image-slider .swiper-pagination {
+            bottom: 30px;
+        }
+
+        .model-image-slider .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+        }
+
+        .model-image-slider .swiper-pagination-bullet-active {
+            background: #bcb8b1;
+        }
+
+        .diy-selection-wrapper {
+            max-width: 1800px;
+            margin: 60px auto 0;
+            padding: 0 50px;
+        }
+
+        .diy-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .diy-selection-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 1.7;
             cursor: pointer;
         }
 
-        .lightbox.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .diy-selection-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
         }
 
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
+        .diy-selection-item:hover img {
+            transform: scale(1.08);
         }
 
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            z-index: 10000;
+        .diy-pagination {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            letter-spacing: 0.1em;
         }
 
-        .back-button {
+        .irreplaceable-section {
+            background: linear-gradient(135deg, rgba(188, 184, 177, 0.08) 0%, rgba(188, 184, 177, 0.03) 100%);
+            padding: 150px 0;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #0a0e1a;
+        }
+
+        .irreplaceable-section h2 {
+            font-size: 56px;
+            color: #ffffff;
+            font-weight: 900;
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        .irreplaceable-section p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 2;
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+
+        .irreplaceable-section .contact-button {
             display: inline-block;
-            background: linear-gradient(135deg, rgba(188, 184, 177, 0.2), rgba(188, 184, 177, 0.1));
-            border: 1px solid rgba(188, 184, 177, 0.3);
-            color: #bcb8b1;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 20px 60px;
+            background: rgba(188, 184, 177, 0.15);
+            border: 1px solid rgba(188, 184, 177, 0.4);
+            border-radius: 35px;
+            color: #ffffff;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 600;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            margin-bottom: 40px;
+            letter-spacing: 0.05em;
         }
 
-        .back-button:hover {
-            background: linear-gradient(135deg, rgba(188, 184, 177, 0.3), rgba(188, 184, 177, 0.2));
-            border-color: rgba(188, 184, 177, 0.5);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(188, 184, 177, 0.2);
-            text-decoration: none;
+        .irreplaceable-section .contact-button:hover {
+            background: rgba(188, 184, 177, 0.25);
+            border-color: rgba(188, 184, 177, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(188, 184, 177, 0.2);
         }
 
         @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
+            .model-hero-section {
+                padding: 150px 0 100px;
             }
             
-            .gallery-item img {
-                height: 350px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
+            .model-hero-section h1 {
+                font-size: 42px;
             }
             
-            .gallery-item img {
-                height: 300px;
+            .model-section {
+                padding: 0 20px;
+                margin-bottom: 100px;
+            }
+            
+            .model-section-title {
+                font-size: 36px;
+            }
+            
+            .model-image-slider .swiper {
+                height: 400px;
+            }
+            
+            .diy-selection-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .irreplaceable-section {
+                padding: 100px 0;
+            }
+            
+            .irreplaceable-section h2 {
+                font-size: 36px;
             }
         }
         
@@ -262,6 +374,7 @@
 </head>
 
 <body>
+    <!-- Preloader -->
     <div id="preloader" class="preloader-content ">
         <div class="loading-window">
             <div class="car">
@@ -298,7 +411,7 @@
                                 <li class="menu-item-has-children">
                                     <a href="services.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">모델소개</a>
                                     <ul>
-                                        <li><a href="lune-carnival-4.html" class="text-hover-animaiton">LUNE CARNIVAL 4</a></li>
+                                        <li><a href="lune-carnival-4.html" class="text-hover-animaiton">SPRINTER</a></li>
                                         <li><a href="lune-carnival-7.html" class="text-hover-animaiton">LUNE CARNIVAL 6</a></li>
                                         <li><a href="lune-carnival-9.html" class="text-hover-animaiton">LUNE CARNIVAL 9</a></li>
                                         <li><a href="sprinter.html" class="text-hover-animaiton">SPRINTER</a></li>
@@ -339,30 +452,135 @@
     </header>
     <!-- End Header Section -->
 
-    <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/시트 색깔/브라운.jpg') center/cover; padding: 200px 0 160px;">
+    <!-- Model Hero Section -->
+    <section class="model-hero-section">
         <div class="container">
-            <div class="ak-page-title-content text-center">
-                <h1 style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">시트 갤러리</h1>
-                <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 0;">최고급 가죽 시트와 다양한 색상 옵션</p>
+            <div class="model-tag english-serif-light">SPRINTER</div>
+            <h1 class="english-serif">SPRINTER</h1>
+            <p class="model-subtitle">VVIP를 위한 최적의 공간의 의전용 커스텀</p>
+        </div>
+    </section>
+
+    <!-- Model Content Sections -->
+    <section class="model-content-section">
+        <!-- PLACE Section -->
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg" alt="PLACE" class="model-section-image">
+            <div class="model-section-text-wrapper">
+                <div class="container">
+                    <div class="model-section-subtitle english-serif-light">LUNE SPRINTER CUSTOM</div>
+                    <h2 class="model-section-title english-serif">PLACE</h2>
+                    <div class="model-section-content">
+                        <p>주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERIOR SPACE Section -->
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내5963.jpg" alt="INTERIOR SPACE" class="model-section-image">
+            <div class="model-section-text-wrapper">
+                <div class="container">
+                    <div class="model-section-subtitle english-serif-light">LUNE SPRINTER CUSTOM</div>
+                    <h2 class="model-section-title english-serif">INTERIOR<br>SPACE</h2>
+                    <div class="model-section-content">
+                        <p>후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 'LUNE' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Image Slider -->
+            <div class="model-image-slider" data-aos="fade-up">
+                <div class="swiper model-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내1407.jpg" alt="SPRINTER Interior 1">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내1414.jpg" alt="SPRINTER Interior 2">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내1775.jpg" alt="SPRINTER Interior 3">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내3114.jpg" alt="SPRINTER Interior 4">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+        <!-- 4 SEATER PARTITION Section -->
+        <div class="model-section-with-image" data-aos="fade-up">
+            <div class="model-section-text-wrapper">
+                <div class="container">
+                    <div class="model-section-subtitle english-serif-light">LUNE SPRINTER CUSTOM</div>
+                    <h2 class="model-section-title english-serif">SPRINTER<br>PARTITION</h2>
+                    <div class="model-section-content">
+                        <p>천연 나파 가죽 소재의 시트 2석으로 구성한 1열과 VIP 의전용 전동 리무진 시트 2석의 2열까지 총 4인승으로 이루어졌습니다. 여유로운 공간감, 편안한 착좌감으로 VIP 의전 차량으로 손색이 없습니다.<br><br>풀 우드 플로어 바닥 마감, 오염 스크래치 방지, 실내 방음 시스템 등을 적용해 품격있는 실내 인테리어를 완성합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내5204.jpg" alt="SPRINTER PARTITION" class="model-section-image">
+        </div>
+
+        <!-- DIY SELECTION Section -->
+        <div class="model-section" data-aos="fade-up">
+            <div class="container">
+                <div class="model-section-subtitle english-serif-light">LUNE SPRINTER CUSTOM</div>
+                <h2 class="model-section-title english-serif">DIY SELECTION</h2>
+                <div class="model-section-content">
+                    <p>맞춤형 리무진 시트를 선보이는 디에이치오토에서 고객님의 니즈에 맞춰 시트와 사이트랙 등의 실내 인테리어 16가지의 다양한 색상을 직접 선택하실 수 있습니다.</p>
+                </div>
+                
+                <!-- DIY Color Selection Grid -->
+                <div class="diy-selection-wrapper">
+                    <div class="diy-selection-grid">
+                        <!-- 시트 색깔 이미지 -->
+                        <div class="diy-selection-item">
+                            <img src="assets/img/시트 색깔/블랙.jpg" alt="블랙">
+                        </div>
+                        <div class="diy-selection-item">
+                            <img src="assets/img/시트 색깔/네이비.jpg" alt="네이비">
+                        </div>
+                        <div class="diy-selection-item">
+                            <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운">
+                        </div>
+                        <div class="diy-selection-item">
+                            <img src="assets/img/시트 색깔/그레이.jpg" alt="그레이">
+                        </div>
+                        <div class="diy-selection-item">
+                            <img src="assets/img/시트 색깔/꼬냑.jpg" alt="꼬냑">
+                        </div>
+                        <div class="diy-selection-item">
+                            <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리">
+                        </div>
+                        <!-- 핸들 이미지 -->
+                        <div class="diy-selection-item">
+                            <img src="assets/img/핸들/5월 15일 dh auto 카니발 핸들1304.jpg" alt="핸들 1">
+                        </div>
+                        <div class="diy-selection-item">
+                            <img src="assets/img/핸들/5월 15일 dh auto 카니발 핸들9625.jpg" alt="핸들 2">
+                        </div>
+                        <div class="diy-selection-item">
+                            <img src="assets/img/핸들/4월 22일 dh auto 카니발 실내5963.jpg" alt="핸들 3">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section style="padding: 100px 0; background: #0a0a0a;">
-        <div style="max-width: 100%; padding: 0 15px; margin: 0 auto;">
-            <a href="gallery.html" class="back-button">← 갤러리로 돌아가기</a>
-            
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Images will be loaded here by JavaScript -->
-            </div>
+    <!-- Irreplaceable Value Section -->
+    <section class="irreplaceable-section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="english-serif">Irreplaceable Value</h2>
+            <p>LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다</p>
+            <a href="contact.html" class="contact-button">구매 문의하기</a>
         </div>
     </section>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightboxImg" src="" alt="">
-    </div>
 
     <!-- Start Footer -->
     <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
@@ -444,6 +662,7 @@
             </div>
         </div>
     </footer>
+    <!-- End Footer -->
 
     <span class="ak-scrollup">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -452,6 +671,7 @@
         </svg>
     </span>
 
+    <!-- Script -->
     <script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
     <script src="assets/js/plugins/bootstrap.bundle.min.js"></script>
     <script src="assets/js/plugins/lightgallery.min.js"></script>
@@ -460,8 +680,22 @@
     <script src="assets/js/plugins/swiper.min.js"></script>
     <script src="assets/js/plugins/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
-    
     <script>
+        // Swiper 초기화
+        var modelSwiper = new Swiper('.model-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
         function switchLanguage(lang) {
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
@@ -472,94 +706,13 @@
             console.log('Language switched to:', lang);
         }
 
-        // 시트 갤러리 이미지 데이터
-        const galleryImages = [
-            {
-                url: 'assets/img/시트 색깔/아이보리.jpg',
-                title: '아이보리 시트',
-                description: '고급스럽고 깔끔한 아이보리 컬러의 프리미엄 가죽 시트'
-            },
-            {
-                url: 'assets/img/시트 색깔/블랙.jpg',
-                title: '블랙 시트',
-                description: '클래식하고 세련된 블랙 컬러의 최고급 나파 가죽 시트'
-            },
-            {
-                url: 'assets/img/시트 색깔/네이비.jpg',
-                title: '네이비 시트',
-                description: '품격 있는 네이비 컬러로 완성된 프리미엄 시트'
-            },
-            {
-                url: 'assets/img/시트 색깔/브라운.jpg',
-                title: '브라운 시트',
-                description: '따뜻하고 고급스러운 브라운 컬러의 천연 가죽 시트'
-            },
-            {
-                url: 'assets/img/시트 색깔/꼬냑.jpg',
-                title: '꼬냑 시트',
-                description: '럭셔리한 꼬냑 컬러로 완성된 프리미엄 가죽 시트'
-            },
-            {
-                url: 'assets/img/시트 색깔/그레이.jpg',
-                title: '그레이 시트',
-                description: '모던하고 세련된 그레이 컬러의 고급 시트'
-            }
-        ];
-
-        // 갤러리 로드 - 최적화된 로딩
-        function loadGallery() {
-            const galleryGrid = document.getElementById('galleryGrid');
-            galleryGrid.innerHTML = '';
-
-            // 모든 이미지를 즉시 로드 (시트는 6개뿐이므로)
-            galleryImages.forEach((image, index) => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                galleryItem.onclick = () => openLightbox(image.url);
-                
-                galleryItem.innerHTML = `
-                    <img src="${image.url}" 
-                         alt="${image.title}" 
-                         loading="eager"
-                         decoding="async"
-                         style="background-color: rgba(188,184,177,0.1);">
-                    <div class="gallery-item-overlay">
-                        <div class="gallery-item-title">${image.title}</div>
-                        <div class="gallery-item-description">${image.description}</div>
-                    </div>
-                `;
-                
-                galleryGrid.appendChild(galleryItem);
-            });
-        }
-
-        // 라이트박스 열기
-        function openLightbox(imageSrc) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            lightboxImg.src = imageSrc;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // 라이트박스 닫기
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // 페이지 로드 시 갤러리 초기화
-        document.addEventListener('DOMContentLoaded', function() {
-            loadGallery();
-        });
-
-        // ESC 키로 라이트박스 닫기
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
+        // AOS 초기화
+        AOS.init({
+            duration: 1000,
+            once: true,
         });
     </script>
 </body>
+
 </html>
+

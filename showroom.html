@@ -7,8 +7,77 @@
     <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/glass-button.css" />
+    
+    <style>
+        /* 호버 효과 개선 - 텍스트 잘림 방지 */
+        .text-hover-animaiton {
+            overflow: visible !important;
+            line-height: 1.5 !important;
+            padding: 12px 2px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .text-hover-animaiton:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 네비게이션 메뉴 호버 강제 적용 */
+        .ak-nav .ak-nav_list a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav .ak-nav_list > li > a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 네비게이션 메뉴 호버 개선 */
+        .ak-nav_list li {
+            overflow: visible !important;
+        }
+        
+        .ak-nav_list {
+            overflow: visible !important;
+        }
+        
+        /* 네비게이션 컨테이너 overflow 설정 */
+        .ak-nav {
+            overflow: visible !important;
+        }
+        
+        .ak-main-header-center {
+            overflow: visible !important;
+        }
+        
+        /* 네비게이션 호버 효과 강제 적용 - 인라인 스타일 덮어쓰기 */
+        .ak-site_header .ak-nav .ak-nav_list a.text-hover-animaiton:hover,
+        .ak-main_header .ak-nav .ak-nav_list a.text-hover-animaiton:hover,
+        .ak-nav .ak-nav_list > li > a.text-hover-animaiton:hover,
+        .ak-site_header .ak-nav .ak-nav_list li a.text-hover-animaiton:hover,
+        .ak-main_header .ak-nav .ak-nav_list li a.text-hover-animaiton:hover,
+        .ak-nav .ak-nav_list li a.text-hover-animaiton:hover,
+        .ak-site_header .ak-main_header .ak-nav .ak-nav_list a.text-hover-animaiton:hover,
+        .ak-site_header .ak-main_header .ak-nav .ak-nav_list li a.text-hover-animaiton:hover,
+        .ak-site_header .ak-main_header .ak-nav .ak-nav_list > li > a.text-hover-animaiton:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 모든 네비게이션 링크 호버 효과 */
+        .ak-site_header .ak-nav a:hover,
+        .ak-main_header .ak-nav a:hover,
+        .ak-nav a:hover,
+        .ak-site_header .ak-main_header .ak-nav a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 인라인 스타일이 있는 경우에도 호버 효과 적용 */
+        .ak-site_header .ak-nav .ak-nav_list a[style*="color"]:hover,
+        .ak-main_header .ak-nav .ak-nav_list a[style*="color"]:hover {
+            color: #bcb8b1 !important;
+        }
+    </style>
 </head>
 <body>
+        <!-- Start Header Section -->
     <header class="ak-site_header ak-style1 ak-sticky_header">
         <div class="ak-main_header">
             <div style="width: 100%; padding: 0 50px;">
@@ -26,7 +95,7 @@
                                     <a href="services.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">모델소개</a>
                                     <ul>
                                         <li><a href="lune-carnival-4.html" class="text-hover-animaiton">LUNE CARNIVAL 4</a></li>
-                                        <li><a href="lune-carnival-7.html" class="text-hover-animaiton">LUNE CARNIVAL 7</a></li>
+                                        <li><a href="lune-carnival-7.html" class="text-hover-animaiton">LUNE CARNIVAL 6</a></li>
                                         <li><a href="lune-carnival-9.html" class="text-hover-animaiton">LUNE CARNIVAL 9</a></li>
                                         <li><a href="sprinter.html" class="text-hover-animaiton">SPRINTER</a></li>
                                     </ul>
@@ -49,13 +118,13 @@
                                     <div class="heartbeat-icon">
                                         <span class="ak-heartbeat-btn"><img src="assets/img/phone.svg" alt="..."></span>
                                     </div>
-                                    <h6>031-943-4488</h6>
+                                    <h6 style="color: white !important; margin: 0 !important; font-size: 16px !important; white-space: nowrap !important;">031-943-4488</h6>
                                 </div>
                             </a>
                             <div class="language-selector" style="display: flex !important; align-items: center !important; gap: 3px !important; color: white !important; font-size: 14px !important;">
-                                <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #bcb8b1 !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
+                                <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #bcb8b1 !important; cursor: pointer !important; padding: 12px 2px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
                                 <span style="color: white !important; margin: 0 2px !important;">/</span>
-                                <button class="lang-btn" onclick="switchLanguage('en')" style="background: none !important; border: none !important; color: white !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important;">ENG</button>
+                                <button class="lang-btn" onclick="switchLanguage('en')" style="background: none !important; border: none !important; color: white !important; cursor: pointer !important; padding: 12px 2px !important; font-size: 14px !important;">ENG</button>
                             </div>
                         </div>
                     </div>
@@ -64,6 +133,7 @@
         </div>
         <div class="nav-bar-border"></div>
     </header>
+    <!-- End Header Section -->
 
     <section style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/choose-us.png') center/cover; padding: 120px 0 80px;">
         <div class="container">
@@ -291,6 +361,7 @@
 
     <script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
     <script src="assets/js/plugins/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
         function switchLanguage(lang) {
@@ -376,6 +447,17 @@
         // 페이지 로드 시 기본 지도 설정
         document.addEventListener('DOMContentLoaded', function() {
             updateGoogleMap('headquarters');
+            
+            // 네비게이션 호버 효과 강제 적용
+            const navLinks = document.querySelectorAll('.ak-nav .ak-nav_list a.text-hover-animaiton');
+            navLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                    this.style.setProperty('color', '#bcb8b1', 'important');
+                });
+                link.addEventListener('mouseleave', function() {
+                    this.style.setProperty('color', '#ffffff', 'important');
+                });
+            });
         });
     </script>
 

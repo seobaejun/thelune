@@ -2374,18 +2374,22 @@ kbd {
     position: relative;
   }
   .ak-nav .ak-nav_list ul {
-    width: 260px;
+    width: auto !important;
+    min-width: auto !important;
+    max-width: max-content !important;
     background-color: rgba(0, 0, 0, 0.8549019608);
     position: absolute;
     box-shadow: 0px 1px 2px 0px rgba(2, 0, 181, 0.1);
     border-top: 2px solid rgba(255, 255, 255, 0.3215686275);
-    padding: 10px 0;
+    padding: 10px 0 !important;
+    padding-right: 0 !important;
     z-index: 100;
     opacity: 0;
     visibility: hidden;
     display: block !important;
     border-radius: 0px 0px 5px 5px;
     transition: all 0.1s ease;
+    box-sizing: border-box !important;
   }
   .ak-nav .ak-nav_list ul li:hover ul {
     top: 0px;
@@ -2398,7 +2402,9 @@ kbd {
   .ak-nav .ak-nav_list ul a {
     display: block;
     line-height: inherit;
-    padding: 7px 20px;
+    padding: 7px 20px !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
   }
   .ak-nav .ak-nav_list ul ul {
     top: 15px;

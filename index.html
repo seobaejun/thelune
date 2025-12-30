@@ -237,11 +237,42 @@
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
         }
         
-        /* 호버 효과 개선 */
+        /* 호버 효과 개선 - 텍스트 잘림 방지 */
         .text-hover-animaiton {
             overflow: visible !important;
             line-height: 1.5 !important;
             padding: 12px 2px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .text-hover-animaiton:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 네비게이션 메뉴 호버 강제 적용 */
+        .ak-nav .ak-nav_list a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav .ak-nav_list > li > a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav .ak-nav_list a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        .ak-nav .ak-nav_list > li > a:hover {
+            color: #bcb8b1 !important;
+        }
+        
+        /* 네비게이션 컨테이너 overflow 설정 */
+        .ak-nav {
+            overflow: visible !important;
+        }
+        
+        .ak-main-header-center {
+            overflow: visible !important;
         }
         
         /* 네비게이션 메뉴 호버 개선 */
