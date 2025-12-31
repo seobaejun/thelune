@@ -633,4 +633,31 @@
     .choose-us-img img:first-child {
         box-shadow: 20px 20px 60px 0px rgba(0, 0, 0, 0.8), -20px -20px 60px 0px rgba(255, 255, 255, 0.1);
     }
+    
+    /* 모바일에서 버튼 크기 절반으로 (텍스트 크기는 유지) */
+    .glass-button-text {
+        padding: 6px 12px !important;
+        font-size: 16px !important;
+    }
+    
+    .glass-button.size-default .glass-button-text {
+        padding: 7px 14px !important;
+        font-size: 16px !important;
+    }
+    
+    .glass-button.size-sm .glass-button-text {
+        padding: 5px 10px !important;
+        font-size: 14px !important;
+    }
+    
+    .glass-button.size-lg .glass-button-text {
+        padding: 8px 16px !important;
+        font-size: 18px !important;
+    }
+    
+    .glass-button.hero-glass-button .glass-button-text,
+    .glass-button.secondary-glass-button .glass-button-text {
+        padding: 6px 12px !important;
+        font-size: 16px !important;
+    }
 }

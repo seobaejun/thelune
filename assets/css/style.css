@@ -2769,15 +2769,76 @@ kbd {
     max-width: 100% !important;
   }
   
-  /* 모바일에서 버튼 크기 조정 */
-  .glass-button {
-    padding: 10px 20px !important;
-    font-size: 14px !important;
+  /* 모바일에서 버튼 크기 조정 (텍스트 크기는 유지, 박스 크기만 절반으로) */
+  .glass-button-text {
+    padding: 6px 12px !important;
+    font-size: 16px !important;
   }
   
   .glass-button-wrap {
     flex-direction: column !important;
-    gap: 15px !important;
+    gap: 12px !important;
+  }
+  
+  /* 히어로 섹션 텍스트 간격 조정 */
+  .hero-title {
+    margin-bottom: 25px !important;
+  }
+  
+  .hero-main-title,
+  .hero-main-title-1 {
+    margin-bottom: 10px !important;
+  }
+  
+  .mini-title {
+    margin-top: 15px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .ak-height-45 {
+    height: 30px !important;
+  }
+  
+  /* 히어로 섹션에서 문의하기, A/S접수 버튼 숨김 */
+  .ak-header_btns a[href="contact.html"],
+  .ak-header_btns a[href="as.html"] {
+    display: none !important;
+  }
+  
+  /* 전화번호와 언어 선택기를 한 줄로 표시 */
+  .ak-header_btns {
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+  
+  .ak-header_btns a[href^="tel:"] {
+    flex-shrink: 0 !important;
+  }
+  
+  .ak-header_btns a[href^="tel:"] .d-flex {
+    gap: 8px !important;
+  }
+  
+  .ak-header_btns a[href^="tel:"] h6 {
+    font-size: 13px !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+  }
+  
+  .ak-header_btns .heartbeat-icon {
+    flex-shrink: 0 !important;
+  }
+  
+  .ak-header_btns .heartbeat-icon img {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  .ak-header_btns .language-selector {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    font-size: 12px !important;
   }
   
   /* 모바일에서 푸터 메뉴와 팔로어 어스 삭제 */
