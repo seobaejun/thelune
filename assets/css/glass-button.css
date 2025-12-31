@@ -92,6 +92,7 @@
 .glass-button.hero-glass-button:hover {
     background: rgba(188, 184, 177, 0.4);
     border: 2px solid var(--primary-color);
+    transform: translateY(-5px);
 }
 .glass-button.hero-glass-button + .glass-button-shadow {
     background: rgba(188, 184, 177, 0.5);
@@ -118,11 +119,12 @@
     color: var(--white-color);
 }
 .glass-button.secondary-glass-button:hover {
-    background: rgba(188, 184, 177, 0.2);
+    background: rgba(188, 184, 177, 0.4);
     border: 2px solid var(--primary-color);
+    transform: translateY(-5px);
 }
 .glass-button.secondary-glass-button + .glass-button-shadow {
-    background: rgba(188, 184, 177, 0.4);
+    background: rgba(188, 184, 177, 0.5);
 }
 
 /* More Buttons */

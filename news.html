@@ -132,7 +132,7 @@
 
         .news-list-section {
             background: #0f1419;
-            padding: 60px 0;
+            padding: 60px 0 100px 0;
         }
 
         .news-grid {
@@ -366,47 +366,110 @@
         }
 
         .bottom-cta {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            padding: 80px 0;
-            text-align: center;
+            position: relative;
+            padding: 0;
             color: white;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .bottom-cta-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom-cta-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .bottom-cta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 70%);
+            z-index: 2;
+        }
+
+        .bottom-cta-content {
+            position: relative;
+            z-index: 3;
+            padding: 80px 0 80px 0;
+            width: 100%;
+        }
+
+        .bottom-cta-text {
+            max-width: 500px;
+            text-align: left;
+            padding-left: 150px;
         }
 
         .bottom-cta h2 {
-            font-size: 36px;
+            font-size: 48px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .bottom-cta p {
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            font-size: 18px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #bcb8b1;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
 
-        .cta-button:hover {
-            background: #a8a49e;
-            color: white;
-            text-decoration: none;
-            transform: translateY(-2px);
-        }
 
-        .cta-button img {
-            width: 16px;
-            height: 16px;
+        @media (max-width: 768px) {
+            .bottom-cta {
+                min-height: 500px;
+            }
+
+            .bottom-cta-background {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .bottom-cta-background img {
+                object-position: center;
+            }
+
+            .bottom-cta-content {
+                padding: 60px 30px;
+            }
+
+            .bottom-cta-text {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .bottom-cta h2 {
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+
+            .bottom-cta p {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            .bottom-cta-overlay {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 100%);
+            }
         }
         
         /* 호버 효과 개선 - 텍스트 잘림 방지 */
@@ -699,13 +762,21 @@
 
     <!-- Bottom CTA Section -->
     <section class="bottom-cta">
-        <div class="container">
-            <h2 class="english-serif">Irreplaceable Value</h2>
-            <p class="avenir-book">LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다</p>
-            <a href="quote.html" class="cta-button avenir-roman">
-                구매 문의하기
-                <img src="assets/img/arrow-right.svg" alt="arrow" style="filter: brightness(0) invert(1);">
-            </a>
+        <div class="bottom-cta-background">
+            <img src="assets/img/제목 없는 디자인.jpg" alt="THE LUNE 차량">
+        </div>
+        <div class="bottom-cta-overlay"></div>
+        <div class="bottom-cta-content">
+            <div class="bottom-cta-text">
+                <h2 class="english-serif">Irreplaceable Value</h2>
+                <p class="avenir-book">LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다</p>
+                <div class="glass-button-wrap">
+                    <a href="quote.html" class="glass-button hero-glass-button">
+                        <span class="glass-button-text">구매 문의하기</span>
+                    </a>
+                    <div class="glass-button-shadow"></div>
+                </div>
+            </div>
         </div>
     </section>
 
