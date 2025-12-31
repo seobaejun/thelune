@@ -78,10 +78,10 @@
      2. Mobile  Menu  
  -----------------------------------------------------------------*/
   function mainNav() {
-    // 햄버거 버튼을 로고 옆에 배치 (모바일에서만)
+    // 햄버거 버튼을 헤더 오른쪽에 배치 (모바일에서만)
     if ($(window).width() <= 1199) {
-      if ($(".ak-main-header-left .ak-munu_toggle").length === 0) {
-        $(".ak-main-header-left").append('<span class="ak-munu_toggle"><span></span></span>');
+      if ($(".ak-main_header_in .ak-munu_toggle").length === 0) {
+        $(".ak-main_header_in").append('<span class="ak-munu_toggle"><span></span></span>');
       }
     } else {
       if ($(".ak-nav .ak-munu_toggle").length === 0) {
@@ -95,6 +95,7 @@
       e.preventDefault();
       e.stopPropagation();
       $(this).toggleClass("ak-toggle_active");
+      $(".ak-nav").toggleClass("mobile-menu-open");
       $(".ak-nav_list").slideToggle(300);
     });
     $(".ak-munu_dropdown_toggle").on("click", function () {

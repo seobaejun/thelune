@@ -2619,8 +2619,13 @@ kbd {
     transition-delay: 0s, 0.2s;
   }
   
+  /* 네비게이션을 처음에 숨김 */
   .ak-nav {
-    position: relative;
+    display: none !important;
+  }
+  
+  .ak-nav.mobile-menu-open {
+    display: block !important;
   }
   
   .ak-nav .ak-nav_list {
@@ -2637,16 +2642,12 @@ kbd {
     max-height: calc(100vh - 80px) !important;
     overflow-y: auto !important;
     display: none !important;
-    transform: translateY(-20px) !important;
-    opacity: 0 !important;
-    transition: all 0.3s ease !important;
+    flex-direction: column !important;
   }
   
   /* 메뉴가 열렸을 때 */
-  .ak-nav .ak-nav_list:not([style*="display: none"]) {
+  .ak-nav.mobile-menu-open .ak-nav_list {
     display: block !important;
-    transform: translateY(0) !important;
-    opacity: 1 !important;
   }
   
   .ak-nav .ak-nav_list li {
@@ -2748,6 +2749,42 @@ kbd {
     max-height: 45px !important;
     width: auto !important;
   }
+  
+  /* 모바일 메뉴 아이템 (문의하기, A/S접수)는 데스크톱에서 숨김 */
+  .mobile-menu-item {
+    display: none !important;
+  }
+  
+  /* 모바일에서만 표시 */
+  @media screen and (max-width: 1199px) {
+    .mobile-menu-item {
+      display: block !important;
+    }
+  }
+  
+  /* 히어로 섹션 모바일 수정 */
+  .hero-slider-info {
+    margin-left: 0 !important;
+    padding: 0 20px !important;
+    max-width: 100% !important;
+  }
+  
+  /* 모바일에서 버튼 크기 조정 */
+  .glass-button {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+  
+  .glass-button-wrap {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+  
+  /* 모바일에서 푸터 메뉴와 팔로어 어스 삭제 */
+  footer div[style*="Menu and Follow Us"],
+  footer div[style*="flex: 0 0 auto"][style*="gap: 120px"] {
+    display: none !important;
+  }
 }
 @media screen and (max-width: 991px) {
   .ak-site_header .container {
@@ -2776,29 +2813,30 @@ kbd {
     display: none !important;
   }
   
-  /* 햄버거 버튼을 로고 옆에 배치 */
-  .ak-main-header-left {
+  /* 햄버거 버튼을 오른쪽 끝에 배치 */
+  .ak-main_header_in {
     position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 20px !important;
   }
   
   .ak-munu_toggle {
     display: block !important;
-    position: relative !important;
-    right: auto !important;
-    top: auto !important;
-    transform: none !important;
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
     z-index: 1001 !important;
     width: 30px !important;
     height: 27px !important;
     cursor: pointer !important;
-    margin-left: 0 !important;
   }
   
+  /* 네비게이션을 처음에 숨김 */
   .ak-nav {
-    position: relative;
+    display: none !important;
+  }
+  
+  .ak-nav.mobile-menu-open {
+    display: block !important;
   }
   
   .ak-nav .ak-nav_list {
@@ -2814,6 +2852,13 @@ kbd {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
     max-height: calc(100vh - 80px) !important;
     overflow-y: auto !important;
+    display: none !important;
+    flex-direction: column !important;
+  }
+  
+  /* 메뉴가 열렸을 때 */
+  .ak-nav.mobile-menu-open .ak-nav_list {
+    display: block !important;
   }
   
   .ak-nav .ak-nav_list li {
