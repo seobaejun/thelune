@@ -1166,6 +1166,20 @@
                     item.style.opacity = opacity;
                     item.style.willChange = 'transform, opacity';
                     
+                    // 메인 이미지만 선명하게 - 앞쪽 이미지에만 image-rendering 최적화 적용
+                    const img = item.querySelector('img');
+                    if (img) {
+                        if (normalizedAngle < 30) {
+                            // 메인 이미지 (앞쪽 30도 이내)
+                            img.style.imageRendering = '-webkit-optimize-contrast';
+                            img.style.imageRendering = 'crisp-edges';
+                            img.style.imageRendering = 'high-quality';
+                        } else {
+                            // 나머지 이미지는 기본값
+                            img.style.imageRendering = '';
+                        }
+                    }
+                    
                     // Add z-index for proper layering
                     item.style.zIndex = Math.round(opacity * 100);
                 });
