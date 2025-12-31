@@ -5772,6 +5772,27 @@ kbd {
     .lune-logo.footer-logo img {
         height: 30px;
     }
+    
+    /* 모바일에서 Why Choose Us 섹션의 이미지 2개 숨기기 */
+    .choose-us-img img {
+        display: none !important;
+    }
+    
+    /* 모바일에서 원형 버튼 숨기기 */
+    .rotating-button-container {
+        display: none !important;
+    }
+    
+    /* 모바일에서 푸터 연락처 줄바꿈 */
+    .footer-contact-desktop {
+        display: none !important;
+    }
+    .footer-contact-mobile {
+        display: block !important;
+    }
+    .footer-contact-mobile div {
+        margin-bottom: 4px;
+    }
 }
 
 /* Choose Us Image Positioning */
