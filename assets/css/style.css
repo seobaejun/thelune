@@ -2751,14 +2751,35 @@ kbd {
   }
   
   /* 모바일 메뉴 아이템 (문의하기, A/S접수)는 데스크톱에서 숨김 */
-  .mobile-menu-item {
+  .ak-nav_list .mobile-menu-item {
     display: none !important;
+  }
+  
+  /* PC에서 확실히 숨기기 */
+  @media screen and (min-width: 1200px) {
+    .ak-nav_list .mobile-menu-item,
+    .ak-nav .ak-nav_list .mobile-menu-item,
+    .ak-main-header-center .ak-nav_list .mobile-menu-item {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
   }
   
   /* 모바일에서만 표시 */
   @media screen and (max-width: 1199px) {
-    .mobile-menu-item {
-      display: block !important;
+    .ak-nav_list .mobile-menu-item {
+      display: list-item !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: auto !important;
+      height: auto !important;
+      overflow: visible !important;
     }
   }
   
@@ -5850,6 +5871,36 @@ kbd {
 /* text-hover-animaiton 클래스 브랜드 컬러 적용 */
 .text-hover-animaiton .menu-text {
     text-shadow: 0 60px 0 #bcb8b1 !important;
+}
+
+/* PC에서 모바일 메뉴 아이템 완전히 숨기기 - 최우선 적용 */
+@media screen and (min-width: 1200px) {
+    .ak-main-header-center .ak-nav .ak-nav_list li.mobile-menu-item,
+    .ak-nav .ak-nav_list li.mobile-menu-item,
+    .ak-nav_list li.mobile-menu-item,
+    ul.ak-nav_list li.mobile-menu-item,
+    .ak-main-header-center ul.ak-nav_list li.mobile-menu-item,
+    .ak-main-header-center .ak-nav ul.ak-nav_list li.mobile-menu-item {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        flex: 0 0 0 !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
+    }
+    
+    /* 인라인 스타일이 있어도 덮어쓰기 */
+    .ak-main-header-center .ak-nav .ak-nav_list[style*="display: flex"] li.mobile-menu-item,
+    .ak-nav .ak-nav_list[style*="display: flex"] li.mobile-menu-item {
+        display: none !important;
+    }
 }
 
 /*# sourceMappingURL=style.css.map */
