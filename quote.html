@@ -173,148 +173,100 @@
             }
         }
         
-        /* 모바일 햄버거 메뉴 활성화 시 - 메인페이지와 동일한 구조 */
-        @media screen and (max-width: 1199px) {
-            /* 모바일에서 네비게이션 초기 상태 - 인라인 스타일 덮어쓰기 */
-            .ak-nav .ak-nav_list[style*="display: flex"] {
+        /* 모바일 햄버거 메뉴 - 메인페이지와 동일한 구조 */
+        @media screen and (max-width: 991px) {
+            /* 네비게이션을 처음에 숨김 */
+            .ak-nav {
                 display: none !important;
             }
             
-            /* 햄버거 메뉴 활성화 시 */
-            .ak-nav.ak-toggle_active .ak-nav_list[style*="display: flex"],
-            .ak-nav.mobile-menu-open .ak-nav_list[style*="display: flex"] {
-                display: flex !important;
-                flex-direction: column !important;
-                position: absolute !important;
-                top: 100% !important;
-                left: 0 !important;
-                right: 0 !important;
-                background: rgba(10, 10, 10, 0.98) !important;
-                padding: 20px !important;
-                z-index: 1000 !important;
-                gap: 15px !important;
-                white-space: normal !important;
-                width: 100% !important;
+            .ak-nav.mobile-menu-open {
+                display: block !important;
             }
             
-            /* 모바일 헤더 레이아웃 조정 - 메인페이지와 동일 */
-            .ak-site_header.ak-style1 .ak-main_header_in[style*="display: flex"] {
-                flex-wrap: wrap !important;
-                align-items: center !important;
-                height: auto !important;
-                min-height: 80px !important;
-                justify-content: flex-start !important; /* space-between 대신 flex-start로 변경 */
+            /* 모바일 네비게이션 개선 */
+            .ak-main_header {
+                position: relative;
+            }
+            
+            .ak-main-header-center {
+                display: none !important;
+            }
+            
+            .ak-main-header-right {
+                display: none !important;
+            }
+            
+            /* 햄버거 버튼을 오른쪽 끝에 배치 */
+            .ak-main_header_in {
                 position: relative !important;
             }
             
-            /* 모바일에서 헤더 섹션 숨기기 - 메인페이지와 동일 */
-            .ak-site_header.ak-style1 .ak-main-header-center[style*="flex: 1"] {
-                display: none !important;
-            }
-            
-            /* 전화번호와 언어 선택기를 로고 밑 줄에 배치 */
-            .ak-site_header.ak-style1 .ak-main-header-right[style*="display: flex"] {
-                display: flex !important;
-                flex: 1 1 100% !important;
-                order: 3 !important;
-                width: 100% !important;
-                justify-content: center !important;
-                align-items: center !important;
-                gap: 20px !important;
-                padding-top: 10px !important;
-                margin-top: 10px !important;
-                border-top: 1px solid rgba(188, 184, 177, 0.2) !important;
-            }
-            
-            /* 문의하기, A/S접수 버튼 숨기기 */
-            .ak-site_header.ak-style1 .ak-main-header-right .ak-header_btns a[href="contact.html"],
-            .ak-site_header.ak-style1 .ak-main-header-right .ak-header_btns a[href="as.html"] {
-                display: none !important;
-            }
-            
-            /* 로고를 왼쪽에 강제 배치 */
-            .ak-site_header.ak-style1 .ak-main-header-left {
-                position: relative !important;
-                display: flex !important;
-                align-items: center !important;
-                gap: 20px !important;
-                flex: 0 0 auto !important;
-                order: 1 !important;
-                justify-content: flex-start !important;
-                left: 0 !important;
-                margin-left: 0 !important;
-                margin-right: auto !important;
-            }
-            
-            /* 햄버거 버튼을 오른쪽 끝에 강제 배치 */
-            .ak-site_header.ak-style1 .ak-main_header_in .ak-munu_toggle {
+            .ak-munu_toggle {
                 display: block !important;
                 position: absolute !important;
                 right: 20px !important;
-                left: auto !important;
                 top: 50% !important;
                 transform: translateY(-50%) !important;
                 z-index: 1001 !important;
                 width: 30px !important;
                 height: 27px !important;
                 cursor: pointer !important;
-                margin-left: auto !important;
-                margin-right: 0 !important;
-                order: 999 !important; /* flexbox에서 가장 뒤로 */
             }
             
-            /* 햄버거 버튼 아이콘 스타일 */
-            .ak-munu_toggle span,
-            .ak-munu_toggle span:before,
-            .ak-munu_toggle span:after {
-                width: 100%;
-                height: 2px;
-                background-color: #fff;
-                display: block;
+            .ak-nav .ak-nav_list {
+                position: fixed !important;
+                top: 80px !important;
+                left: 0 !important;
+                width: 100% !important;
+                background-color: rgba(0, 0, 0, 0.98) !important;
+                backdrop-filter: blur(10px) !important;
+                padding: 20px 0 !important;
+                padding-top: 30px !important;
+                z-index: 1000 !important;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+                max-height: calc(100vh - 80px) !important;
+                overflow-y: auto !important;
+                display: none !important;
+                flex-direction: column !important;
             }
             
-            .ak-munu_toggle span {
-                margin: 0 auto;
-                position: relative;
-                top: 12px;
-                transition-duration: 0s;
-                transition-delay: 0.2s;
+            /* 메뉴가 열렸을 때 */
+            .ak-nav.mobile-menu-open .ak-nav_list {
+                display: block !important;
             }
             
-            .ak-munu_toggle span:before {
-                content: "";
-                position: absolute;
-                margin-top: -9px;
-                transition-property: margin, transform;
-                transition-duration: 0.2s;
-                transition-delay: 0.2s, 0s;
+            .ak-nav .ak-nav_list li {
+                border-bottom: 1px solid rgba(188, 184, 177, 0.1) !important;
             }
             
-            .ak-munu_toggle span:after {
-                content: "";
-                position: absolute;
-                margin-top: 9px;
-                transition-property: margin, transform;
-                transition-duration: 0.2s;
-                transition-delay: 0.2s, 0s;
+            .ak-nav .ak-nav_list li:last-child {
+                border-bottom: none !important;
             }
             
-            /* 햄버거 버튼이 열렸을 때 X로 변환 */
-            .ak-toggle_active span {
-                background-color: transparent !important;
-                transition-delay: 0.2s;
+            .ak-nav .ak-nav_list a {
+                display: block !important;
+                padding: 15px 30px !important;
+                font-size: 16px !important;
+                text-transform: none !important;
+                color: #ffffff !important;
+                transition: all 0.3s ease !important;
             }
             
-            .ak-toggle_active span:before {
-                margin-top: 0 !important;
-                transform: rotate(45deg) !important;
-                transition-delay: 0s, 0.2s;
+            .ak-nav .ak-nav_list a:hover {
+                background-color: rgba(188, 184, 177, 0.1) !important;
+                color: #bcb8b1 !important;
+                padding-left: 40px !important;
             }
             
-            .ak-toggle_active span:after {
-                margin-top: 0 !important;
-                transform: rotate(-45deg) !important;
-                transition-delay: 0s, 0.2s;
+            /* 헤더 패딩 조정 */
+            .ak-main_header > div {
+                padding: 0 20px !important;
+            }
+            
+            .ak-site_branding img {
+                max-height: 45px !important;
+                width: auto !important;
             }
             
             /* 로고 위치 및 크기 조정 - 메인페이지와 동일 */
@@ -443,8 +395,6 @@
                             <img src="assets/img/logo.png" alt="THE LUNE">
                         </a>
                     </div>
-                    <!-- 햄버거 버튼 -->
-                    <span class="ak-munu_toggle"><span></span></span>
                     <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
                         <div class="ak-nav ak-medium">
                             <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 30px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important;">
