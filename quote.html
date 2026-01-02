@@ -117,7 +117,29 @@
             }
         }
         
-        /* 모바일 반응형 스타일 */
+        /* 모바일 반응형 스타일 - 1199px 이하에서 햄버거 버튼 표시 */
+        @media screen and (max-width: 1199px) {
+            .ak-munu_toggle {
+                display: block !important;
+                position: relative !important;
+                right: auto !important;
+                top: auto !important;
+                transform: none !important;
+                z-index: 1001 !important;
+                width: 30px !important;
+                height: 27px !important;
+                cursor: pointer !important;
+                margin-left: 20px !important;
+            }
+            
+            .ak-main-header-left {
+                position: relative !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 20px !important;
+            }
+        }
+        
         @media screen and (max-width: 768px) {
             /* 견적 페이지 상단 패딩 조정 - 헤더와 겹치지 않도록 */
             .quote-page[style*="padding-top: 90px"] {
@@ -283,7 +305,7 @@
                         <a class="ak-site_branding lune-logo" href="index.html">
                             <img src="assets/img/logo.png" alt="THE LUNE">
                         </a>
-                        <span class="ak-munu_toggle"><span></span></span>
+                        <span class="ak-munu_toggle" style="display: block !important; position: relative !important; right: auto !important; top: auto !important; transform: none !important; z-index: 1001 !important; width: 30px !important; height: 27px !important; cursor: pointer !important; margin-left: 20px !important;"><span></span></span>
                     </div>
                     <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
                         <div class="ak-nav ak-medium">
