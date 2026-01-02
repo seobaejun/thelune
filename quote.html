@@ -119,6 +119,11 @@
         
         /* 모바일 반응형 스타일 - 1199px 이하에서 햄버거 버튼 표시 */
         @media screen and (max-width: 1199px) {
+            /* 헤더 레이아웃 유지 - space-between으로 로고는 왼쪽, 버튼은 오른쪽 */
+            .ak-main_header_in[style*="justify-content: space-between"] {
+                justify-content: space-between !important;
+            }
+            
             .ak-munu_toggle {
                 display: block !important;
                 position: relative !important;
@@ -129,14 +134,13 @@
                 width: 30px !important;
                 height: 27px !important;
                 cursor: pointer !important;
-                margin-left: 20px !important;
+                margin-left: auto !important;
             }
             
             .ak-main-header-left {
                 position: relative !important;
                 display: flex !important;
                 align-items: center !important;
-                gap: 20px !important;
             }
         }
         
@@ -305,8 +309,8 @@
                         <a class="ak-site_branding lune-logo" href="index.html">
                             <img src="assets/img/logo.png" alt="THE LUNE">
                         </a>
-                        <span class="ak-munu_toggle" style="display: block !important; position: relative !important; right: auto !important; top: auto !important; transform: none !important; z-index: 1001 !important; width: 30px !important; height: 27px !important; cursor: pointer !important; margin-left: 20px !important;"><span></span></span>
                     </div>
+                    <span class="ak-munu_toggle" style="display: block !important; position: relative !important; right: auto !important; top: auto !important; transform: none !important; z-index: 1001 !important; width: 30px !important; height: 27px !important; cursor: pointer !important; margin-left: auto !important;"><span></span></span>
                     <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
                         <div class="ak-nav ak-medium">
                             <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 30px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important;">
