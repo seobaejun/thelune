@@ -119,22 +119,37 @@
         
         /* 모바일 반응형 스타일 - 1199px 이하에서 햄버거 버튼 표시 */
         @media screen and (max-width: 1199px) {
-            /* 헤더 레이아웃 유지 - space-between으로 로고는 왼쪽, 버튼은 오른쪽 */
+            /* 헤더 레이아웃 - space-between으로 로고는 왼쪽, 버튼은 오른쪽 끝 */
             .ak-main_header_in[style*="justify-content: space-between"] {
                 justify-content: space-between !important;
             }
             
-            .ak-munu_toggle {
+            /* 모바일에서 중앙과 오른쪽 영역 숨기기 */
+            .ak-main-header-center {
+                display: none !important;
+            }
+            
+            .ak-main-header-right {
+                display: none !important;
+            }
+            
+            /* 햄버거 버튼을 오른쪽 끝에 절대 위치로 배치 */
+            .ak-main_header_in > .ak-munu_toggle {
                 display: block !important;
-                position: relative !important;
-                right: auto !important;
-                top: auto !important;
-                transform: none !important;
+                position: absolute !important;
+                right: 20px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
                 z-index: 1001 !important;
                 width: 30px !important;
                 height: 27px !important;
                 cursor: pointer !important;
-                margin-left: auto !important;
+                margin: 0 !important;
+            }
+            
+            /* 헤더를 relative로 만들어서 absolute 위치 지정 가능하게 */
+            .ak-main_header_in {
+                position: relative !important;
             }
             
             .ak-main-header-left {
@@ -304,13 +319,13 @@
     <header class="ak-site_header ak-style1 ak-sticky_header">
         <div class="ak-main_header">
             <div style="width: 100%; padding: 0 50px;">
-                <div class="ak-main_header_in" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
+                <div class="ak-main_header_in" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; position: relative !important;">
                     <div class="ak-main-header-left">
                         <a class="ak-site_branding lune-logo" href="index.html">
                             <img src="assets/img/logo.png" alt="THE LUNE">
                         </a>
                     </div>
-                    <span class="ak-munu_toggle" style="display: block !important; position: relative !important; right: auto !important; top: auto !important; transform: none !important; z-index: 1001 !important; width: 30px !important; height: 27px !important; cursor: pointer !important; margin-left: auto !important;"><span></span></span>
+                    <span class="ak-munu_toggle" style="display: block !important; position: absolute !important; right: 20px !important; top: 50% !important; transform: translateY(-50%) !important; z-index: 1001 !important; width: 30px !important; height: 27px !important; cursor: pointer !important; margin: 0 !important;"><span></span></span>
                     <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
                         <div class="ak-nav ak-medium">
                             <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 30px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important;">
