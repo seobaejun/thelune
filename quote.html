@@ -142,9 +142,9 @@
                 aspect-ratio: 3 / 4 !important;
             }
             
-            /* 카드 내부 이미지 영역 조정 - 모바일에서 이미지를 더 크게 표시 */
+            /* 카드 내부 이미지 영역 조정 - 모바일에서 이미지와 텍스트가 겹치지 않도록 */
             .quote-card-image {
-                height: 75% !important;
+                height: 55% !important;
                 background-size: cover !important;
                 background-position: center top !important;
             }
@@ -152,9 +152,10 @@
             /* 카드 내부 콘텐츠 영역 조정 - 텍스트와 이미지 겹치지 않게 */
             .quote-form div[style*="position: absolute"][style*="bottom: 0"][style*="z-index: 2"] {
                 padding: 30px 20px !important;
-                min-height: 250px !important;
-                top: auto !important;
-                background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.7) 40%, transparent 60%) !important;
+                min-height: 300px !important;
+                top: 45% !important;
+                bottom: 0 !important;
+                background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.9) 25%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.6) 60%, transparent 80%) !important;
             }
             
             /* 제목 크기 조정 */
@@ -176,6 +177,27 @@
             .ak-main-header-right .ak-header_btns a[href="contact.html"],
             .ak-main-header-right .ak-header_btns a[href="as.html"] {
                 display: none !important;
+            }
+            
+            /* 햄버거 버튼이 표시되도록 보장 */
+            .ak-munu_toggle {
+                display: block !important;
+                position: relative !important;
+                right: auto !important;
+                top: auto !important;
+                transform: none !important;
+                z-index: 1001 !important;
+                width: 30px !important;
+                height: 27px !important;
+                cursor: pointer !important;
+                margin-left: 0 !important;
+            }
+        }
+        
+        /* 모바일에서 햄버거 버튼이 표시되도록 보장 (1199px 이하) */
+        @media screen and (max-width: 1199px) {
+            .ak-munu_toggle {
+                display: block !important;
             }
         }
         
