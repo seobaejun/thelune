@@ -2,6 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>A/S접수 - THE LUNE</title>
     <link rel="icon" href="assets/img/favicon.svg" />
     
@@ -154,6 +155,57 @@
                 padding: 45px 15px;
                 flex-direction: column;
                 gap: 15px;
+            }
+            
+            /* 모바일 헤더 패딩 조정 */
+            .ak-main_header > div[style*="padding: 0 50px"] {
+                padding: 0 20px !important;
+            }
+            
+            /* 모바일에서 헤더 오른쪽 버튼 숨기기 */
+            .ak-main-header-right .ak-header_btns a[href="contact.html"],
+            .ak-main-header-right .ak-header_btns a[href="as.html"] {
+                display: none !important;
+            }
+        }
+        
+        /* 모바일 햄버거 메뉴 활성화 시 */
+        @media screen and (max-width: 1199px) {
+            /* 모바일에서 네비게이션 초기 상태 - 인라인 스타일 덮어쓰기 */
+            .ak-nav .ak-nav_list[style*="display: flex"] {
+                display: none !important;
+            }
+            
+            /* 햄버거 메뉴 활성화 시 */
+            .ak-nav.ak-toggle_active .ak-nav_list[style*="display: flex"],
+            .ak-nav.mobile-menu-open .ak-nav_list[style*="display: flex"] {
+                display: flex !important;
+                flex-direction: column !important;
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: rgba(10, 10, 10, 0.98) !important;
+                padding: 20px !important;
+                z-index: 1000 !important;
+                gap: 15px !important;
+                white-space: normal !important;
+                width: 100% !important;
+            }
+            
+            /* 모바일 헤더 레이아웃 조정 */
+            .ak-main_header_in[style*="display: flex"] {
+                flex-wrap: wrap !important;
+            }
+            
+            .ak-main-header-center[style*="flex: 1"] {
+                flex: 1 1 100% !important;
+                order: 3 !important;
+                width: 100% !important;
+            }
+            
+            .ak-main-header-right[style*="display: flex"] {
+                order: 2 !important;
             }
         }
         
