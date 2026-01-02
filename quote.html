@@ -131,7 +131,7 @@
             
             /* 제목 크기 조정 */
             .quote-title-section h1 {
-                font-size: 24px !important;
+                font-size: 28px !important;
             }
             
             /* 컨테이너 패딩 조정 */
@@ -177,8 +177,10 @@
             
             /* 모바일 헤더 레이아웃 조정 - 메인페이지와 동일 */
             .ak-main_header_in[style*="display: flex"] {
-                flex-wrap: nowrap !important;
+                flex-wrap: wrap !important;
                 align-items: center !important;
+                height: auto !important;
+                min-height: 80px !important;
             }
             
             /* 모바일에서 헤더 섹션 숨기기 - 메인페이지와 동일 */
@@ -186,7 +188,23 @@
                 display: none !important;
             }
             
+            /* 전화번호와 언어 선택기를 로고 밑 줄에 배치 */
             .ak-main-header-right[style*="display: flex"] {
+                display: flex !important;
+                flex: 1 1 100% !important;
+                order: 3 !important;
+                width: 100% !important;
+                justify-content: center !important;
+                align-items: center !important;
+                gap: 20px !important;
+                padding-top: 10px !important;
+                margin-top: 10px !important;
+                border-top: 1px solid rgba(188, 184, 177, 0.2) !important;
+            }
+            
+            /* 문의하기, A/S접수 버튼 숨기기 */
+            .ak-main-header-right .ak-header_btns a[href="contact.html"],
+            .ak-main-header-right .ak-header_btns a[href="as.html"] {
                 display: none !important;
             }
             
@@ -197,6 +215,7 @@
                 align-items: center !important;
                 gap: 20px !important;
                 flex: 1 !important;
+                order: 1 !important;
             }
             
             /* 햄버거 버튼 표시 및 위치 조정 - 메인페이지와 동일 */
@@ -213,11 +232,16 @@
                 margin-left: 0 !important;
             }
             
-            /* 로고 위치 조정 - 메인페이지와 동일 */
+            /* 로고 위치 및 크기 조정 - 메인페이지와 동일 */
             .ak-site_branding.lune-logo {
                 margin: 0 !important;
                 display: flex !important;
                 align-items: center !important;
+            }
+            
+            .ak-site_branding.lune-logo img {
+                max-height: 45px !important;
+                width: auto !important;
             }
             
             /* 헤더 패딩 조정 */
