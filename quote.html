@@ -283,6 +283,7 @@
                         <a class="ak-site_branding lune-logo" href="index.html">
                             <img src="assets/img/logo.png" alt="THE LUNE">
                         </a>
+                        <span class="ak-munu_toggle"><span></span></span>
                     </div>
                     <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
                         <div class="ak-nav ak-medium">
@@ -1277,6 +1278,30 @@
                     this.style.setProperty('color', '#ffffff', 'important');
                 });
             });
+            
+            // 햄버거 버튼 클릭 이벤트 바인딩 (main.js가 실행되지 않을 경우 대비)
+            setTimeout(function() {
+                const toggleBtn = document.querySelector('.ak-munu_toggle');
+                const nav = document.querySelector('.ak-nav');
+                const navList = document.querySelector('.ak-nav_list');
+                
+                if (toggleBtn && !toggleBtn.hasAttribute('data-bound')) {
+                    toggleBtn.setAttribute('data-bound', 'true');
+                    toggleBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.classList.toggle('ak-toggle_active');
+                        if (nav) nav.classList.toggle('mobile-menu-open');
+                        if (navList) {
+                            if (navList.style.display === 'none' || !navList.style.display) {
+                                navList.style.display = 'block';
+                            } else {
+                                navList.style.display = 'none';
+                            }
+                        }
+                    });
+                }
+            }, 500);
         });
     </script>
 
