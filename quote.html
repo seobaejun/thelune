@@ -97,6 +97,17 @@
             -ms-overflow-style: none !important; /* IE/Edge */
         }
         
+        /* 견적 제목 줄바꿈 제어 - PC에서는 한 줄, 모바일에서는 두 줄 */
+        .quote-title-break {
+            display: none; /* PC에서는 숨김 */
+        }
+        
+        @media screen and (max-width: 768px) {
+            .quote-title-break {
+                display: inline; /* 모바일에서는 표시 */
+            }
+        }
+        
         /* 모바일 반응형 스타일 */
         @media screen and (max-width: 768px) {
             /* 견적 카드 모바일 반응형 */
@@ -176,21 +187,22 @@
             }
             
             /* 모바일 헤더 레이아웃 조정 - 메인페이지와 동일 */
-            .ak-main_header_in[style*="display: flex"] {
+            .ak-site_header.ak-style1 .ak-main_header_in[style*="display: flex"] {
                 flex-wrap: wrap !important;
                 align-items: center !important;
                 height: auto !important;
                 min-height: 80px !important;
                 justify-content: space-between !important;
+                position: relative !important;
             }
             
             /* 모바일에서 헤더 섹션 숨기기 - 메인페이지와 동일 */
-            .ak-main-header-center[style*="flex: 1"] {
+            .ak-site_header.ak-style1 .ak-main-header-center[style*="flex: 1"] {
                 display: none !important;
             }
             
             /* 전화번호와 언어 선택기를 로고 밑 줄에 배치 */
-            .ak-main-header-right[style*="display: flex"] {
+            .ak-site_header.ak-style1 .ak-main-header-right[style*="display: flex"] {
                 display: flex !important;
                 flex: 1 1 100% !important;
                 order: 3 !important;
@@ -204,13 +216,13 @@
             }
             
             /* 문의하기, A/S접수 버튼 숨기기 */
-            .ak-main-header-right .ak-header_btns a[href="contact.html"],
-            .ak-main-header-right .ak-header_btns a[href="as.html"] {
+            .ak-site_header.ak-style1 .ak-main-header-right .ak-header_btns a[href="contact.html"],
+            .ak-site_header.ak-style1 .ak-main-header-right .ak-header_btns a[href="as.html"] {
                 display: none !important;
             }
             
             /* 로고를 왼쪽에 배치 - 메인페이지와 동일 */
-            .ak-main-header-left {
+            .ak-site_header.ak-style1 .ak-main-header-left {
                 position: relative !important;
                 display: flex !important;
                 align-items: center !important;
@@ -221,11 +233,7 @@
             }
             
             /* 햄버거 버튼을 오른쪽 끝에 배치 - 메인페이지와 동일 */
-            .ak-main_header_in {
-                position: relative !important;
-            }
-            
-            .ak-main_header_in .ak-munu_toggle {
+            .ak-site_header.ak-style1 .ak-main_header_in .ak-munu_toggle {
                 display: block !important;
                 position: absolute !important;
                 right: 20px !important;
@@ -416,7 +424,10 @@
         <div class="quote-header">
             <div class="container">
                 <div class="quote-title-section">
-                    <h1 style="font-size: 32px;">THE LUNE 카니발 견적내기</h1>
+                    <h1 style="font-size: 32px; line-height: 1.3;">
+                        THE LUNE 카니발<br class="quote-title-break">
+                        <span style="font-size: 0.9em;">견적내기</span>
+                    </h1>
                     <div class="quote-controls" style="display: flex; align-items: center; gap: 20px;">
                         <a href="index.html" style="color: #bcb8b1; text-decoration: none; font-weight: 600; font-size: 16px;">메인으로</a>
                         <span onclick="window.resetQuote()" style="color: #ccc; cursor: pointer; font-size: 14px;">초기화</span>
