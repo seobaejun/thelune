@@ -208,6 +208,37 @@
         .ak-main-header-center {
             overflow: visible !important;
         }
+        
+        /* 모바일 스크롤 문제 해결 */
+        @media screen and (max-width: 768px) {
+            html, body {
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                height: auto !important;
+                position: relative !important;
+            }
+            
+            body {
+                min-height: 100vh !important;
+            }
+            
+            /* 모바일에서 data-glow 요소가 스크롤을 막지 않도록 */
+            [data-glow] {
+                touch-action: pan-y !important;
+                pointer-events: auto !important;
+            }
+            
+            /* 모든 섹션이 정상적으로 스크롤되도록 */
+            section {
+                position: relative !important;
+                overflow: visible !important;
+            }
+            
+            .galaxy-section {
+                overflow: visible !important;
+                min-height: auto !important;
+            }
+        }
         </style>
 </head>
 
