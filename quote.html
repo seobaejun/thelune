@@ -181,6 +181,7 @@
                 align-items: center !important;
                 height: auto !important;
                 min-height: 80px !important;
+                justify-content: space-between !important;
             }
             
             /* 모바일에서 헤더 섹션 숨기기 - 메인페이지와 동일 */
@@ -208,28 +209,32 @@
                 display: none !important;
             }
             
-            /* 햄버거 버튼을 로고 옆에 배치 - 메인페이지와 동일 */
+            /* 로고를 왼쪽에 배치 - 메인페이지와 동일 */
             .ak-main-header-left {
                 position: relative !important;
                 display: flex !important;
                 align-items: center !important;
                 gap: 20px !important;
-                flex: 1 !important;
+                flex: 0 0 auto !important;
                 order: 1 !important;
+                justify-content: flex-start !important;
             }
             
-            /* 햄버거 버튼 표시 및 위치 조정 - 메인페이지와 동일 */
+            /* 햄버거 버튼을 오른쪽 끝에 배치 - 메인페이지와 동일 */
+            .ak-main_header_in {
+                position: relative !important;
+            }
+            
             .ak-main_header_in .ak-munu_toggle {
                 display: block !important;
-                position: relative !important;
-                right: auto !important;
-                top: auto !important;
-                transform: none !important;
+                position: absolute !important;
+                right: 20px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
                 z-index: 1001 !important;
                 width: 30px !important;
                 height: 27px !important;
                 cursor: pointer !important;
-                margin-left: 0 !important;
             }
             
             /* 로고 위치 및 크기 조정 - 메인페이지와 동일 */
