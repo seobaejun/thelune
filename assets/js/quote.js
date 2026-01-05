@@ -25,6 +25,9 @@ function initializeQuotePage() {
     updatePriceDisplay();
     updateSelectedOptionsDisplay();
     
+    // 초기 로드 시 외장컬러 옵션 상태 업데이트 (등급이 선택되지 않은 상태)
+    updateExteriorColorOptions(null);
+    
     console.log('Quote page initialized');
 }
 
@@ -33,6 +36,7 @@ function setupEventListeners() {
     // Add event listeners to all form inputs
     setupFormEventListeners('#quoteForm');
     setupFormEventListeners('#quote6SeatForm');
+    setupFormEventListeners('#quote9SeatForm');
     
     // Add event listeners to buttons
     setupButtonListeners();
@@ -63,10 +67,27 @@ function setupFormEventListeners(formSelector) {
         // Add event listeners
         if (input.type === 'radio') {
             // For radio buttons, use click event to handle deselection
-            input.addEventListener('click', handleRadioClick);
+            input.addEventListener('click', function(e) {
+                // 비활성화된 옵션은 클릭 방지
+                if (input.disabled) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                handleRadioClick(e);
+            });
         } else {
             // For checkboxes, use change event
-            input.addEventListener('change', handleOptionChange);
+            input.addEventListener('change', function(e) {
+                // 비활성화된 옵션은 변경 방지
+                if (input.disabled) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    input.checked = false;
+                    return false;
+                }
+                handleOptionChange(e);
+            });
         }
         
         listenerCount++;
@@ -176,6 +197,16 @@ function setupButtonListeners() {
         console.log('Show 6-seat options button listener added');
     }
     
+    // Show 9-seat options button
+    const show9SeatBtn = document.getElementById('show9SeatOptions');
+    if (show9SeatBtn) {
+        show9SeatBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            show9SeatQuoteOptions();
+        });
+        console.log('Show 9-seat options button listener added');
+    }
+    
     // 6인승 Show quote button
     const showQuoteBtn6Seat = document.getElementById('showQuoteBtn6Seat');
     if (showQuoteBtn6Seat) {
@@ -196,6 +227,28 @@ function setupButtonListeners() {
             downloadQuotePDF();
         });
         console.log('6-seat download PDF button listener added');
+    }
+    
+    // 9인승 Show quote button
+    const showQuoteBtn9Seat = document.getElementById('showQuoteBtn9Seat');
+    if (showQuoteBtn9Seat) {
+        showQuoteBtn9Seat.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('9-seat show quote button clicked');
+            showQuote();
+        });
+        console.log('9-seat show quote button listener added');
+    }
+    
+    // 9인승 Download PDF button
+    const downloadPDFBtn9Seat = document.getElementById('downloadPDFBtn9Seat');
+    if (downloadPDFBtn9Seat) {
+        downloadPDFBtn9Seat.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('9-seat download PDF button clicked');
+            downloadQuotePDF();
+        });
+        console.log('9-seat download PDF button listener added');
     }
     
 }
@@ -242,8 +295,155 @@ function handleOptionChange(event) {
     updatePriceDisplay();
     updateSelectedOptionsDisplay();
     
+    // 등급 선택이 변경되면 외장컬러 옵션 업데이트
+    if (sectionName === '등급 선택' || sectionName === '등급') {
+        updateExteriorColorOptions(input);
+    }
+    
+    // 퍼포먼스 옵션: 리어 에어서스펜션과 HSD 프리미엄 서스펜션은 상호 배타적
+    if (sectionName === '퍼포먼스 옵션' || sectionName === '퍼포먼스') {
+        const mutualExclude = input.dataset.mutualExclude;
+        if (mutualExclude && input.checked) {
+            const form = input.closest('form');
+            if (form) {
+                const excludeInput = form.querySelector(`#${mutualExclude}`);
+                if (excludeInput && excludeInput.checked) {
+                    excludeInput.checked = false;
+                    const excludeSectionName = getSectionName(excludeInput);
+                    if (selectedOptions[excludeSectionName] && selectedOptions[excludeSectionName].element === excludeInput) {
+                        delete selectedOptions[excludeSectionName];
+                        calculateTotalPrice();
+                        updatePriceDisplay();
+                        updateSelectedOptionsDisplay();
+                    }
+                }
+            }
+        }
+    }
+    
     // Add visual feedback
     addSelectionFeedback(input);
+}
+
+// 등급 선택에 따라 외장컬러 옵션 활성화/비활성화
+function updateExteriorColorOptions(gradeInput) {
+    const selectedGrade = gradeInput ? gradeInput.value : null;
+    const isXLine = selectedGrade === 'xline';
+    
+    // 현재 폼 찾기 (4인승, 6인승, 9인승)
+    let form;
+    if (gradeInput) {
+        form = gradeInput.closest('form');
+    } else {
+        // 등급이 선택되지 않았을 때 모든 폼 처리
+        const forms = ['quoteForm', 'quote6SeatForm', 'quote9SeatForm'];
+        forms.forEach(formId => {
+            const f = document.getElementById(formId);
+            if (f) {
+                updateExteriorColorOptionsForForm(f, null);
+            }
+        });
+        return;
+    }
+    
+    if (!form) return;
+    updateExteriorColorOptionsForForm(form, isXLine);
+}
+
+// 특정 폼의 외장컬러 옵션 업데이트
+function updateExteriorColorOptionsForForm(form, isXLine) {
+    // 해당 폼의 모든 외장컬러 옵션 찾기
+    const exteriorColorInputs = form.querySelectorAll('input[name^="exterior_color"]');
+    
+    exteriorColorInputs.forEach(input => {
+        const restriction = input.dataset.gradeRestriction;
+        const label = input.closest('.option-item');
+        
+        if (!restriction) {
+            // 제한이 없는 옵션 (오로라 블랙 펄, 스노우 화이트 펄, 네이비 그레이 등)
+            input.disabled = false;
+            if (label) {
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                label.style.cursor = 'pointer';
+            }
+        } else if (restriction === 'xline') {
+            // X-LINE 전용 (세라믹 실버)
+            if (isXLine === true) {
+                input.disabled = false;
+                if (label) {
+                    label.style.opacity = '1';
+                    label.style.pointerEvents = 'auto';
+                    label.style.cursor = 'pointer';
+                }
+            } else {
+                // X-LINE이 아니면 비활성화
+                if (input.checked) {
+                    input.checked = false;
+                    // 선택 해제 시 가격 업데이트
+                    const sectionName = getSectionName(input);
+                    if (selectedOptions[sectionName] && selectedOptions[sectionName].element === input) {
+                        delete selectedOptions[sectionName];
+                        calculateTotalPrice();
+                        updatePriceDisplay();
+                        updateSelectedOptionsDisplay();
+                    }
+                }
+                input.disabled = true;
+                if (label) {
+                    label.style.opacity = '0.5';
+                    label.style.pointerEvents = 'none';
+                    label.style.cursor = 'not-allowed';
+                    // label 클릭 이벤트도 막기
+                    label.addEventListener('click', function(e) {
+                        if (input.disabled) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                        }
+                    });
+                }
+            }
+        } else if (restriction === 'not-xline') {
+            // X-LINE 제외 (아이보리 실버, 판테라 메탈)
+            if (isXLine === false) {
+                // X-LINE이 아니고 등급이 선택된 경우 활성화
+                input.disabled = false;
+                if (label) {
+                    label.style.opacity = '1';
+                    label.style.pointerEvents = 'auto';
+                    label.style.cursor = 'pointer';
+                }
+            } else {
+                // X-LINE이거나 등급이 선택되지 않았으면 비활성화
+                if (input.checked) {
+                    input.checked = false;
+                    // 선택 해제 시 가격 업데이트
+                    const sectionName = getSectionName(input);
+                    if (selectedOptions[sectionName] && selectedOptions[sectionName].element === input) {
+                        delete selectedOptions[sectionName];
+                        calculateTotalPrice();
+                        updatePriceDisplay();
+                        updateSelectedOptionsDisplay();
+                    }
+                }
+                input.disabled = true;
+                if (label) {
+                    label.style.opacity = '0.5';
+                    label.style.pointerEvents = 'none';
+                    label.style.cursor = 'not-allowed';
+                    // label 클릭 이벤트도 막기
+                    label.addEventListener('click', function(e) {
+                        if (input.disabled) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                        }
+                    });
+                }
+            }
+        }
+    });
 }
 
 // Get section name from input
@@ -291,6 +491,12 @@ function updatePriceDisplay() {
     const totalPriceBottomInput6Seat = document.getElementById('totalPriceBottom6Seat');
     if (totalPriceBottomInput6Seat) {
         totalPriceBottomInput6Seat.value = formattedPrice;
+    }
+    
+    // Update bottom price input (9인승)
+    const totalPriceBottomInput9Seat = document.getElementById('totalPriceBottom9Seat');
+    if (totalPriceBottomInput9Seat) {
+        totalPriceBottomInput9Seat.value = formattedPrice;
     }
     
     // Update sidebar total (span element)
@@ -523,13 +729,18 @@ function show4SeatQuoteOptions() {
     
     const quoteOptions = document.getElementById('quoteOptions');
     const quote6SeatOptions = document.getElementById('quote6SeatOptions');
+    const quote9SeatOptions = document.getElementById('quote9SeatOptions');
     const show4SeatBtn = document.getElementById('show4SeatOptions');
     const show6SeatBtn = document.getElementById('show6SeatOptions');
+    const show9SeatBtn = document.getElementById('show9SeatOptions');
     
     if (quoteOptions && show4SeatBtn) {
-        // 6인승 옵션 숨기기
+        // 6인승, 9인승 옵션 숨기기
         if (quote6SeatOptions) {
             quote6SeatOptions.style.display = 'none';
+        }
+        if (quote9SeatOptions) {
+            quote9SeatOptions.style.display = 'none';
         }
         
         // 좌석 유형이 변경되었다면 옵션 초기화
@@ -547,13 +758,20 @@ function show4SeatQuoteOptions() {
         // Show sidebar
         showSidebar();
         
-        // 6인승 버튼을 다시 선택 가능하게 설정
+        // 6인승, 9인승 버튼을 다시 선택 가능하게 설정
         if (show6SeatBtn) {
             show6SeatBtn.innerHTML = '견적 문의';
             show6SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
             show6SeatBtn.style.opacity = '1';
             show6SeatBtn.disabled = false;
             show6SeatBtn.style.cursor = 'pointer';
+        }
+        if (show9SeatBtn) {
+            show9SeatBtn.innerHTML = '견적 문의';
+            show9SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
+            show9SeatBtn.style.opacity = '1';
+            show9SeatBtn.disabled = false;
+            show9SeatBtn.style.cursor = 'pointer';
         }
         
         // 즉시 옵션 표시 (애니메이션 최소화)
@@ -563,6 +781,14 @@ function show4SeatQuoteOptions() {
         requestAnimationFrame(() => {
             // 4인승 form에 이벤트 리스너 설정
             setupFormEventListeners('#quoteForm');
+            
+            // 외장컬러 옵션 상태 업데이트
+            const selectedGrade = document.querySelector('#quoteForm input[name="grade_options"]:checked');
+            if (selectedGrade) {
+                updateExteriorColorOptions(selectedGrade);
+            } else {
+                updateExteriorColorOptions(null);
+            }
             
             // 스크롤 이동 (단순화)
             setTimeout(() => {
@@ -586,13 +812,18 @@ function show6SeatQuoteOptions() {
     
     const quoteOptions = document.getElementById('quoteOptions');
     const quote6SeatOptions = document.getElementById('quote6SeatOptions');
+    const quote9SeatOptions = document.getElementById('quote9SeatOptions');
     const show4SeatBtn = document.getElementById('show4SeatOptions');
     const show6SeatBtn = document.getElementById('show6SeatOptions');
+    const show9SeatBtn = document.getElementById('show9SeatOptions');
     
     if (quote6SeatOptions && show6SeatBtn) {
-        // 4인승 옵션 숨기기
+        // 4인승, 9인승 옵션 숨기기
         if (quoteOptions) {
             quoteOptions.style.display = 'none';
+        }
+        if (quote9SeatOptions) {
+            quote9SeatOptions.style.display = 'none';
         }
         
         // 좌석 유형이 변경되었다면 옵션 초기화
@@ -610,13 +841,20 @@ function show6SeatQuoteOptions() {
         // Show sidebar
         showSidebar();
         
-        // 4인승 버튼을 다시 선택 가능하게 설정
+        // 4인승, 9인승 버튼을 다시 선택 가능하게 설정
         if (show4SeatBtn) {
             show4SeatBtn.innerHTML = '견적 문의';
             show4SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
             show4SeatBtn.style.opacity = '1';
             show4SeatBtn.disabled = false;
             show4SeatBtn.style.cursor = 'pointer';
+        }
+        if (show9SeatBtn) {
+            show9SeatBtn.innerHTML = '견적 문의';
+            show9SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
+            show9SeatBtn.style.opacity = '1';
+            show9SeatBtn.disabled = false;
+            show9SeatBtn.style.cursor = 'pointer';
         }
         
         // 6인승 옵션 표시 (애니메이션 최소화)
@@ -626,6 +864,14 @@ function show6SeatQuoteOptions() {
         requestAnimationFrame(() => {
             // 6인승 form에 이벤트 리스너 설정
             setupFormEventListeners('#quote6SeatForm');
+            
+            // 외장컬러 옵션 상태 업데이트
+            const selectedGrade = document.querySelector('#quote6SeatForm input[name="grade_options_6seat"]:checked');
+            if (selectedGrade) {
+                updateExteriorColorOptions(selectedGrade);
+            } else {
+                updateExteriorColorOptions(null);
+            }
             
             // 스크롤 이동 (단순화)
             setTimeout(() => {
@@ -640,6 +886,89 @@ function show6SeatQuoteOptions() {
         showNotification('6인승 견적 옵션이 표시되었습니다. 원하는 옵션을 선택해주세요!', 'success');
     } else {
         console.error('6-seat quote options or button not found');
+    }
+}
+
+// Show 9-seat quote options
+function show9SeatQuoteOptions() {
+    console.log('show9SeatQuoteOptions() called');
+    
+    const quoteOptions = document.getElementById('quoteOptions');
+    const quote6SeatOptions = document.getElementById('quote6SeatOptions');
+    const quote9SeatOptions = document.getElementById('quote9SeatOptions');
+    const show4SeatBtn = document.getElementById('show4SeatOptions');
+    const show6SeatBtn = document.getElementById('show6SeatOptions');
+    const show9SeatBtn = document.getElementById('show9SeatOptions');
+    
+    if (quote9SeatOptions && show9SeatBtn) {
+        // 4인승, 6인승 옵션 숨기기
+        if (quoteOptions) {
+            quoteOptions.style.display = 'none';
+        }
+        if (quote6SeatOptions) {
+            quote6SeatOptions.style.display = 'none';
+        }
+        
+        // 좌석 유형이 변경되었다면 옵션 초기화
+        if (selectedSeatType && selectedSeatType !== '9seat') {
+            resetQuoteOptions();
+        }
+        selectedSeatType = '9seat';
+        
+        // 즉시 버튼 상태 변경 (사용자 피드백)
+        show9SeatBtn.innerHTML = '9인승 견적 선택됨 ✓';
+        show9SeatBtn.style.background = 'linear-gradient(135deg, #28a745, #20a039)';
+        show9SeatBtn.disabled = true;
+        show9SeatBtn.style.cursor = 'default';
+        
+        // Show sidebar
+        showSidebar();
+        
+        // 4인승, 6인승 버튼을 다시 선택 가능하게 설정
+        if (show4SeatBtn) {
+            show4SeatBtn.innerHTML = '견적 문의';
+            show4SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
+            show4SeatBtn.style.opacity = '1';
+            show4SeatBtn.disabled = false;
+            show4SeatBtn.style.cursor = 'pointer';
+        }
+        if (show6SeatBtn) {
+            show6SeatBtn.innerHTML = '견적 문의';
+            show6SeatBtn.style.background = 'rgba(188, 184, 177, 0.95)';
+            show6SeatBtn.style.opacity = '1';
+            show6SeatBtn.disabled = false;
+            show6SeatBtn.style.cursor = 'pointer';
+        }
+        
+        // 9인승 옵션 표시 (애니메이션 최소화)
+        quote9SeatOptions.style.display = 'block';
+        
+        // 다음 프레임에서 처리 (레이아웃 안정화)
+        requestAnimationFrame(() => {
+            // 9인승 form에 이벤트 리스너 설정
+            setupFormEventListeners('#quote9SeatForm');
+            
+            // 외장컬러 옵션 상태 업데이트
+            const selectedGrade = document.querySelector('#quote9SeatForm input[name="grade_options_9seat"]:checked');
+            if (selectedGrade) {
+                updateExteriorColorOptions(selectedGrade);
+            } else {
+                updateExteriorColorOptions(null);
+            }
+            
+            // 스크롤 이동 (단순화)
+            setTimeout(() => {
+                quote9SeatOptions.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 100);
+        });
+        
+        console.log('9-seat quote options shown');
+        showNotification('9인승 견적 옵션이 표시되었습니다. 원하는 옵션을 선택해주세요!', 'success');
+    } else {
+        console.error('9-seat quote options or button not found');
     }
 }
 
