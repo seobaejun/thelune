@@ -400,22 +400,66 @@ function updateOptionImage(input) {
     const form = input.closest('form');
     if (!form) return;
     
-    // 체크박스인 경우 (중복 선택 가능)
-    if (input.type === 'checkbox') {
+    // name 속성을 기반으로 여러 이미지를 표시해야 하는 섹션 판단
+    const inputName = input.name || '';
+    const isMultiImageSection = 
+        inputName.includes('special_lineup_options') || 
+        inputName.includes('performance_options') || 
+        inputName.includes('additional_options');
+    
+    // 특장라인업 옵션, 퍼포먼스 옵션, 추가 옵션은 여러 이미지 표시
+    const multiImageSections = ['특장라인업 옵션', '퍼포먼스 옵션', '추가 옵션', '추가옵션'];
+    
+    // 디버깅
+    console.log('updateOptionImage:', {
+        inputName: inputName,
+        sectionName: sectionName,
+        inputType: input.type,
+        isMultiImageSection: isMultiImageSection,
+        isInMultiImageSections: multiImageSections.includes(sectionName)
+    });
+    
+    // 특장라인업 옵션, 퍼포먼스 옵션, 추가 옵션은 항상 여러 이미지 컨테이너 사용 (라디오 버튼 포함)
+    if (isMultiImageSection || multiImageSections.includes(sectionName)) {
+        console.log('Calling updateCheckboxOptionImage (multi-image section)');
+        // 기존 큰 이미지 컨테이너 제거 (data-multi-image 속성이 없는 것)
+        const existingContainers = form.querySelectorAll(`.option-image-container[data-section="${sectionName}"]`);
+        existingContainers.forEach(container => {
+            if (!container.hasAttribute('data-multi-image')) {
+                // 큰 이미지만 있는 컨테이너 제거
+                const hasImageItems = container.querySelector('.option-image-item');
+                if (!hasImageItems) {
+                    container.remove();
+                }
+            }
+        });
+        updateCheckboxOptionImage(input, sectionName, form);
+    } else if (input.type === 'checkbox') {
+        // 다른 섹션의 체크박스도 여러 이미지 컨테이너 사용
+        console.log('Calling updateCheckboxOptionImage (checkbox)');
         updateCheckboxOptionImage(input, sectionName, form);
     } else {
-        // 라디오 버튼인 경우 (단일 선택)
+        // 라디오 버튼인 경우 (단일 선택) - 큰 이미지 표시
+        console.log('Calling updateRadioOptionImage');
         updateRadioOptionImage(input, sectionName, form);
     }
 }
 
-// 체크박스 옵션 이미지 업데이트 (중복 선택 가능)
+// 체크박스 옵션 이미지 업데이트 (중복 선택 가능, 라디오 버튼도 포함)
 function updateCheckboxOptionImage(input, sectionName, form) {
     const optionId = input.id;
     const optionValue = input.value;
     
+    console.log('updateCheckboxOptionImage called:', {
+        optionId: optionId,
+        sectionName: sectionName,
+        checked: input.checked
+    });
+    
     // 섹션의 메인 이미지 컨테이너 찾기 또는 생성
     let mainImageContainer = form.querySelector(`.option-image-container[data-section="${sectionName}"]`);
+    
+    console.log('mainImageContainer found:', !!mainImageContainer);
     
     if (!mainImageContainer) {
         const section = input.closest('.quote-section');
@@ -425,20 +469,53 @@ function updateCheckboxOptionImage(input, sectionName, form) {
                 mainImageContainer = document.createElement('div');
                 mainImageContainer.className = 'option-image-container';
                 mainImageContainer.setAttribute('data-section', sectionName);
+                mainImageContainer.setAttribute('data-multi-image', 'true');
+                // 추가옵션과 동일한 스타일 적용
                 mainImageContainer.style.cssText = 'display: none; margin-top: 20px; text-align: center;';
                 mainImageContainer.style.display = 'flex';
                 mainImageContainer.style.flexWrap = 'wrap';
                 mainImageContainer.style.gap = '15px';
                 mainImageContainer.style.justifyContent = 'center';
                 sectionContent.parentNode.insertBefore(mainImageContainer, sectionContent.nextSibling);
+                console.log('Created new mainImageContainer');
+            } else {
+                console.log('sectionContent not found');
             }
+        } else {
+            console.log('section not found');
         }
     }
     
-    if (!mainImageContainer) return;
+    if (!mainImageContainer) {
+        console.log('mainImageContainer is null, returning');
+        return;
+    }
+    
+    // 기존 컨테이너가 있으면 스타일 업데이트
+    if (mainImageContainer) {
+        mainImageContainer.style.display = 'flex';
+        mainImageContainer.style.flexWrap = 'wrap';
+        mainImageContainer.style.gap = '15px';
+        mainImageContainer.style.justifyContent = 'center';
+    }
+    
+    // 라디오 버튼인 경우, 같은 name을 가진 다른 라디오 버튼의 이미지 제거
+    if (input.type === 'radio') {
+        const sameNameInputs = form.querySelectorAll(`input[name="${input.name}"]`);
+        sameNameInputs.forEach(inp => {
+            if (inp.id !== optionId) {
+                const otherImageContainer = mainImageContainer.querySelector(`.option-image-item[data-option-id="${inp.id}"]`);
+                if (otherImageContainer) {
+                    otherImageContainer.remove();
+                }
+            }
+        });
+    }
     
     // 해당 옵션의 이미지 컨테이너 찾기
     let optionImageContainer = mainImageContainer.querySelector(`.option-image-item[data-option-id="${optionId}"]`);
+    
+    console.log('optionImageContainer found:', !!optionImageContainer);
     
     if (input.checked) {
         // 선택된 경우: 이미지 추가
@@ -446,15 +523,18 @@ function updateCheckboxOptionImage(input, sectionName, form) {
             optionImageContainer = document.createElement('div');
             optionImageContainer.className = 'option-image-item';
             optionImageContainer.setAttribute('data-option-id', optionId);
-            optionImageContainer.style.cssText = 'flex: 0 0 auto; max-width: 300px;';
-            optionImageContainer.innerHTML = `<img src="assets/img/4인승.jpg" alt="${getOptionName(input)}" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">`;
+            // 모든 이미지를 동일한 크기로 고정
+            optionImageContainer.style.cssText = 'flex: 0 0 auto; width: 200px; height: 150px; overflow: hidden;';
+            optionImageContainer.innerHTML = `<img src="assets/img/4인승.jpg" alt="${getOptionName(input)}" class="option-image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">`;
             mainImageContainer.appendChild(optionImageContainer);
+            console.log('Added new image container');
         }
         mainImageContainer.style.display = 'flex';
     } else {
         // 선택 해제된 경우: 이미지 제거
         if (optionImageContainer) {
             optionImageContainer.remove();
+            console.log('Removed image container');
         }
         
         // 선택된 옵션이 없으면 메인 컨테이너 숨기기
