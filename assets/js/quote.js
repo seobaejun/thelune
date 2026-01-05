@@ -28,6 +28,24 @@ function initializeQuotePage() {
     // 초기 로드 시 외장컬러 옵션 상태 업데이트 (등급이 선택되지 않은 상태)
     updateExteriorColorOptions(null);
     
+    // 초기 로드 시 특장라인업 옵션 상태 업데이트
+    // 4인승 폼은 항상 TLV4로 처리
+    const form4Seat = document.getElementById('quoteForm');
+    if (form4Seat) {
+        updateSpecialLineupOptionsForForm(form4Seat, 'tlv4');
+    }
+    
+    // 9인승 폼은 차종 선택에 따라 처리
+    const form9Seat = document.getElementById('quote9SeatForm');
+    if (form9Seat) {
+        const carTypeInput = form9Seat.querySelector('input[name^="car_type"]:checked');
+        if (carTypeInput) {
+            updateSpecialLineupOptions(carTypeInput);
+        } else {
+            updateSpecialLineupOptionsForForm(form9Seat, '');
+        }
+    }
+    
     console.log('Quote page initialized');
 }
 
@@ -300,6 +318,11 @@ function handleOptionChange(event) {
         updateExteriorColorOptions(input);
     }
     
+    // 차종 선택이 변경되면 특장라인업 옵션 업데이트
+    if (sectionName === '차종 선택' || sectionName === '차종') {
+        updateSpecialLineupOptions(input);
+    }
+    
     // 퍼포먼스 옵션: 리어 에어서스펜션과 HSD 프리미엄 서스펜션은 상호 배타적
     if (sectionName === '퍼포먼스 옵션' || sectionName === '퍼포먼스') {
         const mutualExclude = input.dataset.mutualExclude;
@@ -440,6 +463,82 @@ function updateExteriorColorOptionsForForm(form, isXLine) {
                             return false;
                         }
                     });
+                }
+            }
+        }
+    });
+}
+
+// 차종 선택에 따라 특장라인업 옵션 활성화/비활성화
+function updateSpecialLineupOptions(carTypeInput) {
+    const form = carTypeInput.closest('form');
+    if (!form) return;
+    
+    // 4인승 폼인 경우 항상 TLV4로 처리
+    const formId = form.id;
+    if (formId === 'quoteForm') {
+        updateSpecialLineupOptionsForForm(form, 'tlv4');
+        return;
+    }
+    
+    // 9인승 폼인 경우 차종 선택에 따라 처리
+    const selectedCarType = carTypeInput.value;
+    let currentModel = '';
+    if (selectedCarType === 'high_limousine') {
+        currentModel = 'tl9';
+    } else if (selectedCarType === 'low_carnival_limousine') {
+        currentModel = 'tlv9';
+    }
+    
+    updateSpecialLineupOptionsForForm(form, currentModel);
+}
+
+// 특정 폼의 특장라인업 옵션 업데이트
+function updateSpecialLineupOptionsForForm(form, currentModel) {
+    const specialLineupInputs = form.querySelectorAll('input[name^="special_lineup_options"]');
+    
+    specialLineupInputs.forEach(input => {
+        const restriction = input.dataset.modelRestriction;
+        const label = input.closest('.option-item');
+        
+        if (!restriction || restriction === 'all') {
+            // 제한이 없는 옵션
+            input.disabled = false;
+            if (label) {
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                label.style.cursor = 'pointer';
+            }
+        } else {
+            // 모델 제한이 있는 옵션
+            const allowedModels = restriction.split(',').map(m => m.trim().toLowerCase());
+            const isAllowed = currentModel && allowedModels.includes(currentModel.toLowerCase());
+            
+            if (isAllowed) {
+                input.disabled = false;
+                if (label) {
+                    label.style.opacity = '1';
+                    label.style.pointerEvents = 'auto';
+                    label.style.cursor = 'pointer';
+                }
+            } else {
+                // 선택 불가능한 모델
+                if (input.checked) {
+                    input.checked = false;
+                    const sectionName = getSectionName(input);
+                    const optionKey = `${sectionName}_${input.value}`;
+                    if (selectedOptions[optionKey] && selectedOptions[optionKey].element === input) {
+                        delete selectedOptions[optionKey];
+                        calculateTotalPrice();
+                        updatePriceDisplay();
+                        updateSelectedOptionsDisplay();
+                    }
+                }
+                input.disabled = true;
+                if (label) {
+                    label.style.opacity = '0.5';
+                    label.style.pointerEvents = 'none';
+                    label.style.cursor = 'not-allowed';
                 }
             }
         }
@@ -790,6 +889,9 @@ function show4SeatQuoteOptions() {
                 updateExteriorColorOptions(null);
             }
             
+            // 특장라인업 옵션 상태 업데이트 (4인승은 항상 TLV4)
+            updateSpecialLineupOptionsForForm(document.getElementById('quoteForm'), 'tlv4');
+            
             // 스크롤 이동 (단순화)
             setTimeout(() => {
                 quoteOptions.scrollIntoView({ 
@@ -954,6 +1056,14 @@ function show9SeatQuoteOptions() {
                 updateExteriorColorOptions(selectedGrade);
             } else {
                 updateExteriorColorOptions(null);
+            }
+            
+            // 특장라인업 옵션 상태 업데이트
+            const selectedCarType = document.querySelector('#quote9SeatForm input[name="car_type_9seat"]:checked');
+            if (selectedCarType) {
+                updateSpecialLineupOptions(selectedCarType);
+            } else {
+                updateSpecialLineupOptionsForForm(document.getElementById('quote9SeatForm'), '');
             }
             
             // 스크롤 이동 (단순화)
