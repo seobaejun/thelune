@@ -62,3 +62,4 @@ with open('news.html', 'w', encoding='utf-8') as f:
 print("뉴스 카드가 전체 클릭 가능하도록 수정되었습니다!")
 
 
+

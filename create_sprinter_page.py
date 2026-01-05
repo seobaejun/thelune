@@ -37,3 +37,4 @@ with open('sprinter.html', 'w', encoding='utf-8') as f:
 print("SPRINTER 페이지가 성공적으로 생성되었습니다!")
 
 
+
