@@ -46,7 +46,54 @@ function initializeQuotePage() {
         }
     }
     
+    // 모든 폼에 이미지 컨테이너 추가
+    addImageContainersToAllSections();
+    
     console.log('Quote page initialized');
+}
+
+// 모든 섹션에 이미지 컨테이너 추가
+function addImageContainersToAllSections() {
+    const forms = ['quoteForm', 'quote6SeatForm', 'quote9SeatForm'];
+    const sectionNames = [
+        '차종 선택', '유종 선택', '등급 선택', '순정옵션', 
+        '외장컬러', '인테리어', '퍼포먼스 옵션', '특장라인업 옵션',
+        '기본 컨버전 옵션', '추가 옵션'
+    ];
+    
+    forms.forEach(formId => {
+        const form = document.getElementById(formId);
+        if (!form) return;
+        
+        sectionNames.forEach(sectionName => {
+            // 이미 이미지 컨테이너가 있는지 확인
+            const existingContainer = form.querySelector(`.option-image-container[data-section="${sectionName}"]`);
+            if (existingContainer) return;
+            
+            // 해당 섹션 찾기
+            const section = form.querySelector(`.quote-section h2`);
+            if (!section) return;
+            
+            let currentSection = section.closest('.quote-section');
+            while (currentSection) {
+                const h2 = currentSection.querySelector('h2');
+                if (h2 && h2.textContent.trim() === sectionName) {
+                    // 섹션의 section-content 다음에 이미지 컨테이너 추가
+                    const sectionContent = currentSection.querySelector('.section-content');
+                    if (sectionContent) {
+                        const imageContainer = document.createElement('div');
+                        imageContainer.className = 'option-image-container';
+                        imageContainer.setAttribute('data-section', sectionName);
+                        imageContainer.style.cssText = 'display: none; margin-top: 20px; text-align: center;';
+                        imageContainer.innerHTML = `<img src="assets/img/4인승.jpg" alt="선택된 옵션 이미지" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">`;
+                        sectionContent.parentNode.insertBefore(imageContainer, sectionContent.nextSibling);
+                    }
+                    break;
+                }
+                currentSection = currentSection.nextElementSibling;
+            }
+        });
+    });
 }
 
 // Setup event listeners
@@ -182,16 +229,7 @@ function setupButtonListeners() {
         console.log('Reset button listener added');
     }
     
-    // Full option item click
-    const fullOptionItem = document.getElementById('fullOptionItem');
-    if (fullOptionItem) {
-        fullOptionItem.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleFullOptionDetails();
-        });
-        console.log('Full option item click listener added');
-    }
+    // Full option item click listener removed - details are always visible now
     
     // Package1 item click listener removed - details are always visible now
     
@@ -346,6 +384,130 @@ function handleOptionChange(event) {
     
     // Add visual feedback
     addSelectionFeedback(input);
+    
+    // 옵션 선택 시 이미지 표시
+    updateOptionImage(input);
+}
+
+// 옵션 선택 시 이미지 표시
+function updateOptionImage(input) {
+    if (!input) return;
+    
+    const sectionName = getSectionName(input);
+    if (!sectionName) return;
+    
+    // 현재 폼 찾기
+    const form = input.closest('form');
+    if (!form) return;
+    
+    // 체크박스인 경우 (중복 선택 가능)
+    if (input.type === 'checkbox') {
+        updateCheckboxOptionImage(input, sectionName, form);
+    } else {
+        // 라디오 버튼인 경우 (단일 선택)
+        updateRadioOptionImage(input, sectionName, form);
+    }
+}
+
+// 체크박스 옵션 이미지 업데이트 (중복 선택 가능)
+function updateCheckboxOptionImage(input, sectionName, form) {
+    const optionId = input.id;
+    const optionValue = input.value;
+    
+    // 섹션의 메인 이미지 컨테이너 찾기 또는 생성
+    let mainImageContainer = form.querySelector(`.option-image-container[data-section="${sectionName}"]`);
+    
+    if (!mainImageContainer) {
+        const section = input.closest('.quote-section');
+        if (section) {
+            const sectionContent = section.querySelector('.section-content');
+            if (sectionContent) {
+                mainImageContainer = document.createElement('div');
+                mainImageContainer.className = 'option-image-container';
+                mainImageContainer.setAttribute('data-section', sectionName);
+                mainImageContainer.style.cssText = 'display: none; margin-top: 20px; text-align: center;';
+                mainImageContainer.style.display = 'flex';
+                mainImageContainer.style.flexWrap = 'wrap';
+                mainImageContainer.style.gap = '15px';
+                mainImageContainer.style.justifyContent = 'center';
+                sectionContent.parentNode.insertBefore(mainImageContainer, sectionContent.nextSibling);
+            }
+        }
+    }
+    
+    if (!mainImageContainer) return;
+    
+    // 해당 옵션의 이미지 컨테이너 찾기
+    let optionImageContainer = mainImageContainer.querySelector(`.option-image-item[data-option-id="${optionId}"]`);
+    
+    if (input.checked) {
+        // 선택된 경우: 이미지 추가
+        if (!optionImageContainer) {
+            optionImageContainer = document.createElement('div');
+            optionImageContainer.className = 'option-image-item';
+            optionImageContainer.setAttribute('data-option-id', optionId);
+            optionImageContainer.style.cssText = 'flex: 0 0 auto; max-width: 300px;';
+            optionImageContainer.innerHTML = `<img src="assets/img/4인승.jpg" alt="${getOptionName(input)}" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">`;
+            mainImageContainer.appendChild(optionImageContainer);
+        }
+        mainImageContainer.style.display = 'flex';
+    } else {
+        // 선택 해제된 경우: 이미지 제거
+        if (optionImageContainer) {
+            optionImageContainer.remove();
+        }
+        
+        // 선택된 옵션이 없으면 메인 컨테이너 숨기기
+        const remainingImages = mainImageContainer.querySelectorAll('.option-image-item');
+        if (remainingImages.length === 0) {
+            mainImageContainer.style.display = 'none';
+        }
+    }
+}
+
+// 라디오 버튼 옵션 이미지 업데이트 (단일 선택)
+function updateRadioOptionImage(input, sectionName, form) {
+    // 해당 섹션의 이미지 컨테이너 찾기
+    let imageContainer = form.querySelector(`.option-image-container[data-section="${sectionName}"]`);
+    
+    // 이미지 컨테이너가 없으면 생성
+    if (!imageContainer) {
+        const section = input.closest('.quote-section');
+        if (section) {
+            const sectionContent = section.querySelector('.section-content');
+            if (sectionContent) {
+                imageContainer = document.createElement('div');
+                imageContainer.className = 'option-image-container';
+                imageContainer.setAttribute('data-section', sectionName);
+                imageContainer.style.cssText = 'display: none; margin-top: 20px; text-align: center;';
+                imageContainer.innerHTML = `<img src="assets/img/4인승.jpg" alt="선택된 옵션 이미지" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">`;
+                sectionContent.parentNode.insertBefore(imageContainer, sectionContent.nextSibling);
+            }
+        }
+    }
+    
+    if (!imageContainer) return;
+    
+    // 옵션이 선택되었는지 확인
+    const isSelected = input.checked;
+    
+    if (isSelected) {
+        // 이미지 표시
+        imageContainer.style.display = 'block';
+    } else {
+        // 같은 섹션에 다른 선택된 옵션이 있는지 확인
+        const sectionInputs = form.querySelectorAll(`input[name="${input.name}"]`);
+        let hasSelected = false;
+        sectionInputs.forEach(inp => {
+            if (inp.checked) {
+                hasSelected = true;
+            }
+        });
+        
+        if (!hasSelected) {
+            imageContainer.style.display = 'none';
+        }
+    }
 }
 
 // 등급 선택에 따라 외장컬러 옵션 활성화/비활성화
@@ -599,9 +761,9 @@ function updatePriceDisplay() {
     }
     
     // Update sidebar total (span element)
-    const sidebarTotal = document.getElementById('totalPrice');
+    const sidebarTotal = document.getElementById('sidebarTotal');
     if (sidebarTotal) {
-        sidebarTotal.textContent = formattedPrice + '원';
+        sidebarTotal.textContent = formatPrice(totalPrice) + '원';
     }
     
     console.log('Price display updated:', formattedPrice);
@@ -617,8 +779,16 @@ function updateSelectedOptionsDisplay() {
     
     if (Object.keys(selectedOptions).length === 0) {
         selectedOptionsContainer.innerHTML = '<p>옵션을 선택해주세요.</p>';
+        // 총 합계도 0으로 업데이트
+        const sidebarTotal = document.getElementById('sidebarTotal');
+        if (sidebarTotal) {
+            sidebarTotal.textContent = '0원';
+        }
         return;
     }
+    
+    // 총 합계 계산
+    let totalSum = 0;
     
     // Add each selected option
     Object.entries(selectedOptions).forEach(([key, option]) => {
@@ -631,7 +801,16 @@ function updateSelectedOptionsDisplay() {
         `;
         
         selectedOptionsContainer.appendChild(optionElement);
+        
+        // 가격 합산
+        totalSum += option.price || 0;
     });
+    
+    // 우측 사이드바의 총 합계 업데이트
+    const sidebarTotal = document.getElementById('sidebarTotal');
+    if (sidebarTotal) {
+        sidebarTotal.textContent = formatPrice(totalSum) + '원';
+    }
 }
 
 // Format price with commas
@@ -786,23 +965,23 @@ function closeSimpleModal() {
     }
 }
 
-// Toggle full option details
-function toggleFullOptionDetails() {
-    const detailsDiv = document.getElementById('fullOptionDetails');
-    const toggleArrow = document.getElementById('toggleArrow');
-    
-    if (detailsDiv && toggleArrow) {
-        if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
-            detailsDiv.style.display = 'block';
-            toggleArrow.innerHTML = '▲';
-            console.log('Full option details shown');
-        } else {
-            detailsDiv.style.display = 'none';
-            toggleArrow.innerHTML = '▼';
-            console.log('Full option details hidden');
-        }
-    }
-}
+// Toggle full option details - REMOVED (details are always visible now)
+// function toggleFullOptionDetails() {
+//     const detailsDiv = document.getElementById('fullOptionDetails');
+//     const toggleArrow = document.getElementById('toggleArrow');
+//     
+//     if (detailsDiv && toggleArrow) {
+//         if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+//             detailsDiv.style.display = 'block';
+//             toggleArrow.innerHTML = '▲';
+//             console.log('Full option details shown');
+//         } else {
+//             detailsDiv.style.display = 'none';
+//             toggleArrow.innerHTML = '▼';
+//             console.log('Full option details hidden');
+//         }
+//     }
+// }
 
 // Toggle package1 details
 function togglePackage1Details() {
@@ -1917,7 +2096,7 @@ window.printQuote = printQuote;
 window.downloadQuotePDF = downloadQuotePDF;
 window.closeQuoteModal = closeQuoteModal;
 window.closeSimpleModal = closeSimpleModal;
-window.toggleFullOptionDetails = toggleFullOptionDetails;
+// window.toggleFullOptionDetails = toggleFullOptionDetails; // REMOVED - details are always visible now
 window.togglePackage1Details = togglePackage1Details;
 window.show4SeatQuoteOptions = show4SeatQuoteOptions;
 window.show4SeatQuoteOptions = show4SeatQuoteOptions;

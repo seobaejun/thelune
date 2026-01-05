@@ -509,6 +509,10 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 옵션 선택 이미지 표시 영역 -->
+                        <div class="option-image-container" data-section="차종 선택" style="display: none; margin-top: 20px; text-align: center;">
+                            <img src="assets/img/4인승.jpg" alt="선택된 옵션 이미지" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                        </div>
                     </div>
                     
                     <!-- 유종 선택 -->
@@ -533,6 +537,10 @@
                                     </label>
                                 </div>
                             </div>
+                        </div>
+                        <!-- 옵션 선택 이미지 표시 영역 -->
+                        <div class="option-image-container" data-section="유종 선택" style="display: none; margin-top: 20px; text-align: center;">
+                            <img src="assets/img/4인승.jpg" alt="선택된 옵션 이미지" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
                         </div>
                     </div>
 
@@ -573,6 +581,10 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 옵션 선택 이미지 표시 영역 -->
+                        <div class="option-image-container" data-section="등급 선택" style="display: none; margin-top: 20px; text-align: center;">
+                            <img src="assets/img/4인승.jpg" alt="선택된 옵션 이미지" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                        </div>
                     </div>
 
                     <!-- 순정옵션 -->
@@ -582,73 +594,19 @@
                             <h3>기본전체옵션</h3>
                             <p>기본전체옵션을 확인해 주세요</p>
                             <div class="option-list">
-                                <div class="option-item" id="fullOptionItem" style="cursor: pointer;">
+                                <div class="option-item" id="fullOptionItem">
                                     <input type="checkbox" id="full_option" name="genuine_options" value="full_option" data-price="0" data-label="풀 옵션" checked disabled>
-                                    <label for="full_option" style="cursor: pointer; width: 100%;">
+                                    <label for="full_option" style="width: 100%;">
                                         <span class="option-name">풀 옵션</span>
                                         <span class="option-description">(스타일 / 드라이브 와이즈 / 모니터링 팩 / 스마트 커넥트 / HUD+빌트인 캠2 / BOSS 사운드 / 컴포트)</span>
                                         <span class="option-price">기본 포함</span>
-                                        <span id="toggleArrow" style="float: right; font-size: 14px; color: #bcb8b1;">▼</span>
                                     </label>
                                 </div>
-                                
-                                <!-- 풀 옵션 상세 내용 -->
-                                <div id="fullOptionDetails" style="display: none; margin-top: 15px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #bcb8b1;">
-                                    <h4 style="color: #bcb8b1; margin-bottom: 15px; font-size: 16px;">기본 전체 옵션 상세 내용</h4>
-                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; font-size: 14px;">
-                                        <div style="font-weight: bold; color: #333;">루프</div>
-                                        <div>카니발 전용 Hi-Roof</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">1열</div>
-                                        <div>1열 벤치 보조 가죽 시트<br>2열 VVP 회전 / 등 받이 전자 의전 시트 (헤드리 시트/열선/통풍/안마/충전포트)<br>라커지 체 플로어</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">2열</div>
-                                        <div></div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">4열</div>
-                                        <div>4열 상용 시트 전자 후 수납 및 설치</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">테이블</div>
-                                        <div>하츠 파티션 장착 (수납형 등받이)</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">트림</div>
-                                        <div>도어 트림업 4PS / 전장 트림업, 플롤 트림업 / 라커지 트림업, 트렁크 트림업</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">바닥재</div>
-                                        <div>최고급 오토 바닥 히팅 우드 플로어</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">무드등</div>
-                                        <div>전장 무드 무드등, 사이드 엠비언트 무드등</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">TV</div>
-                                        <div>27인치 스마트 TV</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">도어스커트</div>
-                                        <div>2열 자동 도어 스커트</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">바디킷</div>
-                                        <div>AG 바디킷 (에어댐 장착)</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">구성</div>
-                                        <div>올 그레인 4EA / 올레 그레인 4EA</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">커튼</div>
-                                        <div>하니콤 블라인드</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">사이드스텝</div>
-                                        <div>자동식 사이드 스텝</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">핸들</div>
-                                        <div>DOS 핸들 장착</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">스타라이트</div>
-                                        <div>파이버 타입</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">그외</div>
-                                        <div>스피커 커버, 프리미엄 턴팅</div>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+                        <!-- 옵션 선택 이미지 표시 영역 -->
+                        <div class="option-image-container" data-section="순정옵션" style="display: none; margin-top: 20px; text-align: center;">
+                            <img src="assets/img/4인승.jpg" alt="선택된 옵션 이미지" class="option-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
                         </div>
                     </div>
 
@@ -1156,71 +1114,13 @@
                             <h3>기본전체옵션</h3>
                             <p>기본전체옵션을 확인해 주세요</p>
                             <div class="option-list">
-                                <div class="option-item" id="fullOptionItem6Seat" style="cursor: pointer;">
+                                <div class="option-item" id="fullOptionItem6Seat">
                                     <input type="checkbox" id="full_option_6seat" name="genuine_options_6seat" value="full_option" data-price="0" data-label="풀 옵션" checked disabled>
-                                    <label for="full_option_6seat" style="cursor: pointer; width: 100%;">
+                                    <label for="full_option_6seat" style="width: 100%;">
                                         <span class="option-name">풀 옵션</span>
                                         <span class="option-description">(스타일 / 드라이브 와이즈 / 모니터링 팩 / 스마트 커넥트 / HUD+빌트인 캠2 / BOSS 사운드 / 컴포트)</span>
                                         <span class="option-price">기본 포함</span>
-                                        <span id="toggleArrow6Seat" style="float: right; font-size: 14px; color: #bcb8b1;">▼</span>
                                     </label>
-                                </div>
-                                
-                                <!-- 풀 옵션 상세 내용 -->
-                                <div id="fullOptionDetails6Seat" style="display: none; margin-top: 15px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #bcb8b1;">
-                                    <h4 style="color: #bcb8b1; margin-bottom: 15px; font-size: 16px;">기본 전체 옵션 상세 내용</h4>
-                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; font-size: 14px;">
-                                        <div style="font-weight: bold; color: #333;">루프</div>
-                                        <div>카니발 전용 Hi-Roof</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">1열</div>
-                                        <div>1열 벤치 보조 가죽 시트<br>2열 VVP 회전 / 등 받이 전자 의전 시트 (헤드리 시트/열선/통풍/안마/충전포트)<br>라커지 체 플로어</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">2열</div>
-                                        <div></div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">4열</div>
-                                        <div>4열 상용 시트 전자 후 수납 및 설치</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">테이블</div>
-                                        <div>하츠 파티션 장착 (수납형 등받이)</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">트림</div>
-                                        <div>도어 트림업 4PS / 전장 트림업, 플롤 트림업 / 라커지 트림업, 트렁크 트림업</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">바닥재</div>
-                                        <div>최고급 오토 바닥 히팅 우드 플로어</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">무드등</div>
-                                        <div>전장 무드 무드등, 사이드 엠비언트 무드등</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">TV</div>
-                                        <div>27인치 스마트 TV</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">도어스커트</div>
-                                        <div>2열 자동 도어 스커트</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">바디킷</div>
-                                        <div>AG 바디킷 (에어댐 장착)</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">구성</div>
-                                        <div>올 그레인 4EA / 올레 그레인 4EA</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">커튼</div>
-                                        <div>하니콤 블라인드</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">사이드스텝</div>
-                                        <div>자동식 사이드 스텝</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">핸들</div>
-                                        <div>DOS 핸들 장착</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">스타라이트</div>
-                                        <div>파이버 타입</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">그외</div>
-                                        <div>스피커 커버, 프리미엄 턴팅</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1610,71 +1510,13 @@
                             <h3>기본전체옵션</h3>
                             <p>기본전체옵션을 확인해 주세요</p>
                             <div class="option-list">
-                                <div class="option-item" id="fullOptionItem9Seat" style="cursor: pointer;">
+                                <div class="option-item" id="fullOptionItem9Seat">
                                     <input type="checkbox" id="full_option_9seat" name="genuine_options_9seat" value="full_option" data-price="0" data-label="풀 옵션" checked disabled>
-                                    <label for="full_option_9seat" style="cursor: pointer; width: 100%;">
+                                    <label for="full_option_9seat" style="width: 100%;">
                                         <span class="option-name">풀 옵션</span>
                                         <span class="option-description">(스타일 / 드라이브 와이즈 / 모니터링 팩 / 스마트 커넥트 / HUD+빌트인 캠2 / BOSS 사운드 / 컴포트)</span>
                                         <span class="option-price">기본 포함</span>
-                                        <span id="toggleArrow9Seat" style="float: right; font-size: 14px; color: #bcb8b1;">▼</span>
                                     </label>
-                                </div>
-                                
-                                <!-- 풀 옵션 상세 내용 -->
-                                <div id="fullOptionDetails9Seat" style="display: none; margin-top: 15px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #bcb8b1;">
-                                    <h4 style="color: #bcb8b1; margin-bottom: 15px; font-size: 16px;">기본 전체 옵션 상세 내용</h4>
-                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; font-size: 14px;">
-                                        <div style="font-weight: bold; color: #333;">루프</div>
-                                        <div>카니발 전용 Hi-Roof</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">1열</div>
-                                        <div>1열 벤치 보조 가죽 시트<br>2열 VVP 회전 / 등 받이 전자 의전 시트 (헤드리 시트/열선/통풍/안마/충전포트)<br>라커지 체 플로어</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">2열</div>
-                                        <div></div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">4열</div>
-                                        <div>4열 상용 시트 전자 후 수납 및 설치</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">테이블</div>
-                                        <div>하츠 파티션 장착 (수납형 등받이)</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">트림</div>
-                                        <div>도어 트림업 4PS / 전장 트림업, 플롤 트림업 / 라커지 트림업, 트렁크 트림업</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">바닥재</div>
-                                        <div>최고급 오토 바닥 히팅 우드 플로어</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">무드등</div>
-                                        <div>전장 무드 무드등, 사이드 엠비언트 무드등</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">TV</div>
-                                        <div>27인치 스마트 TV</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">도어스커트</div>
-                                        <div>2열 자동 도어 스커트</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">바디킷</div>
-                                        <div>AG 바디킷 (에어댐 장착)</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">구성</div>
-                                        <div>올 그레인 4EA / 올레 그레인 4EA</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">커튼</div>
-                                        <div>하니콤 블라인드</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">사이드스텝</div>
-                                        <div>자동식 사이드 스텝</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">핸들</div>
-                                        <div>DOS 핸들 장착</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">스타라이트</div>
-                                        <div>파이버 타입</div>
-                                        
-                                        <div style="font-weight: bold; color: #333;">그외</div>
-                                        <div>스피커 커버, 프리미엄 턴팅</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1738,19 +1580,26 @@
                         <h2>인테리어</h2>
                         <div class="section-content">
                             <h3>인테리어</h3>
-                            <p>인테리어 옵션을 선택해 주세요</p>
+                            <p>내장 인테리어를 선택해 주세요</p>
                             <div class="option-list">
                                 <div class="option-item">
-                                    <input type="radio" id="interior_black_9seat" name="interior_options_9seat" value="black" data-price="0" data-label="블랙 인테리어">
-                                    <label for="interior_black_9seat">
-                                        <span class="option-name">블랙 인테리어</span>
+                                    <input type="radio" id="top_interior_9seat" name="interior_options_9seat" value="top_interior" data-price="0" data-label="토프 인테리어">
+                                    <label for="top_interior_9seat">
+                                        <span class="option-name">토프 인테리어</span>
                                         <span class="option-price">기본 포함</span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="interior_beige_9seat" name="interior_options_9seat" value="beige" data-price="0" data-label="베이지 인테리어">
-                                    <label for="interior_beige_9seat">
-                                        <span class="option-name">베이지 인테리어</span>
+                                    <input type="radio" id="cotton_beige_9seat" name="interior_options_9seat" value="cotton_beige" data-price="0" data-label="코튼 베이지">
+                                    <label for="cotton_beige_9seat">
+                                        <span class="option-name">코튼 베이지</span>
+                                        <span class="option-price">기본 포함</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="navy_beige_9seat" name="interior_options_9seat" value="navy_beige" data-price="0" data-label="네이비 베이지">
+                                    <label for="navy_beige_9seat">
+                                        <span class="option-name">네이비 베이지</span>
                                         <span class="option-price">기본 포함</span>
                                     </label>
                                 </div>
