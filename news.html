@@ -1001,6 +1001,305 @@
             });
             
         });
+
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 뉴스 페이지 콘텐츠
+                'NEWS': 'NEWS',
+                'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM': 'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM',
+                'ALL NEWS': 'ALL NEWS',
+                'PRESS': 'PRESS',
+                'NOTICE': 'NOTICE',
+                'EVENT': 'EVENT',
+                'BLOG': 'BLOG',
+                'VVIP를 위한 최적의 공간의 의전용 커스텀': 'VVIP를 위한 최적의 공간의 의전용 커스텀',
+                '\'주식회사 더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.': '\'주식회사 더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.',
+                '주식회사 더 룬, 룬 카니발 하이리무진 경험 가능한 전시장 오픈': '주식회사 더 룬, 룬 카니발 하이리무진 경험 가능한 전시장 오픈',
+                '더 룬의 맞춤형 업그레이드 프로그램은 \'고객 맞춤\', \'규격화\', \'완벽함\'이라는 세 가지 모토로 \'LUNE\'만의 특별함을 선사합니다.': '더 룬의 맞춤형 업그레이드 프로그램은 \'고객 맞춤\', \'규격화\', \'완벽함\'이라는 세 가지 모토로 \'LUNE\'만의 특별함을 선사합니다.',
+                '\'주식회사 더 룬\' 시그니쳐 타입모델 고객감동 이벤트 개최': '\'주식회사 더 룬\' 시그니쳐 타입모델 고객감동 이벤트 개최',
+                '\'주식회사 더 룬\' \'퍼스트클래스급\' 카니발 하이리무진 Signature 라인업 공개': '\'주식회사 더 룬\' \'퍼스트클래스급\' 카니발 하이리무진 Signature 라인업 공개',
+                '주식회사 더 룬 VIP 고객체험 서비스': '주식회사 더 룬 VIP 고객체험 서비스',
+                '\'더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.': '\'더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.',
+                '구매 문의하기': '구매 문의하기',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다',
+                'Irreplaceable Value': 'Irreplaceable Value',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com',
+                '대표번호 : 031-943-4488': '대표번호 : 031-943-4488',
+                '팩스 : 031-949-6211': '팩스 : 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 뉴스 페이지 콘텐츠
+                'NEWS': 'NEWS',
+                'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM': 'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM',
+                'ALL NEWS': 'ALL NEWS',
+                'PRESS': 'PRESS',
+                'NOTICE': 'NOTICE',
+                'EVENT': 'EVENT',
+                'BLOG': 'BLOG',
+                'VVIP를 위한 최적의 공간의 의전용 커스텀': 'Custom ceremonial space optimized for VVIPs',
+                '\'주식회사 더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.': 'THE LUNE Co., Ltd. has launched the brand \'LUNE\' and unveiled the Carnival High Limousine Signature lineup. The Carnival High Limousine Signature lineup introduced by LUNE Custom this year features \'first-class level\' custom technology that elevates the existing premium Carnival High Limousine custom, with main specifications as follows.',
+                '주식회사 더 룬, 룬 카니발 하이리무진 경험 가능한 전시장 오픈': 'THE LUNE Co., Ltd. Opens Showroom Where You Can Experience LUNE Carnival High Limousine',
+                '더 룬의 맞춤형 업그레이드 프로그램은 \'고객 맞춤\', \'규격화\', \'완벽함\'이라는 세 가지 모토로 \'LUNE\'만의 특별함을 선사합니다.': 'THE LUNE\'s custom upgrade program delivers the uniqueness of \'LUNE\' with three mottos: \'Customer Customization\', \'Standardization\', and \'Perfection\'.',
+                '\'주식회사 더 룬\' 시그니쳐 타입모델 고객감동 이벤트 개최': 'THE LUNE Co., Ltd. Holds Customer Appreciation Event for Signature Type Model',
+                '\'주식회사 더 룬\' \'퍼스트클래스급\' 카니발 하이리무진 Signature 라인업 공개': 'THE LUNE Co., Ltd. Unveils \'First-Class Level\' Carnival High Limousine Signature Lineup',
+                '주식회사 더 룬 VIP 고객체험 서비스': 'THE LUNE Co., Ltd. VIP Customer Experience Service',
+                '\'더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다. 금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.': 'THE LUNE Co., Ltd. has launched the brand \'LUNE\' and unveiled the Carnival High Limousine Signature lineup. The Carnival High Limousine Signature lineup introduced by LUNE Custom this year features \'first-class level\' custom technology that elevates the existing premium Carnival High Limousine custom, with main specifications as follows.',
+                '구매 문의하기': 'Inquire About Purchase',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE discovers and grows the potential value<br>of the space called a vehicle and its passengers',
+                'Irreplaceable Value': 'Irreplaceable Value',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com',
+                '대표번호 : 031-943-4488': 'Tel: 031-943-4488',
+                '팩스 : 031-949-6211': 'Fax: 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .ak-page-title h1, .ak-page-title p, .category-nav a, .news-title span, .news-excerpt, .news-category, .glass-button-text, .bottom-cta h2, .bottom-cta p, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
+        function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 언어 버튼 활성화 상태 변경
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.style.color = 'white';
+                btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
+            });
+            
+            // 클릭된 버튼 활성화
+            const clickedBtn = (typeof event !== 'undefined' && event && event.target) || null;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 페이지 제목 번역
+            document.querySelectorAll('.ak-page-title h1, .ak-page-title p').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 카테고리 메뉴 번역
+            document.querySelectorAll('.category-nav a').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 뉴스 카드 제목 번역
+            document.querySelectorAll('.news-title span').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 뉴스 카드 설명 번역
+            document.querySelectorAll('.news-excerpt').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 뉴스 카드 카테고리 번역
+            document.querySelectorAll('.news-category').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 버튼 텍스트 번역
+            document.querySelectorAll('.glass-button-text').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // Bottom CTA 섹션 번역 (h2 제목)
+            document.querySelectorAll('.bottom-cta h2').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // Bottom CTA 섹션 번역 (p 설명)
+            document.querySelectorAll('.bottom-cta p').forEach(el => {
+                const html = el.innerHTML.trim();
+                // 공백과 줄바꿈을 정규화한 버전도 확인
+                const normalizedHtml = html.replace(/\n\s+/g, '').replace(/\s+/g, ' ').trim();
+                
+                if (translation[html]) {
+                    el.innerHTML = translation[html];
+                } else if (translation[normalizedHtml]) {
+                    el.innerHTML = translation[normalizedHtml];
+                } else {
+                    // 부분 번역 시도
+                    let newHtml = html;
+                    Object.keys(translation).forEach(key => {
+                        if (newHtml.includes(key) && key !== html) {
+                            newHtml = newHtml.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), translation[key]);
+                        }
+                    });
+                    if (newHtml !== html) {
+                        el.innerHTML = newHtml;
+                    }
+                }
+            });
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+        }
+        
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>

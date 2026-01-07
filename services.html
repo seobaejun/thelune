@@ -650,6 +650,9 @@
                 '9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.': '9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.',
                 '비즈니스와 레저를 위한 프리미엄 스프린터 커스텀 모델입니다.': '비즈니스와 레저를 위한 프리미엄 스프린터 커스텀 모델입니다.',
                 '더 알아보기': '더 알아보기',
+                '구매 문의하기': '구매 문의하기',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다',
+                'Irreplaceable Value': 'Irreplaceable Value',
                 // 푸터
                 '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
                 '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
@@ -675,6 +678,9 @@
                 '9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.': 'A 9-seater large model providing premium interior optimized for group use.',
                 '비즈니스와 레저를 위한 프리미엄 스프린터 커스텀 모델입니다.': 'A premium Sprinter custom model for business and leisure.',
                 '더 알아보기': 'Learn More',
+                '구매 문의하기': 'Inquire About Purchase',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE discovers and grows the potential value<br>of the space called a vehicle and its passengers',
+                'Irreplaceable Value': 'Irreplaceable Value',
                 // 푸터
                 '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
                 '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
@@ -687,7 +693,7 @@
 
         // 원본 텍스트 저장 함수
         function saveOriginalTexts() {
-            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h1, p, .glass-button-text, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h1, p, .glass-button-text, .bottom-cta h2, .bottom-cta p, footer div, footer a, .footer-contact-mobile div').forEach(el => {
                 if (!el.hasAttribute('data-original-text')) {
                     el.setAttribute('data-original-text', el.textContent.trim());
                 }
@@ -709,7 +715,7 @@
             });
             
             // 클릭된 버튼 활성화
-            const clickedBtn = event && event.target;
+            const clickedBtn = (typeof event !== 'undefined' && event && event.target) || null;
             if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
                 clickedBtn.style.color = '#bcb8b1';
                 clickedBtn.style.fontWeight = '600';
@@ -776,8 +782,16 @@
                 }
             });
             
-            // 페이지 제목 및 설명 번역
-            document.querySelectorAll('h1, p').forEach(el => {
+            // 페이지 제목 번역
+            document.querySelectorAll('.ak-page-title h1, .ak-page-title p').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 모델 카드 설명 번역 (모델 섹션 내의 p 태그만)
+            document.querySelectorAll('section[style*="padding: 140px 0"] p').forEach(el => {
                 const text = el.textContent.trim();
                 if (translation[text]) {
                     el.textContent = translation[text];
@@ -789,6 +803,38 @@
                 const text = el.textContent.trim();
                 if (translation[text]) {
                     el.textContent = translation[text];
+                }
+            });
+            
+            // Bottom CTA 섹션 번역 (h2 제목)
+            document.querySelectorAll('.bottom-cta h2').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // Bottom CTA 섹션 번역 (p 설명)
+            document.querySelectorAll('.bottom-cta p').forEach(el => {
+                const html = el.innerHTML.trim();
+                // 공백과 줄바꿈을 정규화한 버전도 확인
+                const normalizedHtml = html.replace(/\n\s+/g, '').replace(/\s+/g, ' ').trim();
+                
+                if (translation[html]) {
+                    el.innerHTML = translation[html];
+                } else if (translation[normalizedHtml]) {
+                    el.innerHTML = translation[normalizedHtml];
+                } else {
+                    // 부분 번역 시도
+                    let newHtml = html;
+                    Object.keys(translation).forEach(key => {
+                        if (newHtml.includes(key) && key !== html) {
+                            newHtml = newHtml.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), translation[key]);
+                        }
+                    });
+                    if (newHtml !== html) {
+                        el.innerHTML = newHtml;
+                    }
                 }
             });
             

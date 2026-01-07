@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -581,15 +581,315 @@
     <script src="assets/js/plugins/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // A/S 접수 페이지 콘텐츠
+                'A/S 접수 양식': 'A/S 접수 양식',
+                '이름': '이름',
+                '(필수)': '(필수)',
+                '이메일': '이메일',
+                '이메일이 올바르지 않습니다': '이메일이 올바르지 않습니다',
+                '연락처': '연락처',
+                '연락처가 올바르지 않습니다': '연락처가 올바르지 않습니다',
+                '접수차종': '접수차종',
+                '접수차종을 선택해주세요.': '접수차종을 선택해주세요.',
+                '카니발 하이리무진': '카니발 하이리무진',
+                '스프린터': '스프린터',
+                '소형 벤(카니발V클레스,스타리아)': '소형 벤(카니발V클레스,스타리아)',
+                '중형 벤(스프린터,쏠라티,르노마스터)': '중형 벤(스프린터,쏠라티,르노마스터)',
+                '대형 벤(에스컬레이드,네비게이터,서버벤)': '대형 벤(에스컬레이드,네비게이터,서버벤)',
+                '기타': '기타',
+                '차량번호': '차량번호',
+                '최초등록일(자동차등록증 기준)': '최초등록일(자동차등록증 기준)',
+                '예: 2024-01-15': '예: 2024-01-15',
+                '구입처(지점)': '구입처(지점)',
+                '구입당시 세일즈 담당자': '구입당시 세일즈 담당자',
+                'A/S접수 내용(최대한 디테일하게 작성)': 'A/S접수 내용(최대한 디테일하게 작성)',
+                '첨부파일(증상이 표현된 이미지 또는 동영상)': '첨부파일(증상이 표현된 이미지 또는 동영상)',
+                '파일 업로드': '파일 업로드',
+                '첨부파일은 최대 20MB까지 등록 가능합니다. 1개 이상의 파일인 경우, 압축하여 zip 파일로 첨부해주세요.': '첨부파일은 최대 20MB까지 등록 가능합니다. 1개 이상의 파일인 경우, 압축하여 zip 파일로 첨부해주세요.',
+                '개인정보 수집 및 이용 동의': '개인정보 수집 및 이용 동의',
+                '보기': '보기',
+                '자동등록 방지': '자동등록 방지',
+                '새로고침': '새로고침',
+                '자동등록방지 숫자를 순서대로 입력하세요.': '자동등록방지 숫자를 순서대로 입력하세요.',
+                '접수하기': '접수하기',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com',
+                '대표번호 : 031-943-4488': '대표번호 : 031-943-4488',
+                '팩스 : 031-949-6211': '팩스 : 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // A/S 접수 페이지 콘텐츠
+                'A/S 접수 양식': 'A/S Service Request Form',
+                '이름': 'Name',
+                '(필수)': '(Required)',
+                '이메일': 'Email',
+                '이메일이 올바르지 않습니다': 'Invalid email address',
+                '연락처': 'Phone Number',
+                '연락처가 올바르지 않습니다': 'Invalid phone number',
+                '접수차종': 'Vehicle Type',
+                '접수차종을 선택해주세요.': 'Please select a vehicle type.',
+                '카니발 하이리무진': 'Carnival High Limousine',
+                '스프린터': 'Sprinter',
+                '소형 벤(카니발V클레스,스타리아)': 'Small Van (Carnival V-Class, Staria)',
+                '중형 벤(스프린터,쏠라티,르노마스터)': 'Medium Van (Sprinter, Solati, Renault Master)',
+                '대형 벤(에스컬레이드,네비게이터,서버벤)': 'Large Van (Escalade, Navigator, Server Van)',
+                '기타': 'Other',
+                '차량번호': 'License Plate Number',
+                '최초등록일(자동차등록증 기준)': 'First Registration Date (Based on Vehicle Registration)',
+                '예: 2024-01-15': 'e.g., 2024-01-15',
+                '구입처(지점)': 'Purchase Location (Branch)',
+                '구입당시 세일즈 담당자': 'Sales Representative at Time of Purchase',
+                'A/S접수 내용(최대한 디테일하게 작성)': 'A/S Request Details (Please describe in detail)',
+                '첨부파일(증상이 표현된 이미지 또는 동영상)': 'Attachments (Images or videos showing the issue)',
+                '파일 업로드': 'Upload File',
+                '첨부파일은 최대 20MB까지 등록 가능합니다. 1개 이상의 파일인 경우, 압축하여 zip 파일로 첨부해주세요.': 'Attachments can be up to 20MB. If you have multiple files, please compress them into a zip file.',
+                '개인정보 수집 및 이용 동의': 'Privacy Policy Agreement',
+                '보기': 'View',
+                '자동등록 방지': 'CAPTCHA',
+                '새로고침': 'Refresh',
+                '자동등록방지 숫자를 순서대로 입력하세요.': 'Please enter the CAPTCHA numbers in order.',
+                '접수하기': 'Submit',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com',
+                '대표번호 : 031-943-4488': 'Tel: 031-943-4488',
+                '팩스 : 031-949-6211': 'Fax: 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h2, h3, p, label, .glass-button-text, footer div, footer a, .footer-contact-mobile div, option, button, input[type="text"][placeholder], span.error-message').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
+            
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                // select 옵션 복원
+                const select = document.querySelector('select[name="vehicle_type"]');
+                if (select) {
+                    const options = select.querySelectorAll('option');
+                    options.forEach((option, index) => {
+                        const originalText = option.getAttribute('data-original-text');
+                        if (originalText) {
+                            option.textContent = originalText;
+                        }
+                    });
+                }
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 페이지 제목 및 설명 번역
+            document.querySelectorAll('h2, h3, p, label, .glass-button-text, span.error-message').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                } else {
+                    // HTML이 포함된 경우 (예: 이름(필수))
+                    const originalHtml = el.getAttribute('data-original-html') || el.innerHTML.trim();
+                    if (translation[originalHtml]) {
+                        el.innerHTML = translation[originalHtml];
+                    } else {
+                        // 부분 번역 시도 (예: 이름(필수) -> Name(Required))
+                        let newHtml = el.innerHTML;
+                        Object.keys(translation).forEach(key => {
+                            if (newHtml.includes(key) && key !== originalHtml) {
+                                newHtml = newHtml.replace(key, translation[key]);
+                            }
+                        });
+                        if (newHtml !== el.innerHTML) {
+                            el.innerHTML = newHtml;
+                        }
+                    }
+                }
+            });
+            
+            // select 옵션 번역
+            const select = document.querySelector('select[name="vehicle_type"]');
+            if (select) {
+                const options = select.querySelectorAll('option');
+                options.forEach((option, index) => {
+                    const originalText = option.getAttribute('data-original-text') || option.textContent.trim();
+                    if (translation[originalText]) {
+                        option.textContent = translation[originalText];
+                    }
+                });
+            }
+            
+            // input placeholder 번역
+            document.querySelectorAll('input[placeholder]').forEach(input => {
+                const placeholder = input.getAttribute('placeholder');
+                if (translation[placeholder]) {
+                    input.setAttribute('placeholder', translation[placeholder]);
+                }
+            });
+            
+            // button 텍스트 번역
+            document.querySelectorAll('button').forEach(btn => {
+                const text = btn.textContent.trim();
+                if (translation[text]) {
+                    btn.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
+        
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
 
         // Privacy Modal Functions
         function openPrivacyModal() {

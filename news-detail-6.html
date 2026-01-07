@@ -479,15 +479,240 @@
     <script src="assets/js/plugins/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 뉴스 상세 페이지 콘텐츠
+                '\'주식회사 더 룬\' \'퍼스트클래스급\' 카니발 하이리무진 Signature 라인업 공개': '\'주식회사 더 룬\' \'퍼스트클래스급\' 카니발 하이리무진 Signature 라인업 공개',
+                '\'더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다.': '\'더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다.',
+                '금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.': '금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.',
+                'LUNE Signature 공통사양으로는 전사양 LUNE custom Edition 하이루프, 국내유일 4중 고성능필터에 올라운드 공기청정시스템이 도입됐다. 차량 내 공기정화 기능이 탑재된 것이 눈에 띄며, 유튜브와 넷플릭스가 재생되는 스마트 TV가 탑재되어 항공 퍼스트클래스의 시각적인 안락함을 탑승자에게 선사한다.': 'LUNE Signature 공통사양으로는 전사양 LUNE custom Edition 하이루프, 국내유일 4중 고성능필터에 올라운드 공기청정시스템이 도입됐다. 차량 내 공기정화 기능이 탑재된 것이 눈에 띄며, 유튜브와 넷플릭스가 재생되는 스마트 TV가 탑재되어 항공 퍼스트클래스의 시각적인 안락함을 탑승자에게 선사한다.',
+                'Signature 4, 7의 모델은 천장 및 도어 전체 풀트리밍이 적용되며, 항공 퍼스트클래스를 컨셉으로 만들어진 VIP 의전시트는 편안한 착석감과 안락함을 제공한다. 최상급 나파 가죽의 전동리무진시트가 장착되어 전동, 언더서포터, 통풍, 열선 등의 의전기능들이 탑재 됐으며, 와시트 컨트롤 스위치, USB 충전포트 윈도우, 슬라이딩 도어 스위치 , 다리를 받쳐주는 언더서포트 등이 탑재되어 탑승자의 피로감을 덜어줌은 물론 편의성까지 제공한다.': 'Signature 4, 7의 모델은 천장 및 도어 전체 풀트리밍이 적용되며, 항공 퍼스트클래스를 컨셉으로 만들어진 VIP 의전시트는 편안한 착석감과 안락함을 제공한다. 최상급 나파 가죽의 전동리무진시트가 장착되어 전동, 언더서포터, 통풍, 열선 등의 의전기능들이 탑재 됐으며, 와시트 컨트롤 스위치, USB 충전포트 윈도우, 슬라이딩 도어 스위치 , 다리를 받쳐주는 언더서포트 등이 탑재되어 탑승자의 피로감을 덜어줌은 물론 편의성까지 제공한다.',
+                '주식회사 더 룬 VIP 고객체험 서비스': '주식회사 더 룬 VIP 고객체험 서비스',
+                '이전': '이전',
+                '다음': '다음',
+                'BACK TO LIST': 'BACK TO LIST',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 뉴스 상세 페이지 콘텐츠
+                '\'주식회사 더 룬\' \'퍼스트클래스급\' 카니발 하이리무진 Signature 라인업 공개': 'THE LUNE Co., Ltd. Unveils \'First-Class Level\' Carnival High Limousine Signature Lineup',
+                '\'더 룬\'에서 론칭한 브랜드 \'LUNE\'이 카니발 하이리무진 Signature 라인업을 공개했다.': 'THE LUNE Co., Ltd. has launched the brand \'LUNE\' and unveiled the Carnival High Limousine Signature lineup.',
+                '금년도 룬커스텀이 선보인 카니발 하이리무진 Signature 라인업은 기존의 프리미엄 카니발 하이리무진 커스텀의 단계를 높여 \'퍼스트클래스 급\' 커스텀의 기술을 선보인 것이 특징으로 주요 사양은 아래와 같다.': 'The Carnival High Limousine Signature lineup introduced by LUNE Custom this year features \'first-class level\' custom technology that elevates the existing premium Carnival High Limousine custom, with main specifications as follows.',
+                'LUNE Signature 공통사양으로는 전사양 LUNE custom Edition 하이루프, 국내유일 4중 고성능필터에 올라운드 공기청정시스템이 도입됐다. 차량 내 공기정화 기능이 탑재된 것이 눈에 띄며, 유튜브와 넷플릭스가 재생되는 스마트 TV가 탑재되어 항공 퍼스트클래스의 시각적인 안락함을 탑승자에게 선사한다.': 'The common specifications of LUNE Signature include full-spec LUNE custom Edition high-roof, the only 4-stage high-performance filter with all-around air purification system in Korea. The vehicle features air purification functionality, and a smart TV that plays YouTube and Netflix, providing passengers with the visual comfort of airline first class.',
+                'Signature 4, 7의 모델은 천장 및 도어 전체 풀트리밍이 적용되며, 항공 퍼스트클래스를 컨셉으로 만들어진 VIP 의전시트는 편안한 착석감과 안락함을 제공한다. 최상급 나파 가죽의 전동리무진시트가 장착되어 전동, 언더서포터, 통풍, 열선 등의 의전기능들이 탑재 됐으며, 와시트 컨트롤 스위치, USB 충전포트 윈도우, 슬라이딩 도어 스위치 , 다리를 받쳐주는 언더서포트 등이 탑재되어 탑승자의 피로감을 덜어줌은 물론 편의성까지 제공한다.': 'The Signature 4 and 7 models feature full trimming on the ceiling and doors. The VIP ceremonial seats, designed with the concept of airline first class, provide comfortable seating and relaxation. Premium napa leather electric limousine seats are installed with ceremonial functions such as electric, under supporter, ventilation, and heating. Features such as wash control switch, USB charging port window, sliding door switch, and under supporter for leg support are installed to reduce passenger fatigue and provide convenience.',
+                '주식회사 더 룬 VIP 고객체험 서비스': 'THE LUNE Co., Ltd. VIP Customer Experience Service',
+                '이전': 'Previous',
+                '다음': 'Next',
+                'BACK TO LIST': 'BACK TO LIST',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .news-detail-title, .news-detail-content p, .news-nav-label, .news-nav-link, .back-to-list span, footer div, footer a').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
-            console.log('Language switched to:', lang);
+            
+            // 클릭된 버튼 활성화
+            const clickedBtn = (typeof event !== 'undefined' && event && event.target) || null;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 뉴스 제목 번역
+            document.querySelectorAll('.news-detail-title').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 뉴스 콘텐츠 번역
+            document.querySelectorAll('.news-detail-content p').forEach(el => {
+                const html = el.innerHTML.trim();
+                // 공백과 줄바꿈을 정규화한 버전도 확인
+                const normalizedHtml = html.replace(/\n\s+/g, '').replace(/\s+/g, ' ').trim();
+                
+                if (translation[html]) {
+                    el.innerHTML = translation[html];
+                } else if (translation[normalizedHtml]) {
+                    el.innerHTML = translation[normalizedHtml];
+                } else {
+                    // 부분 번역 시도
+                    let newHtml = html;
+                    Object.keys(translation).forEach(key => {
+                        if (newHtml.includes(key) && key !== html && key.length > 10) {
+                            newHtml = newHtml.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), translation[key]);
+                        }
+                    });
+                    if (newHtml !== html) {
+                        el.innerHTML = newHtml;
+                    }
+                }
+            });
+            
+            // 네비게이션 라벨 번역
+            document.querySelectorAll('.news-nav-label').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.news-nav-link').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
         }
+        
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>

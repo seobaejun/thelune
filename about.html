@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 
 <head>
     <!-- Meta Tags -->
@@ -1008,18 +1008,497 @@
     <script src="assets/js/plugins/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 페이지 제목
+                'THE LUNE에 대해 알아보세요': 'THE LUNE에 대해 알아보세요',
+                // 타이핑 텍스트
+                'LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.': 'LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.',
+                // 메인 설명
+                '차량으로 이동하는 시간을 피곤한 것이 아닌, 하나의 만족스러운 경험으로 만들고자 합니다. 탑승자를 위해 다양한 맞춤형 옵션을 제공하고, 섬세한 고품질의 디테일로 공간을 구성하며, 차량 내부의 공간과 탑승자가 가진 잠재된 가치를 드러내고 한층 더 높은 수준으로 끌어올립니다. 높은 편의성, 안정성, 만족감 등 탑승자에게 퍼스트 클래스의 경험을 선사하는 브랜드입니다. LUNE은 단어적 표현으로 초승달을 의미하며, 초승달의 두 호가 중첩되는 이미지는 차량이라는 공간과 탑승자라는 사람의 잠재된 가치가 자연스럽게 만나는 의미를 갖고 있습니다.': '차량으로 이동하는 시간을 피곤한 것이 아닌, 하나의 만족스러운 경험으로 만들고자 합니다. 탑승자를 위해 다양한 맞춤형 옵션을 제공하고, 섬세한 고품질의 디테일로 공간을 구성하며, 차량 내부의 공간과 탑승자가 가진 잠재된 가치를 드러내고 한층 더 높은 수준으로 끌어올립니다. 높은 편의성, 안정성, 만족감 등 탑승자에게 퍼스트 클래스의 경험을 선사하는 브랜드입니다. LUNE은 단어적 표현으로 초승달을 의미하며, 초승달의 두 호가 중첩되는 이미지는 차량이라는 공간과 탑승자라는 사람의 잠재된 가치가 자연스럽게 만나는 의미를 갖고 있습니다.',
+                // HISTORY 섹션
+                'THE LUNE의 성장 스토리': 'THE LUNE의 성장 스토리',
+                '룬커스텀 창업': '룬커스텀 창업',
+                'LUNE 브랜드 출시': 'LUNE 브랜드 출시',
+                '기아 카니발, 현대차 쏠라티, 벤츠 스프린터 기술 개발': '기아 카니발, 현대차 쏠라티, 벤츠 스프린터 기술 개발',
+                'SKT 5G정보통신 차량 제작(SKT 5G TV광고 방영차량)': 'SKT 5G정보통신 차량 제작(SKT 5G TV광고 방영차량)',
+                '생명': '생명',
+                '회장 케딜락 에스컬레이드 차량 실내 인테리어': '회장 케딜락 에스컬레이드 차량 실내 인테리어',
+                '그룹': '그룹',
+                '회장 벤츠 스프린터 실내 인테리어': '회장 벤츠 스프린터 실내 인테리어',
+                '(주)메': '(주)메',
+                '카 카니발': '카 카니발',
+                '하이리무진 파츠 공급 계약': '하이리무진 파츠 공급 계약',
+                '삼성전자': '삼성전자',
+                '부회장 의전차량(기아 그랜버드)실내 인테리어': '부회장 의전차량(기아 그랜버드)실내 인테리어',
+                '부회장 의전 차량(벤츠 스프린터) 공급': '부회장 의전 차량(벤츠 스프린터) 공급',
+                '하': '하',
+                '로': '로',
+                '회장 벤츠 스프린터 의전용 차량공급': '회장 벤츠 스프린터 의전용 차량공급',
+                'N': 'N',
+                '트': '트',
+                '의장 벤츠 스프린터 의전용 차량공급': '의장 벤츠 스프린터 의전용 차량공급',
+                '새마을': '새마을',
+                '회장 벤츠 스프린터 의전용 차량공급': '회장 벤츠 스프린터 의전용 차량공급',
+                '네': '네',
+                '의장 벤츠 스프린터 의전용 차량공급': '의장 벤츠 스프린터 의전용 차량공급',
+                '연구개발 전담부서 - 한국산업기술진흥협회 인증': '연구개발 전담부서 - 한국산업기술진흥협회 인증',
+                '(주)와이즈오토 벤츠 스프린터 실내 인테리어 개발, 공급 계약': '(주)와이즈오토 벤츠 스프린터 실내 인테리어 개발, 공급 계약',
+                '아시아경제TV 클로즈업 기업현장 1186회차 방영': '아시아경제TV 클로즈업 기업현장 1186회차 방영',
+                '벤처기업인증': '벤처기업인증',
+                '벤츠 스프린터 부산국제보트쇼 (주)와이즈오토 공동출품': '벤츠 스프린터 부산국제보트쇼 (주)와이즈오토 공동출품',
+                '3D CNC 고속가공기 확충': '3D CNC 고속가공기 확충',
+                '특장관련 특허 5개 출원, 등록': '특장관련 특허 5개 출원, 등록',
+                'ISO 9001 품질경영시스템 획득 - 한국국제규격인증': 'ISO 9001 품질경영시스템 획득 - 한국국제규격인증',
+                'ISO 14001 환경경영시스템 획득 - 한국국제규격인증': 'ISO 14001 환경경영시스템 획득 - 한국국제규격인증',
+                '국토교통부 자동차 제작사 정식인증': '국토교통부 자동차 제작사 정식인증',
+                '4세대 LUNE 카니발 하이리무진 출시': '4세대 LUNE 카니발 하이리무진 출시',
+                '기업부설연구소 설립': '기업부설연구소 설립',
+                '삼선전자 주식회사 임원 의전차량 차량제작, 관리 계약체결': '삼선전자 주식회사 임원 의전차량 차량제작, 관리 계약체결',
+                '이노비즈(INNO-BIZ) 인증': '이노비즈(INNO-BIZ) 인증',
+                '지상파 드라마 촬영협찬 및 종합편성채널 CF방영': '지상파 드라마 촬영협찬 및 종합편성채널 CF방영',
+                'ISO 45001 안전보건경영시스템 획득 - 한국국제규격인증': 'ISO 45001 안전보건경영시스템 획득 - 한국국제규격인증',
+                '인증중고차 사업부 전시장 오픈 - 용인 오토허브': '인증중고차 사업부 전시장 오픈 - 용인 오토허브',
+                '"더트라이브"와 골프 리무진 서비스 제휴': '"더트라이브"와 골프 리무진 서비스 제휴',
+                '2023 대한민국 브랜드파워 1위 - 자동차 제조 부문 1위 수상': '2023 대한민국 브랜드파워 1위 - 자동차 제조 부문 1위 수상',
+                // Showroom 섹션
+                'THE LUNE 본사': 'THE LUNE 본사',
+                '안산 전시장': '안산 전시장',
+                '부산 전시장': '부산 전시장',
+                '주소': '주소',
+                '전화': '전화',
+                '준비 중': '준비 중',
+                '경기도 파주시 탄현면 축현산단로 21-41': '경기도 파주시 탄현면 축현산단로 21-41',
+                '경기 안산시 단원구 원포공원2로 24, 215호': '경기 안산시 단원구 원포공원2로 24, 215호',
+                '부산 금정구 금사로 160 3층': '부산 금정구 금사로 160 3층',
+                // 이미지 갤러리(인증서) 섹션
+                '제작자 등록증': '제작자 등록증',
+                '기업부설연구소 인정서': '기업부설연구소 인정서',
+                '벤처기업확인서': '벤처기업확인서',
+                '이노비즈(INNO-BIZ) 확인서': '이노비즈(INNO-BIZ) 확인서',
+                '우수기술 기업인증서': '우수기술 기업인증서',
+                '소재부품인증 확인서': '소재부품인증 확인서',
+                '2023 대한민국<br>브랜드파워 1위': '2023 대한민국<br>브랜드파워 1위',
+                'ISO 9001<br>품질경영시스템': 'ISO 9001<br>품질경영시스템',
+                'ISO 14001<br>환경경영시스템': 'ISO 14001<br>환경경영시스템',
+                'ISO 45001<br>안전보건경영시스템': 'ISO 45001<br>안전보건경영시스템',
+                '특허증_차량 내부 인테리어 개조방법 및 시스템': '특허증_차량 내부 인테리어 개조방법 및 시스템',
+                '특허증_차량용 내장재 마감 및 이의 시공 방법': '특허증_차량용 내장재 마감 및 이의 시공 방법',
+                '특허증_차량용 파티션 구조물 및 이의 시공방법': '특허증_차량용 파티션 구조물 및 이의 시공방법',
+                '특허증_진동에 강한 차량 내부 인테리어 구조물의 시공 방법': '특허증_진동에 강한 차량 내부 인테리어 구조물의 시공 방법',
+                // ORGANIZATION 섹션
+                'THE LUNE의 조직구조': 'THE LUNE의 조직구조',
+                // Company Value 섹션
+                '대체할 수 없는 가치, 룬': '대체할 수 없는 가치, 룬',
+                '2015년 시작된 주식회사 더 룬은 2016년 "LUNE(룬)"이라는 브랜드를 탄생시켜,<br>수많은 종류의 자동차들을 더욱 완성도 높게 만들어 고객에게 선사해주는 국토교통부 인증 특장업체입니다.': '2015년 시작된 주식회사 더 룬은 2016년 "LUNE(룬)"이라는 브랜드를 탄생시켜,<br>수많은 종류의 자동차들을 더욱 완성도 높게 만들어 고객에게 선사해주는 국토교통부 인증 특장업체입니다.',
+                '2015년 시작된 주식회사 더 룬은 2016년 "LUNE(룬)"이라는 브랜드를 탄생시켜,<br>\n                            수많은 종류의 자동차들을 더욱 완성도 높게 만들어 고객에게 선사해주는 국토교통부 인증 특장업체입니다.': '2015년 시작된 주식회사 더 룬은 2016년 "LUNE(룬)"이라는 브랜드를 탄생시켜,<br>\n                            수많은 종류의 자동차들을 더욱 완성도 높게 만들어 고객에게 선사해주는 국토교통부 인증 특장업체입니다.',
+                '벤츠 스프린터, V클래스, 캐딜락 에스컬레이드, 쏠라티, 르노 마스터, 카니발까지<br>고객의 요구에 맞춰 편의사양을 설계, 개발해 다양한 포지션의 디자인을 선보임으로써 최적의 맞춤형 차량을 생산합니다.': '벤츠 스프린터, V클래스, 캐딜락 에스컬레이드, 쏠라티, 르노 마스터, 카니발까지<br>고객의 요구에 맞춰 편의사양을 설계, 개발해 다양한 포지션의 디자인을 선보임으로써 최적의 맞춤형 차량을 생산합니다.',
+                '벤츠 스프린터, V클래스, 캐딜락 에스컬레이드, 쏠라티, 르노 마스터, 카니발까지<br>\n                            고객의 요구에 맞춰 편의사양을 설계, 개발해 다양한 포지션의 디자인을 선보임으로써 최적의 맞춤형 차량을 생산합니다.': '벤츠 스프린터, V클래스, 캐딜락 에스컬레이드, 쏠라티, 르노 마스터, 카니발까지<br>\n                            고객의 요구에 맞춰 편의사양을 설계, 개발해 다양한 포지션의 디자인을 선보임으로써 최적의 맞춤형 차량을 생산합니다.',
+                '최고급 소재와 스마트한 마감, 보다 편안한 실내를 제공합니다.<br>차량이라는 공간과 탑승자라는 사람의 잠재된 가치를 찾고 성장시키겠다는 비전을 갖고 있습니다.<br>이동수단 그 이상의 가치를 더 룬에서 실현합니다.': '최고급 소재와 스마트한 마감, 보다 편안한 실내를 제공합니다.<br>차량이라는 공간과 탑승자라는 사람의 잠재된 가치를 찾고 성장시키겠다는 비전을 갖고 있습니다.<br>이동수단 그 이상의 가치를 더 룬에서 실현합니다.',
+                '최고급 소재와 스마트한 마감, 보다 편안한 실내를 제공합니다.<br>\n                            차량이라는 공간과 탑승자라는 사람의 잠재된 가치를 찾고 성장시키겠다는 비전을 갖고 있습니다.<br>\n                            이동수단 그 이상의 가치를 더 룬에서 실현합니다.': '최고급 소재와 스마트한 마감, 보다 편안한 실내를 제공합니다.<br>\n                            차량이라는 공간과 탑승자라는 사람의 잠재된 가치를 찾고 성장시키겠다는 비전을 갖고 있습니다.<br>\n                            이동수단 그 이상의 가치를 더 룬에서 실현합니다.',
+                // VALUE 설명
+                '단순한 이동수단과 탑승자가 아닌 그 이상의 가치를 부여할 수 있도록 차량 내부의 공간과 탑승자가 가진 잠재력을 발견하고 드러냅니다.': '단순한 이동수단과 탑승자가 아닌 그 이상의 가치를 부여할 수 있도록 차량 내부의 공간과 탑승자가 가진 잠재력을 발견하고 드러냅니다.',
+                '차량과 탑승자가 가진 잠재적 가치를 더 빛내줄 수 있도록 차량 내부의 공간을 군더더기 없이 본질에 충실한 디자인으로 구성합니다.': '차량과 탑승자가 가진 잠재적 가치를 더 빛내줄 수 있도록 차량 내부의 공간을 군더더기 없이 본질에 충실한 디자인으로 구성합니다.',
+                '오로지 탑승자만을 위해 맞춰진 독점적인 디자인과 옵션 구성으로 퍼스트 클래스급의 경험을 선사합니다.': '오로지 탑승자만을 위해 맞춰진 독점적인 디자인과 옵션 구성으로 퍼스트 클래스급의 경험을 선사합니다.',
+                // CI INTRODUCTION
+                'First Class + 특별한 경험': 'First Class + 특별한 경험',
+                '어둠 속에서 밝게 빛나는 초승달이 점진적으로 나타나듯<br>룬을 통해 고객과 특별한 경험이 만나며 탑승자와 공간에서의 진정한 가치가 드러남을 의미합니다.': '어둠 속에서 밝게 빛나는 초승달이 점진적으로 나타나듯<br>룬을 통해 고객과 특별한 경험이 만나며 탑승자와 공간에서의 진정한 가치가 드러남을 의미합니다.',
+                '로고는 룬을 상징하는 대표적인 디자인 요소로, 룬의 아이덴티티를 구축하고 전체 이미지를 형상하는<br>가장 중요한 역할을 합니다. 로고에 포함된 곡선의 형태는 탑승자와 공간의 가치를 상징하며,<br>가로로 넓은 형태는 수많은 가치를 수용할 수 있는 가능성을 가진 룬의 공간을 상징합니다.': '로고는 룬을 상징하는 대표적인 디자인 요소로, 룬의 아이덴티티를 구축하고 전체 이미지를 형상하는<br>가장 중요한 역할을 합니다. 로고에 포함된 곡선의 형태는 탑승자와 공간의 가치를 상징하며,<br>가로로 넓은 형태는 수많은 가치를 수용할 수 있는 가능성을 가진 룬의 공간을 상징합니다.',
+                '로고는 룬을 상징하는 대표적인 디자인 요소로, 룬의 아이덴티티를 구축하고 전체 이미지를 형상하는<br>\n                        가장 중요한 역할을 합니다. 로고에 포함된 곡선의 형태는 탑승자와 공간의 가치를 상징하며,<br>\n                        가로로 넓은 형태는 수많은 가치를 수용할 수 있는 가능성을 가진 룬의 공간을 상징합니다.': '로고는 룬을 상징하는 대표적인 디자인 요소로, 룬의 아이덴티티를 구축하고 전체 이미지를 형상하는<br>\n                        가장 중요한 역할을 합니다. 로고에 포함된 곡선의 형태는 탑승자와 공간의 가치를 상징하며,<br>\n                        가로로 넓은 형태는 수많은 가치를 수용할 수 있는 가능성을 가진 룬의 공간을 상징합니다.',
+                '최소 공간 규정은 매체 적용 시 각종 텍스트 정보와 시각적 표시물로부터 보호되어야 할 최소한의 공간 규정입니다.': '최소 공간 규정은 매체 적용 시 각종 텍스트 정보와 시각적 표시물로부터 보호되어야 할 최소한의 공간 규정입니다.',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 페이지 제목
+                'THE LUNE에 대해 알아보세요': 'Learn About THE LUNE',
+                // 타이핑 텍스트
+                'LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.': 'LUNE is a brand that delivers irreplaceable value.',
+                // 메인 설명
+                '차량으로 이동하는 시간을 피곤한 것이 아닌, 하나의 만족스러운 경험으로 만들고자 합니다. 탑승자를 위해 다양한 맞춤형 옵션을 제공하고, 섬세한 고품질의 디테일로 공간을 구성하며, 차량 내부의 공간과 탑승자가 가진 잠재된 가치를 드러내고 한층 더 높은 수준으로 끌어올립니다. 높은 편의성, 안정성, 만족감 등 탑승자에게 퍼스트 클래스의 경험을 선사하는 브랜드입니다. LUNE은 단어적 표현으로 초승달을 의미하며, 초승달의 두 호가 중첩되는 이미지는 차량이라는 공간과 탑승자라는 사람의 잠재된 가치가 자연스럽게 만나는 의미를 갖고 있습니다.': 'We aim to transform travel time from a tiring experience into a satisfying one. We provide various customized options for passengers, compose spaces with meticulous high-quality details, and reveal and elevate the potential value of both the vehicle\'s interior space and its passengers to a higher level. LUNE is a brand that offers a first-class experience with high convenience, stability, and satisfaction. LUNE means crescent moon, and the overlapping image of two arcs of the crescent moon represents the natural meeting of the potential value of the vehicle space and the passenger.',
+                // HISTORY 섹션
+                'THE LUNE의 성장 스토리': 'THE LUNE Growth Story',
+                '룬커스텀 창업': 'LUNE Custom Founded',
+                'LUNE 브랜드 출시': 'LUNE Brand Launch',
+                '기아 카니발, 현대차 쏠라티, 벤츠 스프린터 기술 개발': 'Kia Carnival, Hyundai Solati, Mercedes Sprinter Technology Development',
+                'SKT 5G정보통신 차량 제작(SKT 5G TV광고 방영차량)': 'SKT 5G Information & Communication Vehicle Production (SKT 5G TV Commercial Vehicle)',
+                '생명': '',
+                '회장 케딜락 에스컬레이드 차량 실내 인테리어': 'Chairman Cadillac Escalade Vehicle Interior',
+                '그룹': '',
+                '회장 벤츠 스프린터 실내 인테리어': 'Chairman Mercedes Sprinter Interior',
+                '(주)메': '',
+                '카 카니발': 'Carnival',
+                '하이리무진 파츠 공급 계약': 'High Limousine Parts Supply Contract',
+                '삼성전자': 'Samsung Electronics',
+                '부회장 의전차량(기아 그랜버드)실내 인테리어': 'Vice Chairman Official Vehicle (Kia Granbird) Interior',
+                '부회장 의전 차량(벤츠 스프린터) 공급': 'Vice Chairman Official Vehicle (Mercedes Sprinter) Supply',
+                '하': '',
+                '로': '',
+                '회장 벤츠 스프린터 의전용 차량공급': 'Chairman Mercedes Sprinter Official Vehicle Supply',
+                'N': '',
+                '트': '',
+                '의장 벤츠 스프린터 의전용 차량공급': 'Chairman Mercedes Sprinter Official Vehicle Supply',
+                '새마을': 'Saemaul',
+                '네': '',
+                '의장 벤츠 스프린터 의전용 차량공급': 'Chairman Mercedes Sprinter Official Vehicle Supply',
+                '연구개발 전담부서 - 한국산업기술진흥협회 인증': 'R&D Department - Korea Industrial Technology Association Certification',
+                '(주)와이즈오토 벤츠 스프린터 실내 인테리어 개발, 공급 계약': 'Wise Auto Co., Ltd. Mercedes Sprinter Interior Development & Supply Contract',
+                '아시아경제TV 클로즈업 기업현장 1186회차 방영': 'Asia Economy TV Close-up Corporate Field Episode 1186 Broadcast',
+                '벤처기업인증': 'Venture Company Certification',
+                '벤츠 스프린터 부산국제보트쇼 (주)와이즈오토 공동출품': 'Mercedes Sprinter Busan International Boat Show - Wise Auto Co., Ltd. Joint Exhibition',
+                '3D CNC 고속가공기 확충': '3D CNC High-Speed Processing Machine Expansion',
+                '특장관련 특허 5개 출원, 등록': '5 Special Vehicle Related Patents Filed and Registered',
+                'ISO 9001 품질경영시스템 획득 - 한국국제규격인증': 'ISO 9001 Quality Management System - Korea International Standards Certification',
+                'ISO 14001 환경경영시스템 획득 - 한국국제규격인증': 'ISO 14001 Environmental Management System - Korea International Standards Certification',
+                '국토교통부 자동차 제작사 정식인증': 'Ministry of Land, Infrastructure and Transport Official Vehicle Manufacturer Certification',
+                '4세대 LUNE 카니발 하이리무진 출시': '4th Generation LUNE Carnival High Limousine Launch',
+                '기업부설연구소 설립': 'Corporate R&D Center Establishment',
+                '삼선전자 주식회사 임원 의전차량 차량제작, 관리 계약체결': 'Samsung Electronics Co., Ltd. Executive Vehicle Production & Management Contract',
+                '이노비즈(INNO-BIZ) 인증': 'INNO-BIZ Certification',
+                '지상파 드라마 촬영협찬 및 종합편성채널 CF방영': 'Terrestrial Drama Production Sponsorship & General Programming Channel CF Broadcast',
+                'ISO 45001 안전보건경영시스템 획득 - 한국국제규격인증': 'ISO 45001 Occupational Health & Safety Management System - Korea International Standards Certification',
+                '인증중고차 사업부 전시장 오픈 - 용인 오토허브': 'Certified Used Car Division Showroom Opening - Yongin Auto Hub',
+                '"더트라이브"와 골프 리무진 서비스 제휴': 'Partnership with "The Drive" Golf Limousine Service',
+                '2023 대한민국 브랜드파워 1위 - 자동차 제조 부문 1위 수상': '2023 Korea Brand Power No. 1 - Automotive Manufacturing Category No. 1 Award',
+                // Showroom 섹션
+                'THE LUNE 본사': 'THE LUNE Headquarters',
+                '안산 전시장': 'Ansan Showroom',
+                '부산 전시장': 'Busan Showroom',
+                '주소': 'Address',
+                '전화': 'Phone',
+                '준비 중': 'Coming Soon',
+                '경기도 파주시 탄현면 축현산단로 21-41': '21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '경기 안산시 단원구 원포공원2로 24, 215호': '24, Wonpogongwon 2-ro, Danwon-gu, Ansan-si, Gyeonggi-do, Room 215',
+                '부산 금정구 금사로 160 3층': '3rd Floor, 160 Geumsa-ro, Geumjeong-gu, Busan',
+                // 이미지 갤러리(인증서) 섹션
+                '제작자 등록증': 'Producer Registration Certificate',
+                '기업부설연구소 인정서': 'Corporate R&D Center Recognition Certificate',
+                '벤처기업확인서': 'Venture Company Confirmation Certificate',
+                '이노비즈(INNO-BIZ) 확인서': 'INNO-BIZ Confirmation Certificate',
+                '우수기술 기업인증서': 'Excellent Technology Company Certificate',
+                '소재부품인증 확인서': 'Materials & Components Certification Confirmation',
+                '2023 대한민국<br>브랜드파워 1위': '2023 Korea<br>Brand Power No. 1',
+                'ISO 9001<br>품질경영시스템': 'ISO 9001<br>Quality Management System',
+                'ISO 14001<br>환경경영시스템': 'ISO 14001<br>Environmental Management System',
+                'ISO 45001<br>안전보건경영시스템': 'ISO 45001<br>Occupational Health & Safety Management System',
+                '특허증_차량 내부 인테리어 개조방법 및 시스템': 'Patent: Vehicle Interior Modification Method and System',
+                '특허증_차량용 내장재 마감 및 이의 시공 방법': 'Patent: Vehicle Interior Material Finishing and Installation Method',
+                '특허증_차량용 파티션 구조물 및 이의 시공방법': 'Patent: Vehicle Partition Structure and Installation Method',
+                '특허증_진동에 강한 차량 내부 인테리어 구조물의 시공 방법': 'Patent: Vibration-Resistant Vehicle Interior Structure Installation Method',
+                // ORGANIZATION 섹션
+                'THE LUNE의 조직구조': 'THE LUNE Organization Structure',
+                // Company Value 섹션
+                '대체할 수 없는 가치, 룬': 'Irreplaceable Value, LUNE',
+                '2015년 시작된 주식회사 더 룬은 2016년 "LUNE(룬)"이라는 브랜드를 탄생시켜,<br>수많은 종류의 자동차들을 더욱 완성도 높게 만들어 고객에게 선사해주는 국토교통부 인증 특장업체입니다.': 'THE LUNE Co., Ltd., which started in 2015, gave birth to the "LUNE" brand in 2016,<br>and is a Ministry of Land, Infrastructure and Transport certified special vehicle manufacturer that creates more complete vehicles of various types for customers.',
+                '2015년 시작된 주식회사 더 룬은 2016년 "LUNE(룬)"이라는 브랜드를 탄생시켜,<br>\n                            수많은 종류의 자동차들을 더욱 완성도 높게 만들어 고객에게 선사해주는 국토교통부 인증 특장업체입니다.': 'THE LUNE Co., Ltd., which started in 2015, gave birth to the "LUNE" brand in 2016,<br>and is a Ministry of Land, Infrastructure and Transport certified special vehicle manufacturer that creates more complete vehicles of various types for customers.',
+                '벤츠 스프린터, V클래스, 캐딜락 에스컬레이드, 쏠라티, 르노 마스터, 카니발까지<br>고객의 요구에 맞춰 편의사양을 설계, 개발해 다양한 포지션의 디자인을 선보임으로써 최적의 맞춤형 차량을 생산합니다.': 'From Mercedes Sprinter, V-Class, Cadillac Escalade, Solati, Renault Master, to Carnival,<br>we design and develop convenience features according to customer requirements, presenting designs in various positions to produce optimal customized vehicles.',
+                '벤츠 스프린터, V클래스, 캐딜락 에스컬레이드, 쏠라티, 르노 마스터, 카니발까지<br>\n                            고객의 요구에 맞춰 편의사양을 설계, 개발해 다양한 포지션의 디자인을 선보임으로써 최적의 맞춤형 차량을 생산합니다.': 'From Mercedes Sprinter, V-Class, Cadillac Escalade, Solati, Renault Master, to Carnival,<br>we design and develop convenience features according to customer requirements, presenting designs in various positions to produce optimal customized vehicles.',
+                '최고급 소재와 스마트한 마감, 보다 편안한 실내를 제공합니다.<br>차량이라는 공간과 탑승자라는 사람의 잠재된 가치를 찾고 성장시키겠다는 비전을 갖고 있습니다.<br>이동수단 그 이상의 가치를 더 룬에서 실현합니다.': 'We provide premium materials, smart finishes, and a more comfortable interior.<br>We have a vision to discover and grow the potential value of the vehicle space and its passengers.<br>We realize value beyond transportation at THE LUNE.',
+                '최고급 소재와 스마트한 마감, 보다 편안한 실내를 제공합니다.<br>\n                            차량이라는 공간과 탑승자라는 사람의 잠재된 가치를 찾고 성장시키겠다는 비전을 갖고 있습니다.<br>\n                            이동수단 그 이상의 가치를 더 룬에서 실현합니다.': 'We provide premium materials, smart finishes, and a more comfortable interior.<br>We have a vision to discover and grow the potential value of the vehicle space and its passengers.<br>We realize value beyond transportation at THE LUNE.',
+                // VALUE 설명
+                '단순한 이동수단과 탑승자가 아닌 그 이상의 가치를 부여할 수 있도록 차량 내부의 공간과 탑승자가 가진 잠재력을 발견하고 드러냅니다.': 'We discover and reveal the potential of both the vehicle\'s interior space and its passengers, enabling value beyond simple transportation.',
+                '차량과 탑승자가 가진 잠재적 가치를 더 빛내줄 수 있도록 차량 내부의 공간을 군더더기 없이 본질에 충실한 디자인으로 구성합니다.': 'We compose the vehicle\'s interior space with an essential design without excess, to better illuminate the potential value of the vehicle and its passengers.',
+                '오로지 탑승자만을 위해 맞춰진 독점적인 디자인과 옵션 구성으로 퍼스트 클래스급의 경험을 선사합니다.': 'We offer a first-class experience through exclusive designs and option configurations tailored solely for passengers.',
+                // CI INTRODUCTION
+                'First Class + 특별한 경험': 'First Class + Special Experience',
+                '어둠 속에서 밝게 빛나는 초승달이 점진적으로 나타나듯<br>룬을 통해 고객과 특별한 경험이 만나며 탑승자와 공간에서의 진정한 가치가 드러남을 의미합니다.': 'Just as a bright crescent moon gradually appears in the darkness,<br>through LUNE, customers meet special experiences, and the true value of passengers and space is revealed.',
+                '어둠 속에서 밝게 빛나는 초승달이 점진적으로 나타나듯<br>\n                        룬을 통해 고객과 특별한 경험이 만나며 탑승자와 공간에서의 진정한 가치가 드러남을 의미합니다.': 'Just as a bright crescent moon gradually appears in the darkness,<br>through LUNE, customers meet special experiences, and the true value of passengers and space is revealed.',
+                '로고는 룬을 상징하는 대표적인 디자인 요소로, 룬의 아이덴티티를 구축하고 전체 이미지를 형상하는<br>가장 중요한 역할을 합니다. 로고에 포함된 곡선의 형태는 탑승자와 공간의 가치를 상징하며,<br>가로로 넓은 형태는 수많은 가치를 수용할 수 있는 가능성을 가진 룬의 공간을 상징합니다.': 'The logo is a representative design element symbolizing LUNE, playing the most important role in building LUNE\'s identity and shaping the overall image.<br>The curved form included in the logo symbolizes the value of passengers and space,<br>and the wide horizontal form symbolizes LUNE\'s space with the potential to accommodate numerous values.',
+                '로고는 룬을 상징하는 대표적인 디자인 요소로, 룬의 아이덴티티를 구축하고 전체 이미지를 형상하는<br>\n                        가장 중요한 역할을 합니다. 로고에 포함된 곡선의 형태는 탑승자와 공간의 가치를 상징하며,<br>\n                        가로로 넓은 형태는 수많은 가치를 수용할 수 있는 가능성을 가진 룬의 공간을 상징합니다.': 'The logo is a representative design element symbolizing LUNE, playing the most important role in building LUNE\'s identity and shaping the overall image.<br>The curved form included in the logo symbolizes the value of passengers and space,<br>and the wide horizontal form symbolizes LUNE\'s space with the potential to accommodate numerous values.',
+                '최소 공간 규정은 매체 적용 시 각종 텍스트 정보와 시각적 표시물로부터 보호되어야 할 최소한의 공간 규정입니다.': 'The minimum space requirement is the minimum space regulation that must be protected from various text information and visual displays when applying to media.',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            // 모든 번역 가능한 요소들 저장
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h1, h2, h3, p, span, .glass-button-text, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+                // span 태그는 특정 조건에서만 저장 (히스토리 섹션의 주소, 전화 등)
+                if (el.tagName === 'SPAN' && !el.closest('.language-selector') && !el.closest('.typing-cursor') && el.textContent.trim()) {
+                    if (!el.hasAttribute('data-original-text')) {
+                        el.setAttribute('data-original-text', el.textContent.trim());
+                    }
+                } else if (el.tagName !== 'SPAN' || (el.closest('[data-aos]') && el.textContent.trim())) {
+                    if (!el.hasAttribute('data-original-text')) {
+                        el.setAttribute('data-original-text', el.textContent.trim());
+                    }
+                    if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                        el.setAttribute('data-original-html', el.innerHTML.trim());
+                    }
+                }
+            });
+            
+            // 타이핑 텍스트도 저장
+            const typingText = document.getElementById('typing-text');
+            if (typingText && !typingText.hasAttribute('data-original-typing-text')) {
+                typingText.setAttribute('data-original-typing-text', 'LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.');
+            }
+        }
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
             // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
             
-            // 실제 언어 변경 로직은 여기에 추가
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                // 타이핑 텍스트 복원 및 재실행
+                const typingText = document.getElementById('typing-text');
+                if (typingText) {
+                    const originalText = typingText.getAttribute('data-original-typing-text') || 'LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.';
+                    typeWriter('typing-text', originalText, 120);
+                }
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 페이지 제목 및 설명 번역
+            document.querySelectorAll('h1, h2, h3, p, span').forEach(el => {
+                // span 태그는 특정 조건에서만 번역 (히스토리 섹션의 주소, 전화 등)
+                if (el.tagName === 'SPAN' && !el.closest('.language-selector') && !el.closest('.typing-cursor') && !el.style.filter) {
+                    const text = el.textContent.trim();
+                    if (translation[text]) {
+                        el.textContent = translation[text];
+                    }
+                } else if (el.tagName !== 'SPAN') {
+                    // 흐림 효과가 있는 span이 포함된 경우 처리
+                    if (el.querySelector('span[style*="filter: blur"]')) {
+                        // 흐림 효과가 있는 span을 제외하고 번역
+                        const blurSpans = el.querySelectorAll('span[style*="filter: blur"]');
+                        const blurContents = Array.from(blurSpans).map(span => span.outerHTML);
+                        
+                        // 원본 HTML 저장
+                        const originalHtml = el.getAttribute('data-original-html') || el.innerHTML.trim();
+                        
+                        // 흐림 효과 span을 임시로 마커로 교체
+                        let tempHtml = el.innerHTML;
+                        blurContents.forEach((blurContent, index) => {
+                            tempHtml = tempHtml.replace(blurContent, `__BLUR_MARKER_${index}__`);
+                        });
+                        
+                        // 번역 시도
+                        let translatedHtml = tempHtml;
+                        Object.keys(translation).forEach(key => {
+                            if (translatedHtml.includes(key)) {
+                                translatedHtml = translatedHtml.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), translation[key]);
+                            }
+                        });
+                        
+                        // 마커를 다시 원래 blur span으로 복원
+                        blurContents.forEach((blurContent, index) => {
+                            translatedHtml = translatedHtml.replace(`__BLUR_MARKER_${index}__`, blurContent);
+                        });
+                        
+                        if (translatedHtml !== el.innerHTML) {
+                            el.innerHTML = translatedHtml;
+                        }
+                    } else {
+                        // 일반적인 경우
+                        const text = el.textContent.trim();
+                        if (translation[text]) {
+                            el.textContent = translation[text];
+                        } else {
+                            // HTML이 포함된 경우
+                            const originalHtml = el.getAttribute('data-original-html') || el.innerHTML.trim();
+                            // 공백과 줄바꿈을 정규화한 버전도 확인
+                            const normalizedHtml = originalHtml.replace(/\s+/g, ' ').trim();
+                            const normalizedWithBr = originalHtml.replace(/\n\s+/g, '').trim();
+                            
+                            if (translation[originalHtml]) {
+                                el.innerHTML = translation[originalHtml];
+                            } else if (translation[normalizedHtml]) {
+                                el.innerHTML = translation[normalizedHtml];
+                            } else if (translation[normalizedWithBr]) {
+                                el.innerHTML = translation[normalizedWithBr];
+                            } else {
+                                // 부분 번역 시도
+                                let newHtml = el.innerHTML;
+                                Object.keys(translation).forEach(key => {
+                                    if (newHtml.includes(key) && key !== originalHtml) {
+                                        newHtml = newHtml.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), translation[key]);
+                                    }
+                                });
+                                if (newHtml !== el.innerHTML) {
+                                    el.innerHTML = newHtml;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 타이핑 텍스트 번역 및 재실행
+            const typingText = document.getElementById('typing-text');
+            if (typingText) {
+                const englishText = translation['LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.'];
+                if (englishText) {
+                    typeWriter('typing-text', englishText, 120);
+                }
+            }
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
+        
+        // 페이지 로드 시 저장된 언어 설정 불러오기 및 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            // 저장된 언어 확인
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            
+            // 타이핑 애니메이션 텍스트 설정
+            let typingText = "LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.";
+            if (savedLang === 'en') {
+                typingText = translations.en['LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.'];
+            }
+            
+            // 타이핑 애니메이션 시작
+            typeWriter('typing-text', typingText, 120);
+            
+            // 언어 설정 적용
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // 글로우 카드 효과 초기화
+            initGlowCards();
+            
+            // 이미지 오류 처리 초기화
+            handleImageErrors();
+        });
 
         // 타이핑 애니메이션 함수
         function typeWriter(elementId, text, speed = 150) {
@@ -1123,17 +1602,6 @@
             });
         }
 
-        // 페이지 로드 시 초기화
-        document.addEventListener('DOMContentLoaded', function() {
-            const text = "LUNE은 대체할 수 없는 가치를 전달하는 브랜드입니다.";
-            typeWriter('typing-text', text, 120);
-            
-            // 글로우 카드 효과 초기화
-            initGlowCards();
-            
-            // 이미지 오류 처리 초기화
-            handleImageErrors();
-        });
 
     </script>
 </body>

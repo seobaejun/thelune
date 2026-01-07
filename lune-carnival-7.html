@@ -792,6 +792,7 @@
                 '맞춤형 리무진 시트를 선보이는 디에이치오토에서 고객님의 니즈에 맞춰 시트와 사이트랙 등의 실내 인테리어 16가지의 다양한 색상을 직접 선택하실 수 있습니다.': '맞춤형 리무진 시트를 선보이는 디에이치오토에서 고객님의 니즈에 맞춰 시트와 사이트랙 등의 실내 인테리어 16가지의 다양한 색상을 직접 선택하실 수 있습니다.',
                 '구매 문의하기': '구매 문의하기',
                 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다',
+                'Irreplaceable Value': 'Irreplaceable Value',
                 // 푸터
                 '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
                 '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
@@ -818,6 +819,7 @@
                 '맞춤형 리무진 시트를 선보이는 디에이치오토에서 고객님의 니즈에 맞춰 시트와 사이트랙 등의 실내 인테리어 16가지의 다양한 색상을 직접 선택하실 수 있습니다.': 'At DH Auto, which showcases custom limousine seats, you can directly choose from 16 different colors for interior elements such as seats and side racks according to your needs.',
                 '구매 문의하기': 'Inquire About Purchase',
                 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE discovers and grows the potential value<br>of the space called a vehicle and its passengers',
+                'Irreplaceable Value': 'Irreplaceable Value',
                 // 푸터
                 '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
                 '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
@@ -830,7 +832,7 @@
 
         // 원본 텍스트 저장 함수
         function saveOriginalTexts() {
-            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .model-subtitle, .model-section-content p, .glass-button-text, .bottom-cta p, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .model-subtitle, .model-section-content p, .glass-button-text, .bottom-cta h2, .bottom-cta p, footer div, footer a, .footer-contact-mobile div').forEach(el => {
                 if (!el.hasAttribute('data-original-text')) {
                     el.setAttribute('data-original-text', el.textContent.trim());
                 }
@@ -948,11 +950,35 @@
                 }
             });
             
-            // Bottom CTA 섹션 번역
+            // Bottom CTA 섹션 번역 (h2 제목)
+            document.querySelectorAll('.bottom-cta h2').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // Bottom CTA 섹션 번역 (p 설명)
             document.querySelectorAll('.bottom-cta p').forEach(el => {
                 const html = el.innerHTML.trim();
+                // 공백과 줄바꿈을 정규화한 버전도 확인
+                const normalizedHtml = html.replace(/\n\s+/g, '').replace(/\s+/g, ' ').trim();
+                
                 if (translation[html]) {
                     el.innerHTML = translation[html];
+                } else if (translation[normalizedHtml]) {
+                    el.innerHTML = translation[normalizedHtml];
+                } else {
+                    // 부분 번역 시도
+                    let newHtml = html;
+                    Object.keys(translation).forEach(key => {
+                        if (newHtml.includes(key) && key !== html) {
+                            newHtml = newHtml.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), translation[key]);
+                        }
+                    });
+                    if (newHtml !== html) {
+                        el.innerHTML = newHtml;
+                    }
                 }
             });
             
