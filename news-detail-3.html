@@ -524,7 +524,7 @@
 
         // 원본 텍스트 저장 함수
         function saveOriginalTexts() {
-            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .news-detail-title, .news-detail-content p, .news-nav-label, .news-nav-link, .back-to-list span, footer div, footer a').forEach(el => {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .news-detail-title, .news-detail-content p, .news-nav-label, .news-nav-link, .back-to-list span, footer div, footer span, footer a').forEach(el => {
                 if (!el.hasAttribute('data-original-text')) {
                     el.setAttribute('data-original-text', el.textContent.trim());
                 }
@@ -661,8 +661,8 @@
                 }
             });
             
-            // 푸터 번역
-            document.querySelectorAll('footer div').forEach(el => {
+            // 푸터 번역 (div와 span 모두)
+            document.querySelectorAll('footer div, footer span').forEach(el => {
                 const text = el.textContent.trim();
                 if (translation[text]) {
                     el.textContent = translation[text];

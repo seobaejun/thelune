@@ -697,6 +697,14 @@
                 }
             });
             
+            // 푸터 데스크톱 버전 (span)
+            document.querySelectorAll('.footer-contact-desktop').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             // 푸터 모바일 버전
             document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
                 const text = el.textContent.trim();
