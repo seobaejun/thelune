@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -565,13 +565,279 @@
     <script src="assets/js/plugins/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 메인 콘텐츠
+                '전시장 위치': '전시장 위치',
+                '방문하실 전시장을 선택해주세요': '방문하실 전시장을 선택해주세요',
+                'THE LUNE 본사': 'THE LUNE 본사',
+                '안산 전시장': '안산 전시장',
+                '부산 전시장': '부산 전시장',
+                '📍 위치': '📍 위치',
+                '📞 연락처': '📞 연락처',
+                '🕒 운영시간': '🕒 운영시간',
+                '평일: 09:00 - 18:00': '평일: 09:00 - 18:00',
+                '토요일: 09:00 - 17:00': '토요일: 09:00 - 17:00',
+                '일요일: 휴무': '일요일: 휴무',
+                '방문 예약하기': '방문 예약하기',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다',
+                '구매 문의하기': '구매 문의하기',
+                '문의: 031-943-4488': '문의: 031-943-4488',
+                // 주소
+                '경기도 파주시 탄현면 축현산단로 21-41': '경기도 파주시 탄현면 축현산단로 21-41',
+                '경기 안산시 단원구 원포공원2로 24, 215호': '경기 안산시 단원구 원포공원2로 24, 215호',
+                '부산 금정구 금사로 160 3층': '부산 금정구 금사로 160 3층',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com',
+                '대표번호 : 031-943-4488': '대표번호 : 031-943-4488',
+                '팩스 : 031-949-6211': '팩스 : 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 메인 콘텐츠
+                '전시장 위치': 'Showroom Location',
+                '방문하실 전시장을 선택해주세요': 'Please select a showroom to visit',
+                'THE LUNE 본사': 'THE LUNE Headquarters',
+                '안산 전시장': 'Ansan Showroom',
+                '부산 전시장': 'Busan Showroom',
+                '📍 위치': '📍 Location',
+                '📞 연락처': '📞 Contact',
+                '🕒 운영시간': '🕒 Business Hours',
+                '평일: 09:00 - 18:00': 'Weekdays: 09:00 - 18:00',
+                '토요일: 09:00 - 17:00': 'Saturday: 09:00 - 17:00',
+                '일요일: 휴무': 'Sunday: Closed',
+                '방문 예약하기': 'Book a Visit',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE discovers and grows the potential value<br>of the space called a vehicle and its passengers',
+                '구매 문의하기': 'Inquire About Purchase',
+                '문의: 031-943-4488': 'Inquiry: 031-943-4488',
+                // 주소
+                '경기도 파주시 탄현면 축현산단로 21-41': '21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '경기 안산시 단원구 원포공원2로 24, 215호': '24, Wonpo-gongwon 2-ro, Danwon-gu, Ansan-si, Gyeonggi-do, Room 215',
+                '부산 금정구 금사로 160 3층': '160 Geumsa-ro, Geumjeong-gu, Busan, 3rd Floor',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com',
+                '대표번호 : 031-943-4488': 'Tel: 031-943-4488',
+                '팩스 : 031-949-6211': 'Fax: 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 영어에서 한국어로 역변환을 위한 맵 생성
+        const reverseTranslations = {};
+        Object.keys(translations.en).forEach(key => {
+            reverseTranslations[translations.en[key]] = translations.ko[key];
+        });
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
+            
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 메인 섹션 제목 및 설명
+            document.querySelectorAll('h2').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            document.querySelectorAll('p').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 전시장 버튼 번역
+            document.querySelectorAll('.showroom-btn').forEach(btn => {
+                const text = btn.textContent.trim();
+                if (translation[text]) {
+                    btn.textContent = translation[text];
+                }
+            });
+            
+            // 전시장 정보 섹션 번역
+            document.querySelectorAll('.location-info h3').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            document.querySelectorAll('.location-info h4').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 운영시간 텍스트 번역 (br 태그 포함)
+            document.querySelectorAll('.location-info p').forEach(el => {
+                const html = el.innerHTML.trim();
+                if (html.includes('평일: 09:00 - 18:00')) {
+                    el.innerHTML = translation['평일: 09:00 - 18:00'] + '<br>' + 
+                                   translation['토요일: 09:00 - 17:00'] + '<br>' + 
+                                   translation['일요일: 휴무'];
+                }
+            });
+            
+            // 연락처 텍스트 번역 (부산 전시장)
+            document.querySelectorAll('.location-info p').forEach(el => {
+                const text = el.textContent.trim();
+                if (text.includes('문의: 031-943-4488')) {
+                    el.textContent = translation['문의: 031-943-4488'];
+                }
+            });
+            
+            // 주소 번역
+            document.querySelectorAll('.location-info p').forEach(el => {
+                const text = el.textContent.trim();
+                if (text === '경기도 파주시 탄현면 축현산단로 21-41') {
+                    el.textContent = translation['경기도 파주시 탄현면 축현산단로 21-41'];
+                } else if (text === '경기 안산시 단원구 원포공원2로 24, 215호') {
+                    el.textContent = translation['경기 안산시 단원구 원포공원2로 24, 215호'];
+                } else if (text === '부산 금정구 금사로 160 3층') {
+                    el.textContent = translation['부산 금정구 금사로 160 3층'];
+                }
+            });
+            
+            // 버튼 텍스트 번역
+            document.querySelectorAll('.glass-button-text').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // Bottom CTA 섹션 번역
+            document.querySelectorAll('.bottom-cta p').forEach(el => {
+                const html = el.innerHTML.trim();
+                if (html.includes('LUNE은 차량이라는 공간과 탑승자의')) {
+                    el.innerHTML = translation['LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다'];
+                }
+            });
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
 
@@ -645,9 +911,44 @@
             mapElement.innerHTML = locations[location].iframe;
         }
 
-        // 페이지 로드 시 기본 지도 설정
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h2, h3, h4, p, span, .glass-button-text, .showroom-btn, .location-info h3, .location-info h4, .location-info p, .bottom-cta p').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
+        // 페이지 로드 시 기본 지도 설정 및 언어 복원
         document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
             updateGoogleMap('headquarters');
+            
+            // 저장된 언어 설정 불러오기
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
             
             // 네비게이션 호버 효과 강제 적용
             const navLinks = document.querySelectorAll('.ak-nav .ak-nav_list a.text-hover-animaiton');

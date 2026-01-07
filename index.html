@@ -988,18 +988,321 @@
         });
     </script>
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 메인 콘텐츠
+                'THE LUNE과 함께하는 <br>특별한 경험을 만나보세요.<br>최고급 리무진 서비스로 품격 있는 여행을 선사합니다.': 'THE LUNE과 함께하는 <br>특별한 경험을 만나보세요.<br>최고급 리무진 서비스로 품격 있는 여행을 선사합니다.',
+                '대체 불가능한 가치를 제공하는<br>THE LUNE 프리미엄 리무진 서비스.<br>당신만을 위한 특별한 순간을 만들어드립니다.': '대체 불가능한 가치를 제공하는<br>THE LUNE 프리미엄 리무진 서비스.<br>당신만을 위한 특별한 순간을 만들어드립니다.',
+                '모든 모델 보기': '모든 모델 보기',
+                'THE LUNE은 고객의 특별한 순간을 위한 프리미엄 리무진 서비스를 제공합니다. \n                            최고의 기술력과 인증된 품질로 대체 불가능한 가치를 선사하며, \n                            고객 만족을 최우선으로 하는 차별화된 서비스를 경험하실 수 있습니다.': 'THE LUNE은 고객의 특별한 순간을 위한 프리미엄 리무진 서비스를 제공합니다. \n                            최고의 기술력과 인증된 품질로 대체 불가능한 가치를 선사하며, \n                            고객 만족을 최우선으로 하는 차별화된 서비스를 경험하실 수 있습니다.',
+                '2023년 브랜드파워 1위': '2023년 브랜드파워 1위',
+                '벤처기업 및 이노비즈 인증': '벤처기업 및 이노비즈 인증',
+                'ISO 품질경영시스템 인증': 'ISO 품질경영시스템 인증',
+                '차량 인테리어 특허 보유': '차량 인테리어 특허 보유',
+                'THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.': 'THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.',
+                'THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            4인승부터 9인승까지, 고객의 필요에 맞는 최적의 차량을 제공하며, \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.': 'THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            4인승부터 9인승까지, 고객의 필요에 맞는 최적의 차량을 제공하며, \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.',
+                // 서비스 진행 섹션
+                '커스텀 디자인': '커스텀 디자인',
+                '고객의 취향과 필요에 맞춘 맞춤형 인테리어 디자인으로 특별한 공간을 연출합니다. 프리미엄 소재와 세심한 마감으로 완성도를 높입니다.': '고객의 취향과 필요에 맞춘 맞춤형 인테리어 디자인으로 특별한 공간을 연출합니다. 프리미엄 소재와 세심한 마감으로 완성도를 높입니다.',
+                '인증 및 특허': '인증 및 특허',
+                '벤처기업 및 이노비즈 인증, ISO 품질경영시스템 인증을 보유하고 있으며, 차량 인테리어 특허 기술로 최고의 품질을 보장합니다.': '벤처기업 및 이노비즈 인증, ISO 품질경영시스템 인증을 보유하고 있으며, 차량 인테리어 특허 기술로 최고의 품질을 보장합니다.',
+                '브랜드 파워': '브랜드 파워',
+                '2023년 브랜드파워 1위를 수상한 THE LUNE은 고객 만족도와 신뢰성을 바탕으로 업계 최고의 서비스를 제공하고 있습니다.': '2023년 브랜드파워 1위를 수상한 THE LUNE은 고객 만족도와 신뢰성을 바탕으로 업계 최고의 서비스를 제공하고 있습니다.',
+                // 모델 섹션
+                '4인승 프리미엄 리무진으로 소규모 VIP 이동에 최적화된 럭셔리 차량입니다. 최고급 인테리어와 편의시설로 특별한 여행을 선사합니다.': '4인승 프리미엄 리무진으로 소규모 VIP 이동에 최적화된 럭셔리 차량입니다. 최고급 인테리어와 편의시설로 특별한 여행을 선사합니다.',
+                '6인승 프리미엄 리무진으로 가족 단위나 소그룹 이동에 완벽한 선택입니다. 넓은 공간과 고급 편의시설로 편안하고 안전한 여행을 보장합니다.': '6인승 프리미엄 리무진으로 가족 단위나 소그룹 이동에 완벽한 선택입니다. 넓은 공간과 고급 편의시설로 편안하고 안전한 여행을 보장합니다.',
+                '9인승 대형 프리미엄 리무진으로 단체 이동이나 특별한 행사에 최적화된 럭셔리 차량입니다. 최대 승객 수용과 프리미엄 서비스를 동시에 제공합니다.': '9인승 대형 프리미엄 리무진으로 단체 이동이나 특별한 행사에 최적화된 럭셔리 차량입니다. 최대 승객 수용과 프리미엄 서비스를 동시에 제공합니다.',
+                '더 보기': '더 보기',
+                // NEWS 섹션
+                'THE LUNE의 최신 소식과 업계 동향을 확인하세요. 프리미엄 리무진 서비스의 새로운 소식을 전해드립니다.': 'THE LUNE의 최신 소식과 업계 동향을 확인하세요. 프리미엄 리무진 서비스의 새로운 소식을 전해드립니다.',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com',
+                '대표번호 : 031-943-4488': '대표번호 : 031-943-4488',
+                '팩스 : 031-949-6211': '팩스 : 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 메인 콘텐츠
+                'THE LUNE과 함께하는 <br>특별한 경험을 만나보세요.<br>최고급 리무진 서비스로 품격 있는 여행을 선사합니다.': 'Experience a special journey with THE LUNE.<br>Premium limousine service for an elegant travel experience.',
+                '대체 불가능한 가치를 제공하는<br>THE LUNE 프리미엄 리무진 서비스.<br>당신만을 위한 특별한 순간을 만들어드립니다.': 'Providing irreplaceable value<br>THE LUNE Premium Limousine Service.<br>We create special moments just for you.',
+                '모든 모델 보기': 'View All Models',
+                'THE LUNE은 고객의 특별한 순간을 위한 프리미엄 리무진 서비스를 제공합니다. \n                            최고의 기술력과 인증된 품질로 대체 불가능한 가치를 선사하며, \n                            고객 만족을 최우선으로 하는 차별화된 서비스를 경험하실 수 있습니다.': 'THE LUNE provides premium limousine services for your special moments. \n                            We deliver irreplaceable value with the best technology and certified quality, \n                            offering a differentiated service that prioritizes customer satisfaction.',
+                '2023년 브랜드파워 1위': '2023 Brand Power #1',
+                '벤처기업 및 이노비즈 인증': 'Venture & Innobiz Certified',
+                'ISO 품질경영시스템 인증': 'ISO Quality Management Certified',
+                '차량 인테리어 특허 보유': 'Vehicle Interior Patent Holder',
+                'THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.': 'Discover THE LUNE\'s diverse range of premium limousine models. \n                            Experience the finest service and amenities in every model.',
+                'THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            4인승부터 9인승까지, 고객의 필요에 맞는 최적의 차량을 제공하며, \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.': 'Discover THE LUNE\'s diverse range of premium limousine models. \n                            From 4-seater to 9-seater, we provide the optimal vehicle for your needs, \n                            with the finest service and amenities in every model.',
+                // 서비스 진행 섹션
+                '커스텀 디자인': 'Custom Design',
+                '고객의 취향과 필요에 맞춘 맞춤형 인테리어 디자인으로 특별한 공간을 연출합니다. 프리미엄 소재와 세심한 마감으로 완성도를 높입니다.': 'We create special spaces with custom interior designs tailored to customer tastes and needs. We enhance completeness with premium materials and meticulous finishing.',
+                '인증 및 특허': 'Certification and Patent',
+                '벤처기업 및 이노비즈 인증, ISO 품질경영시스템 인증을 보유하고 있으며, 차량 인테리어 특허 기술로 최고의 품질을 보장합니다.': 'We hold venture company and Inno-Biz certifications, ISO quality management system certification, and guarantee the highest quality with patented vehicle interior technology.',
+                '브랜드 파워': 'Brand Power',
+                '2023년 브랜드파워 1위를 수상한 THE LUNE은 고객 만족도와 신뢰성을 바탕으로 업계 최고의 서비스를 제공하고 있습니다.': 'THE LUNE, which won first place in brand power in 2023, provides the industry\'s best service based on customer satisfaction and trust.',
+                // 모델 섹션
+                '4인승 프리미엄 리무진으로 소규모 VIP 이동에 최적화된 럭셔리 차량입니다. 최고급 인테리어와 편의시설로 특별한 여행을 선사합니다.': 'A 4-seater premium limousine, a luxury vehicle optimized for small-group VIP travel. It offers a special journey with top-notch interior and amenities.',
+                '6인승 프리미엄 리무진으로 가족 단위나 소그룹 이동에 완벽한 선택입니다. 넓은 공간과 고급 편의시설로 편안하고 안전한 여행을 보장합니다.': 'A 6-seater premium limousine, a perfect choice for family or small-group travel. It guarantees a comfortable and safe journey with spacious room and high-end amenities.',
+                '9인승 대형 프리미엄 리무진으로 단체 이동이나 특별한 행사에 최적화된 럭셔리 차량입니다. 최대 승객 수용과 프리미엄 서비스를 동시에 제공합니다.': 'A 9-seater large premium limousine, a luxury vehicle optimized for group travel or special events. It simultaneously offers maximum passenger capacity and premium service.',
+                '더 보기': 'View More',
+                // NEWS 섹션
+                'THE LUNE의 최신 소식과 업계 동향을 확인하세요. 프리미엄 리무진 서비스의 새로운 소식을 전해드립니다.': 'Check out the latest news and industry trends from THE LUNE. We deliver new news about premium limousine services.',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com',
+                '대표번호 : 031-943-4488': 'Tel: 031-943-4488',
+                '팩스 : 031-949-6211': 'Fax: 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 영어에서 한국어로 역변환을 위한 맵 생성
+        const reverseTranslations = {};
+        Object.keys(translations.en).forEach(key => {
+            reverseTranslations[translations.en[key]] = translations.ko[key];
+        });
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
             // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
             
-            // 실제 언어 변경 로직은 여기에 추가
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 메인 콘텐츠 번역
+            // 버튼 텍스트
+            document.querySelectorAll('.glass-button-text').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // mini-title (히어로 섹션 설명)
+            document.querySelectorAll('.mini-title').forEach(el => {
+                const html = el.innerHTML.trim();
+                // 정확한 매칭 시도
+                if (translation[html]) {
+                    el.innerHTML = translation[html];
+                } else {
+                    // 텍스트 내용으로 매칭
+                    const textContent = el.textContent.trim();
+                    if (textContent.includes('THE LUNE과 함께하는') && textContent.includes('특별한 경험을 만나보세요')) {
+                        el.innerHTML = translation['THE LUNE과 함께하는 <br>특별한 경험을 만나보세요.<br>최고급 리무진 서비스로 품격 있는 여행을 선사합니다.'];
+                    } else if (textContent.includes('대체 불가능한 가치를 제공하는') && textContent.includes('THE LUNE 프리미엄 리무진 서비스')) {
+                        el.innerHTML = translation['대체 불가능한 가치를 제공하는<br>THE LUNE 프리미엄 리무진 서비스.<br>당신만을 위한 특별한 순간을 만들어드립니다.'];
+                    }
+                }
+            });
+            
+            // 섹션 서브타이틀
+            document.querySelectorAll('.ak-section-subtitle').forEach(el => {
+                const text = el.textContent.trim().replace(/\s+/g, ' ');
+                // 정확한 매칭을 위해 주요 텍스트만 추출
+                if (text.includes('THE LUNE은 고객의 특별한 순간을 위한')) {
+                    el.textContent = translation['THE LUNE은 고객의 특별한 순간을 위한 프리미엄 리무진 서비스를 제공합니다. \n                            최고의 기술력과 인증된 품질로 대체 불가능한 가치를 선사하며, \n                            고객 만족을 최우선으로 하는 차별화된 서비스를 경험하실 수 있습니다.'];
+                } else if (text.includes('THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요')) {
+                    if (text.includes('4인승부터 9인승까지')) {
+                        el.textContent = translation['THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            4인승부터 9인승까지, 고객의 필요에 맞는 최적의 차량을 제공하며, \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.'];
+                    } else {
+                        el.textContent = translation['THE LUNE의 다양한 프리미엄 리무진 모델을 만나보세요. \n                            모든 모델에서 최고급 서비스와 편의시설을 경험하실 수 있습니다.'];
+                    }
+                } else if (text.includes('THE LUNE의 최신 소식과 업계 동향을 확인하세요')) {
+                    el.textContent = translation['THE LUNE의 최신 소식과 업계 동향을 확인하세요. 프리미엄 리무진 서비스의 새로운 소식을 전해드립니다.'];
+                }
+            });
+            
+            // 서비스 진행 섹션 제목 및 설명
+            document.querySelectorAll('.service-progress-card .title').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            document.querySelectorAll('.service-progress-card .desp').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 모델 섹션 설명
+            document.querySelectorAll('.card-desp').forEach(el => {
+                const text = el.textContent.trim().replace(/\s+/g, ' ');
+                if (text.includes('4인승 프리미엄 리무진으로 소규모 VIP 이동에 최적화된')) {
+                    el.textContent = translation['4인승 프리미엄 리무진으로 소규모 VIP 이동에 최적화된 럭셔리 차량입니다. 최고급 인테리어와 편의시설로 특별한 여행을 선사합니다.'];
+                } else if (text.includes('6인승 프리미엄 리무진으로 가족 단위나 소그룹 이동에 완벽한')) {
+                    el.textContent = translation['6인승 프리미엄 리무진으로 가족 단위나 소그룹 이동에 완벽한 선택입니다. 넓은 공간과 고급 편의시설로 편안하고 안전한 여행을 보장합니다.'];
+                } else if (text.includes('9인승 대형 프리미엄 리무진으로 단체 이동이나 특별한 행사에 최적화된')) {
+                    el.textContent = translation['9인승 대형 프리미엄 리무진으로 단체 이동이나 특별한 행사에 최적화된 럭셔리 차량입니다. 최대 승객 수용과 프리미엄 서비스를 동시에 제공합니다.'];
+                }
+            });
+            
+            // 스트로크 텍스트 (인증 정보)
+            document.querySelectorAll('.ak-stroke-text').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
+        
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h2, h3, h4, p, span, .glass-button-text, .mini-title, .ak-section-subtitle, .service-progress-card .title, .service-progress-card .desp, .card-desp, .ak-stroke-text, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 

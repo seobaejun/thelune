@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 
 <head>
     <!-- Meta Tags -->
@@ -631,18 +631,218 @@
     <script src="assets/js/plugins/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // services 페이지 콘텐츠
+                'THE LUNE의 프리미엄 모델들을 만나보세요': 'THE LUNE의 프리미엄 모델들을 만나보세요',
+                '4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.': '4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.',
+                '6인승 프리미엄 모델로 넓은 공간과 럭셔리한 인테리어를 자랑합니다.': '6인승 프리미엄 모델로 넓은 공간과 럭셔리한 인테리어를 자랑합니다.',
+                '9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.': '9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.',
+                '비즈니스와 레저를 위한 프리미엄 스프린터 커스텀 모델입니다.': '비즈니스와 레저를 위한 프리미엄 스프린터 커스텀 모델입니다.',
+                '더 알아보기': '더 알아보기',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com',
+                '대표번호 : 031-943-4488': '대표번호 : 031-943-4488',
+                '팩스 : 031-949-6211': '팩스 : 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // services 페이지 콘텐츠
+                'THE LUNE의 프리미엄 모델들을 만나보세요': 'Discover THE LUNE\'s Premium Models',
+                '4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.': 'A 4-seater premium model offering top-tier interior and comfortable ride quality.',
+                '6인승 프리미엄 모델로 넓은 공간과 럭셔리한 인테리어를 자랑합니다.': 'A 6-seater premium model boasting spacious room and luxurious interior.',
+                '9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.': 'A 9-seater large model providing premium interior optimized for group use.',
+                '비즈니스와 레저를 위한 프리미엄 스프린터 커스텀 모델입니다.': 'A premium Sprinter custom model for business and leisure.',
+                '더 알아보기': 'Learn More',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com',
+                '대표번호 : 031-943-4488': 'Tel: 031-943-4488',
+                '팩스 : 031-949-6211': 'Fax: 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h1, p, .glass-button-text, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
             // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
             
-            // 실제 언어 변경 로직은 여기에 추가
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 페이지 제목 및 설명 번역
+            document.querySelectorAll('h1, p').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 버튼 텍스트 번역
+            document.querySelectorAll('.glass-button-text').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
+        
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
         
     </script>
 </body>

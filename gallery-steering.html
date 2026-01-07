@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -448,18 +448,263 @@
     <script src="assets/js/main.js"></script>
     
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 핸들 갤러리 페이지
+                '핸들 갤러리': '핸들 갤러리',
+                '프리미엄 스티어링 휠과 컨트롤 시스템': '프리미엄 스티어링 휠과 컨트롤 시스템',
+                '← 갤러리로 돌아가기': '← 갤러리로 돌아가기',
+                '프리미엄 스티어링 휠': '프리미엄 스티어링 휠',
+                '고급 가죽으로 마감된 프리미엄 스티어링 휠': '고급 가죽으로 마감된 프리미엄 스티어링 휠',
+                '첨단 컨트롤 시스템이 적용된 멀티펑션 핸들': '첨단 컨트롤 시스템이 적용된 멀티펑션 핸들',
+                '인체공학적 설계와 고급 마감이 적용된 스티어링 휠': '인체공학적 설계와 고급 마감이 적용된 스티어링 휠',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 핸들 갤러리 페이지
+                '핸들 갤러리': 'Steering Wheel Gallery',
+                '프리미엄 스티어링 휠과 컨트롤 시스템': 'Premium Steering Wheel and Control System',
+                '← 갤러리로 돌아가기': '← Back to Gallery',
+                '프리미엄 스티어링 휠': 'Premium Steering Wheel',
+                '고급 가죽으로 마감된 프리미엄 스티어링 휠': 'Premium steering wheel finished with premium leather',
+                '첨단 컨트롤 시스템이 적용된 멀티펑션 핸들': 'Multifunction steering wheel with advanced control system',
+                '인체공학적 설계와 고급 마감이 적용된 스티어링 휠': 'Steering wheel with ergonomic design and premium finishes',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h1, h2, h3, p, .back-button, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
+            
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // JavaScript 내부의 갤러리 데이터 먼저 복원
+                if (galleryImages && window.originalGalleryImages) {
+                    galleryImages = JSON.parse(JSON.stringify(window.originalGalleryImages));
+                }
+                
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                // 네비게이션 메뉴 복원
+                const navItems = {
+                    'About Us': '회사소개',
+                    'Models': '모델소개',
+                    'News': '홍보센터',
+                    'Showroom': '전시장',
+                    'Quote': '견적내기',
+                    'Contact': '문의하기',
+                    'Gallery': '갤러리',
+                    'A/S Service': 'A/S접수'
+                };
+                
+                document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                    const text = link.textContent.trim();
+                    if (navItems[text]) {
+                        link.textContent = navItems[text];
+                    }
+                });
+                
+                // HTML lang 속성 변경
+                document.documentElement.lang = 'ko';
+                
+                // 갤러리 다시 렌더링 (한국어 데이터로)
+                if (typeof loadGallery === 'function') {
+                    loadGallery();
+                }
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 페이지 제목 및 설명 번역
+            document.querySelectorAll('h1, p, .back-button').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // JavaScript 내부의 갤러리 데이터 번역
+            if (galleryImages) {
+                // 원본 데이터 저장 (처음 한 번만)
+                if (!window.originalGalleryImages) {
+                    window.originalGalleryImages = JSON.parse(JSON.stringify(galleryImages));
+                }
+                
+                galleryImages.forEach((item, index) => {
+                    if (item.title) {
+                        // 제목 번역
+                        if (item.title.includes('프리미엄 스티어링 휠')) {
+                            item.title = item.title.replace('프리미엄 스티어링 휠', 'Premium Steering Wheel');
+                        }
+                    }
+                    if (item.description) {
+                        // 번역 데이터에 있는 경우
+                        if (translation[item.description]) {
+                            item.description = translation[item.description];
+                        } else {
+                            // 원본 데이터에서 찾아서 번역
+                            const originalItem = window.originalGalleryImages && window.originalGalleryImages[index];
+                            if (originalItem && originalItem.description && translation[originalItem.description]) {
+                                item.description = translation[originalItem.description];
+                            }
+                        }
+                    }
+                });
+                
+                // 갤러리 다시 렌더링 (이미지 제목/설명이 업데이트됨)
+                if (typeof loadGallery === 'function') {
+                    loadGallery();
+                }
+                
+                // 이미 렌더링된 갤러리 아이템의 텍스트도 업데이트
+                document.querySelectorAll('.gallery-item-title').forEach((el, index) => {
+                    if (galleryImages[index] && galleryImages[index].title) {
+                        el.textContent = galleryImages[index].title;
+                    }
+                });
+                document.querySelectorAll('.gallery-item-description').forEach((el, index) => {
+                    if (galleryImages[index] && galleryImages[index].description) {
+                        el.textContent = galleryImages[index].description;
+                    }
+                });
+            }
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
+        
 
         // 핸들 갤러리 이미지 데이터
-        const galleryImages = [
+        let galleryImages = [
             {
                 url: 'assets/img/핸들/5월 15일 dh auto 카니발 핸들1304.jpg',
                 title: '프리미엄 스티어링 휠 1',
@@ -482,21 +727,48 @@
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = '';
 
+            // 현재 언어 상태 확인
+            const currentLang = document.documentElement.lang || localStorage.getItem('preferredLanguage') || 'ko';
+            const translation = translations[currentLang];
+            
             // 모든 이미지를 즉시 로드 (핸들은 3개뿐이므로)
             galleryImages.forEach((image, index) => {
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
                 galleryItem.onclick = () => openLightbox(image.url);
                 
+                // 제목과 설명 번역 적용
+                let displayTitle = image.title;
+                let displayDescription = image.description;
+                
+                if (currentLang === 'en' && translation) {
+                    // 제목 번역
+                    if (displayTitle && displayTitle.includes('프리미엄 스티어링 휠')) {
+                        displayTitle = displayTitle.replace('프리미엄 스티어링 휠', 'Premium Steering Wheel');
+                    }
+                    // 설명 번역
+                    if (displayDescription) {
+                        if (translation[displayDescription]) {
+                            displayDescription = translation[displayDescription];
+                        } else {
+                            // 원본 데이터에서 찾아서 번역
+                            const originalItem = window.originalGalleryImages && window.originalGalleryImages[index];
+                            if (originalItem && originalItem.description && translation[originalItem.description]) {
+                                displayDescription = translation[originalItem.description];
+                            }
+                        }
+                    }
+                }
+                
                 galleryItem.innerHTML = `
                     <img src="${image.url}" 
-                         alt="${image.title}" 
+                         alt="${displayTitle}" 
                          loading="eager"
                          decoding="async"
                          style="background-color: rgba(188,184,177,0.1);">
                     <div class="gallery-item-overlay">
-                        <div class="gallery-item-title">${image.title}</div>
-                        <div class="gallery-item-description">${image.description}</div>
+                        <div class="gallery-item-title">${displayTitle}</div>
+                        <div class="gallery-item-description">${displayDescription}</div>
                     </div>
                 `;
                 
@@ -520,9 +792,37 @@
             document.body.style.overflow = '';
         }
 
-        // 페이지 로드 시 갤러리 초기화
+        // 페이지 로드 시 갤러리 초기화 및 언어 설정
         document.addEventListener('DOMContentLoaded', function() {
-            loadGallery();
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            // 원본 갤러리 데이터 저장
+            if (galleryImages && !window.originalGalleryImages) {
+                window.originalGalleryImages = JSON.parse(JSON.stringify(galleryImages));
+            }
+            
+            // 저장된 언어 설정 불러오기 및 적용
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+                // 한국어로 갤러리 로드
+                loadGallery();
+            }
         });
 
         // ESC 키로 라이트박스 닫기

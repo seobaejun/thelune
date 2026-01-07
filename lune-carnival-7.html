@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 
 <head>
     <!-- Meta Tags -->
@@ -772,15 +772,241 @@
             },
         });
 
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 모델 페이지 콘텐츠
+                'VVIP를 위한 최적의 공간의 의전용 커스텀': 'VVIP를 위한 최적의 공간의 의전용 커스텀',
+                '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.': '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.',
+                '후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 \'LUNE\' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.': '후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 \'LUNE\' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.',
+                '천연 나파 가죽 소재의 시트 2석으로 구성한 1열과 VIP 의전용 전동 리무진 시트 4석의 2열까지 총 6인승으로 이루어졌습니다. 여유로운 공간감, 편안한 착좌감으로 VIP 의전 차량으로 손색이 없습니다.<br><br>풀 우드 플로어 바닥 마감, 오염 스크래치 방지, 실내 방음 시스템 등을 적용해 품격있는 실내 인테리어를 완성합니다.': '천연 나파 가죽 소재의 시트 2석으로 구성한 1열과 VIP 의전용 전동 리무진 시트 4석의 2열까지 총 6인승으로 이루어졌습니다. 여유로운 공간감, 편안한 착좌감으로 VIP 의전 차량으로 손색이 없습니다.<br><br>풀 우드 플로어 바닥 마감, 오염 스크래치 방지, 실내 방음 시스템 등을 적용해 품격있는 실내 인테리어를 완성합니다.',
+                '맞춤형 리무진 시트를 선보이는 디에이치오토에서 고객님의 니즈에 맞춰 시트와 사이트랙 등의 실내 인테리어 16가지의 다양한 색상을 직접 선택하실 수 있습니다.': '맞춤형 리무진 시트를 선보이는 디에이치오토에서 고객님의 니즈에 맞춰 시트와 사이트랙 등의 실내 인테리어 16가지의 다양한 색상을 직접 선택하실 수 있습니다.',
+                '구매 문의하기': '구매 문의하기',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com',
+                '대표번호 : 031-943-4488': '대표번호 : 031-943-4488',
+                '팩스 : 031-949-6211': '팩스 : 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 모델 페이지 콘텐츠
+                'VVIP를 위한 최적의 공간의 의전용 커스텀': 'Custom ceremonial space optimized for VVIPs',
+                '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.': 'THE LUNE Co., Ltd. respects the value of your time as a VVIP<br>and focuses on a direction that adds premium value to your space.',
+                '후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 \'LUNE\' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.': 'The design centered on the rear seat space emphasizes the beauty of empty space, enhancing comfort and convenience. Eco-friendly wood decorations such as the Posid wood floor provide an experience of sustainable luxury that the \'LUNE\' brand aims for.',
+                '천연 나파 가죽 소재의 시트 2석으로 구성한 1열과 VIP 의전용 전동 리무진 시트 4석의 2열까지 총 6인승으로 이루어졌습니다. 여유로운 공간감, 편안한 착좌감으로 VIP 의전 차량으로 손색이 없습니다.<br><br>풀 우드 플로어 바닥 마감, 오염 스크래치 방지, 실내 방음 시스템 등을 적용해 품격있는 실내 인테리어를 완성합니다.': 'It consists of a total of 6 seats: the first row with 2 seats made of natural napa leather, and the second row with 4 VIP ceremonial electric limousine seats. With spacious room and comfortable seating, it is second to none as a VIP ceremonial vehicle.<br><br>Full wood floor finishing, stain and scratch prevention, and interior soundproofing systems are applied to complete a sophisticated interior.',
+                '맞춤형 리무진 시트를 선보이는 디에이치오토에서 고객님의 니즈에 맞춰 시트와 사이트랙 등의 실내 인테리어 16가지의 다양한 색상을 직접 선택하실 수 있습니다.': 'At DH Auto, which showcases custom limousine seats, you can directly choose from 16 different colors for interior elements such as seats and side racks according to your needs.',
+                '구매 문의하기': 'Inquire About Purchase',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE discovers and grows the potential value<br>of the space called a vehicle and its passengers',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com',
+                '대표번호 : 031-943-4488': 'Tel: 031-943-4488',
+                '팩스 : 031-949-6211': 'Fax: 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .model-subtitle, .model-section-content p, .glass-button-text, .bottom-cta p, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
+            
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 모델 페이지 콘텐츠 번역
+            document.querySelectorAll('.model-subtitle').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 섹션 콘텐츠 번역
+            document.querySelectorAll('.model-section-content p').forEach(el => {
+                const html = el.innerHTML.trim();
+                if (translation[html]) {
+                    el.innerHTML = translation[html];
+                } else {
+                    const text = el.textContent.trim();
+                    if (translation[text]) {
+                        el.textContent = translation[text];
+                    }
+                }
+            });
+            
+            // 버튼 텍스트 번역
+            document.querySelectorAll('.glass-button-text').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // Bottom CTA 섹션 번역
+            document.querySelectorAll('.bottom-cta p').forEach(el => {
+                const html = el.innerHTML.trim();
+                if (translation[html]) {
+                    el.innerHTML = translation[html];
+                }
+            });
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
+        
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
 
         // AOS 초기화
         AOS.init({

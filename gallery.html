@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -1121,15 +1121,379 @@
     <script src="assets/js/plugins/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+        // 번역 데이터
+        const translations = {
+            ko: {
+                // 네비게이션
+                '회사소개': '회사소개',
+                '모델소개': '모델소개',
+                '홍보센터': '홍보센터',
+                '전시장': '전시장',
+                '견적내기': '견적내기',
+                '문의하기': '문의하기',
+                '갤러리': '갤러리',
+                'A/S접수': 'A/S접수',
+                // 갤러리 페이지 콘텐츠
+                'THE LUNE의 작업 결과물을 확인하세요': 'THE LUNE의 작업 결과물을 확인하세요',
+                '4인승': '4인승',
+                '6인승': '6인승',
+                '시트': '시트',
+                '핸들': '핸들',
+                '프리미엄 4인승 모델의 럭셔리 인테리어와 최고급 마감재를 확인하세요.': '프리미엄 4인승 모델의 럭셔리 인테리어와 최고급 마감재를 확인하세요.',
+                '편안한 6인승 모델의 프리미엄 공간과 세련된 디자인을 감상하세요.': '편안한 6인승 모델의 프리미엄 공간과 세련된 디자인을 감상하세요.',
+                '최고급 가죽 시트와 인체공학적 디자인의 완벽한 조화를 만나보세요.': '최고급 가죽 시트와 인체공학적 디자인의 완벽한 조화를 만나보세요.',
+                '프리미엄 스티어링 휠과 첨단 컨트롤 시스템의 세부사항을 확인하세요.': '프리미엄 스티어링 휠과 첨단 컨트롤 시스템의 세부사항을 확인하세요.',
+                '갤러리 보기': '갤러리 보기',
+                '카테고리 갤러리': '카테고리 갤러리',
+                '갤러리 로딩 중...': '갤러리 로딩 중...',
+                // 하단 CTA 섹션
+                'Irreplaceable Value': 'Irreplaceable Value',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다',
+                '구매 문의하기': '구매 문의하기',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com',
+                '대표번호 : 031-943-4488': '대표번호 : 031-943-4488',
+                '팩스 : 031-949-6211': '팩스 : 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail : thelune1@naver.com'
+            },
+            en: {
+                // 네비게이션
+                '회사소개': 'About Us',
+                '모델소개': 'Models',
+                '홍보센터': 'News',
+                '전시장': 'Showroom',
+                '견적내기': 'Quote',
+                '문의하기': 'Contact',
+                '갤러리': 'Gallery',
+                'A/S접수': 'A/S Service',
+                // 갤러리 페이지 콘텐츠
+                'THE LUNE의 작업 결과물을 확인하세요': 'View THE LUNE\'s Work Portfolio',
+                '4인승': '4-Seater',
+                '6인승': '6-Seater',
+                '시트': 'Seats',
+                '핸들': 'Steering Wheel',
+                '프리미엄 4인승 모델의 럭셔리 인테리어와 최고급 마감재를 확인하세요.': 'Discover the luxurious interior and premium finishes of the 4-seater premium model.',
+                '편안한 6인승 모델의 프리미엄 공간과 세련된 디자인을 감상하세요.': 'Enjoy the premium space and sophisticated design of the comfortable 6-seater model.',
+                '최고급 가죽 시트와 인체공학적 디자인의 완벽한 조화를 만나보세요.': 'Experience the perfect harmony of premium leather seats and ergonomic design.',
+                '프리미엄 스티어링 휠과 첨단 컨트롤 시스템의 세부사항을 확인하세요.': 'Check out the details of the premium steering wheel and advanced control system.',
+                '갤러리 보기': 'View Gallery',
+                '카테고리 갤러리': 'Category Gallery',
+                '갤러리 로딩 중...': 'Loading Gallery...',
+                // 하단 CTA 섹션
+                'Irreplaceable Value': 'Irreplaceable Value',
+                'LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다': 'LUNE discovers and grows the potential value<br>of the space of a vehicle and its occupants',
+                '구매 문의하기': 'Purchase Inquiry',
+                // 푸터
+                '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
+                '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
+                '대표번호 : 031-943-4488 팩스 : 031-949-6211 E-mail : thelune1@naver.com': 'Tel: 031-943-4488 Fax: 031-949-6211 E-mail: thelune1@naver.com',
+                '대표번호 : 031-943-4488': 'Tel: 031-943-4488',
+                '팩스 : 031-949-6211': 'Fax: 031-949-6211',
+                'E-mail : thelune1@naver.com': 'E-mail: thelune1@naver.com'
+            }
+        };
+
+        // 원본 텍스트 저장 함수
+        function saveOriginalTexts() {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, h1, h2, h3, p, .category-title, .category-description, .category-button, #modalTitle, .bottom-cta h2, .bottom-cta p, .bottom-cta .glass-button-text, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+                if (!el.hasAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent.trim());
+                }
+                if (el.innerHTML && el.innerHTML.includes('<br>') && !el.hasAttribute('data-original-html')) {
+                    el.setAttribute('data-original-html', el.innerHTML.trim());
+                }
+            });
+        }
+
         function switchLanguage(lang) {
+            // localStorage에 언어 저장
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 언어 버튼 활성화 상태 변경
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.style.color = 'white';
                 btn.style.fontWeight = 'normal';
+                btn.classList.remove('active');
             });
-            event.target.style.color = '#bcb8b1';
-            event.target.style.fontWeight = '600';
+            
+            // 클릭된 버튼 활성화
+            const clickedBtn = event && event.target;
+            if (clickedBtn && clickedBtn.classList.contains('lang-btn')) {
+                clickedBtn.style.color = '#bcb8b1';
+                clickedBtn.style.fontWeight = '600';
+                clickedBtn.classList.add('active');
+            } else {
+                // 이벤트가 없는 경우 (페이지 로드 시) lang에 맞는 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // HTML lang 속성 변경
+            document.documentElement.lang = lang;
+            
+            // 번역 적용
+            const translation = translations[lang];
+            if (!translation) return;
+            
+            // 한국어로 복원하는 경우
+            if (lang === 'ko') {
+                // 저장된 원본 텍스트로 복원
+                document.querySelectorAll('[data-original-text]').forEach(el => {
+                    const originalText = el.getAttribute('data-original-text');
+                    if (originalText) {
+                        el.textContent = originalText;
+                    }
+                });
+                
+                // 저장된 원본 HTML로 복원
+                document.querySelectorAll('[data-original-html]').forEach(el => {
+                    const originalHtml = el.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        el.innerHTML = originalHtml;
+                    }
+                });
+                
+                // JavaScript 내부의 갤러리 데이터도 복원
+                if (window.galleryItems && window.originalGalleryItems) {
+                    window.galleryItems = JSON.parse(JSON.stringify(window.originalGalleryItems));
+                }
+                if (window.categoryData && window.originalCategoryData) {
+                    window.categoryData = JSON.parse(JSON.stringify(window.originalCategoryData));
+                }
+                
+                return; // 한국어 복원 완료
+            }
+            
+            // 영어로 변환하는 경우
+            // 네비게이션 메뉴 번역
+            const navItems = {
+                '회사소개': translation['회사소개'],
+                '모델소개': translation['모델소개'],
+                '홍보센터': translation['홍보센터'],
+                '전시장': translation['전시장'],
+                '견적내기': translation['견적내기'],
+                '문의하기': translation['문의하기'],
+                '갤러리': translation['갤러리'],
+                'A/S접수': translation['A/S접수']
+            };
+            
+            // 네비게이션 링크 번역
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                } else if (translation[text]) {
+                    link.textContent = translation[text];
+                }
+            });
+            
+            // 페이지 제목 및 설명 번역
+            document.querySelectorAll('h1, p').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 하단 CTA 섹션 번역
+            document.querySelectorAll('.bottom-cta h2, .bottom-cta p, .bottom-cta .glass-button-text').forEach(el => {
+                const text = el.textContent.trim();
+                const originalHtml = el.getAttribute('data-original-html') || el.innerHTML.trim();
+                
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                } else if (translation[originalHtml]) {
+                    el.innerHTML = translation[originalHtml];
+                } else if (el.tagName === 'P' && originalHtml.includes('LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다')) {
+                    el.innerHTML = translation['LUNE은 차량이라는 공간과 탑승자의<br>잠재된 가치를 발견하고 성장시킵니다'];
+                }
+            });
+            
+            // 카테고리 카드 번역
+            document.querySelectorAll('.category-title, .category-description, .category-button').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                } else {
+                    // 부분 일치로 번역 시도
+                    if (text === '4인승' && translation['4인승']) {
+                        el.textContent = translation['4인승'];
+                    } else if (text === '6인승' && translation['6인승']) {
+                        el.textContent = translation['6인승'];
+                    } else if (text === '시트' && translation['시트']) {
+                        el.textContent = translation['시트'];
+                    } else if (text === '핸들' && translation['핸들']) {
+                        el.textContent = translation['핸들'];
+                    }
+                }
+            });
+            
+            // 모달 제목 번역
+            const modalTitle = document.getElementById('modalTitle');
+            if (modalTitle) {
+                const text = modalTitle.textContent.trim();
+                if (translation[text]) {
+                    modalTitle.textContent = translation[text];
+                }
+            }
+            
+            // JavaScript 내부의 갤러리 데이터 번역
+            if (window.galleryItems) {
+                // 원본 데이터 저장 (처음 한 번만)
+                if (!window.originalGalleryItems) {
+                    window.originalGalleryItems = JSON.parse(JSON.stringify(galleryItems));
+                }
+                
+                galleryItems.forEach((item, index) => {
+                    if (item.photo && item.photo.text) {
+                        const koText = item.photo.text;
+                        // 번역 데이터에 있는 경우 번역
+                        if (translation[koText]) {
+                            item.photo.text = translation[koText];
+                        } else {
+                            // 부분 번역 시도
+                            if (koText.includes('프리미엄 4인승 인테리어')) {
+                                item.photo.text = 'LUNE CARNIVAL 4 Premium 4-Seater Interior - Luxury space completed with premium leather seats and wood panels';
+                            } else if (koText.includes('프리미엄 6인승')) {
+                                item.photo.text = 'LUNE CARNIVAL 6 Premium 6-Seater - Business class level comfort and premium finishes';
+                            } else if (koText.includes('프리미엄 7인승')) {
+                                item.photo.text = 'LUNE CARNIVAL 7 Premium 7-Seater - Interior providing the best comfort and safety for families';
+                            } else if (koText.includes('프리미엄 9인승')) {
+                                item.photo.text = 'LUNE CARNIVAL 9 Premium 9-Seater - Premium amenities and luxury interior for large groups';
+                            } else if (koText.includes('프리미엄 인테리어 디자인')) {
+                                item.photo.text = 'Premium Interior Design - Custom luxury materials and meticulous handcrafted finishes';
+                            } else if (koText.includes('외관 디자인')) {
+                                item.photo.text = 'Exterior Design - Sophisticated exterior and perfect finish completing the premium vehicle\'s elegance';
+                            } else if (koText.includes('럭셔리 시트 디자인')) {
+                                item.photo.text = 'Luxury Seat Design - Comfort completed with ergonomic design and premium napa leather';
+                            } else if (koText.includes('커스텀 디자인')) {
+                                item.photo.text = 'Custom Design - Fully customized interior solutions reflecting customer personality and taste';
+                            } else if (koText.includes('전통 장인정신')) {
+                                item.photo.text = 'Heritage Craftsmanship - Original design harmonizing Korean traditional beauty and modern luxury';
+                            } else if (koText.includes('혁신 기술')) {
+                                item.photo.text = 'Innovation Technology - Perfect fusion of cutting-edge technology and luxury design';
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 카테고리 데이터 번역
+            if (window.categoryData) {
+                // 원본 데이터 저장 (처음 한 번만)
+                if (!window.originalCategoryData) {
+                    window.originalCategoryData = JSON.parse(JSON.stringify(categoryData));
+                }
+                
+                Object.keys(categoryData).forEach(key => {
+                    const category = categoryData[key];
+                    if (category.title && translation[category.title]) {
+                        category.title = translation[category.title];
+                    }
+                    if (category.description && translation[category.description]) {
+                        category.description = translation[category.description];
+                    }
+                    if (category.images) {
+                        category.images.forEach(img => {
+                            if (img.title) {
+                                // 제목 번역
+                                if (img.title.includes('4인승 프리미엄 인테리어')) {
+                                    img.title = img.title.replace('4인승 프리미엄 인테리어', '4-Seater Premium Interior');
+                                } else if (img.title.includes('6인승 프리미엄 인테리어')) {
+                                    img.title = img.title.replace('6인승 프리미엄 인테리어', '6-Seater Premium Interior');
+                                } else if (img.title.includes('프리미엄 스티어링 휠')) {
+                                    img.title = img.title.replace('프리미엄 스티어링 휠', 'Premium Steering Wheel');
+                                }
+                            }
+                            if (img.description) {
+                                // 설명 번역
+                                if (img.description.includes('최고급 가죽 시트와 우드 패널')) {
+                                    img.description = 'Luxury space harmonizing premium leather seats and wood panels';
+                                } else if (img.description.includes('인체공학적 시트 디자인')) {
+                                    img.description = 'Ergonomic seat design for comfortable ride quality';
+                                } else if (img.description.includes('세련된 조명과 고급 마감재')) {
+                                    img.description = 'Interior completed with sophisticated lighting and premium finishes';
+                                } else if (img.description.includes('넓은 공간감과 프라이버시')) {
+                                    img.description = 'Design ensuring spacious room and privacy';
+                                } else if (img.description.includes('비즈니스 클래스 수준')) {
+                                    img.description = 'Business class level amenities and finishes';
+                                } else if (img.description.includes('프리미엄 소재와 정밀한 수공예 마감')) {
+                                    img.description = 'Premium materials and meticulous handcrafted finishes';
+                                } else if (img.description.includes('프리미엄 소재와 정교한 마감')) {
+                                    img.description = 'Space completed with premium materials and sophisticated finishes';
+                                } else if (img.description.includes('고급스럽고 깔끔한 아이보리 컬러')) {
+                                    img.description = 'Premium leather seat in elegant and clean ivory color';
+                                } else if (img.description.includes('품격 있는 네이비 컬러')) {
+                                    img.description = 'Premium seat completed in dignified navy color';
+                                } else if (img.description.includes('럭셔리한 꼬냑 컬러')) {
+                                    img.description = 'Premium leather seat completed in luxurious cognac color';
+                                } else if (img.description.includes('고급 가죽으로 마감된')) {
+                                    img.description = 'Premium steering wheel finished with premium leather';
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // 푸터 번역
+            document.querySelectorAll('footer div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 푸터 링크 번역
+            document.querySelectorAll('footer a').forEach(link => {
+                const text = link.textContent.trim();
+                if (navItems[text]) {
+                    link.textContent = navItems[text];
+                }
+            });
+            
+            // 푸터 모바일 버전
+            document.querySelectorAll('.footer-contact-mobile div').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
             console.log('Language switched to:', lang);
         }
+        
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            // 원본 텍스트 저장
+            saveOriginalTexts();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
+            if (savedLang && savedLang !== 'ko') {
+                // 이벤트 객체 생성 (switchLanguage 함수에서 사용)
+                const fakeEvent = { target: document.querySelector(`.lang-btn[onclick*="'${savedLang}'"]`) };
+                const originalEvent = window.event;
+                window.event = fakeEvent;
+                switchLanguage(savedLang);
+                window.event = originalEvent;
+            } else {
+                // 한국어 버튼 활성화
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'ko'")) {
+                        btn.style.color = '#bcb8b1';
+                        btn.style.fontWeight = '600';
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
 
         // Enhanced Circular Gallery Implementation
         class CircularGallery {
