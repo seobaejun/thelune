@@ -6,12 +6,13 @@ service cloud.firestore {
     // contacts 컬렉션: 모든 사용자가 생성 가능, 모든 사용자가 읽기 가능 (관리자 페이지 접근)
     match /contacts/{contactId} {
       // 생성: 인증 없이도 가능 (문의하기 폼 제출)
-      // 필수 필드 검증
+      // 필수 필드 검증 (status는 선택적)
       allow create: if request.resource.data.keys().hasAll(['name', 'email', 'phone', 'message', 'createdAt']) &&
                        request.resource.data.name is string &&
                        request.resource.data.email is string &&
                        request.resource.data.phone is string &&
-                       request.resource.data.message is string;
+                       request.resource.data.message is string &&
+                       (!('status' in request.resource.data) || request.resource.data.status is string);
       // 읽기: 모든 사용자 가능 (관리자 페이지에서 조회)
       allow read: if true;
       // 수정, 삭제: 모든 사용자 가능 (관리자 페이지에서 관리)
@@ -21,13 +22,15 @@ service cloud.firestore {
     // as_requests 컬렉션: 모든 사용자가 생성 가능, 모든 사용자가 읽기 가능 (관리자 페이지 접근)
     match /as_requests/{asId} {
       // 생성: 인증 없이도 가능 (A/S 접수 폼 제출)
-      // 필수 필드 검증
+      // 필수 필드 검증 (status, fileCount는 선택적)
       allow create: if request.resource.data.keys().hasAll(['name', 'email', 'phone', 'vehicle_type', 'as_content', 'createdAt']) &&
                        request.resource.data.name is string &&
                        request.resource.data.email is string &&
                        request.resource.data.phone is string &&
                        request.resource.data.vehicle_type is string &&
-                       request.resource.data.as_content is string;
+                       request.resource.data.as_content is string &&
+                       (!('status' in request.resource.data) || request.resource.data.status is string) &&
+                       (!('fileCount' in request.resource.data) || request.resource.data.fileCount is int);
       // 읽기: 모든 사용자 가능 (관리자 페이지에서 조회)
       allow read: if true;
       // 수정, 삭제: 모든 사용자 가능 (관리자 페이지에서 관리)

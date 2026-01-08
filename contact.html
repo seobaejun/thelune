@@ -405,26 +405,27 @@
                 <div class="col-lg-6">
                     <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; padding: 40px;">
                         <h3 style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 30px;" class="avenir-roman">문의 양식</h3>
-                        <form>
+                        <form id="contactForm">
                             <div style="margin-bottom: 20px;">
                                 <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">이름</label>
-                                <input type="text" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                                <input type="text" name="name" id="contact-name" required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
                             </div>
                             <div style="margin-bottom: 20px;">
                                 <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">전화번호</label>
-                                <input type="tel" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                                <input type="tel" name="phone" id="contact-phone" required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
                             </div>
                             <div style="margin-bottom: 20px;">
                                 <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">이메일</label>
-                                <input type="email" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
+                                <input type="email" name="email" id="contact-email" required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px;">
                             </div>
                             <div style="margin-bottom: 30px;">
                                 <label style="color: white; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;" class="avenir-roman">문의내용</label>
-                                <textarea rows="5" style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px; resize: vertical;"></textarea>
+                                <textarea rows="5" name="message" id="contact-message" required style="width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(188,184,177,0.3); border-radius: 5px; color: white; font-size: 14px; resize: vertical;"></textarea>
                             </div>
-                            <button type="submit" class="glass-button" style="width: 100%;">
+                            <button type="submit" class="glass-button" style="width: 100%;" id="contact-submit-btn">
                                 <span class="glass-button-text">문의하기</span>
                             </button>
+                            <div id="contact-message-area" style="margin-top: 15px; display: none;"></div>
                         </form>
                     </div>
                 </div>
@@ -755,6 +756,94 @@
                         btn.classList.add('active');
                     }
                 });
+            }
+        });
+    </script>
+
+    <!-- Firebase 연동 -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvJYiARiK-hZAN01xovL28H3OoVaezEfw",
+            authDomain: "thelune-f3e41.firebaseapp.com",
+            projectId: "thelune-f3e41",
+            storageBucket: "thelune-f3e41.firebasestorage.app",
+            messagingSenderId: "633942854938",
+            appId: "1:633942854938:web:d16f719d15fc919d1f70a3",
+            measurementId: "G-2Y8R7TJCGD"
+        };
+
+        let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            console.log('Firebase 초기화 성공');
+        } catch (error) {
+            console.error('Firebase 초기화 오류:', error);
+        }
+
+        // 문의하기 폼 제출 처리
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!db) {
+                console.error('Firebase가 초기화되지 않았습니다.');
+                alert('시스템 오류가 발생했습니다. 페이지를 새로고침해주세요.');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('contact-submit-btn');
+            const messageArea = document.getElementById('contact-message-area');
+            const originalText = submitBtn.querySelector('.glass-button-text').textContent;
+            
+            // 버튼 비활성화
+            submitBtn.disabled = true;
+            submitBtn.querySelector('.glass-button-text').textContent = '제출 중...';
+            messageArea.style.display = 'none';
+            
+            try {
+                const formData = {
+                    name: document.getElementById('contact-name').value.trim(),
+                    phone: document.getElementById('contact-phone').value.trim(),
+                    email: document.getElementById('contact-email').value.trim(),
+                    message: document.getElementById('contact-message').value.trim(),
+                    status: 'pending',
+                    createdAt: Timestamp.now()
+                };
+                
+                console.log('제출할 데이터:', formData);
+                
+                // Firebase에 저장
+                const docRef = await addDoc(collection(db, 'contacts'), formData);
+                console.log('문의하기 저장 성공, 문서 ID:', docRef.id);
+                
+                // 성공 메시지
+                messageArea.style.display = 'block';
+                messageArea.innerHTML = '<div style="color: #4caf50; padding: 10px; background: rgba(76, 175, 80, 0.1); border-radius: 5px; text-align: center;">문의가 성공적으로 제출되었습니다. 빠른 시일 내에 답변드리겠습니다.</div>';
+                
+                // 폼 초기화
+                document.getElementById('contactForm').reset();
+                
+            } catch (error) {
+                console.error('문의하기 제출 오류:', error);
+                console.error('에러 코드:', error.code);
+                console.error('에러 메시지:', error.message);
+                messageArea.style.display = 'block';
+                let errorMessage = '문의 제출 중 오류가 발생했습니다. 다시 시도해주세요.';
+                if (error.code === 'permission-denied') {
+                    errorMessage = '권한 오류: Firestore 보안 규칙을 확인해주세요.';
+                } else if (error.code === 'unavailable') {
+                    errorMessage = '네트워크 오류: 인터넷 연결을 확인해주세요.';
+                } else if (error.message) {
+                    errorMessage = `오류: ${error.message}`;
+                }
+                messageArea.innerHTML = `<div style="color: #f44336; padding: 10px; background: rgba(244, 67, 54, 0.1); border-radius: 5px; text-align: center;">${errorMessage}</div>`;
+            } finally {
+                // 버튼 활성화
+                submitBtn.disabled = false;
+                submitBtn.querySelector('.glass-button-text').textContent = originalText;
             }
         });
     </script>

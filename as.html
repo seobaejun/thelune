@@ -1134,11 +1134,8 @@
                     console.log('Total file size:', (totalFileSize / 1024 / 1024).toFixed(2) + 'MB');
                     console.log('Captcha verified:', currentCaptcha);
                     
-                    // Form submission (여기서는 실제 서버 전송 로직을 구현해야 함)
-                    alert('A/S 접수가 완료되었습니다.');
-                    // 실제로는 여기서 AJAX로 서버에 전송
-                    // const formData = new FormData(this);
-                    // fetch('your-endpoint', { method: 'POST', body: formData });
+                    // Firebase에 저장
+                    submitASForm(selectedFiles);
                 });
             }
         });
@@ -1147,6 +1144,98 @@
         document.addEventListener('DOMContentLoaded', function() {
             generateCaptcha();
         });
+    </script>
+
+    <!-- Firebase 연동 -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvJYiARiK-hZAN01xovL28H3OoVaezEfw",
+            authDomain: "thelune-f3e41.firebaseapp.com",
+            projectId: "thelune-f3e41",
+            storageBucket: "thelune-f3e41.firebasestorage.app",
+            messagingSenderId: "633942854938",
+            appId: "1:633942854938:web:d16f719d15fc919d1f70a3",
+            measurementId: "G-2Y8R7TJCGD"
+        };
+
+        let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            console.log('Firebase 초기화 성공');
+        } catch (error) {
+            console.error('Firebase 초기화 오류:', error);
+        }
+
+        // A/S 접수 폼 제출 함수
+        window.submitASForm = async function(selectedFiles) {
+            if (!db) {
+                console.error('Firebase가 초기화되지 않았습니다.');
+                alert('시스템 오류가 발생했습니다. 페이지를 새로고침해주세요.');
+                return;
+            }
+            
+            const submitBtn = document.querySelector('#asForm button[type="submit"]');
+            const originalText = submitBtn.querySelector('.glass-button-text').textContent;
+            
+            // 버튼 비활성화
+            submitBtn.disabled = true;
+            submitBtn.querySelector('.glass-button-text').textContent = '제출 중...';
+            
+            try {
+                const formData = {
+                    name: document.querySelector('input[name="name"]').value.trim(),
+                    email: document.querySelector('input[name="email"]').value.trim(),
+                    phone: document.querySelector('input[name="phone"]').value.trim(),
+                    vehicle_type: document.querySelector('select[name="vehicle_type"]').value,
+                    vehicle_number: document.querySelector('input[name="vehicle_number"]').value.trim(),
+                    registration_date: document.querySelector('input[name="registration_date"]').value.trim(),
+                    purchase_location: document.querySelector('input[name="purchase_location"]').value.trim(),
+                    sales_person: document.querySelector('input[name="sales_person"]').value.trim(),
+                    as_content: document.querySelector('textarea[name="as_content"]').value.trim(),
+                    attachments: [], // 파일은 나중에 Storage에 업로드 후 URL 저장
+                    fileCount: selectedFiles.length,
+                    status: 'pending',
+                    createdAt: Timestamp.now()
+                };
+                
+                console.log('제출할 데이터:', formData);
+                
+                // Firebase에 저장
+                const docRef = await addDoc(collection(db, 'as_requests'), formData);
+                console.log('A/S 접수 저장 성공, 문서 ID:', docRef.id);
+                
+                // 성공 메시지
+                alert('A/S 접수가 완료되었습니다. 빠른 시일 내에 답변드리겠습니다.');
+                
+                // 폼 초기화
+                document.getElementById('asForm').reset();
+                selectedFiles = [];
+                document.getElementById('fileList').innerHTML = '';
+                generateCaptcha();
+                
+            } catch (error) {
+                console.error('A/S 접수 제출 오류:', error);
+                console.error('에러 코드:', error.code);
+                console.error('에러 메시지:', error.message);
+                let errorMessage = 'A/S 접수 제출 중 오류가 발생했습니다. 다시 시도해주세요.';
+                if (error.code === 'permission-denied') {
+                    errorMessage = '권한 오류: Firestore 보안 규칙을 확인해주세요.';
+                } else if (error.code === 'unavailable') {
+                    errorMessage = '네트워크 오류: 인터넷 연결을 확인해주세요.';
+                } else if (error.message) {
+                    errorMessage = `오류: ${error.message}`;
+                }
+                alert(errorMessage);
+            } finally {
+                // 버튼 활성화
+                submitBtn.disabled = false;
+                submitBtn.querySelector('.glass-button-text').textContent = originalText;
+            }
+        };
     </script>
 </body>
 </html>
