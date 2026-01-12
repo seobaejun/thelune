@@ -449,6 +449,49 @@
             position: relative;
         }
         
+        /* 컨버전 옵션 상세 설명 스타일 */
+        .opt-conversion .option-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
+        }
+        .opt-conversion .option-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a1a;
+        }
+        .opt-conversion .option-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+        .opt-conversion .opt-chk-item input[type="checkbox"]:checked + label .option-name,
+        .opt-conversion .opt-chk-item input[type="checkbox"]:checked + label .option-desc {
+            color: #1a1a1a;
+        }
+        /* 컨버전 옵션 체크되었을 때 배경색 변경하지 않음 (텍스트가 보이도록) */
+        .opt-conversion .opt-chk-item input[type="checkbox"]:checked + label {
+            background: #f5f5f5;
+            border-color: #1a1a1a;
+        }
+        /* 컨버전 옵션 label 패딩 조정 (체크 표시 공간 확보) */
+        .opt-conversion .clchart .opt-chk-item label {
+            padding-left: 50px;
+        }
+        .opt-conversion .option-image {
+            flex-shrink: 0;
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            order: 2;
+        }
+        .opt-conversion .option-text {
+            order: 3;
+        }
+        
         .clchart .opt-chk-item label::before {
             content: '';
             width: 20px;
@@ -971,7 +1014,7 @@
                         </div>
 
                         <!-- 옵션 래퍼 -->
-                        <div class="opt-wrap" data-category="model_spec" style="display: block;">
+                        <div class="opt-wrap" data-category="model_spec" data-step="model-spec" style="display: block;">
                             <form id="quoteForm">
                                 <!-- 트림 -->
                                 <div class="optbx opt-trim">
@@ -1162,6 +1205,75 @@
                                 </div>
                             </form>
                         </div>
+                        
+                        <!-- 컨버전 옵션 섹션 -->
+                        <div class="opt-wrap" data-category="conversion" data-step="conversion" style="display: none;">
+                            <form id="quoteConversionForm">
+                                <div class="optbx opt-conversion">
+                                    <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h4>기본 컨버전 옵션</h4>
+                                        <span style="color: rgba(0,0,0,0.6); font-size: 14px; font-weight: 500;">기본포함</span>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <div class="opt-data clchart top btn-lst" data-opt="conversion_option" data-group="컨버전옵션" data-choice-min="0" data-choice-limit="100" style="display: block;">
+                                            <ul class="con-flex" style="flex-direction: column; gap: 8px;">
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_roof" id="conversion_roof" value="루프" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_roof">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="루프" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">루프</span>
+                                                            <span class="option-desc">카니발 전용 Hi-Roof</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_mood" id="conversion_mood" value="무드등" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_mood">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="무드등" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">무드등</span>
+                                                            <span class="option-desc">천정 메인 무드등, 사이드 엠비언트 무드등</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tv" id="conversion_tv" value="TV" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tv">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="TV" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">TV</span>
+                                                            <span class="option-desc">27인치 스마트 TV</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_soundproof" id="conversion_soundproof" value="방진/방음" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_soundproof">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="방진/방음" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">방진/방음</span>
+                                                            <span class="option-desc">기본 방진 방음 패드 시공</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <!-- 패키지 총액 및 확인 체크박스 -->
+                                        <div class="conversion-package-total" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; margin-top: 20px; padding: 15px; border-top: 1px dashed #ccc;">
+                                            <div class="package-price" style="font-size: 18px; font-weight: 600; color: #1a1a1a;">
+                                                <span id="conversionTotalPrice">14,640,000</span>원
+                                            </div>
+                                            <label class="package-checkbox" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                                <input type="checkbox" id="conversion_package_confirm" name="conversion_package_confirm" style="width: 20px; height: 20px; cursor: pointer;">
+                                                <span style="font-size: 14px; color: #1a1a1a;">확인</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 
                 <!-- 하단 고정 영역: 예상 견적 금액 + 버튼들 (CN모터스 스타일) -->
@@ -1219,28 +1331,137 @@
                 console.log('견적보기 버튼 이벤트 강제 연결 완료');
             }
             
+            // 이전 버튼 클릭 시 이전 페이지로 이동
             const quotePrevBtn = document.getElementById('quotePrevBtn');
             if (quotePrevBtn) {
                 quotePrevBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('이전 버튼 클릭됨');
-                    if (typeof goToPrevStep === 'function') {
-                        goToPrevStep();
+                    console.log('이전 버튼 클릭됨 - 직접 처리');
+                    
+                    // 현재 표시된 opt-wrap 확인
+                    const currentWrap = document.querySelector('.opt-wrap[style*="block"]');
+                    if (currentWrap) {
+                        const currentStep = currentWrap.getAttribute('data-step');
+                        console.log('현재 단계:', currentStep);
+                        
+                        // conversion 단계면 model-spec으로, 그 외는 이전 단계로
+                        if (currentStep === 'conversion') {
+                            // 모든 opt-wrap 숨기기
+                            const allOptWraps = document.querySelectorAll('.opt-wrap');
+                            allOptWraps.forEach(function(wrap) {
+                                wrap.style.display = 'none';
+                            });
+                            
+                            // model-spec 단계 표시
+                            const modelSpecWrap = document.querySelector('.opt-wrap[data-step="model-spec"]');
+                            if (modelSpecWrap) {
+                                modelSpecWrap.style.display = 'block';
+                                console.log('모델/사양 페이지로 돌아감');
+                                
+                                // quote.js 함수가 있으면 호출
+                                if (typeof showStep === 'function') {
+                                    showStep('model-spec');
+                                } else if (typeof window.showStep === 'function') {
+                                    window.showStep('model-spec');
+                                }
+                                if (typeof currentStep !== 'undefined') {
+                                    currentStep = 'model-spec';
+                                } else if (typeof window.currentStep !== 'undefined') {
+                                    window.currentStep = 'model-spec';
+                                }
+                                if (typeof updateStepButtons === 'function') {
+                                    updateStepButtons();
+                                } else if (typeof window.updateStepButtons === 'function') {
+                                    window.updateStepButtons();
+                                }
+                                if (typeof updateProgressBar === 'function') {
+                                    updateProgressBar();
+                                } else if (typeof window.updateProgressBar === 'function') {
+                                    window.updateProgressBar();
+                                }
+                                
+                                // 가격 재계산
+                                setTimeout(function() {
+                                    if (typeof calculatePriceDirectly === 'function') {
+                                        calculatePriceDirectly();
+                                    }
+                                }, 100);
+                            }
+                        } else if (typeof goToPrevStep === 'function') {
+                            goToPrevStep();
+                        } else if (typeof window.goToPrevStep === 'function') {
+                            window.goToPrevStep();
+                        }
+                    } else {
+                        // 현재 표시된 단계가 없으면 model-spec으로
+                        const allOptWraps = document.querySelectorAll('.opt-wrap');
+                        allOptWraps.forEach(function(wrap) {
+                            wrap.style.display = 'none';
+                        });
+                        const modelSpecWrap = document.querySelector('.opt-wrap[data-step="model-spec"]');
+                        if (modelSpecWrap) {
+                            modelSpecWrap.style.display = 'block';
+                        }
                     }
                 });
+                console.log('이전 버튼 이벤트 리스너 추가됨');
             }
             
+            // 컨버전 옵션 버튼 클릭 시 두 번째 페이지(conversion)로 이동
             const quoteConversionBtn = document.getElementById('quoteConversionBtn');
             if (quoteConversionBtn) {
+                // 직접 이벤트 리스너 추가 (quote.js와 독립적으로 작동)
                 quoteConversionBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('컨버전 옵션 버튼 클릭됨');
-                    if (typeof goToNextStep === 'function') {
-                        goToNextStep();
+                    console.log('컨버전 옵션 버튼 클릭됨 - 직접 처리');
+                    
+                    // 모든 opt-wrap 숨기기
+                    const allOptWraps = document.querySelectorAll('.opt-wrap');
+                    allOptWraps.forEach(function(wrap) {
+                        wrap.style.display = 'none';
+                    });
+                    
+                    // conversion 단계 표시
+                    const conversionWrap = document.querySelector('.opt-wrap[data-step="conversion"]');
+                    if (conversionWrap) {
+                        conversionWrap.style.display = 'block';
+                        console.log('컨버전 옵션 페이지 표시됨');
+                        
+                        // quote.js 함수가 있으면 호출 (없어도 작동)
+                        if (typeof showStep === 'function') {
+                            showStep('conversion');
+                        } else if (typeof window.showStep === 'function') {
+                            window.showStep('conversion');
+                        }
+                        if (typeof currentStep !== 'undefined') {
+                            currentStep = 'conversion';
+                        } else if (typeof window.currentStep !== 'undefined') {
+                            window.currentStep = 'conversion';
+                        }
+                        if (typeof updateStepButtons === 'function') {
+                            updateStepButtons();
+                        } else if (typeof window.updateStepButtons === 'function') {
+                            window.updateStepButtons();
+                        }
+                        if (typeof updateProgressBar === 'function') {
+                            updateProgressBar();
+                        } else if (typeof window.updateProgressBar === 'function') {
+                            window.updateProgressBar();
+                        }
+                        
+                        // 가격 재계산
+                        setTimeout(function() {
+                            if (typeof calculatePriceDirectly === 'function') {
+                                calculatePriceDirectly();
+                            }
+                        }, 100);
+                    } else {
+                        console.error('컨버전 옵션 섹션을 찾을 수 없습니다.');
                     }
                 });
+                console.log('컨버전 옵션 버튼 이벤트 리스너 추가됨');
             }
         }
         
@@ -1251,10 +1472,24 @@
             // 모든 체크된 라디오 버튼과 체크박스의 가격 합산
             const allInputs = document.querySelectorAll('#quoteForm input[type="radio"]:checked, #quoteForm input[type="checkbox"]:checked');
             allInputs.forEach(function(input) {
+                // 컨버전 옵션의 기본 체크박스는 제외
+                if (input.id && input.id.endsWith('_base')) {
+                    return;
+                }
                 const price = parseInt(input.dataset.price) || 0;
                 total += price;
                 console.log('가격 합산:', input.id, price, '총합:', total);
             });
+            
+            // 컨버전 옵션은 확인 체크박스가 체크되었을 때만 패키지 가격으로 계산
+            const CONVERSION_PACKAGE_PRICE = 14640000;
+            const conversionConfirmCheckbox = document.getElementById('conversion_package_confirm');
+            
+            // 확인 체크박스가 체크되어 있으면 컨버전 패키지 가격 추가
+            if (conversionConfirmCheckbox && conversionConfirmCheckbox.checked) {
+                total += CONVERSION_PACKAGE_PRICE;
+                console.log('컨버전 패키지 가격 추가:', CONVERSION_PACKAGE_PRICE);
+            }
             
             // 예상 견적 금액 업데이트
             const totalPriceEl = document.getElementById('quoteTotalPrice');
@@ -1524,6 +1759,42 @@
                 });
             }
             
+            // 컨버전 확인 체크박스 이벤트 리스너
+            const conversionConfirmCheckbox = document.getElementById('conversion_package_confirm');
+            if (conversionConfirmCheckbox) {
+                conversionConfirmCheckbox.addEventListener('change', function() {
+                    console.log('컨버전 확인 체크박스 변경:', this.checked);
+                    setTimeout(function() {
+                        if (typeof calculatePriceDirectly === 'function') {
+                            calculatePriceDirectly();
+                        }
+                    }, 100);
+                });
+            }
+            
+            // 기본 컨버전 옵션 체크박스 해제 방지
+            const conversionOptions = ['conversion_roof', 'conversion_mood', 'conversion_tv', 'conversion_soundproof'];
+            conversionOptions.forEach(function(optionId) {
+                const optionInput = document.getElementById(optionId);
+                if (optionInput) {
+                    // 클릭 이벤트로 체크 해제 방지
+                    optionInput.addEventListener('click', function(e) {
+                        if (!this.checked) {
+                            e.preventDefault();
+                            this.checked = true;
+                            console.log('컨버전 옵션 해제 방지:', optionId);
+                        }
+                    });
+                    // change 이벤트로도 체크 해제 방지
+                    optionInput.addEventListener('change', function(e) {
+                        if (!this.checked) {
+                            this.checked = true;
+                            console.log('컨버전 옵션 해제 방지 (change):', optionId);
+                        }
+                    });
+                }
+            });
+            
             // 새로고침 버튼 클릭 시 폼 초기화
             const resetBtn = document.getElementById('resetQuoteBtn');
             if (resetBtn) {
@@ -1543,6 +1814,16 @@
                                 input.checked = false;
                                 // change 이벤트 트리거하여 상태 업데이트
                                 input.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                        });
+                        
+                        // 컨버전 옵션도 초기화 (quoteForm 밖에 있을 수 있음)
+                        const conversionOptions = ['conversion_roof', 'conversion_mood', 'conversion_tv', 'conversion_soundproof'];
+                        conversionOptions.forEach(function(optionId) {
+                            const optionInput = document.getElementById(optionId);
+                            if (optionInput) {
+                                optionInput.checked = false;
+                                optionInput.dispatchEvent(new Event('change', { bubbles: true }));
                             }
                         });
                         
