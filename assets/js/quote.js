@@ -7,19 +7,156 @@ let totalPrice = 0;
 let selectedOptions = {};
 let selectedSeatType = null; // 선택된 좌석 유형 추적
 
+// Make totalPrice and selectedOptions globally accessible
+window.totalPrice = totalPrice;
+window.selectedOptions = selectedOptions;
+
 // Initialize quote page - moved to main DOMContentLoaded listener
 
 // Initialize quote page
 function initializeQuotePage() {
-    // Reset all form inputs
-    const form = document.getElementById('quoteForm');
-    if (form) {
-        form.reset();
-    }
-    
     // Initialize selected options
     selectedOptions = {};
     totalPrice = 0;
+    
+    // form.reset()을 호출하지 않아서 기본 checked 상태 유지
+    
+    // 순정 옵션과 컨버전 옵션을 강제로 checked 상태로 설정
+    function forceCheckStandardAndConversionOptions() {
+        const standardOptions = [
+            'standard_style', 'standard_drive_wise', 'standard_monitoring',
+            'standard_smart_connect', 'standard_hud', 'standard_boss', 'standard_comfort'
+        ];
+        standardOptions.forEach(optionId => {
+            const input = document.getElementById(optionId);
+            if (input) {
+                input.setAttribute('checked', 'checked');
+                input.checked = true;
+                // label에 checked 클래스 추가
+                const label = input.closest('label');
+                if (label) {
+                    label.classList.add('checked');
+                }
+                // change 이벤트 발생시켜서 스타일 업데이트
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+                console.log('순정 옵션 체크 설정:', optionId, input.checked);
+            } else {
+                console.log('순정 옵션을 찾을 수 없음:', optionId);
+            }
+        });
+        
+        const conversionOptions = [
+            'conversion_roof', 'conversion_mood', 'conversion_tv', 'conversion_soundproof'
+        ];
+        conversionOptions.forEach(optionId => {
+            const input = document.getElementById(optionId);
+            if (input) {
+                input.setAttribute('checked', 'checked');
+                input.checked = true;
+                // label에 checked 클래스 추가
+                const label = input.closest('label');
+                if (label) {
+                    label.classList.add('checked');
+                }
+                // change 이벤트 발생시켜서 스타일 업데이트
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+                console.log('컨버전 옵션 체크 설정:', optionId, input.checked);
+            } else {
+                console.log('컨버전 옵션을 찾을 수 없음:', optionId);
+            }
+        });
+    }
+    
+    // 여러 시점에서 체크 상태 설정
+    setTimeout(forceCheckStandardAndConversionOptions, 100);
+    setTimeout(forceCheckStandardAndConversionOptions, 300);
+    setTimeout(forceCheckStandardAndConversionOptions, 500);
+    
+    // 초기 로드 시 체크된 모든 옵션을 selectedOptions에 추가 (숨겨진 요소 포함)
+    // 단, 컨버전 옵션은 제외 (컨버전 옵션 단계로 넘어갔을 때만 합산)
+    const allForms = ['quoteForm', 'quote6SeatForm', 'quote9SeatForm'];
+    allForms.forEach(formId => {
+        const currentForm = document.getElementById(formId);
+        if (currentForm) {
+            // 모든 체크된 라디오 버튼과 체크박스 찾기 (display:none인 요소도 포함)
+            // 단, 컨버전 옵션은 제외
+            const checkedInputs = currentForm.querySelectorAll('input[type="radio"][checked], input[type="checkbox"][checked]');
+            console.log(`Form ${formId}에서 체크된 옵션 수:`, checkedInputs.length);
+            checkedInputs.forEach(input => {
+                // 컨버전 옵션은 제외
+                if (input.id && (input.id.startsWith('conversion_') || input.name && input.name.startsWith('conversion_'))) {
+                    console.log('컨버전 옵션 제외:', input.id || input.name);
+                    return;
+                }
+                
+                // checked 속성이 있으면 checked 상태로 확실히 설정
+                if (input.hasAttribute('checked')) {
+                    input.checked = true;
+                }
+                
+                const sectionName = getSectionName(input);
+                const optionName = getOptionName(input);
+                const price = parseInt(input.dataset.price) || 0;
+                
+                if (input.type === 'radio') {
+                    selectedOptions[sectionName] = {
+                        name: optionName,
+                        price: price,
+                        element: input
+                    };
+                    console.log('라디오 옵션 추가:', sectionName, optionName, price);
+                } else if (input.type === 'checkbox') {
+                    const optionKey = `${sectionName}_${input.value}`;
+                    selectedOptions[optionKey] = {
+                        name: optionName,
+                        price: price,
+                        element: input
+                    };
+                    console.log('체크박스 옵션 추가:', optionKey, optionName, price);
+                }
+            });
+        }
+    });
+    
+    // 전체 문서에서도 체크된 옵션 찾기 (form 밖에 있을 수 있음)
+    // 단, 컨버전 옵션은 제외 (컨버전 옵션 단계로 넘어갔을 때만 합산)
+    const allCheckedInputs = document.querySelectorAll('input[type="radio"][checked], input[type="checkbox"][checked]');
+    console.log('전체 문서에서 체크된 옵션 수:', allCheckedInputs.length);
+    allCheckedInputs.forEach(input => {
+        // 컨버전 옵션은 제외
+        if (input.id && (input.id.startsWith('conversion_') || (input.name && input.name.startsWith('conversion_')))) {
+            console.log('컨버전 옵션 제외 (전체 문서):', input.id || input.name);
+            return;
+        }
+        
+        const sectionName = getSectionName(input);
+        const optionName = getOptionName(input);
+        const price = parseInt(input.dataset.price) || 0;
+        
+        if (input.type === 'radio') {
+            if (!selectedOptions[sectionName]) {
+                selectedOptions[sectionName] = {
+                    name: optionName,
+                    price: price,
+                    element: input
+                };
+                console.log('라디오 옵션 추가 (전체 문서):', sectionName, optionName, price);
+            }
+        } else if (input.type === 'checkbox') {
+            const optionKey = `${sectionName}_${input.value}`;
+            if (!selectedOptions[optionKey]) {
+                selectedOptions[optionKey] = {
+                    name: optionName,
+                    price: price,
+                    element: input
+                };
+                console.log('체크박스 옵션 추가 (전체 문서):', optionKey, optionName, price);
+            }
+        }
+    });
+    
+    // 가격 재계산
+    calculateTotalPrice();
     
     // Update displays
     updatePriceDisplay();
@@ -28,10 +165,14 @@ function initializeQuotePage() {
     // 초기 로드 시 외장컬러 옵션 상태 업데이트 (등급이 선택되지 않은 상태)
     updateExteriorColorOptions(null);
     
-    // 초기 로드 시 특장라인업 옵션 상태 업데이트
-    // 4인승 폼은 항상 TLV4로 처리
+    // 초기 로드 시 모델 선택에 따라 옵션 업데이트
     const form4Seat = document.getElementById('quoteForm');
     if (form4Seat) {
+        const modelInput = form4Seat.querySelector('input[name="model_type"]:checked');
+        if (modelInput) {
+            updateModelOptions(modelInput);
+        }
+        // 특장라인업 옵션도 업데이트
         updateSpecialLineupOptionsForForm(form4Seat, 'tlv4');
     }
     
@@ -49,7 +190,15 @@ function initializeQuotePage() {
     // 모든 폼에 이미지 컨테이너 추가
     addImageContainersToAllSections();
     
+    // 초기 단계 설정
+    currentStep = 'model-spec';
+    showStep('model-spec');
+    updateStepButtons();
+    updateProgressBar();
+    
     console.log('Quote page initialized');
+    console.log('Initial selected options:', selectedOptions);
+    console.log('Initial total price:', totalPrice);
 }
 
 // 모든 섹션에 이미지 컨테이너 추가
@@ -153,6 +302,24 @@ function setupFormEventListeners(formSelector) {
                 }
                 handleOptionChange(e);
             });
+            
+            // label 클릭 시 change 이벤트가 확실히 발생하도록
+            const label = input.closest('label');
+            if (label && !label.dataset.clickListenerAttached) {
+                label.dataset.clickListenerAttached = 'true';
+                label.addEventListener('click', function(e) {
+                    console.log('Label clicked:', input.id, 'target:', e.target.tagName);
+                    // input이 아닌 다른 요소를 클릭한 경우
+                    if (e.target !== input && e.target.tagName !== 'INPUT') {
+                        // 브라우저가 자동으로 input을 체크하도록 기다린 후 change 이벤트 발생
+                        setTimeout(() => {
+                            console.log('Dispatching change event for:', input.id, 'checked:', input.checked);
+                            const changeEvent = new Event('change', { bubbles: true, cancelable: true });
+                            input.dispatchEvent(changeEvent);
+                        }, 10);
+                    }
+                });
+            }
         }
         
         listenerCount++;
@@ -307,6 +474,39 @@ function setupButtonListeners() {
         console.log('9-seat download PDF button listener added');
     }
     
+    // 컨버전 옵션 버튼
+    const quoteConversionBtn = document.getElementById('quoteConversionBtn');
+    if (quoteConversionBtn) {
+        quoteConversionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('컨버전 옵션 버튼 클릭됨');
+            goToNextStep();
+        });
+        console.log('컨버전 옵션 버튼 listener 추가됨');
+    }
+    
+    // 이전 버튼
+    const quotePrevBtn = document.getElementById('quotePrevBtn');
+    if (quotePrevBtn) {
+        quotePrevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('이전 버튼 클릭됨');
+            goToPrevStep();
+        });
+        console.log('이전 버튼 listener 추가됨');
+    }
+    
+    // 견적보기 버튼
+    const quoteViewBtn = document.getElementById('quoteViewBtn');
+    if (quoteViewBtn) {
+        quoteViewBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('견적보기 버튼 클릭됨');
+            showQuote();
+        });
+        console.log('견적보기 버튼 listener 추가됨');
+    }
+    
 }
 
 // Handle option change
@@ -315,6 +515,16 @@ function handleOptionChange(event) {
     const sectionName = getSectionName(input);
     const optionName = getOptionName(input);
     const price = parseInt(input.dataset.price) || 0;
+    
+    console.log('handleOptionChange called:', {
+        inputId: input.id,
+        inputName: input.name,
+        inputValue: input.value,
+        checked: input.checked,
+        sectionName: sectionName,
+        optionName: optionName,
+        price: price
+    });
     
     if (input.type === 'radio') {
         // For radio buttons, only one selection per section
@@ -341,8 +551,10 @@ function handleOptionChange(event) {
                 price: price,
                 element: input
             };
+            console.log('Option added:', optionKey, price);
         } else {
             delete selectedOptions[optionKey];
+            console.log('Option removed:', optionKey);
         }
     }
     
@@ -350,6 +562,9 @@ function handleOptionChange(event) {
     calculateTotalPrice();
     updatePriceDisplay();
     updateSelectedOptionsDisplay();
+    
+    console.log('Selected options:', selectedOptions);
+    console.log('Total price:', totalPrice);
     
     // 등급 선택이 변경되면 외장컬러 옵션 업데이트
     if (sectionName === '등급 선택' || sectionName === '등급') {
@@ -359,6 +574,11 @@ function handleOptionChange(event) {
     // 차종 선택이 변경되면 특장라인업 옵션 업데이트
     if (sectionName === '차종 선택' || sectionName === '차종') {
         updateSpecialLineupOptions(input);
+    }
+    
+    // 모델 선택이 변경되면 모델별 옵션 업데이트
+    if (sectionName === '모델' || input.name === 'model_type') {
+        updateModelOptions(input);
     }
     
     // 퍼포먼스 옵션: 리어 에어서스펜션과 HSD 프리미엄 서스펜션은 상호 배타적
@@ -789,22 +1009,84 @@ function updateSpecialLineupOptionsForForm(form, currentModel) {
 
 // Get section name from input
 function getSectionName(input) {
+    // 먼저 data-group 속성을 가진 부모 요소 찾기
+    const groupElement = input.closest('[data-group]');
+    if (groupElement && groupElement.dataset.group) {
+        return groupElement.dataset.group;
+    }
+    
+    // optbx 내부의 h4 찾기
+    const optbx = input.closest('.optbx');
+    if (optbx) {
+        const heading = optbx.querySelector('h4');
+        if (heading) {
+            return heading.textContent.trim();
+        }
+    }
+    
+    // trim-bx의 경우 opt-label 찾기
+    const trimBx = input.closest('.trim-bx');
+    if (trimBx) {
+        const label = trimBx.querySelector('.opt-label');
+        if (label) {
+            return label.textContent.trim();
+        }
+    }
+    
+    // 기존 방식 (호환성)
     const section = input.closest('.quote-section');
     if (section) {
         const heading = section.querySelector('h2');
-        return heading ? heading.textContent.trim() : 'Unknown';
+        if (heading) {
+            return heading.textContent.trim();
     }
+    }
+    
     return 'Unknown';
 }
 
 // Get option name from input
 function getOptionName(input) {
-    const label = input.nextElementSibling;
-    if (label) {
-        const nameElement = label.querySelector('.option-name');
-        return nameElement ? nameElement.textContent.trim() : label.textContent.trim();
+    // label이 input의 부모인 경우 (input이 label 안에 있는 경우)
+    const parentLabel = input.closest('label');
+    if (parentLabel) {
+        const span = parentLabel.querySelector('span');
+        if (span) {
+            return span.textContent.trim();
+        }
+        // span이 없으면 label의 텍스트에서 input의 value 제외
+        const labelText = parentLabel.textContent.trim();
+        return labelText || input.value;
     }
-    return 'Unknown Option';
+    
+    // label이 input의 다음 형제인 경우
+    const nextLabel = input.nextElementSibling;
+    if (nextLabel && nextLabel.tagName === 'LABEL') {
+        const nameElement = nextLabel.querySelector('.option-name');
+        if (nameElement) {
+            return nameElement.textContent.trim();
+        }
+        const span = nextLabel.querySelector('span');
+        if (span) {
+            return span.textContent.trim();
+        }
+        return nextLabel.textContent.trim();
+    }
+    
+    // label for 속성으로 연결된 경우
+    if (input.id) {
+        const label = document.querySelector(`label[for="${input.id}"]`);
+    if (label) {
+            const span = label.querySelector('span');
+            if (span) {
+                return span.textContent.trim();
+            }
+            return label.textContent.trim();
+    }
+    }
+    
+    // value를 기본값으로 사용
+    return input.value || 'Unknown Option';
 }
 
 // Calculate total price
@@ -815,7 +1097,11 @@ function calculateTotalPrice() {
         totalPrice += option.price;
     });
     
+    // Update global variable
+    window.totalPrice = totalPrice;
+    
     console.log('Total price calculated:', totalPrice);
+    console.log('Selected options:', selectedOptions);
 }
 
 // Update price display
@@ -844,6 +1130,30 @@ function updatePriceDisplay() {
     const sidebarTotal = document.getElementById('sidebarTotal');
     if (sidebarTotal) {
         sidebarTotal.textContent = formatPrice(totalPrice) + '원';
+    }
+    
+    // Update right sidebar price (CN모터스 스타일 - 4인승)
+    const quoteTotalPriceRight = document.getElementById('quoteTotalPriceRight');
+    if (quoteTotalPriceRight) {
+        quoteTotalPriceRight.textContent = formattedPrice;
+    }
+    
+    // Update right sidebar price (6인승)
+    const quoteTotalPriceRight6Seat = document.getElementById('quoteTotalPriceRight6Seat');
+    if (quoteTotalPriceRight6Seat) {
+        quoteTotalPriceRight6Seat.textContent = formattedPrice;
+    }
+    
+    // Update right sidebar price (9인승)
+    const quoteTotalPriceRight9Seat = document.getElementById('quoteTotalPriceRight9Seat');
+    if (quoteTotalPriceRight9Seat) {
+        quoteTotalPriceRight9Seat.textContent = formattedPrice;
+    }
+    
+    // Update quoteTotalPrice (하단 견적 금액)
+    const quoteTotalPrice = document.getElementById('quoteTotalPrice');
+    if (quoteTotalPrice) {
+        quoteTotalPrice.textContent = formattedPrice;
     }
     
     console.log('Price display updated:', formattedPrice);
@@ -990,42 +1300,65 @@ function showQuote() {
 function createSimpleQuoteModal() {
     console.log('Creating simple modal...');
     
-    // Create modal HTML
+    // 옵션을 그룹별로 정리
+    const groupedOptions = {};
+    Object.entries(selectedOptions).forEach(([key, option]) => {
+        // element에서 data-group 속성 가져오기
+        let group = '기타';
+        if (option.element) {
+            const groupElement = option.element.closest('[data-group]');
+            if (groupElement && groupElement.dataset.group) {
+                group = groupElement.dataset.group;
+            } else {
+                // data-group이 없으면 부모 섹션의 제목 찾기
+                const optbx = option.element.closest('.optbx');
+                if (optbx) {
+                    const optbxTop = optbx.querySelector('.optbx-top h4');
+                    if (optbxTop) {
+                        group = optbxTop.textContent.trim();
+                    }
+                }
+            }
+        }
+        if (!groupedOptions[group]) {
+            groupedOptions[group] = [];
+        }
+        groupedOptions[group].push(option);
+    });
+    
+    // Create modal HTML with improved styling
     const modalHTML = `
-        <div id="quoteModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999999; display: flex; align-items: center; justify-content: center;">
-            <div style="background: white; padding: 30px; border-radius: 10px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; color: black;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2 style="margin: 0; color: #bcb8b1;">THE LUNE 견적서</h2>
-                    <button onclick="closeSimpleModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        <div id="quoteModal" class="quote-modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 999999; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
+            <div class="quote-modal-box" style="background: #ffffff; border-radius: 15px; max-width: 700px; width: 100%; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                <div class="quote-modal-header" style="padding: 25px 30px; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; background: #1a1a1a;">
+                    <h2 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">THE LUNE 견적서</h2>
+                    <button onclick="closeSimpleModal()" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #ffffff; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='none'">&times;</button>
                 </div>
-                <div>
-                    <h3>선택된 옵션</h3>
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead>
-                            <tr style="background: #f5f5f5;">
-                                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">항목</th>
-                                <th style="padding: 10px; border: 1px solid #ddd; text-align: right;">가격</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${Object.entries(selectedOptions).map(([key, option]) => `
-                                <tr>
-                                    <td style="padding: 10px; border: 1px solid #ddd;">${option.name}</td>
-                                    <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">${formatPrice(option.price)}원</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                        <tfoot>
-                            <tr style="background: #bcb8b1; color: white; font-weight: bold;">
-                                <td style="padding: 10px; border: 1px solid #ddd;">총 합계</td>
-                                <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">${formatPrice(totalPrice)}원</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                <div class="quote-modal-body" style="padding: 30px; overflow-y: auto; flex: 1;">
+                    ${Object.keys(groupedOptions).length > 0 ? Object.entries(groupedOptions).map(([group, options]) => `
+                        <div class="quote-group" style="margin-bottom: 30px;">
+                            <h3 style="margin: 0 0 15px 0; color: #1a1a1a; font-size: 18px; font-weight: 600; padding-bottom: 10px; border-bottom: 2px solid #1a1a1a;">${group}</h3>
+                            <div class="quote-options-list" style="display: flex; flex-direction: column; gap: 10px;">
+                                ${options.map(option => `
+                                    <div class="quote-option-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f5f5f5; border-radius: 8px; border: 1px solid rgba(0,0,0,0.05);">
+                                        <span style="color: #1a1a1a; font-size: 15px; font-weight: 500;">${option.name}</span>
+                                        <span style="color: #1a1a1a; font-size: 16px; font-weight: 600;">${formatPrice(option.price)}원</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('') : '<p style="text-align: center; color: #999; padding: 40px 0;">선택된 옵션이 없습니다.</p>'}
+                    
+                    <div class="quote-total" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #1a1a1a;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #1a1a1a; border-radius: 10px;">
+                            <span style="color: #ffffff; font-size: 18px; font-weight: 600;">총 견적 금액</span>
+                            <span style="color: #ffffff; font-size: 28px; font-weight: 700;">${formatPrice(totalPrice)}원</span>
+                        </div>
+                    </div>
                 </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <button onclick="closeSimpleModal()" style="background: #ccc; color: black; padding: 10px 20px; border: none; border-radius: 5px; margin-right: 10px; cursor: pointer;">닫기</button>
-                    <button onclick="downloadQuotePDF()" style="background: #bcb8b1; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">PDF 다운로드</button>
+                <div class="quote-modal-footer" style="padding: 20px 30px; border-top: 1px solid rgba(0,0,0,0.1); display: flex; gap: 10px; justify-content: flex-end; background: #f9f9f9;">
+                    <button onclick="closeSimpleModal()" style="background: #ffffff; color: #1a1a1a; padding: 12px 24px; border: 1px solid rgba(0,0,0,0.2); border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s ease;" onmouseover="this.style.background='#f5f5f5'; this.style.borderColor='rgba(0,0,0,0.4)'" onmouseout="this.style.background='#ffffff'; this.style.borderColor='rgba(0,0,0,0.2)'">닫기</button>
+                    <button onclick="downloadQuotePDF()" style="background: #1a1a1a; color: #ffffff; padding: 12px 24px; border: 1px solid #1a1a1a; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s ease;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1a1a1a'">📄 PDF 다운로드</button>
                 </div>
             </div>
         </div>
@@ -1033,6 +1366,17 @@ function createSimpleQuoteModal() {
     
     // Add modal to body
     document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // 모달 외부 클릭 시 닫기
+    const modalOverlay = document.querySelector('#quoteModal.quote-modal-overlay');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeSimpleModal();
+            }
+        });
+    }
+    
     console.log('Simple modal added to DOM');
 }
 
@@ -1151,6 +1495,9 @@ function show4SeatQuoteOptions() {
             // 특장라인업 옵션 상태 업데이트 (4인승은 항상 TLV4)
             updateSpecialLineupOptionsForForm(document.getElementById('quoteForm'), 'tlv4');
             
+            // 이미지 슬라이더 초기화
+            initializeImageSlider();
+            
             // 스크롤 이동 (단순화)
             setTimeout(() => {
                 quoteOptions.scrollIntoView({ 
@@ -1233,6 +1580,9 @@ function show6SeatQuoteOptions() {
             } else {
                 updateExteriorColorOptions(null);
             }
+            
+            // 이미지 슬라이더 초기화
+            initializeImageSlider();
             
             // 스크롤 이동 (단순화)
             setTimeout(() => {
@@ -1324,6 +1674,9 @@ function show9SeatQuoteOptions() {
             } else {
                 updateSpecialLineupOptionsForForm(document.getElementById('quote9SeatForm'), '');
             }
+            
+            // 이미지 슬라이더 초기화
+            initializeImageSlider();
             
             // 스크롤 이동 (단순화)
             setTimeout(() => {
@@ -2182,6 +2535,11 @@ window.show4SeatQuoteOptions = show4SeatQuoteOptions;
 window.show4SeatQuoteOptions = show4SeatQuoteOptions;
 window.show6SeatQuoteOptions = show6SeatQuoteOptions;
 window.setLanguage = setLanguage;
+window.handleOptionChange = handleOptionChange;
+window.calculateTotalPrice = calculateTotalPrice;
+window.updatePriceDisplay = updatePriceDisplay;
+window.getSectionName = getSectionName;
+window.getOptionName = getOptionName;
 
 // Debug function
 window.testButtons = function() {
@@ -2202,6 +2560,93 @@ document.addEventListener('DOMContentLoaded', function() {
     // 기존 초기화 함수들 호출
     initializeQuotePage();
     setupEventListeners();
+    
+    // 순정 옵션과 컨버전 옵션을 확실히 체크 상태로 설정
+    function ensureStandardAndConversionOptionsChecked() {
+        const standardOptions = [
+            'standard_style', 'standard_drive_wise', 'standard_monitoring',
+            'standard_smart_connect', 'standard_hud', 'standard_boss', 'standard_comfort'
+        ];
+        standardOptions.forEach(optionId => {
+            const input = document.getElementById(optionId);
+            if (input) {
+                input.setAttribute('checked', 'checked');
+                input.checked = true;
+                // label에 checked 클래스 추가
+                const label = input.closest('label');
+                if (label) {
+                    label.classList.add('checked');
+                }
+                console.log('순정 옵션 체크 확인:', optionId, input.checked);
+            } else {
+                console.log('순정 옵션을 찾을 수 없음:', optionId);
+            }
+        });
+        
+        const conversionOptions = [
+            'conversion_roof', 'conversion_mood', 'conversion_tv', 'conversion_soundproof'
+        ];
+        conversionOptions.forEach(optionId => {
+            const input = document.getElementById(optionId);
+            if (input) {
+                input.setAttribute('checked', 'checked');
+                input.checked = true;
+                // label에 checked 클래스 추가
+                const label = input.closest('label');
+                if (label) {
+                    label.classList.add('checked');
+                }
+                console.log('컨버전 옵션 체크 확인:', optionId, input.checked);
+            } else {
+                console.log('컨버전 옵션을 찾을 수 없음:', optionId);
+            }
+        });
+    }
+    
+    // 여러 시점에서 체크 상태 확인
+    setTimeout(ensureStandardAndConversionOptionsChecked, 500);
+    setTimeout(ensureStandardAndConversionOptionsChecked, 1000);
+    setTimeout(ensureStandardAndConversionOptionsChecked, 2000);
+        
+        // 초기화 후 다시 한번 체크된 옵션 확인 및 합산
+        // 단, 컨버전 옵션은 제외
+        const allCheckedInputs = document.querySelectorAll('input[type="radio"][checked], input[type="checkbox"][checked]');
+        console.log('초기화 후 체크된 옵션 재확인:', allCheckedInputs.length);
+        allCheckedInputs.forEach(input => {
+            // 컨버전 옵션은 제외
+            if (input.id && (input.id.startsWith('conversion_') || (input.name && input.name.startsWith('conversion_')))) {
+                return;
+            }
+            
+            // 실제로 checked 상태로 설정
+            input.checked = true;
+            
+            const sectionName = getSectionName(input);
+            const optionName = getOptionName(input);
+            const price = parseInt(input.dataset.price) || 0;
+            
+            if (input.type === 'radio') {
+                selectedOptions[sectionName] = {
+                    name: optionName,
+                    price: price,
+                    element: input
+                };
+            } else if (input.type === 'checkbox') {
+                const optionKey = `${sectionName}_${input.value}`;
+                selectedOptions[optionKey] = {
+                    name: optionName,
+                    price: price,
+                    element: input
+                };
+            }
+        });
+        
+        calculateTotalPrice();
+        updatePriceDisplay();
+        updateSelectedOptionsDisplay();
+        console.log('초기화 후 최종 합산 완료, 총액:', totalPrice);
+    }, 500);
+    
     updatePriceDisplay();
     
     // 6인승 버튼 이벤트 리스너 추가
@@ -2239,4 +2684,374 @@ function hideSidebar() {
         sidebar.style.display = 'none';
         console.log('Sidebar hidden');
     }
+}
+
+// 이미지 슬라이더 초기화 (CN모터스 스타일)
+function initializeImageSlider() {
+    const sliderContainer = document.querySelector('.quote-image-swiper');
+    if (!sliderContainer) return;
+    
+    // 기존 Swiper 인스턴스가 있으면 제거
+    if (sliderContainer.swiper) {
+        sliderContainer.swiper.destroy(true, true);
+    }
+    
+    // Swiper 초기화
+    if (typeof Swiper !== 'undefined') {
+        new Swiper('.quote-image-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+        console.log('Image slider initialized');
+    } else {
+        console.warn('Swiper library not loaded');
+    }
+}
+
+// 모델 선택에 따라 옵션 표시/숨김 처리
+function updateModelOptions(modelInput) {
+    if (!modelInput || !modelInput.checked) return;
+    
+    const form = modelInput.closest('form');
+    if (!form) return;
+    
+    const selectedModel = modelInput.value.toLowerCase(); // TL9, TLV9, TLV4
+    console.log('Selected model:', selectedModel);
+    
+    // 모델 선택 섹션은 항상 표시 (제외)
+    const modelSelectionSection = form.querySelector('[data-opt="model_type"]');
+    
+    // 모든 옵션 섹션 찾기 (모델 선택 섹션 제외)
+    const allOptionSections = form.querySelectorAll('.optbx, .opt-wrap');
+    
+    allOptionSections.forEach(section => {
+        // 모델 선택 섹션은 건너뛰기
+        if (section.contains(modelSelectionSection) || section === modelSelectionSection) {
+            return;
+        }
+        
+        const sectionDataModel = section.dataset.model;
+        
+        // 섹션에 data-model 속성이 있고, 선택된 모델과 일치하지 않으면 숨김
+        if (sectionDataModel && sectionDataModel !== selectedModel) {
+            section.style.display = 'none';
+        } else if (sectionDataModel && sectionDataModel === selectedModel) {
+            section.style.display = 'block';
+        }
+    });
+    
+    // TL9 선택 시 특정 옵션들 표시 (모델 선택 라디오 버튼 제외)
+    if (selectedModel === 'tl9') {
+        // TL9 전용 옵션들 표시 (모델 선택 섹션 제외)
+        const tl9Options = form.querySelectorAll('[data-model="tl9"]:not([data-opt="model_type"]), [data-tl9-only="true"]');
+        tl9Options.forEach(option => {
+            // 모델 선택 섹션 내부 요소는 제외
+            if (option.closest('[data-opt="model_type"]')) {
+                return;
+            }
+            option.style.display = 'block';
+            const input = option.querySelector('input');
+            if (input) {
+                input.disabled = false;
+            }
+        });
+        
+        // 다른 모델 전용 옵션들 숨김 (모델 선택 섹션 제외)
+        const otherModelOptions = form.querySelectorAll('[data-model="tlv9"]:not([data-opt="model_type"]), [data-model="tlv4"]:not([data-opt="model_type"]), [data-tlv9-only="true"], [data-tlv4-only="true"]');
+        otherModelOptions.forEach(option => {
+            // 모델 선택 섹션 내부 요소는 제외
+            if (option.closest('[data-opt="model_type"]')) {
+                return;
+            }
+            option.style.display = 'none';
+            const input = option.querySelector('input');
+            if (input) {
+                input.disabled = true;
+                input.checked = false;
+            }
+        });
+    } else if (selectedModel === 'tlv9') {
+        // TLV9 전용 옵션들 표시 (모델 선택 섹션 제외)
+        const tlv9Options = form.querySelectorAll('[data-model="tlv9"]:not([data-opt="model_type"]), [data-tlv9-only="true"]');
+        tlv9Options.forEach(option => {
+            // 모델 선택 섹션 내부 요소는 제외
+            if (option.closest('[data-opt="model_type"]')) {
+                return;
+            }
+            option.style.display = 'block';
+            const input = option.querySelector('input');
+            if (input) {
+                input.disabled = false;
+            }
+        });
+        
+        // 다른 모델 전용 옵션들 숨김 (모델 선택 섹션 제외)
+        const otherModelOptions = form.querySelectorAll('[data-model="tl9"]:not([data-opt="model_type"]), [data-model="tlv4"]:not([data-opt="model_type"]), [data-tl9-only="true"], [data-tlv4-only="true"]');
+        otherModelOptions.forEach(option => {
+            // 모델 선택 섹션 내부 요소는 제외
+            if (option.closest('[data-opt="model_type"]')) {
+                return;
+            }
+            option.style.display = 'none';
+            const input = option.querySelector('input');
+            if (input) {
+                input.disabled = true;
+                input.checked = false;
+            }
+        });
+    } else if (selectedModel === 'tlv4') {
+        // TLV4 전용 옵션들 표시 (모델 선택 섹션 제외)
+        const tlv4Options = form.querySelectorAll('[data-model="tlv4"]:not([data-opt="model_type"]), [data-tlv4-only="true"]');
+        tlv4Options.forEach(option => {
+            // 모델 선택 섹션 내부 요소는 제외
+            if (option.closest('[data-opt="model_type"]')) {
+                return;
+            }
+            option.style.display = 'block';
+            const input = option.querySelector('input');
+            if (input) {
+                input.disabled = false;
+            }
+        });
+        
+        // 다른 모델 전용 옵션들 숨김 (모델 선택 섹션 제외)
+        const otherModelOptions = form.querySelectorAll('[data-model="tl9"]:not([data-opt="model_type"]), [data-model="tlv9"]:not([data-opt="model_type"]), [data-tl9-only="true"], [data-tlv9-only="true"]');
+        otherModelOptions.forEach(option => {
+            // 모델 선택 섹션 내부 요소는 제외
+            if (option.closest('[data-opt="model_type"]')) {
+                return;
+            }
+            option.style.display = 'none';
+            const input = option.querySelector('input');
+            if (input) {
+                input.disabled = true;
+                input.checked = false;
+            }
+        });
+    }
+    
+    // 가격 재계산
+    calculateTotalPrice();
+    updatePriceDisplay();
+}
+
+// 현재 단계 추적
+let currentStep = 'model-spec'; // 초기 단계: 모델/사양
+
+// 단계 정의
+const steps = ['model-spec', 'conversion', 'conversion-select', 'additional'];
+
+// 단계 제목 정의
+const stepTitles = {
+    'model-spec': '모델/사양',
+    'conversion': '컨버전 옵션',
+    'conversion-select': '컨버전 옵션 선택',
+    'additional': '추가 옵션'
+};
+
+// 다음 단계로 이동
+function goToNextStep() {
+    const currentIndex = steps.indexOf(currentStep);
+    if (currentIndex < steps.length - 1) {
+        const nextStep = steps[currentIndex + 1];
+        showStep(nextStep);
+        currentStep = nextStep;
+        updateStepButtons();
+        updateProgressBar();
+    }
+}
+
+// 이전 단계로 이동
+function goToPrevStep() {
+    const currentIndex = steps.indexOf(currentStep);
+    if (currentIndex > 0) {
+        const prevStep = steps[currentIndex - 1];
+        showStep(prevStep);
+        currentStep = prevStep;
+        updateStepButtons();
+        updateProgressBar();
+    }
+}
+
+// 특정 단계 표시
+function showStep(stepName) {
+    console.log('showStep called with:', stepName);
+    
+    // 모든 단계 숨김 (opt-wrap과 optbx 모두)
+    steps.forEach(step => {
+        const stepElements = document.querySelectorAll(`[data-step="${step}"]`);
+        stepElements.forEach(element => {
+            element.style.display = 'none';
+        });
+    });
+    
+    // 선택한 단계 표시 (opt-wrap과 optbx 모두)
+    const stepElements = document.querySelectorAll(`[data-step="${stepName}"]`);
+    console.log('Found step elements:', stepElements.length);
+    
+    stepElements.forEach(stepElement => {
+        stepElement.style.display = 'block';
+        console.log('Displayed step element:', stepElement, stepElement.className);
+    });
+    
+    // opt-wrap이 있는 경우 그 안의 모든 optbx도 표시
+    const optWrap = document.querySelector(`.opt-wrap[data-step="${stepName}"]`);
+    if (optWrap) {
+        optWrap.style.display = 'block';
+        console.log('Displayed opt-wrap:', optWrap);
+        
+        // 해당 단계의 form에 이벤트 리스너 다시 설정
+        const form = optWrap.querySelector('form');
+        if (form) {
+            // 기존 리스너 제거를 위해 data-listener-attached 속성 제거
+            const inputs = form.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+            inputs.forEach(input => {
+                input.removeAttribute('data-listener-attached');
+            });
+            setupFormEventListeners(`#${form.id}`);
+            
+            // 컨버전 옵션 단계로 넘어왔을 때 체크된 옵션들을 자동으로 합산
+            if (stepName === 'conversion') {
+                setTimeout(() => {
+                    // [checked] 속성을 사용하여 display:none인 요소도 찾기
+                    const checkedInputs = form.querySelectorAll('input[type="checkbox"][checked]');
+                    console.log('컨버전 옵션 체크된 항목:', checkedInputs.length);
+                    checkedInputs.forEach(input => {
+                        // 실제로 checked 상태인지 확인
+                        if (!input.checked) {
+                            input.checked = true; // checked 속성이 있으면 checked 상태로 설정
+                        }
+                        
+                        const sectionName = getSectionName(input);
+                        const optionName = getOptionName(input);
+                        const price = parseInt(input.dataset.price) || 0;
+                        const optionKey = `${sectionName}_${input.value}`;
+                        
+                        console.log('컨버전 옵션 처리:', {
+                            inputId: input.id,
+                            sectionName: sectionName,
+                            optionName: optionName,
+                            price: price,
+                            optionKey: optionKey,
+                            alreadyExists: !!selectedOptions[optionKey]
+                        });
+                        
+                        // 이미 추가되어 있지 않은 경우만 추가
+                        if (!selectedOptions[optionKey]) {
+                            selectedOptions[optionKey] = {
+                                name: optionName,
+                                price: price,
+                                element: input
+                            };
+                            console.log('컨버전 옵션 자동 추가:', optionKey, price);
+                        }
+                    });
+                    
+                    // 가격 재계산 및 표시 업데이트
+                    calculateTotalPrice();
+                    updatePriceDisplay();
+                    updateSelectedOptionsDisplay();
+                    console.log('컨버전 옵션 자동 합산 완료, 총액:', totalPrice);
+                    console.log('현재 선택된 옵션:', selectedOptions);
+                }, 300);
+            }
+        }
+    }
+    
+    // 모든 form에 이벤트 리스너 다시 설정 (안전을 위해)
+    setTimeout(() => {
+        setupFormEventListeners('#quoteForm');
+    }, 200);
+    
+    // 스크롤을 해당 섹션으로 이동
+    if (stepElements.length > 0) {
+        setTimeout(() => {
+            const firstElement = stepElements[0];
+            firstElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    } else {
+        console.warn('No step elements found for:', stepName);
+    }
+}
+
+// 단계 버튼 업데이트
+function updateStepButtons() {
+    const conversionBtn = document.getElementById('quoteConversionBtn');
+    const prevBtn = document.getElementById('quotePrevBtn');
+    
+    if (currentStep === 'model-spec') {
+        // 모델/사양 단계: 컨버전 옵션 버튼 표시
+        if (conversionBtn) {
+            conversionBtn.textContent = '컨버전 옵션 →';
+            conversionBtn.style.display = 'block';
+        }
+        if (prevBtn) {
+            prevBtn.style.display = 'none';
+        }
+    } else if (currentStep === 'conversion') {
+        // 컨버전 옵션 단계: 컨버전 옵션 선택 버튼으로 변경
+        if (conversionBtn) {
+            conversionBtn.textContent = '컨버전 옵션 선택 →';
+            conversionBtn.style.display = 'block';
+        }
+        if (prevBtn) {
+            prevBtn.style.display = 'block';
+        }
+    } else if (currentStep === 'conversion-select') {
+        // 컨버전 옵션 선택 단계: 추가 옵션 버튼으로 변경
+        if (conversionBtn) {
+            conversionBtn.textContent = '추가 옵션 →';
+            conversionBtn.style.display = 'block';
+        }
+        if (prevBtn) {
+            prevBtn.style.display = 'block';
+        }
+    } else if (currentStep === 'additional') {
+        // 추가 옵션 단계: 버튼 숨김
+        if (conversionBtn) {
+            conversionBtn.style.display = 'none';
+        }
+        if (prevBtn) {
+            prevBtn.style.display = 'block';
+        }
+    }
+}
+
+// 진행 바 업데이트
+function updateProgressBar() {
+    const currentIndex = steps.indexOf(currentStep);
+    const stepTitle = stepTitles[currentStep] || '모델/사양';
+    const stepNumber = currentIndex + 1;
+    const totalSteps = steps.length;
+    
+    // 제목 업데이트
+    const titleElement = document.getElementById('currentStepTitle');
+    if (titleElement) {
+        titleElement.textContent = stepTitle;
+    }
+    
+    // 진행률 텍스트 업데이트
+    const progressElement = document.getElementById('currentStepProgress');
+    if (progressElement) {
+        progressElement.textContent = `${stepNumber}/${totalSteps}`;
+    }
+    
+    // 진행 바 업데이트
+    const progressBars = document.querySelectorAll('.prog-bar li');
+    progressBars.forEach((bar, index) => {
+        if (index <= currentIndex) {
+            bar.classList.add('active');
+        } else {
+            bar.classList.remove('active');
+        }
+    });
 }

@@ -2719,6 +2719,7 @@ kbd {
     padding-left: 50px !important;
     font-size: 14px !important;
     color: rgba(255, 255, 255, 0.8) !important;
+    text-transform: none !important;
   }
   
   .ak-nav .ak-nav_list ul li a:hover {
@@ -3065,6 +3066,7 @@ kbd {
     padding-left: 50px !important;
     font-size: 14px !important;
     color: rgba(255, 255, 255, 0.8) !important;
+    text-transform: none !important;
   }
   
   .ak-nav .ak-nav_list ul li a:hover {
@@ -3963,6 +3965,11 @@ kbd {
   padding: 10px 2px;
   margin: 0;
   display: block;
+  text-transform: none !important;
+}
+
+.ak-nav_list ul li a {
+  text-transform: none !important;
 }
 
 @media screen and (max-width: 1200px) {
