@@ -263,14 +263,14 @@
         /* 노트북 화면에서 로고와 메뉴 겹침 방지 */
         @media (min-width: 1024px) and (max-width: 1440px) {
             .ak-main-header-left {
-                min-width: 100px !important;
-                max-width: 120px !important;
+                min-width: 60px !important;
+                max-width: 80px !important;
                 flex-shrink: 0 !important;
-                margin-right: 10px !important;
+                margin-right: 30px !important;
             }
             
             .ak-site_branding.lune-logo img {
-                max-width: 80px !important;
+                max-width: 40px !important;
                 height: auto !important;
             }
             
@@ -311,6 +311,68 @@
             .lang-btn {
                 font-size: 11px !important;
                 padding: 1px 2px !important;
+            }
+        }
+
+
+        /* 퀵메뉴 버튼 스타일 */
+        .quick-menu-button {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .quick-menu-button a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: #f5f5f5;
+            border: 1px solid #d0d0d0;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .quick-menu-button a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            background: #e8e8e8;
+        }
+
+        .quick-menu-button svg {
+            margin-bottom: 4px;
+        }
+
+        .quick-menu-button span {
+            font-size: 12px;
+            color: #1a73e8;
+            font-weight: 600;
+            font-family: 'Avenir', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .quick-menu-button {
+                bottom: 100px;
+                right: 20px;
+            }
+
+            .quick-menu-button a {
+                width: 70px;
+                height: 70px;
+            }
+
+            .quick-menu-button svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .quick-menu-button span {
+                font-size: 11px;
             }
         }
 
@@ -427,7 +489,20 @@
         </div>
     </section>
 
-    <!-- Start Footer -->
+    
+    <!-- Quick Menu Button -->
+    <div class="quick-menu-button">
+        <a href="contact.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M16 4C9.37 4 4 9.37 4 16c0 2.5.73 4.82 1.98 6.8L4 28l5.2-1.98C11.18 29.27 13.5 30 16 30c6.63 0 12-5.37 12-12S22.63 4 16 4z" fill="#1a73e8"/>
+                <text x="16" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">?</text>
+            </svg>
+            <span>문의하기</span>
+        </a>
+    </div>
+
+
+<!-- Start Footer -->
     <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
         <div style="width: 100%; padding: 0 50px;">
             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%;">

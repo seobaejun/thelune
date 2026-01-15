@@ -355,14 +355,14 @@
         /* 노트북 화면에서 로고와 메뉴 겹침 방지 */
         @media (min-width: 1024px) and (max-width: 1440px) {
             .ak-main-header-left {
-                min-width: 100px !important;
-                max-width: 120px !important;
+                min-width: 60px !important;
+                max-width: 80px !important;
                 flex-shrink: 0 !important;
-                margin-right: 10px !important;
+                margin-right: 30px !important;
             }
             
             .ak-site_branding.lune-logo img {
-                max-width: 80px !important;
+                max-width: 40px !important;
                 height: auto !important;
             }
             
@@ -403,6 +403,79 @@
             .lang-btn {
                 font-size: 11px !important;
                 padding: 1px 2px !important;
+            }
+        }
+
+
+        /* 퀵메뉴 버튼 스타일 - body와 html에 overflow visible 강제 */
+        body, html {
+            overflow-x: visible !important;
+            overflow-y: auto !important;
+        }
+        
+        .quick-menu-button {
+            position: fixed !important;
+            bottom: 120px !important;
+            right: 30px !important;
+            z-index: 99999 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        .quick-menu-button a {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 80px !important;
+            height: 80px !important;
+            background: #f5f5f5 !important;
+            border: 1px solid #d0d0d0 !important;
+            border-radius: 50% !important;
+            text-decoration: none !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            transition: all 0.3s ease !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .quick-menu-button a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            background: #e8e8e8;
+        }
+
+        .quick-menu-button svg {
+            margin-bottom: 4px;
+        }
+
+        .quick-menu-button span {
+            font-size: 12px;
+            color: #1a73e8;
+            font-weight: 600;
+            font-family: 'Avenir', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .quick-menu-button {
+                bottom: 100px;
+                right: 20px;
+            }
+
+            .quick-menu-button a {
+                width: 70px;
+                height: 70px;
+            }
+
+            .quick-menu-button svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .quick-menu-button span {
+                font-size: 11px;
             }
         }
 
@@ -487,42 +560,10 @@
                 <div class="col-lg-3 col-md-6" style="margin-bottom: 50px;">
                     <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; height: 100%;">
                         <div style="height: 250px; overflow: hidden;">
-                            <img src="assets/img/4인승.jpg" alt="LUNE CARNIVAL 4" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="assets/img/9인승.jpg" alt="Carnival TL9" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 30px;">
-                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 4</h3>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
-                                4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.
-                            </p>
-                            <a href="lune-carnival-4.html" class="glass-button size-sm">
-                                <span class="glass-button-text">더 알아보기</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" style="margin-bottom: 50px;">
-                    <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; height: 100%;">
-                        <div style="height: 250px; overflow: hidden;">
-                            <img src="assets/img/6인승.jpg" alt="LUNE CARNIVAL 6" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="padding: 30px;">
-                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 6</h3>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
-                                6인승 프리미엄 모델로 넓은 공간과 럭셔리한 인테리어를 자랑합니다.
-                            </p>
-                            <a href="lune-carnival-7.html" class="glass-button size-sm">
-                                <span class="glass-button-text">더 알아보기</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" style="margin-bottom: 50px;">
-                    <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; height: 100%;">
-                        <div style="height: 250px; overflow: hidden;">
-                            <img src="assets/img/9인승.jpg" alt="LUNE CARNIVAL 9" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="padding: 30px;">
-                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">LUNE CARNIVAL 9</h3>
+                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">Carnival TL9</h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
                                 9인승 대형 모델로 단체 이용에 최적화된 프리미엄 인테리어를 제공합니다.
                             </p>
@@ -535,10 +576,42 @@
                 <div class="col-lg-3 col-md-6" style="margin-bottom: 50px;">
                     <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; height: 100%;">
                         <div style="height: 250px; overflow: hidden;">
-                            <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg" alt="SPRINTER" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="assets/img/6인승.jpg" alt="Carnival TLV9" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 30px;">
-                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">SPRINTER</h3>
+                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">Carnival TLV9</h3>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
+                                6인승 프리미엄 모델로 넓은 공간과 럭셔리한 인테리어를 자랑합니다.
+                            </p>
+                            <a href="lune-carnival-7.html" class="glass-button size-sm">
+                                <span class="glass-button-text">더 알아보기</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" style="margin-bottom: 50px;">
+                    <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; height: 100%;">
+                        <div style="height: 250px; overflow: hidden;">
+                            <img src="assets/img/4인승.jpg" alt="Carnival TLV4" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">Carnival TLV4</h3>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
+                                4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.
+                            </p>
+                            <a href="lune-carnival-4.html" class="glass-button size-sm">
+                                <span class="glass-button-text">더 알아보기</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" style="margin-bottom: 50px;">
+                    <div style="background: rgba(188,184,177,0.1); border: 1px solid rgba(188,184,177,0.2); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; height: 100%;">
+                        <div style="height: 250px; overflow: hidden;">
+                            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_07.jpg" alt="Benz Sprinter" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 class="english-serif" style="color: white; font-size: 24px; font-weight: 600; margin-bottom: 15px;">Benz Sprinter</h3>
                             <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
                                 비즈니스와 레저를 위한 프리미엄 스프린터 커스텀 모델입니다.
                             </p>
@@ -573,7 +646,20 @@
         </div>
     </section>
 
-    <!-- Start Footer -->
+    
+    <!-- Quick Menu Button -->
+    <div class="quick-menu-button">
+        <a href="contact.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M16 4C9.37 4 4 9.37 4 16c0 2.5.73 4.82 1.98 6.8L4 28l5.2-1.98C11.18 29.27 13.5 30 16 30c6.63 0 12-5.37 12-12S22.63 4 16 4z" fill="#1a73e8"/>
+                <text x="16" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">?</text>
+            </svg>
+            <span>문의하기</span>
+        </a>
+    </div>
+
+
+<!-- Start Footer -->
     <footer style="background: #0a0a0a !important; color: #ffffff !important; padding: 60px 0 20px 0 !important;">
         <div style="width: 100%; padding: 0 50px;">
             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%;">
