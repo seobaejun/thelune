@@ -325,17 +325,35 @@
 
         .category-image {
             height: 250px;
-            overflow: hidden;
+            overflow: visible;
             position: relative;
             background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .category-image img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
             object-fit: contain;
             object-position: center;
             transition: transform 0.3s ease;
+        }
+        
+        /* ETC 카드 이미지가 가로 여백 없이 표시되도록 처리 */
+        .category-card[data-category="etc"] .category-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .category-card[data-category="etc"] .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         .category-card:hover .category-image img {
@@ -829,7 +847,7 @@
         </div>
     </div>
 
-        <!-- Start Header Section -->
+            <!-- Start Header Section -->
     <header class="ak-site_header ak-style1 ak-sticky_header">
         <div class="ak-main_header">
             <div style="width: 100%; padding: 0 50px;">
@@ -841,10 +859,10 @@
                     </div>
                     <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
                         <div class="ak-nav ak-medium">
-                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 30px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important;">
-                                <li><a href="about.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">회사소개</a></li>
+                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 20px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important; flex-wrap: nowrap !important;">
+                                <li><a href="about.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">회사소개</a></li>
                                 <li class="menu-item-has-children">
-                                    <a href="services.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">모델소개</a>
+                                    <a href="services.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">모델소개</a>
                                     <ul>
                                         <li><a href="lune-carnival-9.html" class="text-hover-animaiton" style="text-transform: none !important;">Carnival TL9</a></li>
                                         <li><a href="lune-carnival-7.html" class="text-hover-animaiton" style="text-transform: none !important;">Carnival TLV9</a></li>
@@ -852,12 +870,13 @@
                                         <li><a href="sprinter.html" class="text-hover-animaiton" style="text-transform: none !important;">Benz Sprinter</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="gallery.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">갤러리</a></li>
-                                <li><a href="news.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">홍보센터</a></li>
-                                <li><a href="showroom.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">전시장</a></li>
-                                <li><a href="quote.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">견적내기</a></li>
-                                <li class="mobile-menu-item"><a href="contact.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">문의하기</a></li>
-                                <li class="mobile-menu-item"><a href="as.html" class="text-hover-animaiton" style="font-size: 15px !important; color: #ffffff !important;">A/S접수</a></li>
+                                <li><a href="gallery.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">갤러리</a></li>
+                                <li><a href="news.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">홍보센터</a></li>
+                                <li><a href="showroom.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">전시장</a></li>
+                                <li><a href="test-drive.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">찾아가는 시승 서비스</a></li>
+                                <li><a href="quote.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">견적내기</a></li>
+                                <li class="mobile-menu-item"><a href="contact.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">문의하기</a></li>
+                                <li class="mobile-menu-item"><a href="as.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">A/S접수</a></li>
                             </ul>
                         </div>
                     </div>
@@ -867,14 +886,6 @@
                                 문의하기
                             </a>
                             <a href="as.html" style="display: inline-block; padding: 8px 20px; border: none; color: #ffffff !important; text-decoration: none !important; font-size: 15px !important; transition: all 0.3s ease;">A/S접수</a>
-                            <a href="tel:031-943-4488">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="heartbeat-icon">
-                                        <span class="ak-heartbeat-btn"><img src="assets/img/phone.svg" alt="..."></span>
-                                    </div>
-                                    <h6 style="color: white !important; margin: 0 !important; font-size: 16px !important; white-space: nowrap !important;">031-943-4488</h6>
-                                </div>
-                            </a>
                             <div class="language-selector" style="display: flex !important; align-items: center !important; gap: 3px !important; color: white !important; font-size: 14px !important;">
                                 <button class="lang-btn active" onclick="switchLanguage('ko')" style="background: none !important; border: none !important; color: #bcb8b1 !important; cursor: pointer !important; padding: 2px 4px !important; font-size: 14px !important; font-weight: 600 !important;">KOR</button>
                                 <span style="color: white !important; margin: 0 2px !important;">/</span>
@@ -908,7 +919,7 @@
             <div class="row" style="margin: 0 -20px; justify-content: center;">
                 <!-- 카니발 카테고리 -->
                 <div class="col-lg-3 col-md-6" style="padding: 0 20px; margin-bottom: 40px;">
-                    <div class="category-card" onclick="location.href='gallery-4seater.html'" style="cursor: pointer;">
+                    <div class="category-card" style="cursor: pointer;" data-category="carnival" onclick="window.location.href='gallery-4seater.html'">
                         <div class="category-card-inner">
                             <div class="category-image">
                                 <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg" alt="카니발 갤러리">
@@ -924,10 +935,10 @@
 
                 <!-- 스프린터 카테고리 -->
                 <div class="col-lg-3 col-md-6" style="padding: 0 20px; margin-bottom: 40px;">
-                    <div class="category-card" style="cursor: pointer;" data-category="sprinter">
+                    <div class="category-card" style="cursor: pointer;" data-category="sprinter" onclick="window.location.href='gallery-sprinter.html'">
                         <div class="category-card-inner">
                             <div class="category-image">
-                                <img src="assets/img/placeholder.jpg" alt="스프린터 갤러리" style="background: rgba(255,255,255,0.1);">
+                                <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_07.jpg" alt="스프린터 갤러리" style="object-fit: contain; object-position: center; background-color: #1a1a1a;">
                             </div>
                             <div class="category-content">
                                 <h3 class="category-title">스프린터</h3>
@@ -940,10 +951,10 @@
 
                 <!-- ETC 카테고리 -->
                 <div class="col-lg-3 col-md-6" style="padding: 0 20px; margin-bottom: 40px;">
-                    <div class="category-card" style="cursor: pointer;" data-category="etc">
+                    <div class="category-card" style="cursor: pointer;" data-category="etc" onclick="window.location.href='gallery-etc.html'">
                         <div class="category-card-inner">
-                            <div class="category-image">
-                                <img src="assets/img/placeholder.jpg" alt="ETC 갤러리" style="background: rgba(255,255,255,0.1);">
+                            <div class="category-image" style="display: flex; align-items: center; justify-content: center;">
+                                <img src="assets/img/ETC/KakaoTalk_20200225_003544687_14.jpg" alt="ETC 갤러리" style="width: 100%; height: 100%; object-fit: cover; object-position: center; background-color: #1a1a1a;">
                             </div>
                             <div class="category-content">
                                 <h3 class="category-title">ETC</h3>
@@ -2192,21 +2203,41 @@
         
         // Add click event listeners to category cards
         document.addEventListener('DOMContentLoaded', function() {
-            const categoryCards = document.querySelectorAll('.category-card[data-category]');
-            categoryCards.forEach(card => {
+            // 모든 카드에 클릭 이벤트 추가
+            const categoryCards = document.querySelectorAll('.category-card');
+            console.log('Found category cards:', categoryCards.length);
+            
+            categoryCards.forEach((card, index) => {
+                const categoryId = card.getAttribute('data-category');
+                console.log(`Card ${index}: categoryId =`, categoryId);
+                
+                // 카드 전체에 클릭 이벤트 추가
                 card.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    const categoryId = this.getAttribute('data-category');
-                    console.log('Card clicked, category:', categoryId);
-                    if (categoryId && typeof openCategoryModal === 'function') {
-                        openCategoryModal(categoryId);
+                    
+                    const clickedCategoryId = this.getAttribute('data-category');
+                    console.log('Card clicked, category:', clickedCategoryId);
+                    
+                    // 카테고리별 페이지 이동
+                    if (clickedCategoryId === 'carnival') {
+                        console.log('Navigating to gallery-4seater.html');
+                        window.location.href = 'gallery-4seater.html';
+                    } else if (clickedCategoryId === 'sprinter') {
+                        console.log('Navigating to gallery-sprinter.html');
+                        window.location.href = 'gallery-sprinter.html';
+                    } else if (clickedCategoryId === 'etc') {
+                        console.log('Navigating to gallery-etc.html');
+                        window.location.href = 'gallery-etc.html';
+                    } else if (clickedCategoryId && typeof openCategoryModal === 'function') {
+                        openCategoryModal(clickedCategoryId);
                     } else {
-                        console.error('openCategoryModal is not a function or categoryId is missing');
+                        console.error('Category ID not found or invalid:', clickedCategoryId);
                         alert('갤러리를 열 수 없습니다. 페이지를 새로고침해주세요.');
                     }
-                });
+                }, true); // capture phase에서 이벤트 처리
             });
+            
             console.log('Category cards initialized:', categoryCards.length);
         });
 
