@@ -396,6 +396,60 @@
             right: 30px;
             z-index: 9999;
         }
+        
+        /* 노트북 화면에서 로고와 메뉴 겹침 방지 */
+        @media (min-width: 1024px) and (max-width: 1440px) {
+            .ak-main-header-left {
+                min-width: 120px !important;
+                max-width: 150px !important;
+                flex-shrink: 0 !important;
+                margin-right: 15px !important;
+            }
+            
+            .ak-site_branding.lune-logo img {
+                max-width: 100px !important;
+                height: auto !important;
+            }
+            
+            .ak-main-header-center {
+                min-width: 0 !important;
+                margin-left: 5px !important;
+                flex: 1 !important;
+            }
+            
+            .ak-nav_list {
+                gap: 10px !important;
+            }
+            
+            .ak-nav_list li a {
+                font-size: 12px !important;
+                padding: 8px 2px !important;
+            }
+            
+            .ak-main-header-right {
+                min-width: 240px !important;
+                flex-shrink: 0 !important;
+                gap: 15px !important;
+            }
+            
+            .ak-header_btns {
+                gap: 15px !important;
+            }
+            
+            .ak-header_btns a {
+                padding: 6px 16px !important;
+                font-size: 13px !important;
+            }
+            
+            .language-selector {
+                gap: 2px !important;
+            }
+            
+            .lang-btn {
+                font-size: 12px !important;
+                padding: 2px 3px !important;
+            }
+        }
 
         .quick-menu-button a {
             display: flex;
@@ -518,7 +572,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="ak-hero ak-style1 slide-inner" style="position: relative;">
-                    <img src="assets/img/hero-bg-1.jpg" class="ak-hero-bg ak-bg object-cover" alt="THE LUNE Hero Background">
+                    <img src="assets/img/히어로섹션.png" class="ak-hero-bg ak-bg object-cover" alt="THE LUNE Hero Background">
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1;"></div>
                     <div class="container">
                         <div class="hero-slider-info" style="position: absolute; display: flex; align-items: center; height: 100%; margin-top: 2%; margin-left: -30px; max-width: 650px; z-index: 2;">
@@ -542,6 +596,38 @@
                                         </a>
                                         <div class="glass-button-shadow"></div>
                                 </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="ak-hero ak-style1 slide-inner" style="position: relative;">
+                    <img src="assets/img/10월 29일 the lune 카니발7409.jpg" class="ak-hero-bg ak-bg object-cover" alt="THE LUNE Hero Background">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1;"></div>
+                    <div class="container">
+                        <div class="hero-slider-info" style="position: absolute; display: flex; align-items: center; height: 100%; margin-top: 2%; margin-left: -30px; max-width: 650px; z-index: 2;">
+                            <div class="slider-info">
+                                <div class="hero-title">
+                                    <h1 class="hero-main-title english-serif" data-swiper-parallax="300">FIRST CLASS</h1>
+                                    <h1 class="hero-main-title-1 style-2 english-serif" data-swiper-parallax="100">HIGH-LIMOUSINE</h1>
+                                    <p class="mini-title" data-swiper-parallax="400" style="color: white;">THE LUNE과 함께하는 <br>특별한 경험을 만나보세요.<br>최고급 리무진 서비스로 품격 있는 여행을 선사합니다.</p>
+                                </div>
+                                <div class="ak-height-45 ak-height-lg-30"></div>
+                                <div data-swiper-parallax="300" style="display: flex; gap: 20px; align-items: center;">
+                                    <div class="glass-button-wrap">
+                                        <a href="quote.html" class="glass-button hero-glass-button">
+                                            <span class="glass-button-text">견적내기</span>
+                                        </a>
+                                        <div class="glass-button-shadow"></div>
+                                    </div>
+                                    <div class="glass-button-wrap">
+                                        <a href="services.html" class="glass-button secondary-glass-button">
+                                            <span class="glass-button-text">모든 모델 보기</span>
+                                        </a>
+                                        <div class="glass-button-shadow"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

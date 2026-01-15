@@ -180,13 +180,13 @@
     if ($.exists(".ak-slider-hero-1")) {
       var swiperOptions = {
         loop: true,
-        speed: 1200,
+        speed: 800,
         parallax: true,
         zoom: {
           maxRatio: 5,
         },
         autoplay: {
-          delay: 6500,
+          delay: 4000,
           disableOnInteraction: false,
         },
         watchSlidesProgress: true,
