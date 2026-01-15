@@ -675,29 +675,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="ak-main-header-center" style="flex: 1 !important; display: flex !important; justify-content: center !important;">
-                        <div class="ak-nav ak-medium">
-                            <ul class="ak-nav_list" style="display: flex !important; align-items: center !important; gap: 20px !important; padding: 0 !important; white-space: nowrap !important; overflow: visible !important; justify-content: center !important; flex-wrap: nowrap !important;">
-                                <li><a href="about.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">회사소개</a></li>
-                                <li class="menu-item-has-children">
-                                    <a href="services.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">모델소개</a>
-                                    <ul>
-                                        <li><a href="lune-carnival-9.html" class="text-hover-animaiton" style="text-transform: none !important;">Carnival TL9</a></li>
-                                        <li><a href="lune-carnival-7.html" class="text-hover-animaiton" style="text-transform: none !important;">Carnival TLV9</a></li>
-                                        <li><a href="lune-carnival-4.html" class="text-hover-animaiton" style="text-transform: none !important;">Carnival TLV4</a></li>
-                                        <li><a href="sprinter.html" class="text-hover-animaiton" style="text-transform: none !important;">Benz Sprinter</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="gallery.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">갤러리</a></li>
-                                <li><a href="news.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">홍보센터</a></li>
-                                <li><a href="showroom.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">전시장</a></li>
-                                <li><a href="test-drive.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">찾아가는 시승 서비스</a></li>
-                                <li><a href="quote.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">견적내기</a></li>
-                                <li class="mobile-menu-item"><a href="contact.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">문의하기</a></li>
-                                <li class="mobile-menu-item"><a href="as.html" class="text-hover-animaiton" style="font-size: 14px !important; color: #ffffff !important;">A/S접수</a></li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="ak-main-header-right" style="display: flex !important; align-items: center !important; gap: 20px !important;">
                         <div class="ak-header_btns" style="display: flex !important; align-items: center !important; gap: 20px !important;">
                             <a href="contact.html" style="display: inline-block; padding: 8px 20px; border: 1px solid rgba(188, 184, 177, 0.5); border-radius: 4px; color: #ffffff !important; text-decoration: none !important; font-size: 15px !important; transition: all 0.3s ease;">
@@ -1027,6 +1004,7 @@
                 '문의하기': 'Contact',
                 '갤러리': '갤러리',
                 'A/S접수': 'A/S접수',
+                '찾아가는 시승 서비스': '찾아가는 시승 서비스',
                 // 뉴스 페이지 콘텐츠
                 'NEWS': 'NEWS',
                 'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM': 'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM',
@@ -1064,6 +1042,7 @@
                 '문의하기': 'Contact',
                 '갤러리': 'Gallery',
                 'A/S접수': 'A/S Service',
+                '찾아가는 시승 서비스': 'Test Drive Service',
                 // 뉴스 페이지 콘텐츠
                 'NEWS': 'NEWS',
                 'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM': 'IRREPLACEABLE VALUE, LUNE CARNIVAL CUSTOM',
@@ -1171,7 +1150,8 @@
                 '견적내기': translation['견적내기'],
                 '문의하기': translation['문의하기'],
                 '갤러리': translation['갤러리'],
-                'A/S접수': translation['A/S접수']
+                'A/S접수': translation['A/S접수'],
+                '찾아가는 시승 서비스': translation['찾아가는 시승 서비스']
             };
             
             // 네비게이션 링크 번역
@@ -1181,6 +1161,13 @@
                     link.textContent = navItems[text];
                 } else if (translation[text]) {
                     link.textContent = translation[text];
+                }
+            });
+            
+            // "찾아가는 시승 서비스" 직접 번역 (확실하게 처리)
+            document.querySelectorAll('.ak-nav_list a[href="test-drive.html"]').forEach(link => {
+                if (link.textContent.trim() === '찾아가는 시승 서비스' || link.textContent.trim().includes('찾아가는 시승 서비스')) {
+                    link.textContent = translation['찾아가는 시승 서비스'];
                 }
             });
             

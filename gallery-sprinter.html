@@ -605,6 +605,13 @@
                 }
             });
             
+            // "찾아가는 시승 서비스" 직접 번역 (확실하게 처리)
+            document.querySelectorAll('.ak-nav_list a[href="test-drive.html"]').forEach(link => {
+                if (link.textContent.trim() === '찾아가는 시승 서비스' || link.textContent.trim().includes('찾아가는 시승 서비스')) {
+                    link.textContent = translation['찾아가는 시승 서비스'];
+                }
+            });
+            
             // 페이지 제목 및 설명 번역
             document.querySelectorAll('h1, p, .back-button').forEach(el => {
                 const text = el.textContent.trim();

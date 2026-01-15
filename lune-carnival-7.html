@@ -772,6 +772,7 @@
                 '문의하기': '문의하기',
                 '갤러리': '갤러리',
                 'A/S접수': 'A/S접수',
+                '찾아가는 시승 서비스': '찾아가는 시승 서비스',
                 // 모델 페이지 콘텐츠
                 'VVIP를 위한 최적의 공간의 의전용 커스텀': 'VVIP를 위한 최적의 공간의 의전용 커스텀',
                 '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.': '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.',
@@ -799,6 +800,7 @@
                 '문의하기': 'Contact',
                 '갤러리': 'Gallery',
                 'A/S접수': 'A/S Service',
+                '찾아가는 시승 서비스': 'Test Drive Service',
                 // 모델 페이지 콘텐츠
                 'VVIP를 위한 최적의 공간의 의전용 커스텀': 'Custom ceremonial space optimized for VVIPs',
                 '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.': 'THE LUNE Co., Ltd. respects the value of your time as a VVIP<br>and focuses on a direction that adds premium value to your space.',
@@ -896,7 +898,8 @@
                 '견적내기': translation['견적내기'],
                 '문의하기': translation['문의하기'],
                 '갤러리': translation['갤러리'],
-                'A/S접수': translation['A/S접수']
+                'A/S접수': translation['A/S접수'],
+                '찾아가는 시승 서비스': translation['찾아가는 시승 서비스']
             };
             
             // 네비게이션 링크 번역
@@ -909,7 +912,19 @@
                 }
             });
             
-            // 모델 페이지 콘텐츠 번역
+            // "찾아가는 시승 서비스" 직접 번역 (확실하게 처리)
+            document.querySelectorAll('.ak-nav_list a[href="test-drive.html"]').forEach(link => {
+                if (link.textContent.trim() === '찾아가는 시승 서비스' || link.textContent.trim().includes('찾아가는 시승 서비스')) {
+                    link.textContent = translation['찾아가는 시승 서비스'];
+                }
+            });
+            
+            // "찾아가는 시승 서비스" 직접 번역 (확실하게 처리)
+            document.querySelectorAll(\'.ak-nav_list a[href="test-drive.html"]\').forEach(link => {
+                if (link.textContent.trim() === \'찾아가는 시승 서비스\' || link.textContent.trim().includes(\'찾아가는 시승 서비스\')) {
+                    link.textContent = translation[\'찾아가는 시승 서비스\'];
+                }
+            });// 모델 페이지 콘텐츠 번역
             document.querySelectorAll('.model-subtitle').forEach(el => {
                 const text = el.textContent.trim();
                 if (translation[text]) {

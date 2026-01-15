@@ -509,6 +509,7 @@
                 '문의하기': '문의하기',
                 '갤러리': '갤러리',
                 'A/S접수': 'A/S접수',
+                '찾아가는 시승 서비스': '찾아가는 시승 서비스',
                 // 문의하기 페이지 콘텐츠
                 'THE LUNE은 고객의 특별한 요구사항을 만족시키는 프리미엄 차량 인테리어 전문 기업입니다. <br> 언제든지 편리한 방법으로 연락주세요.': 'THE LUNE은 고객의 특별한 요구사항을 만족시키는 프리미엄 차량 인테리어 전문 기업입니다. <br> 언제든지 편리한 방법으로 연락주세요.',
                 '경기도 파주시 탄현면 <br>축현산단로 21-41': '경기도 파주시 탄현면 <br>축현산단로 21-41',
@@ -535,6 +536,7 @@
                 '문의하기': 'Contact',
                 '갤러리': 'Gallery',
                 'A/S접수': 'A/S Service',
+                '찾아가는 시승 서비스': 'Test Drive Service',
                 // 문의하기 페이지 콘텐츠
                 'THE LUNE은 고객의 특별한 요구사항을 만족시키는 프리미엄 차량 인테리어 전문 기업입니다. <br> 언제든지 편리한 방법으로 연락주세요.': 'THE LUNE is a premium vehicle interior specialist company that meets customers\' special requirements.<br>Please contact us anytime in a convenient way.',
                 '경기도 파주시 탄현면 <br>축현산단로 21-41': '21-41 Chukhyeonsandan-ro,<br>Tanhyeon-myeon, Paju-si, Gyeonggi-do',
@@ -631,7 +633,8 @@
                 '견적내기': translation['견적내기'],
                 '문의하기': translation['문의하기'],
                 '갤러리': translation['갤러리'],
-                'A/S접수': translation['A/S접수']
+                'A/S접수': translation['A/S접수'],
+                '찾아가는 시승 서비스': translation['찾아가는 시승 서비스']
             };
             
             // 네비게이션 링크 번역
@@ -641,6 +644,13 @@
                     link.textContent = navItems[text];
                 } else if (translation[text]) {
                     link.textContent = translation[text];
+                }
+            });
+            
+            // "찾아가는 시승 서비스" 직접 번역 (확실하게 처리)
+            document.querySelectorAll('.ak-nav_list a[href="test-drive.html"]').forEach(link => {
+                if (link.textContent.trim() === '찾아가는 시승 서비스' || link.textContent.trim().includes('찾아가는 시승 서비스')) {
+                    link.textContent = translation['찾아가는 시승 서비스'];
                 }
             });
             

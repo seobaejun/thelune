@@ -631,6 +631,7 @@
                 '문의하기': '문의하기',
                 '갤러리': '갤러리',
                 'A/S접수': 'A/S접수',
+                '찾아가는 시승 서비스': '찾아가는 시승 서비스',
                 // services 페이지 콘텐츠
                 'THE LUNE의 프리미엄 모델들을 만나보세요': 'THE LUNE의 프리미엄 모델들을 만나보세요',
                 '4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.': '4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.',
@@ -659,6 +660,7 @@
                 '문의하기': 'Contact',
                 '갤러리': 'Gallery',
                 'A/S접수': 'A/S Service',
+                '찾아가는 시승 서비스': 'Test Drive Service',
                 // services 페이지 콘텐츠
                 'THE LUNE의 프리미엄 모델들을 만나보세요': 'Discover THE LUNE\'s Premium Models',
                 '4인승 프리미엄 모델로 최고급 인테리어와 편안한 승차감을 제공합니다.': 'A 4-seater premium model offering top-tier interior and comfortable ride quality.',
@@ -757,7 +759,8 @@
                 '견적내기': translation['견적내기'],
                 '문의하기': translation['문의하기'],
                 '갤러리': translation['갤러리'],
-                'A/S접수': translation['A/S접수']
+                'A/S접수': translation['A/S접수'],
+                '찾아가는 시승 서비스': translation['찾아가는 시승 서비스']
             };
             
             // 네비게이션 링크 번역
@@ -767,6 +770,13 @@
                     link.textContent = navItems[text];
                 } else if (translation[text]) {
                     link.textContent = translation[text];
+                }
+            });
+            
+            // "찾아가는 시승 서비스" 직접 번역 (확실하게 처리)
+            document.querySelectorAll('.ak-nav_list a[href="test-drive.html"]').forEach(link => {
+                if (link.textContent.trim() === '찾아가는 시승 서비스' || link.textContent.trim().includes('찾아가는 시승 서비스')) {
+                    link.textContent = translation['찾아가는 시승 서비스'];
                 }
             });
             
