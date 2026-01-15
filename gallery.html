@@ -327,12 +327,14 @@
             height: 250px;
             overflow: hidden;
             position: relative;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .category-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
             transition: transform 0.3s ease;
         }
 
@@ -392,9 +394,9 @@
 
         /* Category Modal Styles */
         .category-modal {
-            display: none;
+            display: none !important;
             position: fixed;
-            z-index: 1000;
+            z-index: 9999;
             left: 0;
             top: 0;
             width: 100%;
@@ -402,10 +404,12 @@
             background: rgba(0,0,0,0.9);
             backdrop-filter: blur(5px);
             animation: fadeIn 0.3s ease;
+            align-items: center;
+            justify-content: center;
         }
 
         .category-modal.active {
-            display: flex;
+            display: flex !important;
             align-items: center;
             justify-content: center;
         }
@@ -894,16 +898,6 @@
         </div>
     </section>
 
-    <!-- Circular Gallery Section -->
-    <section style="padding: 50px 0; background: #0a0a0a; min-height: 80vh; position: relative; overflow: hidden;">
-        <div class="container-fluid" style="max-width: none; padding: 0;">
-            <!-- Circular Gallery Container -->
-            <div id="circular-gallery" style="height: 80vh; width: 100%; position: relative; perspective: 2000px;">
-                <!-- Gallery items will be dynamically inserted here -->
-            </div>
-        </div>
-    </section>
-
     <!-- Category Gallery Section -->
     <section style="padding: 140px 0; background: #111; position: relative;">
         <div class="container-fluid" style="max-width: 1600px; padding: 0 15px;">
@@ -911,65 +905,49 @@
                 <h2 class="english-serif" style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">GALLERY</h2>
             </div>
             
-            <div class="row" style="margin: 0 -8px;">
-                <!-- 4인승 카테고리 -->
-                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
-                    <div class="category-card" onclick="location.href='gallery-4seater.html'">
+            <div class="row" style="margin: 0 -20px; justify-content: center;">
+                <!-- 카니발 카테고리 -->
+                <div class="col-lg-3 col-md-6" style="padding: 0 20px; margin-bottom: 40px;">
+                    <div class="category-card" onclick="location.href='gallery-4seater.html'" style="cursor: pointer;">
                         <div class="category-card-inner">
                             <div class="category-image">
-                                <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg" alt="4인승 갤러리">
+                                <img src="assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg" alt="카니발 갤러리">
                             </div>
                             <div class="category-content">
-                                <h3 class="category-title">4인승</h3>
-                                <p class="category-description">프리미엄 4인승 모델의 럭셔리 인테리어와 최고급 마감재를 확인하세요.</p>
+                                <h3 class="category-title">카니발</h3>
+                                <p class="category-description">프리미엄 카니발 모델의 럭셔리 인테리어와 최고급 마감재를 확인하세요.</p>
                                 <div class="category-button">갤러리 보기</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 6인승 카테고리 -->
-                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
-                    <div class="category-card" onclick="location.href='gallery-6seater.html'">
+                <!-- 스프린터 카테고리 -->
+                <div class="col-lg-3 col-md-6" style="padding: 0 20px; margin-bottom: 40px;">
+                    <div class="category-card" style="cursor: pointer;" data-category="sprinter">
                         <div class="category-card-inner">
                             <div class="category-image">
-                                <img src="assets/img/6인승/4월 19일 dh auto 카니발0663.jpg" alt="6인승 갤러리">
+                                <img src="assets/img/placeholder.jpg" alt="스프린터 갤러리" style="background: rgba(255,255,255,0.1);">
                             </div>
                             <div class="category-content">
-                                <h3 class="category-title">6인승</h3>
-                                <p class="category-description">편안한 6인승 모델의 프리미엄 공간과 세련된 디자인을 감상하세요.</p>
+                                <h3 class="category-title">스프린터</h3>
+                                <p class="category-description">프리미엄 스프린터 모델의 럭셔리 인테리어를 확인하세요.</p>
                                 <div class="category-button">갤러리 보기</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 시트 카테고리 -->
-                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
-                    <div class="category-card" onclick="location.href='gallery-seats.html'">
+                <!-- ETC 카테고리 -->
+                <div class="col-lg-3 col-md-6" style="padding: 0 20px; margin-bottom: 40px;">
+                    <div class="category-card" style="cursor: pointer;" data-category="etc">
                         <div class="category-card-inner">
                             <div class="category-image">
-                                <img src="assets/img/시트 색깔/브라운.jpg" alt="시트 갤러리">
+                                <img src="assets/img/placeholder.jpg" alt="ETC 갤러리" style="background: rgba(255,255,255,0.1);">
                             </div>
                             <div class="category-content">
-                                <h3 class="category-title">시트</h3>
-                                <p class="category-description">최고급 가죽 시트와 인체공학적 디자인의 완벽한 조화를 만나보세요.</p>
-                                <div class="category-button">갤러리 보기</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 핸들 카테고리 -->
-                <div class="col-lg-3 col-md-6" style="padding: 0 8px; margin-bottom: 40px;">
-                    <div class="category-card" onclick="location.href='gallery-steering.html'">
-                        <div class="category-card-inner">
-                            <div class="category-image">
-                                <img src="assets/img/핸들/5월 15일 dh auto 카니발 핸들1304.jpg" alt="핸들 갤러리">
-                            </div>
-                            <div class="category-content">
-                                <h3 class="category-title">핸들</h3>
-                                <p class="category-description">프리미엄 스티어링 휠과 첨단 컨트롤 시스템의 세부사항을 확인하세요.</p>
+                                <h3 class="category-title">ETC</h3>
+                                <p class="category-description">기타 모델의 프리미엄 인테리어를 확인하세요.</p>
                                 <div class="category-button">갤러리 보기</div>
                             </div>
                         </div>
@@ -1498,8 +1476,6 @@
             }
         });
 
-        // Enhanced Circular Gallery Implementation
-        class CircularGallery {
             constructor(container, items, options = {}) {
                 this.container = container;
                 this.items = items;
@@ -1918,24 +1894,14 @@
                     galleryInstance?.destroy();
                 });
                 
-                console.log('🎨 Circular Gallery initialized with', galleryItems.length, 'items');
-            }
-        });
-        
-        // Global gallery controls (for debugging or external control)
-        window.galleryControls = {
-            pause: () => galleryInstance?.pause(),
-            resume: () => galleryInstance?.resume(),
-            rotateTo: (angle) => galleryInstance?.rotateTo(angle),
-            rotateToItem: (index) => galleryInstance?.rotateToItem(index)
-        };
 
         // Category Gallery Data with Real Images
-        const categoryData = {
-            '4seater': {
-                title: '4인승 갤러리',
-                description: '프리미엄 4인승 모델의 럭셔리 인테리어',
+        window.categoryData = {
+            'carnival': {
+                title: '카니발 갤러리',
+                description: '프리미엄 카니발 모델의 럭셔리 인테리어',
                 images: [
+                    // 4인승 이미지들
                     {
                         url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내1407.jpg',
                         title: '4인승 프리미엄 인테리어 1',
@@ -2005,13 +1971,8 @@
                         url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내8643.jpg',
                         title: '4인승 프리미엄 인테리어 14',
                         description: 'VIP를 위한 최상급 편의시설과 마감재'
-                    }
-                ]
-            },
-            '6seater': {
-                title: '6인승 갤러리',
-                description: '편안한 6인승 모델의 프리미엄 공간',
-                images: [
+                    },
+                    // 6인승 이미지들
                     {
                         url: 'assets/img/6인승/4월 19일 dh auto 카니발0663.jpg',
                         title: '6인승 프리미엄 인테리어 1',
@@ -2046,13 +2007,8 @@
                         url: 'assets/img/6인승/4월 19일 dh auto 카니발9114.jpg',
                         title: '6인승 프리미엄 인테리어 7',
                         description: '비즈니스와 레저 모두에 적합한 다목적 공간'
-                    }
-                ]
-            },
-            'seats': {
-                title: '시트 갤러리',
-                description: '최고급 가죽 시트와 다양한 색상 옵션',
-                images: [
+                    },
+                    // 시트 이미지들
                     {
                         url: 'assets/img/시트 색깔/아이보리.jpg',
                         title: '아이보리 시트',
@@ -2082,13 +2038,8 @@
                         url: 'assets/img/시트 색깔/그레이.jpg',
                         title: '그레이 시트',
                         description: '모던하고 세련된 그레이 컬러의 고급 시트'
-                    }
-                ]
-            },
-            'steering': {
-                title: '핸들 갤러리',
-                description: '프리미엄 스티어링 휠과 컨트롤 시스템',
-                images: [
+                    },
+                    // 핸들 이미지들
                     {
                         url: 'assets/img/핸들/5월 15일 dh auto 카니발 핸들1304.jpg',
                         title: '프리미엄 스티어링 휠 1',
@@ -2105,77 +2056,159 @@
                         description: '인체공학적 설계와 고급 마감이 적용된 스티어링 휠'
                     }
                 ]
+            },
+            'sprinter': {
+                title: '스프린터 갤러리',
+                description: '프리미엄 스프린터 모델의 럭셔리 인테리어',
+                images: []
+            },
+            'etc': {
+                title: 'ETC 갤러리',
+                description: '기타 모델의 프리미엄 인테리어',
+                images: []
             }
         };
 
         // Category Modal Functions
         function openCategoryModal(categoryId) {
-            const modal = document.getElementById('categoryModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const galleryGrid = document.getElementById('categoryGalleryGrid');
-            
-            const category = categoryData[categoryId];
-            if (!category) {
-                console.error('Category not found:', categoryId);
-                return;
-            }
-            
-            // Set modal title
-            modalTitle.textContent = category.title;
-            
-            // Clear previous content
-            galleryGrid.innerHTML = '';
-            
-            // Check if category has images
-            if (category.images && category.images.length > 0) {
-                // Create gallery items
-                category.images.forEach((image, index) => {
-                    const galleryItem = document.createElement('div');
-                    galleryItem.className = 'category-gallery-item';
-                    galleryItem.innerHTML = `
-                        <img src="${image.url}" alt="${image.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
-                        <div class="category-gallery-item-overlay">
-                            <div class="category-gallery-item-title">${image.title}</div>
-                            <div class="category-gallery-item-description">${image.description}</div>
+            try {
+                console.log('Opening modal for category:', categoryId);
+                const modal = document.getElementById('categoryModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const galleryGrid = document.getElementById('categoryGalleryGrid');
+                
+                if (!modal) {
+                    alert('모달을 찾을 수 없습니다.');
+                    console.error('Modal element not found');
+                    return;
+                }
+                
+                if (!modalTitle) {
+                    alert('모달 제목을 찾을 수 없습니다.');
+                    console.error('Modal title element not found');
+                    return;
+                }
+                
+                if (!galleryGrid) {
+                    alert('갤러리 그리드를 찾을 수 없습니다.');
+                    console.error('Gallery grid element not found');
+                    return;
+                }
+                
+                if (!window.categoryData) {
+                    alert('카테고리 데이터를 찾을 수 없습니다.');
+                    console.error('categoryData not found');
+                    return;
+                }
+                
+                const category = window.categoryData[categoryId];
+                if (!category) {
+                    alert('카테고리를 찾을 수 없습니다: ' + categoryId);
+                    console.error('Category not found:', categoryId, 'Available categories:', Object.keys(window.categoryData));
+                    return;
+                }
+                
+                console.log('Category found:', category, 'Images count:', category.images ? category.images.length : 0);
+                
+                // Set modal title
+                modalTitle.textContent = category.title;
+                
+                // Clear previous content
+                galleryGrid.innerHTML = '';
+                
+                // Check if category has images
+                if (category.images && category.images.length > 0) {
+                    console.log('Loading', category.images.length, 'images');
+                    // Create gallery items
+                    category.images.forEach((image, index) => {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'category-gallery-item';
+                        galleryItem.innerHTML = `
+                            <img src="${image.url}" alt="${image.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                            <div class="category-gallery-item-overlay">
+                                <div class="category-gallery-item-title">${image.title}</div>
+                                <div class="category-gallery-item-description">${image.description}</div>
+                            </div>
+                        `;
+                        
+                        // Add click event for full-size view
+                        galleryItem.addEventListener('click', () => {
+                            if (typeof openImageViewer === 'function') {
+                                openImageViewer(image.url, image.title);
+                            }
+                        });
+                        
+                        galleryGrid.appendChild(galleryItem);
+                    });
+                } else {
+                    console.log('No images, showing empty state');
+                    // Show empty state
+                    galleryGrid.innerHTML = `
+                        <div class="category-empty-state">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                            <h4>이미지 준비 중</h4>
+                            <p>${category.description}<br>곧 다양한 이미지를 만나보실 수 있습니다.</p>
                         </div>
                     `;
-                    
-                    // Add click event for full-size view
-                    galleryItem.addEventListener('click', () => {
-                        openImageViewer(image.url, image.title);
-                    });
-                    
-                    galleryGrid.appendChild(galleryItem);
-                });
-            } else {
-                // Show empty state
-                galleryGrid.innerHTML = `
-                    <div class="category-empty-state">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                        </svg>
-                        <h4>이미지 준비 중</h4>
-                        <p>${category.description}<br>곧 다양한 이미지를 만나보실 수 있습니다.</p>
-                    </div>
-                `;
+                }
+                
+                // Show modal
+                console.log('Showing modal');
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Pause main gallery when modal is open (if exists)
+                if (typeof galleryInstance !== 'undefined' && galleryInstance) {
+                    galleryInstance.pause();
+                }
+            } catch (error) {
+                console.error('Error opening modal:', error);
+                alert('모달을 열 수 없습니다: ' + error.message);
             }
-            
-            // Show modal
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Pause main gallery when modal is open
-            galleryInstance?.pause();
         }
+        
+        // Make function globally accessible
+        window.openCategoryModal = openCategoryModal;
 
         function closeCategoryModal() {
             const modal = document.getElementById('categoryModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
             
             // Resume main gallery when modal is closed
-            galleryInstance?.resume();
+            if (typeof galleryInstance !== 'undefined' && galleryInstance) {
+                galleryInstance.resume();
+            }
         }
+        
+        // Make function globally accessible
+        window.closeCategoryModal = closeCategoryModal;
+        
+        // Add click event listeners to category cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryCards = document.querySelectorAll('.category-card[data-category]');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const categoryId = this.getAttribute('data-category');
+                    console.log('Card clicked, category:', categoryId);
+                    if (categoryId && typeof openCategoryModal === 'function') {
+                        openCategoryModal(categoryId);
+                    } else {
+                        console.error('openCategoryModal is not a function or categoryId is missing');
+                        alert('갤러리를 열 수 없습니다. 페이지를 새로고침해주세요.');
+                    }
+                });
+            });
+            console.log('Category cards initialized:', categoryCards.length);
+        });
 
         function openImageViewer(imageUrl, imageTitle) {
             // Create full-screen image viewer

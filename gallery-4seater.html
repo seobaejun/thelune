@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Thememarch" />
     <link rel="icon" href="assets/img/favicon.svg" />
-    <title>4인승 갤러리 - THE LUNE</title>
+    <title>카니발 갤러리 - THE LUNE</title>
     <link rel="stylesheet" href="assets/css/plugins/lightgallery.min.css" />
     <link rel="stylesheet" href="assets/css/plugins/swiper.min.css" />
     <link rel="stylesheet" href="assets/css/plugins/aos.css" />
@@ -328,8 +328,8 @@
     <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg') center/cover; padding: 200px 0 160px;">
         <div class="container">
             <div class="ak-page-title-content text-center">
-                <h1 style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">4인승 갤러리</h1>
-                <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 0;">프리미엄 4인승 모델의 럭셔리 인테리어</p>
+                <h1 style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">카니발 갤러리</h1>
+                <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 0;">프리미엄 카니발 모델의 럭셔리 인테리어</p>
             </div>
         </div>
     </section>
@@ -455,11 +455,11 @@
                 '문의하기': '문의하기',
                 '갤러리': '갤러리',
                 'A/S접수': 'A/S접수',
-                // 4인승 갤러리 페이지
-                '4인승 갤러리': '4인승 갤러리',
-                '프리미엄 4인승 모델의 럭셔리 인테리어': '프리미엄 4인승 모델의 럭셔리 인테리어',
+                // 카니발 갤러리 페이지
+                '카니발 갤러리': '카니발 갤러리',
+                '프리미엄 카니발 모델의 럭셔리 인테리어': '프리미엄 카니발 모델의 럭셔리 인테리어',
                 '← 갤러리로 돌아가기': '← 갤러리로 돌아가기',
-                '4인승 프리미엄 인테리어': '4인승 프리미엄 인테리어',
+                '카니발 프리미엄 인테리어': '카니발 프리미엄 인테리어',
                 '최고급 가죽 시트와 우드 패널이 조화를 이룬 럭셔리 공간': '최고급 가죽 시트와 우드 패널이 조화를 이룬 럭셔리 공간',
                 '편안한 승차감을 위한 인체공학적 시트 디자인': '편안한 승차감을 위한 인체공학적 시트 디자인',
                 '세련된 조명과 고급 마감재로 완성된 실내': '세련된 조명과 고급 마감재로 완성된 실내',
@@ -482,11 +482,11 @@
                 '문의하기': 'Contact',
                 '갤러리': 'Gallery',
                 'A/S접수': 'A/S Service',
-                // 4인승 갤러리 페이지
-                '4인승 갤러리': '4-Seater Gallery',
-                '프리미엄 4인승 모델의 럭셔리 인테리어': 'Luxurious Interior of Premium 4-Seater Model',
+                // 카니발 갤러리 페이지
+                '카니발 갤러리': 'Carnival Gallery',
+                '프리미엄 카니발 모델의 럭셔리 인테리어': 'Luxurious Interior of Premium Carnival Model',
                 '← 갤러리로 돌아가기': '← Back to Gallery',
-                '4인승 프리미엄 인테리어': '4-Seater Premium Interior',
+                '카니발 프리미엄 인테리어': 'Carnival Premium Interior',
                 '최고급 가죽 시트와 우드 패널이 조화를 이룬 럭셔리 공간': 'Luxury space harmonizing premium leather seats and wood panels',
                 '편안한 승차감을 위한 인체공학적 시트 디자인': 'Ergonomic seat design for comfortable ride quality',
                 '세련된 조명과 고급 마감재로 완성된 실내': 'Interior completed with sophisticated lighting and premium finishes',
@@ -642,8 +642,8 @@
                 galleryImages.forEach((item, index) => {
                     if (item.title) {
                         // 제목 번역
-                        if (item.title.includes('4인승 프리미엄 인테리어')) {
-                            item.title = item.title.replace('4인승 프리미엄 인테리어', '4-Seater Premium Interior');
+                        if (item.title.includes('카니발 프리미엄 인테리어')) {
+                            item.title = item.title.replace('카니발 프리미엄 인테리어', 'Carnival Premium Interior');
                         }
                     }
                     if (item.description) {
@@ -714,77 +714,160 @@
         }
         
 
-        // 4인승 갤러리 이미지 데이터
+        // 카니발 갤러리 이미지 데이터
         let galleryImages = [
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내1407.jpg',
-                title: '4인승 프리미엄 인테리어 1',
+                title: '카니발 프리미엄 인테리어 1',
                 description: '최고급 가죽 시트와 우드 패널이 조화를 이룬 럭셔리 공간'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내1414.jpg',
-                title: '4인승 프리미엄 인테리어 2',
+                title: '카니발 프리미엄 인테리어 2',
                 description: '편안한 승차감을 위한 인체공학적 시트 디자인'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내1775.jpg',
-                title: '4인승 프리미엄 인테리어 3',
+                title: '카니발 프리미엄 인테리어 3',
                 description: '세련된 조명과 고급 마감재로 완성된 실내'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내3114.jpg',
-                title: '4인승 프리미엄 인테리어 4',
+                title: '카니발 프리미엄 인테리어 4',
                 description: '넓은 공간감과 프라이버시를 보장하는 디자인'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내3843.jpg',
-                title: '4인승 프리미엄 인테리어 5',
+                title: '카니발 프리미엄 인테리어 5',
                 description: '비즈니스 클래스 수준의 편의시설과 마감'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내4117.jpg',
-                title: '4인승 프리미엄 인테리어 6',
+                title: '카니발 프리미엄 인테리어 6',
                 description: '고급스러운 색상 조합과 정교한 디테일'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내4161.jpg',
-                title: '4인승 프리미엄 인테리어 7',
+                title: '카니발 프리미엄 인테리어 7',
                 description: '최첨단 엔터테인먼트 시스템과 편의기능'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내4890.jpg',
-                title: '4인승 프리미엄 인테리어 8',
+                title: '카니발 프리미엄 인테리어 8',
                 description: '완벽한 마감과 세심한 디테일이 돋보이는 공간'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내5204.jpg',
-                title: '4인승 프리미엄 인테리어 9',
+                title: '카니발 프리미엄 인테리어 9',
                 description: '럭셔리 브랜드 수준의 품격 있는 인테리어'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내5523.jpg',
-                title: '4인승 프리미엄 인테리어 10',
+                title: '카니발 프리미엄 인테리어 10',
                 description: '편안함과 고급스러움이 완벽하게 조화된 공간'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내5963.jpg',
-                title: '4인승 프리미엄 인테리어 11',
+                title: '카니발 프리미엄 인테리어 11',
                 description: '프리미엄 소재와 정밀한 수공예 마감'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내7584.jpg',
-                title: '4인승 프리미엄 인테리어 12',
+                title: '카니발 프리미엄 인테리어 12',
                 description: '최고급 나파 가죽과 천연 소재의 조화'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내8632.jpg',
-                title: '4인승 프리미엄 인테리어 13',
+                title: '카니발 프리미엄 인테리어 13',
                 description: '세련된 디자인과 실용성을 겸비한 공간'
             },
             {
                 url: 'assets/img/4인승/4월 22일 dh auto 카니발 실내8643.jpg',
-                title: '4인승 프리미엄 인테리어 14',
+                title: '카니발 프리미엄 인테리어 14',
                 description: 'VIP를 위한 최상급 편의시설과 마감재'
+            },
+            // 카니발 이미지들
+            {
+                url: 'assets/img/6인승/4월 19일 dh auto 카니발0663.jpg',
+                title: '카니발 프리미엄 인테리어 1',
+                description: '넓은 공간과 편안한 시트 배치로 완성된 카니발 모델'
+            },
+            {
+                url: 'assets/img/6인승/4월 19일 dh auto 카니발1935.jpg',
+                title: '카니발 프리미엄 인테리어 2',
+                description: '가족 단위 이용에 최적화된 공간 구성'
+            },
+            {
+                url: 'assets/img/6인승/4월 19일 dh auto 카니발2216.jpg',
+                title: '카니발 프리미엄 인테리어 3',
+                description: '고급스러운 마감재와 세련된 디자인'
+            },
+            {
+                url: 'assets/img/6인승/4월 19일 dh auto 카니발2217.jpg',
+                title: '카니발 프리미엄 인테리어 4',
+                description: '편안함과 실용성을 동시에 만족하는 인테리어'
+            },
+            {
+                url: 'assets/img/6인승/4월 19일 dh auto 카니발2222.jpg',
+                title: '카니발 프리미엄 인테리어 5',
+                description: '프리미엄 소재와 정교한 마감으로 완성된 공간'
+            },
+            {
+                url: 'assets/img/6인승/4월 19일 dh auto 카니발4273.jpg',
+                title: '카니발 프리미엄 인테리어 6',
+                description: '최첨단 편의시설과 럭셔리 디자인의 조화'
+            },
+            {
+                url: 'assets/img/6인승/4월 19일 dh auto 카니발9114.jpg',
+                title: '카니발 프리미엄 인테리어 7',
+                description: '비즈니스와 레저 모두에 적합한 다목적 공간'
+            },
+            // 시트 이미지들
+            {
+                url: 'assets/img/시트 색깔/아이보리.jpg',
+                title: '아이보리 시트',
+                description: '고급스럽고 깔끔한 아이보리 컬러의 프리미엄 가죽 시트'
+            },
+            {
+                url: 'assets/img/시트 색깔/블랙.jpg',
+                title: '블랙 시트',
+                description: '클래식하고 세련된 블랙 컬러의 최고급 나파 가죽 시트'
+            },
+            {
+                url: 'assets/img/시트 색깔/네이비.jpg',
+                title: '네이비 시트',
+                description: '품격 있는 네이비 컬러로 완성된 프리미엄 시트'
+            },
+            {
+                url: 'assets/img/시트 색깔/브라운.jpg',
+                title: '브라운 시트',
+                description: '따뜻하고 고급스러운 브라운 컬러의 천연 가죽 시트'
+            },
+            {
+                url: 'assets/img/시트 색깔/꼬냑.jpg',
+                title: '꼬냑 시트',
+                description: '럭셔리한 꼬냑 컬러로 완성된 프리미엄 가죽 시트'
+            },
+            {
+                url: 'assets/img/시트 색깔/그레이.jpg',
+                title: '그레이 시트',
+                description: '모던하고 세련된 그레이 컬러의 고급 시트'
+            },
+            // 핸들 이미지들
+            {
+                url: 'assets/img/핸들/5월 15일 dh auto 카니발 핸들1304.jpg',
+                title: '프리미엄 스티어링 휠 1',
+                description: '고급 가죽으로 마감된 프리미엄 스티어링 휠'
+            },
+            {
+                url: 'assets/img/핸들/5월 15일 dh auto 카니발 핸들9625.jpg',
+                title: '프리미엄 스티어링 휠 2',
+                description: '첨단 컨트롤 시스템이 적용된 멀티펑션 핸들'
+            },
+            {
+                url: 'assets/img/핸들/4월 22일 dh auto 카니발 실내5963.jpg',
+                title: '프리미엄 스티어링 휠 3',
+                description: '인체공학적 설계와 고급 마감이 적용된 스티어링 휠'
             }
         ];
 
@@ -822,8 +905,8 @@
                 
                 if (currentLang === 'en' && translation) {
                     // 제목 번역
-                    if (displayTitle && displayTitle.includes('4인승 프리미엄 인테리어')) {
-                        displayTitle = displayTitle.replace('4인승 프리미엄 인테리어', '4-Seater Premium Interior');
+                    if (displayTitle && displayTitle.includes('카니발 프리미엄 인테리어')) {
+                        displayTitle = displayTitle.replace('카니발 프리미엄 인테리어', 'Carnival Premium Interior');
                     }
                     // 설명 번역
                     if (displayDescription) {
