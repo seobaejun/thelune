@@ -164,13 +164,14 @@
                                     <th>이름</th>
                                     <th>이메일</th>
                                     <th>전화번호</th>
+                                    <th>관심차종</th>
                                     <th>제출일</th>
                                     <th>상태</th>
                                     <th>관리</th>
                                 </tr>
                             </thead>
                             <tbody id="contact-tbody">
-                                <tr><td colspan="7" class="text-center">로딩 중...</td></tr>
+                                <tr><td colspan="8" class="text-center">로딩 중...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -290,7 +291,7 @@
                 const querySnapshot = await getDocs(q);
                 
                 if (querySnapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="text-center">등록된 문의가 없습니다.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="8" class="text-center">등록된 문의가 없습니다.</td></tr>';
                     return;
                 }
                 
@@ -312,12 +313,24 @@
                         ? `<button class="status-badge bg-success text-white" onclick="updateContactStatus('${docId}', 'pending')">완료</button>`
                         : `<button class="status-badge bg-warning text-dark" onclick="updateContactStatus('${docId}', 'completed')">대기</button>`;
                     
+                    // 관심차종 표시용 변환 함수
+                    const vehicleInterestMap = {
+                        'carnival_limousine': '카니발 하이리무진',
+                        'sprinter': '스프린터',
+                        'small_van': '소형 벤(카니발V클레스,스타리아)',
+                        'medium_van': '중형 벤(스프린터,쏠라티,르노마스터)',
+                        'large_van': '대형 벤(에스컬레이드,네비게이터,서버벤)',
+                        'other': '기타'
+                    };
+                    const vehicleInterest = data.vehicle_interest ? (vehicleInterestMap[data.vehicle_interest] || data.vehicle_interest) : 'N/A';
+                    
                     html += `
                         <tr>
                             <td>${index}</td>
                             <td>${data.name || 'N/A'}</td>
                             <td>${data.email || 'N/A'}</td>
                             <td>${data.phone || 'N/A'}</td>
+                            <td>${vehicleInterest}</td>
                             <td>${createdAt}</td>
                             <td>${statusBadge}</td>
                             <td style="text-align: center;">
@@ -332,7 +345,7 @@
                 tbody.innerHTML = html;
             } catch (error) {
                 console.error('문의하기 목록 로드 오류:', error);
-                document.getElementById('contact-tbody').innerHTML = '<tr><td colspan="7" class="text-center text-danger">데이터를 불러오는 중 오류가 발생했습니다.</td></tr>';
+                document.getElementById('contact-tbody').innerHTML = '<tr><td colspan="8" class="text-center text-danger">데이터를 불러오는 중 오류가 발생했습니다.</td></tr>';
             }
         }
 
@@ -409,6 +422,17 @@
                     createdAt = date.toLocaleString('ko-KR');
                 }
                 
+                // 관심차종 표시용 변환 함수
+                const vehicleInterestMap = {
+                    'carnival_limousine': '카니발 하이리무진',
+                    'sprinter': '스프린터',
+                    'small_van': '소형 벤(카니발V클레스,스타리아)',
+                    'medium_van': '중형 벤(스프린터,쏠라티,르노마스터)',
+                    'large_van': '대형 벤(에스컬레이드,네비게이터,서버벤)',
+                    'other': '기타'
+                };
+                const vehicleInterest = data.vehicle_interest ? (vehicleInterestMap[data.vehicle_interest] || data.vehicle_interest) : 'N/A';
+                
                 const html = `
                     <div class="row">
                         <div class="col-md-6">
@@ -427,6 +451,12 @@
                             <div class="detail-item">
                                 <div class="detail-label">전화번호</div>
                                 <div class="detail-value">${data.phone || 'N/A'}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-item">
+                                <div class="detail-label">관심차종</div>
+                                <div class="detail-value">${vehicleInterest}</div>
                             </div>
                         </div>
                         <div class="col-md-6">
