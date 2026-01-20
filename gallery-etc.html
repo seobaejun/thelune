@@ -73,64 +73,35 @@
             font-family: 'Avenir', 'Helvetica Neue', 'Arial', sans-serif !important;
         }
 
-        /* Gallery Grid Styles - 2 columns with minimal gaps */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 0;
-            max-width: 100%;
-            margin: 0;
+        /* Gallery Styles - Simple vertical layout like reference page */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            background: rgba(188,184,177,0.1);
-            border: 1px solid rgba(188,184,177,0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
+        .gallery-images {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            border-color: rgba(188,184,177,0.4);
-        }
-
-        .gallery-item img {
+        .gallery-image-item {
             width: 100%;
-            height: 450px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-            background-color: rgba(188,184,177,0.05);
+            margin-bottom: 20px;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        .gallery-image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            border-radius: 8px;
         }
 
-        .gallery-item-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-            padding: 20px;
-            color: white;
-        }
-
-        .gallery-item-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .gallery-item-description {
-            font-size: 14px;
+        .gallery-image-item img:hover {
             opacity: 0.9;
-            line-height: 1.5;
         }
 
         /* Lightbox styles */
@@ -193,24 +164,12 @@
         }
 
         @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
+            .gallery-container {
+                padding: 0 15px;
             }
             
-            .gallery-item img {
-                height: 350px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .gallery-item img {
-                height: 300px;
+            .gallery-images {
+                gap: 15px;
             }
         }
         
@@ -441,20 +400,19 @@
     </header>
     <!-- End Header Section -->
 
-    <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/ETC/KakaoTalk_20200225_003544687_01.jpg') center/cover; padding: 200px 0 160px;">
+    <section class="ak-page-title" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/img/ETC/KakaoTalk_20200225_003544687_01.jpg') center/cover; padding: 150px 0 100px;">
         <div class="container">
             <div class="ak-page-title-content text-center">
-                <h1 style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">ETC 갤러리</h1>
-                <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 0;">기타 모델의 프리미엄 인테리어</p>
+                <h1 style="color: white; font-size: 42px; font-weight: 700; margin-bottom: 15px;">ETC 갤러리</h1>
             </div>
         </div>
     </section>
 
     <section style="padding: 100px 0; background: #0a0a0a;">
-        <div style="max-width: 100%; padding: 0 15px; margin: 0 auto;">
+        <div class="gallery-container">
             <a href="gallery.html" class="back-button">← 갤러리로 돌아가기</a>
             
-            <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-images" id="galleryImages">
                 <!-- Images will be loaded here by JavaScript -->
             </div>
         </div>
@@ -586,9 +544,7 @@
                 'A/S접수': 'A/S접수',
                 // ETC 갤러리 페이지
                 'ETC 갤러리': 'ETC 갤러리',
-                '기타 모델의 프리미엄 인테리어': '기타 모델의 프리미엄 인테리어',
                 '← 갤러리로 돌아가기': '← 갤러리로 돌아가기',
-                'ETC 프리미엄 인테리어': 'ETC 프리미엄 인테리어',
                 // 푸터
                 '주식회사 더 룬 대표 : 이용석': '주식회사 더 룬 대표 : 이용석',
                 '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41',
@@ -606,9 +562,7 @@
                 'A/S접수': 'A/S Service',
                 // ETC 갤러리 페이지
                 'ETC 갤러리': 'ETC Gallery',
-                '기타 모델의 프리미엄 인테리어': 'Premium Interior of Other Models',
                 '← 갤러리로 돌아가기': '← Back to Gallery',
-                'ETC 프리미엄 인테리어': 'ETC Premium Interior',
                 // 푸터
                 '주식회사 더 룬 대표 : 이용석': 'THE LUNE Co., Ltd. CEO: Lee Yong-seok',
                 '사업자등록번호 : 355-88-03055 주소 : 경기도 파주시 탄현면 축현산단로 21-41': 'Business Registration: 355-88-03055 Address: 21-41 Chukhyeonsandan-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do',
@@ -754,38 +708,9 @@
                 }
             });
             
-            // JavaScript 내부의 갤러리 데이터 번역
-            if (galleryImages) {
-                // 원본 데이터 저장 (처음 한 번만)
-                if (!window.originalGalleryImages) {
-                    window.originalGalleryImages = JSON.parse(JSON.stringify(galleryImages));
-                }
-                
-                galleryImages.forEach((item, index) => {
-                    if (item.title) {
-                        // 제목 번역
-                        if (item.title.includes('ETC 프리미엄 인테리어')) {
-                            item.title = item.title.replace('ETC 프리미엄 인테리어', 'ETC Premium Interior');
-                        }
-                    }
-                });
-                
-                // 갤러리 다시 렌더링 (이미지 제목/설명이 업데이트됨)
-                if (typeof loadGallery === 'function') {
-                    loadGallery();
-                }
-                
-                // 이미 렌더링된 갤러리 아이템의 텍스트도 업데이트
-                document.querySelectorAll('.gallery-item-title').forEach((el, index) => {
-                    if (galleryImages[index] && galleryImages[index].title) {
-                        el.textContent = galleryImages[index].title;
-                    }
-                });
-                document.querySelectorAll('.gallery-item-description').forEach((el, index) => {
-                    if (galleryImages[index] && galleryImages[index].description) {
-                        el.textContent = galleryImages[index].description;
-                    }
-                });
+            // 갤러리 다시 렌더링 (언어 변경 시)
+            if (typeof loadGallery === 'function') {
+                loadGallery();
             }
             
             // 푸터 번역
@@ -828,170 +753,138 @@
         let galleryImages = [
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_01.jpg',
-                title: 'ETC 프리미엄 인테리어 1',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어'
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_02.jpg',
-                title: 'ETC 프리미엄 인테리어 2',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 2',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_03.jpg',
-                title: 'ETC 프리미엄 인테리어 3',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 3',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_04.jpg',
-                title: 'ETC 프리미엄 인테리어 4',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 4',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_05.jpg',
-                title: 'ETC 프리미엄 인테리어 5',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 5',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_06.jpg',
-                title: 'ETC 프리미엄 인테리어 6',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 6',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_07.jpg',
-                title: 'ETC 프리미엄 인테리어 7',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 7',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_08.jpg',
-                title: 'ETC 프리미엄 인테리어 8',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 8',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_09.jpg',
-                title: 'ETC 프리미엄 인테리어 9',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 9',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_10.jpg',
-                title: 'ETC 프리미엄 인테리어 10',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 10',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_11.jpg',
-                title: 'ETC 프리미엄 인테리어 11',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 11',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_12.jpg',
-                title: 'ETC 프리미엄 인테리어 12',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 12',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_13.jpg',
-                title: 'ETC 프리미엄 인테리어 13',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 13',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_14.jpg',
-                title: 'ETC 프리미엄 인테리어 14',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 14',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_15.jpg',
-                title: 'ETC 프리미엄 인테리어 15',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 15',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_16.jpg',
-                title: 'ETC 프리미엄 인테리어 16',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 16',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_17.jpg',
-                title: 'ETC 프리미엄 인테리어 17',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 17',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_18.jpg',
-                title: 'ETC 프리미엄 인테리어 18',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 18',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_19.jpg',
-                title: 'ETC 프리미엄 인테리어 19',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 19',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_20.jpg',
-                title: 'ETC 프리미엄 인테리어 20',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 20',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_22.jpg',
-                title: 'ETC 프리미엄 인테리어 21',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 21',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_23.jpg',
-                title: 'ETC 프리미엄 인테리어 22',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 22',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_24.jpg',
-                title: 'ETC 프리미엄 인테리어 23',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 23',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_25.jpg',
-                title: 'ETC 프리미엄 인테리어 24',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 24',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_26.jpg',
-                title: 'ETC 프리미엄 인테리어 25',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 25',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_27.jpg',
-                title: 'ETC 프리미엄 인테리어 26',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 26',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_28.jpg',
-                title: 'ETC 프리미엄 인테리어 27',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 27',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_29.jpg',
-                title: 'ETC 프리미엄 인테리어 28',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 28',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003544687_30.jpg',
-                title: 'ETC 프리미엄 인테리어 29',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 29',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003628873_02.jpg',
-                title: 'ETC 프리미엄 인테리어 30',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 30',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003628873_03.jpg',
-                title: 'ETC 프리미엄 인테리어 31',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 31',
             },
             {
                 url: 'assets/img/ETC/KakaoTalk_20200225_003628873_04.jpg',
-                title: 'ETC 프리미엄 인테리어 32',
-                description: '기타 모델의 프리미엄 인테리어'
+                title: 'ETC 인테리어 32',
             }
         ];
 
         // 갤러리 로드 - 최적화된 로딩 및 프리로딩
         function preloadImages() {
-            // 첫 4개 이미지 프리로드
-            const preloadImages = galleryImages.slice(0, 4);
+            // 첫 2개 이미지 프리로드
+            const preloadImages = galleryImages.slice(0, 2);
             preloadImages.forEach(image => {
                 const img = new Image();
                 img.src = image.url;
@@ -999,60 +892,30 @@
         }
 
         function loadGallery() {
-            const galleryGrid = document.getElementById('galleryGrid');
-            if (!galleryGrid) return;
+            const galleryImagesContainer = document.getElementById('galleryImages');
+            if (!galleryImagesContainer) return;
             
-            galleryGrid.innerHTML = '';
+            galleryImagesContainer.innerHTML = '';
 
             // 현재 언어 상태 확인
             const currentLang = document.documentElement.lang || localStorage.getItem('preferredLanguage') || 'ko';
-            const translation = translations[currentLang];
             
-            // 첫 4개 이미지는 즉시 로드, 나머지는 지연 로드
+            // 이미지들을 단순하게 세로로 나열
             galleryImages.forEach((image, index) => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                galleryItem.onclick = () => openLightbox(image.url);
+                const imageItem = document.createElement('div');
+                imageItem.className = 'gallery-image-item';
                 
                 const loadingType = index < 4 ? 'eager' : 'lazy';
                 
-                // 제목과 설명 번역 적용
-                let displayTitle = image.title;
-                let displayDescription = image.description;
+                const img = document.createElement('img');
+                img.src = image.url;
+                img.alt = image.title || 'Gallery Image';
+                img.loading = loadingType;
+                img.decoding = 'async';
+                img.onclick = () => openLightbox(image.url);
                 
-                if (currentLang === 'en' && translation) {
-                    // 제목 번역
-                    if (displayTitle && displayTitle.includes('ETC 프리미엄 인테리어')) {
-                        displayTitle = displayTitle.replace('ETC 프리미엄 인테리어', 'ETC Premium Interior');
-                    }
-                    // 설명 번역
-                    if (displayDescription) {
-                        if (translation[displayDescription]) {
-                            displayDescription = translation[displayDescription];
-                        } else {
-                            // 원본 데이터에서 찾아서 번역
-                            const originalItem = window.originalGalleryImages && window.originalGalleryImages[index];
-                            if (originalItem && originalItem.description && translation[originalItem.description]) {
-                                displayDescription = translation[originalItem.description];
-                            }
-                        }
-                    }
-                }
-                
-                galleryItem.innerHTML = `
-                    <img src="${image.url}" 
-                         alt="${displayTitle}" 
-                         loading="${loadingType}"
-                         decoding="async"
-                         fetchpriority="${index < 2 ? 'high' : 'auto'}"
-                         style="background-color: rgba(188,184,177,0.1);">
-                    <div class="gallery-item-overlay">
-                        <div class="gallery-item-title">${displayTitle}</div>
-                        <div class="gallery-item-description">${displayDescription}</div>
-                    </div>
-                `;
-                
-                galleryGrid.appendChild(galleryItem);
+                imageItem.appendChild(img);
+                galleryImagesContainer.appendChild(imageItem);
             });
         }
 
@@ -1076,11 +939,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 원본 텍스트 저장
             saveOriginalTexts();
-            
-            // 원본 갤러리 데이터 저장
-            if (galleryImages && !window.originalGalleryImages) {
-                window.originalGalleryImages = JSON.parse(JSON.stringify(galleryImages));
-            }
             
             preloadImages(); // 이미지 프리로드
             
