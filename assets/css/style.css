@@ -2950,6 +2950,11 @@ kbd {
     display: none !important;
   }
   
+  /* 모바일에서 언어 선택 버튼 숨기기 */
+  .language-selector {
+    display: none !important;
+  }
+  
   /* 햄버거 버튼을 오른쪽 끝에 배치 */
   .ak-main_header_in {
     position: relative !important;
@@ -3072,6 +3077,50 @@ kbd {
   .ak-nav .ak-nav_list ul li a:hover {
     padding-left: 60px !important;
     color: #bcb8b1 !important;
+  }
+  
+  /* 모바일 메뉴 내 언어 선택 버튼 스타일 */
+  .mobile-language-selector {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 20px 30px !important;
+    border-top: 1px solid rgba(188, 184, 177, 0.2) !important;
+    margin-top: 10px !important;
+  }
+  
+  .mobile-language-selector-wrapper {
+    list-style: none !important;
+    border-bottom: none !important;
+  }
+  
+  .mobile-language-selector .lang-btn {
+    background: none !important;
+    border: 1px solid rgba(188, 184, 177, 0.3) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    border-radius: 4px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .mobile-language-selector .lang-btn.active {
+    background: rgba(188, 184, 177, 0.2) !important;
+    border-color: rgba(188, 184, 177, 0.5) !important;
+    color: #bcb8b1 !important;
+    font-weight: 600 !important;
+  }
+  
+  .mobile-language-selector .lang-btn:hover {
+    background: rgba(188, 184, 177, 0.1) !important;
+    border-color: rgba(188, 184, 177, 0.4) !important;
+  }
+  
+  .mobile-language-selector .lang-separator {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 14px !important;
   }
   
   /* 헤더 패딩 조정 */

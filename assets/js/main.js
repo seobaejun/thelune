@@ -56,6 +56,11 @@
     showScrollUp();
   });
 
+  $(window).on("resize", function () {
+    // 화면 크기 변경 시 모바일 메뉴 언어 선택 버튼 재설정
+    mainNav();
+  });
+
   /*-------------------------------------------------
       1. preloader  
  --------------------------------------------------------------*/
@@ -83,10 +88,62 @@
       if ($(".ak-main_header_in .ak-munu_toggle").length === 0) {
         $(".ak-main_header_in").append('<span class="ak-munu_toggle"><span></span></span>');
       }
+      
+      // 모바일 메뉴에 언어 선택 버튼 추가 (한 번만)
+      if ($(".ak-nav_list .mobile-language-selector").length === 0) {
+        var langSelector = $(".language-selector").first();
+        var langHtml = langSelector.html();
+        if (langHtml) {
+          // 언어 선택 버튼을 모바일 메뉴에 추가
+          var mobileLangSelector = '<li class="mobile-language-selector-wrapper" style="list-style: none !important; border-bottom: none !important;"><div class="mobile-language-selector">' + langHtml + '</div></li>';
+          $(".ak-nav_list").append(mobileLangSelector);
+          
+          // 모바일 언어 선택 버튼에 이벤트 리스너 추가
+          $(".mobile-language-selector .lang-btn").off('click').on("click", function(e) {
+            e.preventDefault();
+            var lang = $(this).attr('onclick');
+            if (lang) {
+              // onclick 속성에서 언어 추출
+              var langMatch = lang.match(/switchLanguage\('(\w+)'\)/);
+              if (langMatch) {
+                var selectedLang = langMatch[1];
+                // 모든 언어 버튼 업데이트
+                $(".mobile-language-selector .lang-btn").removeClass('active').css({
+                  'background': 'none',
+                  'border-color': 'rgba(188, 184, 177, 0.3)',
+                  'color': '#ffffff',
+                  'font-weight': 'normal'
+                });
+                $(this).addClass('active').css({
+                  'background': 'rgba(188, 184, 177, 0.2)',
+                  'border-color': 'rgba(188, 184, 177, 0.5)',
+                  'color': '#bcb8b1',
+                  'font-weight': '600'
+                });
+                // 데스크톱 언어 버튼도 업데이트
+                $(".language-selector .lang-btn").removeClass('active').css({
+                  'color': 'white',
+                  'font-weight': 'normal'
+                });
+                $(".language-selector .lang-btn[onclick*=\"" + selectedLang + "\"]").addClass('active').css({
+                  'color': '#bcb8b1',
+                  'font-weight': '600'
+                });
+                // 언어 전환 함수 호출
+                if (typeof switchLanguage === 'function') {
+                  switchLanguage(selectedLang);
+                }
+              }
+            }
+          });
+        }
+      }
     } else {
       if ($(".ak-nav .ak-munu_toggle").length === 0) {
         $(".ak-nav").append('<span class="ak-munu_toggle"><span></span></span>');
       }
+      // 데스크톱에서는 모바일 언어 선택 버튼 제거
+      $(".mobile-language-selector-wrapper").remove();
     }
     $(".menu-item-has-children").append(
       '<span class="ak-munu_dropdown_toggle"></span>'
@@ -97,6 +154,23 @@
       $(this).toggleClass("ak-toggle_active");
       $(".ak-nav").toggleClass("mobile-menu-open");
       $(".ak-nav_list").slideToggle(300);
+      
+      // 모바일에서 언어 선택 버튼 상태 동기화
+      if ($(window).width() <= 1199) {
+        var activeLang = localStorage.getItem('preferredLanguage') || 'ko';
+        $(".mobile-language-selector .lang-btn").removeClass('active').css({
+          'background': 'none',
+          'border-color': 'rgba(188, 184, 177, 0.3)',
+          'color': '#ffffff',
+          'font-weight': 'normal'
+        });
+        $(".mobile-language-selector .lang-btn[onclick*=\"" + activeLang + "\"]").addClass('active').css({
+          'background': 'rgba(188, 184, 177, 0.2)',
+          'border-color': 'rgba(188, 184, 177, 0.5)',
+          'color': '#bcb8b1',
+          'font-weight': '600'
+        });
+      }
     });
     $(".ak-munu_dropdown_toggle").on("click", function () {
       $(this).toggleClass("active").siblings("ul").slideToggle();
