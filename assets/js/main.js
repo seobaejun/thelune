@@ -85,6 +85,18 @@
   function mainNav() {
     // 햄버거 버튼을 헤더 오른쪽에 배치 (모바일에서만)
     if ($(window).width() <= 1199) {
+      // 모바일에서 헤더의 언어 선택 버튼 숨기기 (JavaScript로 직접 처리)
+      $(".language-selector, .ak-header_btns .language-selector, .ak-main-header-right .language-selector").css({
+        'display': 'none !important',
+        'visibility': 'hidden',
+        'opacity': '0',
+        'height': '0',
+        'width': '0',
+        'overflow': 'hidden',
+        'margin': '0',
+        'padding': '0'
+      });
+      
       if ($(".ak-main_header_in .ak-munu_toggle").length === 0) {
         $(".ak-main_header_in").append('<span class="ak-munu_toggle"><span></span></span>');
       }
@@ -162,6 +174,18 @@
         }
       }
     } else {
+      // 데스크톱에서 언어 선택 버튼 다시 보이기
+      $(".language-selector, .ak-header_btns .language-selector, .ak-main-header-right .language-selector").css({
+        'display': '',
+        'visibility': '',
+        'opacity': '',
+        'height': '',
+        'width': '',
+        'overflow': '',
+        'margin': '',
+        'padding': ''
+      });
+      
       if ($(".ak-nav .ak-munu_toggle").length === 0) {
         $(".ak-nav").append('<span class="ak-munu_toggle"><span></span></span>');
       }
@@ -171,12 +195,29 @@
     $(".menu-item-has-children").append(
       '<span class="ak-munu_dropdown_toggle"></span>'
     );
-    $(".ak-munu_toggle").on("click", function (e) {
+    
+    // 이벤트 리스너 중복 등록 방지
+    $(".ak-munu_toggle").off("click").on("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
+      
+      // 이미 애니메이션 중이면 무시
+      if ($(".ak-nav_list").is(":animated")) {
+        return false;
+      }
+      
       $(this).toggleClass("ak-toggle_active");
-      $(".ak-nav").toggleClass("mobile-menu-open");
-      $(".ak-nav_list").slideToggle(300);
+      var isOpen = $(".ak-nav").hasClass("mobile-menu-open");
+      
+      if (isOpen) {
+        // 메뉴 닫기
+        $(".ak-nav").removeClass("mobile-menu-open");
+        $(".ak-nav_list").slideUp(300);
+      } else {
+        // 메뉴 열기
+        $(".ak-nav").addClass("mobile-menu-open");
+        $(".ak-nav_list").slideDown(300);
+      }
       
       // 모바일에서 언어 선택 버튼 상태 동기화
       if ($(window).width() <= 1199) {
