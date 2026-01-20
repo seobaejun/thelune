@@ -101,3 +101,4 @@ if __name__ == '__main__':
     
     print(f"\n총 {updated_count}개 파일이 업데이트되었습니다.")
 
+

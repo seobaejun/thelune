@@ -88,7 +88,7 @@
 
         .model-hero-section {
             background: #0a0e1a;
-            padding: 200px 0 150px;
+            padding: 200px 0 50px;
             text-align: center;
             position: relative;
         }
@@ -106,7 +106,7 @@
             font-size: 72px;
             color: #ffffff;
             font-weight: 900;
-            margin-bottom: 40px;
+            margin-bottom: 15px;
             letter-spacing: -0.02em;
             line-height: 1.2;
         }
@@ -129,6 +129,8 @@
             position: relative;
             padding: 0;
             margin-bottom: 150px;
+            clear: both;
+            display: block;
         }
 
         .model-section-image {
@@ -140,13 +142,57 @@
             margin-top: 60px;
         }
         
-        /* 첫 4개 섹션의 이미지만 전체 표시 */
-        .model-content-section > .model-section-with-image:nth-of-type(1) .model-section-image,
-        .model-content-section > .model-section-with-image:nth-of-type(2) .model-section-image,
-        .model-content-section > .model-section-with-image:nth-of-type(4) .model-section-image {
-            object-fit: contain;
-            height: auto;
-            min-height: 600px;
+        /* 첫 번째 섹션 이미지 크기 줄이기 */
+        .model-content-section > .model-section-with-image:nth-of-type(1) {
+            display: block !important;
+            text-align: center !important;
+        }
+        .model-content-section > .model-section-with-image:nth-of-type(1) .model-section-image {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            object-fit: contain !important;
+            height: auto !important;
+            min-height: 700px !important;
+            max-height: 900px !important;
+            margin: 20px auto 60px auto !important;
+            display: block !important;
+        }
+        .model-content-section > .model-section-with-image:nth-of-type(1) .model-section-text-wrapper {
+            position: relative !important;
+            padding: 0 50px;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+        
+        .model-content-section > .model-section-with-image:nth-of-type(1) {
+            margin-bottom: 50px;
+        }
+        
+        /* 갤러리 이미지들 (PLACE 섹션 다음의 이미지들, 첫 번째 섹션 이미지 크기와 동일) */
+        .model-content-section > .model-section-with-image:not(:first-of-type) .model-section-image {
+            width: 100% !important;
+            max-width: 100% !important;
+            object-fit: contain !important;
+            height: auto !important;
+            min-height: 700px !important;
+            max-height: 900px !important;
+            margin-top: 20px !important;
+            margin-bottom: 20px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
+        }
+        
+        /* 이미지 아래 텍스트 간격 조정 */
+        .model-content-section > .model-section-with-image:not(:first-of-type) .model-section-text-wrapper {
+            margin-top: 10px !important;
+            margin-bottom: 30px !important;
+        }
+        
+        .model-content-section > .model-section-with-image:not(:first-of-type) .model-section-content {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
         }
 
         .model-section-text-wrapper {
@@ -166,7 +212,7 @@
             font-size: 56px;
             color: #ffffff;
             font-weight: 900;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             text-align: center;
             line-height: 1.3;
         }
@@ -185,6 +231,7 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
+            margin-bottom: 30px;
         }
 
         .model-section-content p {
@@ -642,9 +689,8 @@
     <!-- Model Hero Section -->
     <section class="model-hero-section">
         <div class="container">
-            <div class="model-tag english-serif-light">Benz Sprinter</div>
-            <h1 class="english-serif">Benz Sprinter</h1>
-            <p class="model-subtitle">VVIP를 위한 최적의 공간의 의전용 커스텀</p>
+            <h1 class="english-serif" style="text-transform: none !important;">Benz Sprinter</h1>
+            <p class="model-subtitle">비즈니스와 레저, 사용자의 특별한 목적을 위한 벤츠 스프린터 커스텀 모델. 주문제작 차량입니다.</p>
         </div>
     </section>
 
@@ -652,65 +698,146 @@
     <section class="model-content-section">
         <!-- PLACE Section -->
         <div class="model-section-with-image" data-aos="fade-up">
-            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_10.jpg" alt="PLACE" class="model-section-image">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_07.jpg" alt="PLACE" class="model-section-image">
             <div class="model-section-text-wrapper">
                 <div class="container">
-                    <div class="model-section-subtitle english-serif-light">LUNE SPRINTER CUSTOM</div>
                     <h2 class="model-section-title english-serif">PLACE</h2>
-                    <div class="model-section-content">
-                        <p>주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.</p>
+                    <div class="model-section-content" style="text-align: left !important;">
+                        <p style="text-align: left !important;">차량으로 이동하는 시간을 피곤한 것이 아닌, 하나의 만족스러운 경험으로 만들고자 합니다. 탑승자를 위해 다양한 맞춤형 옵션을 제공하고, 섬세한 고품질의 디테일로 공간을 구성하며,<br>차량 내부의 공간과 탑승자가 가진 잠재된 가치를 드러내고 한층 더 높은 수준으로 끌어올립니다. 높은 편의성, 안정성, 만족감 등 탑승자에게 퍼스트 클래스의 경험을 선사하는 브랜드입니다.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- INTERIOR SPACE Section -->
+        <!-- Image Gallery Section -->
         <div class="model-section-with-image" data-aos="fade-up">
-            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_03.jpg" alt="INTERIOR SPACE" class="model-section-image">
-            <div class="model-section-text-wrapper">
-                <div class="container">
-                    <div class="model-section-subtitle english-serif-light">LUNE SPRINTER CUSTOM</div>
-                    <h2 class="model-section-title english-serif">INTERIOR<br>SPACE</h2>
-                    <div class="model-section-content">
-                        <p>후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 'LUNE' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.</p>
-                    </div>
-                </div>
-            </div>
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_08.jpg" alt="Benz Sprinter Gallery 1" class="model-section-image">
         </div>
-
-            <!-- Image Slider -->
-            <div class="model-image-slider" data-aos="fade-up">
-                <div class="swiper model-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_24.jpg" alt="SPRINTER Interior 1">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_28.jpg" alt="SPRINTER Interior 2">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210.jpg" alt="SPRINTER Interior 3">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_11.jpg" alt="SPRINTER Interior 4">
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-
-        <!-- 4 SEATER PARTITION Section -->
         <div class="model-section-with-image" data-aos="fade-up">
-            <div class="model-section-text-wrapper">
-                <div class="container">
-                    <div class="model-section-subtitle english-serif-light">LUNE SPRINTER CUSTOM</div>
-                    <h2 class="model-section-title english-serif">SPRINTER<br>PARTITION</h2>
-                    <div class="model-section-content">
-                        <p>천연 나파 가죽 소재의 시트 2석으로 구성한 1열과 VIP 의전용 전동 리무진 시트 2석의 2열까지 총 4인승으로 이루어졌습니다. 여유로운 공간감, 편안한 착좌감으로 VIP 의전 차량으로 손색이 없습니다.<br><br>풀 우드 플로어 바닥 마감, 오염 스크래치 방지, 실내 방음 시스템 등을 적용해 품격있는 실내 인테리어를 완성합니다.</p>
-                    </div>
-                </div>
-            </div>
-            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_20.jpg" alt="SPRINTER PARTITION" class="model-section-image">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_09.jpg" alt="Benz Sprinter Gallery 2" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_10.jpg" alt="Benz Sprinter Gallery 3" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_11.jpg" alt="Benz Sprinter Gallery 4" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_12.jpg" alt="Benz Sprinter Gallery 5" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_13.jpg" alt="Benz Sprinter Gallery 6" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_01.jpg" alt="Benz Sprinter Gallery 7" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_02.jpg" alt="Benz Sprinter Gallery 8" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_03.jpg" alt="Benz Sprinter Gallery 9" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_04.jpg" alt="Benz Sprinter Gallery 10" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_05.jpg" alt="Benz Sprinter Gallery 11" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_06.jpg" alt="Benz Sprinter Gallery 12" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_07.jpg" alt="Benz Sprinter Gallery 13" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_08.jpg" alt="Benz Sprinter Gallery 14" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_09.jpg" alt="Benz Sprinter Gallery 15" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_10.jpg" alt="Benz Sprinter Gallery 16" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_11.jpg" alt="Benz Sprinter Gallery 17" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_12.jpg" alt="Benz Sprinter Gallery 18" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_13.jpg" alt="Benz Sprinter Gallery 19" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_14.jpg" alt="Benz Sprinter Gallery 20" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_15.jpg" alt="Benz Sprinter Gallery 21" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_16.jpg" alt="Benz Sprinter Gallery 22" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_17.jpg" alt="Benz Sprinter Gallery 23" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_18.jpg" alt="Benz Sprinter Gallery 24" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_19.jpg" alt="Benz Sprinter Gallery 25" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_20.jpg" alt="Benz Sprinter Gallery 26" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_21.jpg" alt="Benz Sprinter Gallery 27" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_22.jpg" alt="Benz Sprinter Gallery 28" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_23.jpg" alt="Benz Sprinter Gallery 29" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_24.jpg" alt="Benz Sprinter Gallery 30" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_25.jpg" alt="Benz Sprinter Gallery 31" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_26.jpg" alt="Benz Sprinter Gallery 32" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_27.jpg" alt="Benz Sprinter Gallery 33" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_28.jpg" alt="Benz Sprinter Gallery 34" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210_29.jpg" alt="Benz Sprinter Gallery 35" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141241210.jpg" alt="Benz Sprinter Gallery 36" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086.jpg" alt="Benz Sprinter Gallery 37" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_01.jpg" alt="Benz Sprinter Gallery 38" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_02.jpg" alt="Benz Sprinter Gallery 39" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_03.jpg" alt="Benz Sprinter Gallery 40" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_04.jpg" alt="Benz Sprinter Gallery 41" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_05.jpg" alt="Benz Sprinter Gallery 42" class="model-section-image">
+        </div>
+        <div class="model-section-with-image" data-aos="fade-up">
+            <img src="assets/img/스프린터/KakaoTalk_20230419_141232086_06.jpg" alt="Benz Sprinter Gallery 43" class="model-section-image">
         </div>
 
         <!-- DIY SELECTION Section -->
@@ -755,6 +882,9 @@
                             <img src="assets/img/핸들/4월 22일 dh auto 카니발 실내5963.jpg" alt="핸들 3">
                         </div>
                     </div>
+                </div>
+                <div class="model-section-content" style="margin-top: 30px;">
+                    <p>핸들 폴터의 3개 이미지, 시트색깔 6개 이미지 컬러 포함 선택할수 있습니다.</p>
                 </div>
             </div>
         </div>
@@ -923,6 +1053,10 @@
                 'A/S접수': 'A/S접수',
                 '찾아가는 시승 서비스': '찾아가는 시승 서비스',
                 // 모델 페이지 콘텐츠
+                '비즈니스와 레저, 사용자의 특별한 목적을 위한 벤츠 스프린터 커스텀 모델. 주문제작 차량입니다.': '비즈니스와 레저, 사용자의 특별한 목적을 위한 벤츠 스프린터 커스텀 모델. 주문제작 차량입니다.',
+                '차량으로 이동하는 시간을 피곤한 것이 아닌, 하나의 만족스러운 경험으로 만들고자 합니다. 탑승자를 위해 다양한 맞춤형 옵션을 제공하고, 섬세한 고품질의 디테일로 공간을 구성하며,<br>차량 내부의 공간과 탑승자가 가진 잠재된 가치를 드러내고 한층 더 높은 수준으로 끌어올립니다. 높은 편의성, 안정성, 만족감 등 탑승자에게 퍼스트 클래스의 경험을 선사하는 브랜드입니다.': '차량으로 이동하는 시간을 피곤한 것이 아닌, 하나의 만족스러운 경험으로 만들고자 합니다. 탑승자를 위해 다양한 맞춤형 옵션을 제공하고, 섬세한 고품질의 디테일로 공간을 구성하며,<br>차량 내부의 공간과 탑승자가 가진 잠재된 가치를 드러내고 한층 더 높은 수준으로 끌어올립니다. 높은 편의성, 안정성, 만족감 등 탑승자에게 퍼스트 클래스의 경험을 선사하는 브랜드입니다.',
+                'PLACE': 'PLACE',
+                'DIY SELECTION': 'DIY SELECTION',
                 'VVIP를 위한 최적의 공간의 의전용 커스텀': 'VVIP를 위한 최적의 공간의 의전용 커스텀',
                 '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.': '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.',
                 '후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 \'LUNE\' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.': '후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 \'LUNE\' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.',
@@ -951,6 +1085,10 @@
                 'A/S접수': 'A/S Service',
                 '찾아가는 시승 서비스': 'Test Drive Service',
                 // 모델 페이지 콘텐츠
+                '비즈니스와 레저, 사용자의 특별한 목적을 위한 벤츠 스프린터 커스텀 모델. 주문제작 차량입니다.': 'A custom Mercedes Sprinter model for business, leisure, and users\' special purposes. Made-to-order vehicle.',
+                '차량으로 이동하는 시간을 피곤한 것이 아닌, 하나의 만족스러운 경험으로 만들고자 합니다. 탑승자를 위해 다양한 맞춤형 옵션을 제공하고, 섬세한 고품질의 디테일로 공간을 구성하며,<br>차량 내부의 공간과 탑승자가 가진 잠재된 가치를 드러내고 한층 더 높은 수준으로 끌어올립니다. 높은 편의성, 안정성, 만족감 등 탑승자에게 퍼스트 클래스의 경험을 선사하는 브랜드입니다.': 'We aim to make travel time not a tiring experience, but a satisfying one. We provide various customized options for passengers, compose spaces with meticulous high-quality details,<br>and reveal the potential value of the vehicle\'s interior space and passengers, elevating them to an even higher level. We are a brand that provides passengers with a first-class experience through high convenience, stability, and satisfaction.',
+                'PLACE': 'PLACE',
+                'DIY SELECTION': 'DIY SELECTION',
                 'VVIP를 위한 최적의 공간의 의전용 커스텀': 'Custom ceremonial space optimized for VVIPs',
                 '주식회사 더 룬은 VVIP인 당신의 시간의 가치를 존중하며<br>당신의 공간에 프리미엄한 가치를 부여하는 방향성에 집중합니다.': 'THE LUNE Co., Ltd. respects the value of your time as a VVIP<br>and focuses on a direction that adds premium value to your space.',
                 '후석 공간을 중심으로 설계된 디자인은 여백의 미를 강조해 안락함과 편의성을 높였고, 친환경 원목 장식인 포지드 우드 플로어 등은 \'LUNE\' 브랜드가 지향하는 지속 가능한 럭셔리를 경험시켜 줍니다.': 'The design centered on the rear seat space emphasizes the beauty of empty space, enhancing comfort and convenience. Eco-friendly wood decorations such as the Posid wood floor provide an experience of sustainable luxury that the \'LUNE\' brand aims for.',
@@ -971,7 +1109,7 @@
 
         // 원본 텍스트 저장 함수
         function saveOriginalTexts() {
-            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .model-subtitle, .model-section-content p, .glass-button-text, .bottom-cta h2, .bottom-cta p, footer div, footer a, .footer-contact-mobile div').forEach(el => {
+            document.querySelectorAll('.ak-nav_list a, .ak-main-header-right a, .model-subtitle, .model-section-title, .model-section-content p, .glass-button-text, .bottom-cta h2, .bottom-cta p, footer div, footer a, .footer-contact-mobile div').forEach(el => {
                 if (!el.hasAttribute('data-original-text')) {
                     el.setAttribute('data-original-text', el.textContent.trim());
                 }
@@ -1070,6 +1208,14 @@
             
             // 모델 페이지 콘텐츠 번역
             document.querySelectorAll('.model-subtitle').forEach(el => {
+                const text = el.textContent.trim();
+                if (translation[text]) {
+                    el.textContent = translation[text];
+                }
+            });
+            
+            // 섹션 제목 번역
+            document.querySelectorAll('.model-section-title').forEach(el => {
                 const text = el.textContent.trim();
                 if (translation[text]) {
                     el.textContent = translation[text];
@@ -1198,4 +1344,6 @@
 </body>
 
 </html>
+
+
 
