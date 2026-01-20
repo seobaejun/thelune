@@ -2951,8 +2951,18 @@ kbd {
   }
   
   /* 모바일에서 언어 선택 버튼 숨기기 */
-  .language-selector {
+  .language-selector,
+  .ak-header_btns .language-selector,
+  .ak-main-header-right .language-selector,
+  .ak-main-header-right .ak-header_btns .language-selector,
+  div.language-selector,
+  .ak-site_header .language-selector {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
   }
   
   /* 햄버거 버튼을 오른쪽 끝에 배치 */

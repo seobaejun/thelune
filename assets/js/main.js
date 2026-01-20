@@ -129,9 +129,32 @@
                   'color': '#bcb8b1',
                   'font-weight': '600'
                 });
-                // 언어 전환 함수 호출
+                // 언어 전환 함수 호출 (event 객체 생성)
                 if (typeof switchLanguage === 'function') {
-                  switchLanguage(selectedLang);
+                  // event 객체를 생성하여 switchLanguage 함수에 전달
+                  var fakeEvent = { target: this };
+                  var originalEvent = window.event;
+                  window.event = fakeEvent;
+                  try {
+                    switchLanguage(selectedLang);
+                    // 언어 전환 후 모바일 버튼 상태 다시 동기화
+                    setTimeout(function() {
+                      $(".mobile-language-selector .lang-btn").removeClass('active').css({
+                        'background': 'none',
+                        'border-color': 'rgba(188, 184, 177, 0.3)',
+                        'color': '#ffffff',
+                        'font-weight': 'normal'
+                      });
+                      $(".mobile-language-selector .lang-btn[onclick*=\"" + selectedLang + "\"]").addClass('active').css({
+                        'background': 'rgba(188, 184, 177, 0.2)',
+                        'border-color': 'rgba(188, 184, 177, 0.5)',
+                        'color': '#bcb8b1',
+                        'font-weight': '600'
+                      });
+                    }, 100);
+                  } finally {
+                    window.event = originalEvent;
+                  }
                 }
               }
             }
@@ -157,19 +180,21 @@
       
       // 모바일에서 언어 선택 버튼 상태 동기화
       if ($(window).width() <= 1199) {
-        var activeLang = localStorage.getItem('preferredLanguage') || 'ko';
-        $(".mobile-language-selector .lang-btn").removeClass('active').css({
-          'background': 'none',
-          'border-color': 'rgba(188, 184, 177, 0.3)',
-          'color': '#ffffff',
-          'font-weight': 'normal'
-        });
-        $(".mobile-language-selector .lang-btn[onclick*=\"" + activeLang + "\"]").addClass('active').css({
-          'background': 'rgba(188, 184, 177, 0.2)',
-          'border-color': 'rgba(188, 184, 177, 0.5)',
-          'color': '#bcb8b1',
-          'font-weight': '600'
-        });
+        setTimeout(function() {
+          var activeLang = localStorage.getItem('preferredLanguage') || 'ko';
+          $(".mobile-language-selector .lang-btn").removeClass('active').css({
+            'background': 'none',
+            'border-color': 'rgba(188, 184, 177, 0.3)',
+            'color': '#ffffff',
+            'font-weight': 'normal'
+          });
+          $(".mobile-language-selector .lang-btn[onclick*=\"" + activeLang + "\"]").addClass('active').css({
+            'background': 'rgba(188, 184, 177, 0.2)',
+            'border-color': 'rgba(188, 184, 177, 0.5)',
+            'color': '#bcb8b1',
+            'font-weight': '600'
+          });
+        }, 100);
       }
     });
     $(".ak-munu_dropdown_toggle").on("click", function () {
