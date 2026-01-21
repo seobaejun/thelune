@@ -434,9 +434,7 @@
         
         .opt-chk-item label {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 12px;
             background: #f5f5f5;
             border: 1px solid rgba(0,0,0,0.1);
@@ -445,12 +443,27 @@
             transition: all 0.3s ease;
             color: #1a1a1a;
             font-size: 14px;
-            text-align: center;
-            min-height: 45px;
-            white-space: nowrap;
+            justify-content: flex-start;
         }
         
         .opt-chk-item label span {
+            white-space: nowrap;
+        }
+        
+        /* 등급(트림) 선택은 세로 레이아웃 (가격 표시) */
+        .trim-bx[data-opt="trim_level"] .opt-chk-item label {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .trim-bx[data-opt="trim_level"] .opt-chk-item label span {
+            white-space: normal;
+            word-break: keep-all;
+        }
+        
+        .trim-bx[data-opt="trim_level"] .opt-chk-item label small {
             white-space: nowrap;
         }
         
@@ -537,6 +550,8 @@
             font-size: 12px;
             color: #666;
             line-height: 1.4;
+            white-space: normal;
+            word-break: keep-all;
         }
         
         /* 추가 옵션 스타일 */
@@ -1177,33 +1192,6 @@
                         <!-- 옵션 래퍼 -->
                         <div class="opt-wrap" data-category="model_spec" data-step="model-spec" style="display: block;">
                             <form id="quoteForm">
-                                <!-- 모델 -->
-                                <div class="optbx opt-model">
-                                    <div class="optbx-top">
-                                        <h4>모델</h4>
-                                    </div>
-                                    <div class="optbx-con">
-                                        <div class="trim-bx" data-opt="model_type" data-group="모델" data-choice-min="1" data-choice-limit="1" style="display: block;">
-                                            <div class="opt-data btn-lst">
-                                                <ul class="con-flex">
-                                                    <li class="opt-chk-item top" data-type="C">
-                                                        <input type="radio" name="model_type" id="model_tl9" value="TL9" data-price="0">
-                                                        <label for="model_tl9"><span>TL9</span></label>
-                                                    </li>
-                                                    <li class="opt-chk-item top" data-type="C">
-                                                        <input type="radio" name="model_type" id="model_tlv9" value="TLV9" data-price="0">
-                                                        <label for="model_tlv9"><span>TLV9</span></label>
-                                                    </li>
-                                                    <li class="opt-chk-item top" data-type="C">
-                                                        <input type="radio" name="model_type" id="model_tlv4" value="TLV4" data-price="0">
-                                                        <label for="model_tlv4"><span>TLV4</span></label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!-- 차종 -->
                                 <div class="optbx opt-vehicle">
                                     <div class="optbx-top">
@@ -1228,6 +1216,33 @@
                                                     <li class="opt-chk-item top" data-type="C">
                                                         <input type="radio" name="vehicle_type" id="vehicle_ventelier" value="벤터일러" data-price="0">
                                                         <label for="vehicle_ventelier"><span>벤터일러</span></label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 모델 -->
+                                <div class="optbx opt-model">
+                                    <div class="optbx-top">
+                                        <h4>모델</h4>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <div class="trim-bx" data-opt="model_type" data-group="모델" data-choice-min="1" data-choice-limit="1" style="display: block;">
+                                            <div class="opt-data btn-lst">
+                                                <ul class="con-flex">
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="model_type" id="model_tl9" value="TL9" data-price="0">
+                                                        <label for="model_tl9"><span>TL9</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="model_type" id="model_tlv9" value="TLV9" data-price="0">
+                                                        <label for="model_tlv9"><span>TLV9</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="model_type" id="model_tlv4" value="TLV4" data-price="0">
+                                                        <label for="model_tlv4"><span>TLV4</span></label>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1292,7 +1307,7 @@
                                                         <label for="trim_gasoline"><span>가솔린</span></label>
                                                     </li>
                                                     <li class="opt-chk-item top" data-type="C">
-                                                        <input type="radio" name="trim_engine" id="trim_hybrid" value="하이브리드" data-price="0">
+                                                        <input type="radio" name="trim_engine" id="trim_hybrid" value="하이브리드" data-price="4550000">
                                                         <label for="trim_hybrid"><span>하이브리드</span></label>
                                                     </li>
                                                 </ul>
@@ -1422,8 +1437,8 @@
                             </form>
                         </div>
                         
-                        <!-- 컨버전 옵션 섹션 -->
-                        <div class="opt-wrap" data-category="conversion" data-step="conversion" style="display: none;">
+                        <!-- 컨버전 옵션 섹션 (TL9용) -->
+                        <div class="opt-wrap" data-category="conversion" data-step="conversion" data-model="tl9" style="display: none;">
                             <form id="quoteConversionForm">
                                 <div class="optbx opt-conversion">
                                     <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
@@ -1483,6 +1498,125 @@
                                             </div>
                                             <label class="package-checkbox" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                                                 <input type="checkbox" id="conversion_package_confirm" name="conversion_package_confirm" style="width: 20px; height: 20px; cursor: pointer;">
+                                                <span style="font-size: 14px; color: #1a1a1a;">확인</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- 컨버전 옵션 섹션 (TLV9용) -->
+                        <div class="opt-wrap" data-category="conversion" data-step="conversion" data-model="tlv9" style="display: none;">
+                            <form id="quoteConversionFormTLV9">
+                                <div class="optbx opt-conversion">
+                                    <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h4>기본 컨버전 옵션</h4>
+                                        <span style="color: rgba(0,0,0,0.6); font-size: 14px; font-weight: 500;">기본포함</span>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <div class="opt-data clchart top btn-lst" data-opt="conversion_option_tlv9" data-group="컨버전옵션TLV9" data-choice-min="0" data-choice-limit="100" style="display: block;">
+                                            <ul class="con-flex" style="flex-direction: column; gap: 8px;">
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_1row" id="conversion_tlv9_1row" value="1열 뒤쪽 나무 가구 시트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_1row">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="1열" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">1열</span>
+                                                            <span class="option-desc">1열 뒤쪽 나무 가구 시트</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_2row_vvip" id="conversion_tlv9_2row_vvip" value="2열 VVIP 8WAY 전동 마사지 의전 시트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_2row_vvip">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="2열" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">2열</span>
+                                                            <span class="option-desc">2열 VVIP 8WAY 전동 마사지 의전 시트 (마르시 시트/블리 시트/동/마/방/전/도)</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_3row_sofa" id="conversion_tlv9_3row_sofa" value="3열 순정 폴딩시트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_3row_sofa">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="3열" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">3열</span>
+                                                            <span class="option-desc">3열 순정 폴딩시트</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_4row_seat" id="conversion_tlv9_4row_seat" value="4열 순정 강성 시트 추가" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_4row_seat">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="4열" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">4열</span>
+                                                            <span class="option-desc">4열 순정 강성 시트 추가</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_trunk" id="conversion_tlv9_trunk" value="트러짐" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_trunk">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="트러짐" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">트러짐</span>
+                                                            <span class="option-desc">도어 트러짐 4PC / 런닝 트러짐, 쿨톤 트러짐 / 러기지 트러짐, 트렁크 트러짐</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_bamboo" id="conversion_tlv9_bamboo" value="뱀부트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_bamboo">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="뱀부트" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">뱀부트</span>
+                                                            <span class="option-desc">순정 도어 부트트</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_mood" id="conversion_tlv9_mood" value="무드등" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_mood">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="무드등" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">무드등</span>
+                                                            <span class="option-desc">천정 메인 무드등 / 사이드 엠비언트 무드등</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_tv" id="conversion_tlv9_tv" value="TV" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_tv">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="TV" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">TV</span>
+                                                            <span class="option-desc">27인치 스마트 TV</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_soundproof" id="conversion_tlv9_soundproof" value="방진/방음" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_soundproof">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="방진/방음" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">방진/방음</span>
+                                                            <span class="option-desc">기본 방진 방음 패드 시공</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <!-- 패키지 총액 및 확인 체크박스 -->
+                                        <div class="conversion-package-total" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; margin-top: 20px; padding: 15px; border-top: 1px dashed #ccc;">
+                                            <div class="package-price" style="font-size: 18px; font-weight: 600; color: #1a1a1a;">
+                                                <span id="conversionTotalPriceTLV9">28,640,000</span>원
+                                            </div>
+                                            <label class="package-checkbox" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                                <input type="checkbox" id="conversion_package_confirm_tlv9" name="conversion_package_confirm_tlv9" style="width: 20px; height: 20px; cursor: pointer;">
                                                 <span style="font-size: 14px; color: #1a1a1a;">확인</span>
                                             </label>
                                         </div>
@@ -2107,6 +2241,11 @@
                                 if (prevBtn) {
                                     prevBtn.style.display = 'block';
                                 }
+                                
+                                // 모델에 맞는 2페이지 표시
+                                setTimeout(function() {
+                                    updateConversionPageByModel();
+                                }, 100);
                             } else if (prevStep === 'conversion-select') {
                                 // 3페이지: 추가 옵션 → 버튼
                                 if (conversionBtn) {
@@ -2328,6 +2467,11 @@
                                 if (prevBtn) {
                                     prevBtn.style.display = 'block';
                                 }
+                                
+                                // 모델에 맞는 2페이지 표시
+                                setTimeout(function() {
+                                    updateConversionPageByModel();
+                                }, 100);
                             } else if (nextStep === 'conversion-select') {
                                 // 3페이지: 추가 옵션 → 버튼
                                 if (conversionBtn) {
@@ -2431,13 +2575,22 @@
             });
             
             // 컨버전 옵션은 확인 체크박스가 체크되었을 때만 패키지 가격으로 계산
-            const CONVERSION_PACKAGE_PRICE = 14640000;
-            const conversionConfirmCheckbox = document.getElementById('conversion_package_confirm');
+            const CONVERSION_PACKAGE_PRICE_TL9 = 14640000;
+            const CONVERSION_PACKAGE_PRICE_TLV9 = 28640000;
             
-            // 확인 체크박스가 체크되어 있으면 컨버전 패키지 가격 추가
+            const conversionConfirmCheckbox = document.getElementById('conversion_package_confirm');
+            const conversionConfirmCheckboxTLV9 = document.getElementById('conversion_package_confirm_tlv9');
+            
+            // TL9 확인 체크박스가 체크되어 있으면 컨버전 패키지 가격 추가
             if (conversionConfirmCheckbox && conversionConfirmCheckbox.checked) {
-                total += CONVERSION_PACKAGE_PRICE;
-                console.log('컨버전 패키지 가격 추가:', CONVERSION_PACKAGE_PRICE);
+                total += CONVERSION_PACKAGE_PRICE_TL9;
+                console.log('컨버전 패키지 가격 추가 (TL9):', CONVERSION_PACKAGE_PRICE_TL9);
+            }
+            
+            // TLV9 확인 체크박스가 체크되어 있으면 컨버전 패키지 가격 추가
+            if (conversionConfirmCheckboxTLV9 && conversionConfirmCheckboxTLV9.checked) {
+                total += CONVERSION_PACKAGE_PRICE_TLV9;
+                console.log('컨버전 패키지 가격 추가 (TLV9):', CONVERSION_PACKAGE_PRICE_TLV9);
             }
             
             // 예상 견적 금액 업데이트
@@ -2450,6 +2603,77 @@
             
             return total;
         }
+        
+        // 모델 선택에 따라 2페이지(컨버전) 표시/숨김
+        function updateConversionPageByModel() {
+            const selectedModel = document.querySelector('input[name="model_type"]:checked');
+            if (!selectedModel) {
+                console.log('모델 미선택');
+                return;
+            }
+            
+            const modelValue = selectedModel.value.toLowerCase();
+            console.log('=== 선택된 모델:', modelValue, '===');
+            
+            const conversionTL9 = document.querySelector('.opt-wrap[data-step="conversion"][data-model="tl9"]');
+            const conversionTLV9 = document.querySelector('.opt-wrap[data-step="conversion"][data-model="tlv9"]');
+            
+            console.log('TL9 페이지 요소:', conversionTL9);
+            console.log('TLV9 페이지 요소:', conversionTLV9);
+            
+            // 모든 컨버전 페이지의 display 확인
+            const isTL9Visible = conversionTL9 && conversionTL9.style.display === 'block';
+            const isTLV9Visible = conversionTLV9 && conversionTLV9.style.display === 'block';
+            const isConversionPageVisible = isTL9Visible || isTLV9Visible;
+            
+            console.log('컨버전 페이지 표시 상태 - TL9:', isTL9Visible, 'TLV9:', isTLV9Visible);
+            
+            // 컨버전 페이지가 표시된 상태일 때만 모델에 맞게 전환
+            if (isConversionPageVisible) {
+                console.log('컨버전 페이지 활성 - 모델에 맞게 전환');
+                
+                // 모든 컨버전 페이지 숨김
+                if (conversionTL9) conversionTL9.style.display = 'none';
+                if (conversionTLV9) conversionTLV9.style.display = 'none';
+                
+                // 선택된 모델에 맞는 페이지만 표시
+                if (modelValue === 'tl9') {
+                    if (conversionTL9) {
+                        conversionTL9.style.display = 'block';
+                        console.log('✅ TL9 컨버전 페이지 표시');
+                    }
+                } else if (modelValue === 'tlv9') {
+                    if (conversionTLV9) {
+                        conversionTLV9.style.display = 'block';
+                        console.log('✅ TLV9 컨버전 페이지 표시');
+                    }
+                }
+            } else {
+                console.log('컨버전 페이지 비활성 - 전환하지 않음');
+            }
+        }
+        
+        // 모델 라디오 버튼에 이벤트 리스너 추가
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded - 모델 선택 이벤트 리스너 추가');
+            
+            const modelRadios = document.querySelectorAll('input[name="model_type"]');
+            console.log('모델 라디오 버튼 개수:', modelRadios.length);
+            
+            modelRadios.forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    console.log('모델 변경됨:', this.value);
+                    setTimeout(function() {
+                        updateConversionPageByModel();
+                    }, 100);
+                });
+            });
+            
+            // 초기 실행
+            setTimeout(function() {
+                updateConversionPageByModel();
+            }, 500);
+        });
         
         // 가격 업데이트 함수 (주기적으로 실행)
         function updatePricePeriodically() {
@@ -2709,57 +2933,80 @@
                 });
             }
             
-            // 컨버전 확인 체크박스 이벤트 리스너
+            // 컨버전 확인 체크박스 이벤트 리스너 (TL9)
             const conversionConfirmCheckbox = document.getElementById('conversion_package_confirm');
             if (conversionConfirmCheckbox) {
                 conversionConfirmCheckbox.addEventListener('change', function() {
-                    console.log('=== 컨버전 확인 체크박스 변경 ===');
-                    console.log('Checked:', this.checked);
-                    
-                    // 전체 페이지의 모든 체크된 옵션을 처음부터 다시 계산
-                    let totalPrice = 0;
-                    let checkedCount = 0;
-                    
-                    // 전체 페이지의 모든 체크된 라디오/체크박스
-                    document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(function(input) {
-                        // 컨버전 개별 옵션과 확인 체크박스는 스킵 (나중에 패키지로 한번에 계산)
-                        const isConversionOption = input.id && (
-                            input.id === 'conversion_roof' || 
-                            input.id === 'conversion_mood' || 
-                            input.id === 'conversion_tv' || 
-                            input.id === 'conversion_soundproof' ||
-                            input.id === 'conversion_package_confirm'
-                        );
-                        
-                        if (isConversionOption) {
-                            console.log('[스킵] 컨버전 옵션:', input.id);
-                            return; // 컨버전 옵션들은 건너뜀
-                        }
-                        
-                        const price = parseInt(input.dataset.price) || 0;
-                        totalPrice += price;
-                        checkedCount++;
-                        console.log('[' + checkedCount + '] ' + (input.id || input.name) + ' = ' + price + '원 (누적: ' + totalPrice + '원)');
-                    });
-                    
-                    // 컨버전 패키지 가격 추가 (확인 체크박스가 체크된 경우)
-                    if (this.checked) {
-                        const CONVERSION_PACKAGE_PRICE = 14640000;
-                        totalPrice += CONVERSION_PACKAGE_PRICE;
-                        checkedCount++;
-                        console.log('[패키지] 컨버전 패키지 = ' + CONVERSION_PACKAGE_PRICE + '원 (누적: ' + totalPrice + '원)');
-                    }
-                    
-                    console.log('💰 최종 총액:', totalPrice + '원 (총 ' + checkedCount + '개 옵션)');
-                    
-                    // 예상 견적 금액 업데이트
-                    const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
-                    if (quoteTotalPriceEl) {
-                        const formattedPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                        quoteTotalPriceEl.textContent = formattedPrice;
-                        console.log('✅ 가격 표시 업데이트:', formattedPrice);
-                    }
+                    recalculateTotalPrice();
                 });
+            }
+            
+            // 컨버전 확인 체크박스 이벤트 리스너 (TLV9)
+            const conversionConfirmCheckboxTLV9 = document.getElementById('conversion_package_confirm_tlv9');
+            if (conversionConfirmCheckboxTLV9) {
+                conversionConfirmCheckboxTLV9.addEventListener('change', function() {
+                    recalculateTotalPrice();
+                });
+            }
+            
+            // 전체 가격 재계산 함수
+            function recalculateTotalPrice() {
+                console.log('=== 컨버전 확인 체크박스 변경 ===');
+                
+                // 전체 페이지의 모든 체크된 옵션을 처음부터 다시 계산
+                let totalPrice = 0;
+                let checkedCount = 0;
+                
+                // 전체 페이지의 모든 체크된 라디오/체크박스
+                document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(function(input) {
+                    // 컨버전 개별 옵션과 확인 체크박스는 스킵 (나중에 패키지로 한번에 계산)
+                    const isConversionOption = input.id && (
+                        input.id.startsWith('conversion_') &&
+                        input.id !== 'conversion_package_confirm' &&
+                        input.id !== 'conversion_package_confirm_tlv9'
+                    );
+                    
+                    const isConversionConfirm = input.id === 'conversion_package_confirm' || 
+                                               input.id === 'conversion_package_confirm_tlv9';
+                    
+                    if (isConversionOption || isConversionConfirm) {
+                        console.log('[스킵] 컨버전 옵션:', input.id);
+                        return; // 컨버전 옵션들은 건너뜀
+                    }
+                    
+                    const price = parseInt(input.dataset.price) || 0;
+                    totalPrice += price;
+                    checkedCount++;
+                    console.log('[' + checkedCount + '] ' + (input.id || input.name) + ' = ' + price + '원 (누적: ' + totalPrice + '원)');
+                });
+                
+                // 컨버전 패키지 가격 추가
+                const conversionTL9 = document.getElementById('conversion_package_confirm');
+                const conversionTLV9 = document.getElementById('conversion_package_confirm_tlv9');
+                
+                if (conversionTL9 && conversionTL9.checked) {
+                    const CONVERSION_PACKAGE_PRICE_TL9 = 14640000;
+                    totalPrice += CONVERSION_PACKAGE_PRICE_TL9;
+                    checkedCount++;
+                    console.log('[패키지] 컨버전 패키지 (TL9) = ' + CONVERSION_PACKAGE_PRICE_TL9 + '원 (누적: ' + totalPrice + '원)');
+                }
+                
+                if (conversionTLV9 && conversionTLV9.checked) {
+                    const CONVERSION_PACKAGE_PRICE_TLV9 = 28640000;
+                    totalPrice += CONVERSION_PACKAGE_PRICE_TLV9;
+                    checkedCount++;
+                    console.log('[패키지] 컨버전 패키지 (TLV9) = ' + CONVERSION_PACKAGE_PRICE_TLV9 + '원 (누적: ' + totalPrice + '원)');
+                }
+                
+                console.log('💰 최종 총액:', totalPrice + '원 (총 ' + checkedCount + '개 옵션)');
+                
+                // 예상 견적 금액 업데이트
+                const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
+                if (quoteTotalPriceEl) {
+                    const formattedPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    quoteTotalPriceEl.textContent = formattedPrice;
+                    console.log('✅ 가격 표시 업데이트:', formattedPrice);
+                }
             }
             
             // 기본 컨버전 옵션 체크박스 해제 방지
@@ -2937,14 +3184,15 @@
                     document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(function(input) {
                         // 컨버전 개별 옵션과 확인 체크박스는 스킵 (나중에 패키지로 한번에 계산)
                         const isConversionOption = input.id && (
-                            input.id === 'conversion_roof' || 
-                            input.id === 'conversion_mood' || 
-                            input.id === 'conversion_tv' || 
-                            input.id === 'conversion_soundproof' ||
-                            input.id === 'conversion_package_confirm'
+                            input.id.startsWith('conversion_') &&
+                            input.id !== 'conversion_package_confirm' &&
+                            input.id !== 'conversion_package_confirm_tlv9'
                         );
                         
-                        if (isConversionOption) {
+                        const isConversionConfirm = input.id === 'conversion_package_confirm' || 
+                                                   input.id === 'conversion_package_confirm_tlv9';
+                        
+                        if (isConversionOption || isConversionConfirm) {
                             console.log('[스킵] 컨버전 옵션:', input.id);
                             return; // 컨버전 옵션들은 건너뜀
                         }
@@ -2955,13 +3203,22 @@
                         console.log('[' + checkedCount + '] ' + (input.id || input.name) + ' = ' + price + '원 (누적: ' + totalPrice + '원)');
                     });
                     
-                    // 컨버전 패키지 가격 추가 (확인 체크박스가 체크된 경우)
-                    const conversionConfirm = document.getElementById('conversion_package_confirm');
-                    if (conversionConfirm && conversionConfirm.checked) {
-                        const CONVERSION_PACKAGE_PRICE = 14640000;
-                        totalPrice += CONVERSION_PACKAGE_PRICE;
+                    // 컨버전 패키지 가격 추가
+                    const conversionTL9 = document.getElementById('conversion_package_confirm');
+                    const conversionTLV9 = document.getElementById('conversion_package_confirm_tlv9');
+                    
+                    if (conversionTL9 && conversionTL9.checked) {
+                        const CONVERSION_PACKAGE_PRICE_TL9 = 14640000;
+                        totalPrice += CONVERSION_PACKAGE_PRICE_TL9;
                         checkedCount++;
-                        console.log('[패키지] 컨버전 패키지 = ' + CONVERSION_PACKAGE_PRICE + '원 (누적: ' + totalPrice + '원)');
+                        console.log('[패키지] 컨버전 패키지 (TL9) = ' + CONVERSION_PACKAGE_PRICE_TL9 + '원 (누적: ' + totalPrice + '원)');
+                    }
+                    
+                    if (conversionTLV9 && conversionTLV9.checked) {
+                        const CONVERSION_PACKAGE_PRICE_TLV9 = 28640000;
+                        totalPrice += CONVERSION_PACKAGE_PRICE_TLV9;
+                        checkedCount++;
+                        console.log('[패키지] 컨버전 패키지 (TLV9) = ' + CONVERSION_PACKAGE_PRICE_TLV9 + '원 (누적: ' + totalPrice + '원)');
                     }
                     
                     console.log('💰 최종 총액:', totalPrice + '원 (총 ' + checkedCount + '개 옵션)');
