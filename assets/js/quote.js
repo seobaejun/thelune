@@ -1233,24 +1233,87 @@ function addSelectionFeedback(input) {
 // Reset quote
 function resetQuote() {
     if (confirm('모든 선택을 초기화하시겠습니까?')) {
-        // Reset form
-        const form = document.getElementById('quoteForm');
-        if (form) {
-            form.reset();
-        }
+        // 모든 폼 리셋
+        const forms = ['quoteForm', 'quoteConversionForm', 'quoteConversionSelectForm', 'quoteAdditionalForm'];
+        forms.forEach(formId => {
+            const form = document.getElementById(formId);
+            if (form) {
+                form.reset();
+            }
+        });
+        
+        // 모든 체크박스와 라디오 버튼 해제 (순정 옵션 제외)
+        document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+            // 순정 옵션은 해제하지 않음
+            if (!input.closest('.opt-standard')) {
+                input.checked = false;
+            }
+        });
+        
+        // 컨버전 옵션 강제 해제
+        const conversionOptions = ['conversion_roof', 'conversion_mood', 'conversion_tv', 'conversion_soundproof', 'conversion_package_confirm'];
+        conversionOptions.forEach(optionId => {
+            const optionInput = document.getElementById(optionId);
+            if (optionInput) {
+                optionInput.checked = false;
+                optionInput.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
         
         // Reset variables
         selectedOptions = {};
         totalPrice = 0;
+        window.selectedOptions = {};
+        window.totalPrice = 0;
+        
+        // 첫 번째 페이지로 돌아가기
+        currentStep = 'model-spec';
+        window.currentStep = 'model-spec';
+        
+        // 모든 opt-wrap 숨기기
+        document.querySelectorAll('.opt-wrap').forEach(wrap => {
+            wrap.style.display = 'none';
+        });
+        
+        // 첫 번째 페이지 표시
+        const modelSpecWrap = document.querySelector('.opt-wrap[data-step="model-spec"]');
+        if (modelSpecWrap) {
+            modelSpecWrap.style.display = 'block';
+        }
+        
+        // 상태바 초기화
+        const titleElement = document.getElementById('currentStepTitle');
+        if (titleElement) {
+            titleElement.textContent = '모델/사양';
+        }
+        
+        const progressElement = document.getElementById('currentStepProgress');
+        if (progressElement) {
+            progressElement.textContent = '1/4';
+        }
+        
+        // 진행 바 초기화
+        const progressBars = document.querySelectorAll('.prog-bar li');
+        progressBars.forEach((bar, index) => {
+            if (index === 0) {
+                bar.classList.add('active');
+                bar.style.background = '#1a1a1a';
+            } else {
+                bar.classList.remove('active');
+                bar.style.background = 'rgba(0,0,0,0.1)';
+            }
+        });
         
         // Update displays
         updatePriceDisplay();
         updateSelectedOptionsDisplay();
+        updateStepButtons();
+        updateProgressBar();
         
         // Show success message
         showNotification('견적이 초기화되었습니다.', 'success');
         
-        console.log('Quote reset');
+        console.log('Quote reset - 모든 페이지 초기화 완료');
     }
 }
 
@@ -3050,7 +3113,7 @@ function updateStepButtons() {
             conversionBtn.style.display = 'block';
         }
         if (prevBtn) {
-            prevBtn.style.display = 'none';
+            prevBtn.style.display = 'block';
         }
     } else if (currentStep === 'conversion') {
         // 컨버전 옵션 단계: 컨버전 옵션 선택 버튼으로 변경
@@ -3071,9 +3134,10 @@ function updateStepButtons() {
             prevBtn.style.display = 'block';
         }
     } else if (currentStep === 'additional') {
-        // 추가 옵션 단계: 버튼 숨김
+        // 추가 옵션 단계: 견적내기 완료 버튼 표시
         if (conversionBtn) {
-            conversionBtn.style.display = 'none';
+            conversionBtn.textContent = '견적내기 완료';
+            conversionBtn.style.display = 'block';
         }
         if (prevBtn) {
             prevBtn.style.display = 'block';
