@@ -522,7 +522,7 @@
         
         .clchart .opt-chk-item label {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             background: #f5f5f5;
             border: 1px solid rgba(0,0,0,0.1);
@@ -531,6 +531,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 70px;
+            overflow: hidden;
         }
         
         /* 컨버전 옵션 상세 설명 스타일 */
@@ -540,18 +544,25 @@
             gap: 4px;
             flex: 1;
             min-width: 0;
+            max-width: calc(100% - 110px);
+            overflow: hidden;
         }
         .opt-conversion .option-name {
             font-weight: 600;
             font-size: 14px;
             color: #1a1a1a;
+            white-space: normal;
+            word-break: keep-all;
+            overflow-wrap: break-word;
         }
         .opt-conversion .option-desc {
             font-size: 12px;
             color: #666;
-            line-height: 1.4;
-            white-space: normal;
+            line-height: 1.5;
+            white-space: normal !important;
             word-break: keep-all;
+            overflow-wrap: break-word;
+            max-width: 100%;
         }
         
         /* 추가 옵션 스타일 */
@@ -561,11 +572,17 @@
             gap: 4px;
             flex: 1;
             min-width: 0;
+            max-width: calc(100% - 110px);
+            overflow: hidden;
         }
         .opt-additional .option-name {
             font-weight: 600;
             font-size: 14px;
             color: #1a1a1a;
+            white-space: normal !important;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            line-height: 1.4;
         }
         .opt-additional .option-price {
             font-size: 14px;
@@ -579,12 +596,16 @@
             object-fit: cover;
             border-radius: 4px;
             order: 2;
+            margin-top: 5px;
         }
         .opt-additional .option-text {
             order: 3;
+            padding-top: 5px;
         }
         .opt-additional .clchart .opt-chk-item label {
             padding-left: 50px;
+            align-items: flex-start;
+            min-height: 70px;
         }
         .opt-conversion .opt-chk-item input[type="checkbox"]:checked + label .option-name,
         .opt-conversion .opt-chk-item input[type="checkbox"]:checked + label .option-desc {
@@ -606,9 +627,11 @@
             object-fit: cover;
             border-radius: 4px;
             order: 2;
+            margin-top: 5px;
         }
         .opt-conversion .option-text {
             order: 3;
+            padding-top: 5px;
         }
         
         .clchart .opt-chk-item label::before {
@@ -1518,62 +1541,72 @@
                                         <div class="opt-data clchart top btn-lst" data-opt="conversion_option_tlv9" data-group="컨버전옵션TLV9" data-choice-min="0" data-choice-limit="100" style="display: block;">
                                             <ul class="con-flex" style="flex-direction: column; gap: 8px;">
                                                 <li class="opt-chk-item top" data-type="B">
-                                                    <input type="checkbox" name="conversion_tlv9_1row" id="conversion_tlv9_1row" value="1열 뒤쪽 나무 가구 시트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <input type="checkbox" name="conversion_tlv9_roof" id="conversion_tlv9_roof" value="루프" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_roof">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="루프" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">루프</span>
+                                                            <span class="option-desc">카니발 전용 Hi-Roof</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_1row" id="conversion_tlv9_1row" value="1열" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
                                                     <label for="conversion_tlv9_1row">
                                                         <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="1열" class="option-image">
                                                         <div class="option-text">
                                                             <span class="option-name">1열</span>
-                                                            <span class="option-desc">1열 뒤쪽 나무 가구 시트</span>
+                                                            <span class="option-desc">1열 뒤쪽 나무 가죽 시트</span>
                                                         </div>
                                                     </label>
                                                 </li>
                                                 <li class="opt-chk-item top" data-type="B">
-                                                    <input type="checkbox" name="conversion_tlv9_2row_vvip" id="conversion_tlv9_2row_vvip" value="2열 VVIP 8WAY 전동 마사지 의전 시트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
-                                                    <label for="conversion_tlv9_2row_vvip">
+                                                    <input type="checkbox" name="conversion_tlv9_2row" id="conversion_tlv9_2row" value="2열" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_2row">
                                                         <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="2열" class="option-image">
                                                         <div class="option-text">
                                                             <span class="option-name">2열</span>
-                                                            <span class="option-desc">2열 VVIP 8WAY 전동 마사지 의전 시트 (마르시 시트/블리 시트/동/마/방/전/도)</span>
+                                                            <span class="option-desc">2열 VVIP 8WAY 전동 마사지 의전 시트 (메모리 시트/열선/통풍/안마/충전포트)</span>
                                                         </div>
                                                     </label>
                                                 </li>
                                                 <li class="opt-chk-item top" data-type="B">
-                                                    <input type="checkbox" name="conversion_tlv9_3row_sofa" id="conversion_tlv9_3row_sofa" value="3열 순정 폴딩시트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
-                                                    <label for="conversion_tlv9_3row_sofa">
+                                                    <input type="checkbox" name="conversion_tlv9_3row" id="conversion_tlv9_3row" value="3열" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_3row">
                                                         <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="3열" class="option-image">
                                                         <div class="option-text">
                                                             <span class="option-name">3열</span>
-                                                            <span class="option-desc">3열 순정 폴딩시트</span>
+                                                            <span class="option-desc">3열 순정 독립시트</span>
                                                         </div>
                                                     </label>
                                                 </li>
                                                 <li class="opt-chk-item top" data-type="B">
-                                                    <input type="checkbox" name="conversion_tlv9_4row_seat" id="conversion_tlv9_4row_seat" value="4열 순정 강성 시트 추가" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
-                                                    <label for="conversion_tlv9_4row_seat">
+                                                    <input type="checkbox" name="conversion_tlv9_4row" id="conversion_tlv9_4row" value="4열" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_4row">
                                                         <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="4열" class="option-image">
                                                         <div class="option-text">
                                                             <span class="option-name">4열</span>
-                                                            <span class="option-desc">4열 순정 강성 시트 추가</span>
+                                                            <span class="option-desc">4열 순정 싱킹 시트 유지</span>
                                                         </div>
                                                     </label>
                                                 </li>
                                                 <li class="opt-chk-item top" data-type="B">
-                                                    <input type="checkbox" name="conversion_tlv9_trunk" id="conversion_tlv9_trunk" value="트러짐" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
-                                                    <label for="conversion_tlv9_trunk">
-                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="트러짐" class="option-image">
+                                                    <input type="checkbox" name="conversion_tlv9_trimming" id="conversion_tlv9_trimming" value="트리밍" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_trimming">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="트리밍" class="option-image">
                                                         <div class="option-text">
-                                                            <span class="option-name">트러짐</span>
-                                                            <span class="option-desc">도어 트러짐 4PC / 런닝 트러짐, 쿨톤 트러짐 / 러기지 트러짐, 트렁크 트러짐</span>
+                                                            <span class="option-name">트리밍</span>
+                                                            <span class="option-desc">도어 트리밍 4PS / 천정 트리밍, 콘솔 트리밍 / 러기지 트리밍, 트렁크 트리밍</span>
                                                         </div>
                                                     </label>
                                                 </li>
                                                 <li class="opt-chk-item top" data-type="B">
-                                                    <input type="checkbox" name="conversion_tlv9_bamboo" id="conversion_tlv9_bamboo" value="뱀부트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
-                                                    <label for="conversion_tlv9_bamboo">
-                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="뱀부트" class="option-image">
+                                                    <input type="checkbox" name="conversion_tlv9_floor" id="conversion_tlv9_floor" value="바닥재" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_floor">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="바닥재" class="option-image">
                                                         <div class="option-text">
-                                                            <span class="option-name">뱀부트</span>
-                                                            <span class="option-desc">순정 도어 부트트</span>
+                                                            <span class="option-name">바닥재</span>
+                                                            <span class="option-desc">최고급 요트 바닥 우드플로어</span>
                                                         </div>
                                                     </label>
                                                 </li>
@@ -1583,7 +1616,7 @@
                                                         <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="무드등" class="option-image">
                                                         <div class="option-text">
                                                             <span class="option-name">무드등</span>
-                                                            <span class="option-desc">천정 메인 무드등 / 사이드 엠비언트 무드등</span>
+                                                            <span class="option-desc">천정 메인 무드등, 사이드 엠비언트 무드등</span>
                                                         </div>
                                                     </label>
                                                 </li>
@@ -1594,6 +1627,16 @@
                                                         <div class="option-text">
                                                             <span class="option-name">TV</span>
                                                             <span class="option-desc">27인치 스마트 TV</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="conversion_tlv9_doorskuff" id="conversion_tlv9_doorskuff" value="도어스커프" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg" checked>
+                                                    <label for="conversion_tlv9_doorskuff">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="도어스커프" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">도어스커프</span>
+                                                            <span class="option-desc">2열 자동문 도어 스커프</span>
                                                         </div>
                                                     </label>
                                                 </li>
@@ -1941,8 +1984,8 @@
                             </form>
                         </div>
                         
-                        <!-- 추가 옵션 섹션 (4페이지) -->
-                        <div class="opt-wrap" data-category="additional" data-step="additional" style="display: none;">
+                        <!-- 추가 옵션 섹션 (4페이지 - TL9용) -->
+                        <div class="opt-wrap" data-category="additional" data-step="additional" data-model="tl9" style="display: none;">
                             <form id="quoteAdditionalForm">
                                 <div class="optbx opt-additional">
                                     <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
@@ -2038,6 +2081,114 @@
                                                         <div class="option-text">
                                                             <span class="option-name">도어 트렁크 러기지 풀트리밍</span>
                                                             <span class="option-price">2,600,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div style="height: 150px;"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- 추가 옵션 섹션 (4페이지 - TLV9용) -->
+                        <div class="opt-wrap" data-category="additional" data-step="additional" data-model="tlv9" style="display: none;">
+                            <form id="quoteAdditionalFormTLV9">
+                                <div class="optbx opt-additional">
+                                    <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h4>추가 옵션</h4>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <div class="opt-data clchart top btn-lst" data-opt="additional_option_tlv9" data-group="추가옵션TLV9" data-choice-min="0" data-choice-limit="100" style="display: block;">
+                                            <ul class="con-flex" style="flex-direction: column; gap: 8px;">
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_ag_side" id="additional_tlv9_ag_side" value="AG 자동 사이드 스텝" data-price="2200000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_ag_side">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="AG 자동 사이드 스텝" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">AG 자동 사이드 스텝</span>
+                                                            <span class="option-price">2,200,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_side_step" id="additional_tlv9_side_step" value="전동 사이드 스텝" data-price="1200000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_side_step">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="전동 사이드 스텝" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">전동 사이드 스텝</span>
+                                                            <span class="option-price">1,200,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_honeycomb" id="additional_tlv9_honeycomb" value="허니콤블라인드" data-price="800000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_honeycomb">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="허니콤블라인드" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">허니콤블라인드</span>
+                                                            <span class="option-price">800,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_3row_captain" id="additional_tlv9_3row_captain" value="3열 정대형 전동시트" data-price="4500000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_3row_captain">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="3열 정대형 전동시트" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">3열 정대형 전동시트</span>
+                                                            <span class="option-price">4,500,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_hsd_front" id="additional_tlv9_hsd_front" value="HSD Front(뒤) 브레이크 SET" data-price="2200000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_hsd_front">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="HSD Front(뒤) 브레이크 SET" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">HSD Front(뒤) 브레이크 SET</span>
+                                                            <span class="option-price">2,200,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_hsd_front_rear" id="additional_tlv9_hsd_front_rear" value="HSD Front(앞) 브레이크 SET" data-price="2200000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_hsd_front_rear">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="HSD Front(앞) 브레이크 SET" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">HSD Front(앞) 브레이크 SET</span>
+                                                            <span class="option-price">2,200,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_starlight" id="additional_tlv9_starlight" value="스타라이트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_starlight">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="스타라이트" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">스타라이트</span>
+                                                            <span class="option-price">0원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_front_gsc" id="additional_tlv9_front_gsc" value="프런트 리어 GSC바디킷" data-price="650000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_front_gsc">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="프런트 리어 GSC바디킷" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">프런트 리어 GSC바디킷</span>
+                                                            <span class="option-price">650,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tlv9_tinting" id="additional_tlv9_tinting" value="기본틴팅" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tlv9_tinting">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="기본틴팅" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">기본틴팅</span>
+                                                            <span class="option-price">0원</span>
                                                         </div>
                                                     </label>
                                                 </li>
@@ -3154,22 +3305,56 @@
         });
         
         // 추가 옵션 체크박스 이벤트 리스너 (4페이지) - 간단하게 처리
+        // 모델 선택에 따라 4페이지(추가 옵션) 표시/숨김
+        function updateAdditionalPageByModel() {
+            const selectedModel = document.querySelector('input[name="model_type"]:checked');
+            if (!selectedModel) return;
+            
+            const modelValue = selectedModel.value.toLowerCase();
+            const additionalTL9 = document.querySelector('.opt-wrap[data-step="additional"][data-model="tl9"]');
+            const additionalTLV9 = document.querySelector('.opt-wrap[data-step="additional"][data-model="tlv9"]');
+            
+            const isTL9Visible = additionalTL9 && additionalTL9.style.display === 'block';
+            const isTLV9Visible = additionalTLV9 && additionalTLV9.style.display === 'block';
+            
+            if (isTL9Visible || isTLV9Visible) {
+                if (additionalTL9) additionalTL9.style.display = 'none';
+                if (additionalTLV9) additionalTLV9.style.display = 'none';
+                
+                if (modelValue === 'tl9' && additionalTL9) {
+                    additionalTL9.style.display = 'block';
+                } else if (modelValue === 'tlv9' && additionalTLV9) {
+                    additionalTLV9.style.display = 'block';
+                }
+            }
+        }
+        
         function setupAdditionalOptionsListeners() {
             console.log('=== setupAdditionalOptionsListeners 호출됨 (HTML 인라인) ===');
             
-            const additionalForm = document.getElementById('quoteAdditionalForm');
-            if (!additionalForm) {
+            // 모델에 맞는 4페이지 표시
+            updateAdditionalPageByModel();
+            
+            // TL9, TLV9 폼 모두 찾기
+            const forms = [
+                document.getElementById('quoteAdditionalForm'),
+                document.getElementById('quoteAdditionalFormTLV9')
+            ].filter(f => f);
+            
+            if (forms.length === 0) {
                 console.log('추가 옵션 폼을 찾을 수 없음');
                 return;
             }
             
-            const checkboxes = additionalForm.querySelectorAll('input[type="checkbox"]');
-            console.log('추가 옵션 체크박스 개수:', checkboxes.length);
+            forms.forEach(function(additionalForm) {
+                console.log('폼 처리:', additionalForm.id);
+                const checkboxes = additionalForm.querySelectorAll('input[type="checkbox"]');
+                console.log('추가 옵션 체크박스 개수:', checkboxes.length);
             
-            checkboxes.forEach(function(checkbox) {
-                // 기존 이벤트 제거
-                const newCheckbox = checkbox.cloneNode(true);
-                checkbox.parentNode.replaceChild(newCheckbox, checkbox);
+                checkboxes.forEach(function(checkbox) {
+                    // 기존 이벤트 제거
+                    const newCheckbox = checkbox.cloneNode(true);
+                    checkbox.parentNode.replaceChild(newCheckbox, checkbox);
                 
                 // change 이벤트 추가 - 간단하게 전체 다시 계산
                 newCheckbox.addEventListener('change', function() {
@@ -3233,8 +3418,9 @@
                         console.error('❌ quoteTotalPrice 요소를 찾을 수 없음');
                     }
                 });
-                
-                console.log('✅ 체크박스 이벤트 설정:', newCheckbox.id);
+                    
+                    console.log('✅ 체크박스 이벤트 설정:', newCheckbox.id);
+                });
             });
         }
         
