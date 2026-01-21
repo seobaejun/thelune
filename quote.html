@@ -467,6 +467,39 @@
             color: #666;
             line-height: 1.4;
         }
+        
+        /* 추가 옵션 스타일 */
+        .opt-additional .option-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
+        }
+        .opt-additional .option-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a1a;
+        }
+        .opt-additional .option-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .opt-additional .option-image {
+            flex-shrink: 0;
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            order: 2;
+        }
+        .opt-additional .option-text {
+            order: 3;
+        }
+        .opt-additional .clchart .opt-chk-item label {
+            padding-left: 50px;
+        }
         .opt-conversion .opt-chk-item input[type="checkbox"]:checked + label .option-name,
         .opt-conversion .opt-chk-item input[type="checkbox"]:checked + label .option-desc {
             color: #1a1a1a;
@@ -496,7 +529,7 @@
             content: '';
             width: 20px;
             height: 20px;
-            border: 2px solid rgba(0,0,0,0.3);
+            border: 2px solid rgba(0,0,0,0.5);
             border-radius: 3px;
             flex-shrink: 0;
             background: #ffffff;
@@ -508,6 +541,12 @@
             order: 1;
             z-index: 2;
         }
+        
+        /* 3페이지 컨버전 옵션 선택의 라디오 버튼 테두리 더 진하게 */
+        .opt-conversion .clchart .opt-chk-item label::before {
+            border: 2px solid rgba(0,0,0,0.6);
+        }
+        
         
         /* 순정 옵션의 경우 체크박스를 label 안에 배치 */
         .opt-standard .clchart .opt-chk-item label {
@@ -1329,14 +1368,314 @@
                         <!-- 컨버전 옵션 선택 섹션 (3페이지) -->
                         <div class="opt-wrap" data-category="conversion-select" data-step="conversion-select" style="display: none;">
                             <form id="quoteConversionSelectForm">
-                                <div class="optbx opt-conversion-select">
+                                <div class="optbx opt-conversion">
                                     <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
                                         <h4>컨버전 옵션 선택</h4>
                                     </div>
                                     <div class="optbx-con">
-                                        <p style="padding: 20px; text-align: center; color: rgba(0,0,0,0.6);">
-                                            컨버전 옵션을 선택해주세요.
-                                        </p>
+                                        <div class="opt-data clchart top btn-lst" data-opt="conversion_select_option" data-group="컨버전옵션선택" data-choice-min="0" data-choice-limit="100" style="display: block;">
+                                            <ul class="con-flex" style="flex-direction: column; gap: 8px;">
+                                                <!-- 바닥 종류 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">바닥 종류</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="floor_type" id="floor_wood" value="우드 플로어" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                            <label for="floor_wood">
+                                                                <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="우드 플로어" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="우드">우드 플로어</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="floor_type" id="floor_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="floor_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="아이보리">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="floor_type" id="floor_beige" value="베이지" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="floor_beige">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="베이지" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="베이지">베이지</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <!-- 커튼 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">커튼</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="curtain" id="curtain_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="curtain_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="아이보리">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="curtain" id="curtain_beige" value="베이지" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="curtain_beige">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="베이지" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="베이지">베이지</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="curtain" id="curtain_brown" value="브라운" data-price="0" data-image="assets/img/시트 색깔/브라운.jpg">
+                                                            <label for="curtain_brown">
+                                                                <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="브라운">브라운</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <!-- 시트 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">시트</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="seat" id="seat_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="seat_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="아이보리">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="seat" id="seat_gray" value="그레이" data-price="0" data-image="assets/img/시트 색깔/그레이.jpg">
+                                                            <label for="seat_gray">
+                                                                <img src="assets/img/시트 색깔/그레이.jpg" alt="그레이" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="그레이">그레이</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="seat" id="seat_cognac" value="꼬냑" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="seat_cognac">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="꼬냑" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="꼬냑">꼬냑</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="seat" id="seat_navy" value="네이비" data-price="0" data-image="assets/img/시트 색깔/네이비.jpg">
+                                                            <label for="seat_navy">
+                                                                <img src="assets/img/시트 색깔/네이비.jpg" alt="네이비" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="네이비">네이비</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="seat" id="seat_brown" value="브라운" data-price="0" data-image="assets/img/시트 색깔/브라운.jpg">
+                                                            <label for="seat_brown">
+                                                                <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="브라운">브라운</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="seat" id="seat_black" value="블랙" data-price="0" data-image="assets/img/시트 색깔/블랙.jpg">
+                                                            <label for="seat_black">
+                                                                <img src="assets/img/시트 색깔/블랙.jpg" alt="블랙" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="블랙">블랙</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <!-- 도어 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">도어</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="door" id="door_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="door_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="아이보리">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="door" id="door_beige" value="베이지" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="door_beige">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="베이지" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="베이지">베이지</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="door" id="door_brown" value="브라운" data-price="0" data-image="assets/img/시트 색깔/브라운.jpg">
+                                                            <label for="door_brown">
+                                                                <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="브라운">브라운</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <!-- 천장 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">천장</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="ceiling" id="ceiling_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="ceiling_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="아이보리">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="ceiling" id="ceiling_beige" value="베이지" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="ceiling_beige">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="베이지" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="베이지">베이지</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="ceiling" id="ceiling_brown" value="브라운" data-price="0" data-image="assets/img/시트 색깔/브라운.jpg">
+                                                            <label for="ceiling_brown">
+                                                                <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="브라운">브라운</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <!-- 콘솔 헤드 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">콘솔 헤드</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="console_head" id="console_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="console_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="아이보리">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="console_head" id="console_beige" value="베이지" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="console_beige">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="베이지" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="베이지">베이지</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="console_head" id="console_brown" value="브라운" data-price="0" data-image="assets/img/시트 색깔/브라운.jpg">
+                                                            <label for="console_brown">
+                                                                <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name" data-color="브라운">브라운</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <!-- 러기지 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">러기지</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="luggage" id="luggage_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="luggage_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="luggage" id="luggage_beige" value="베이지" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="luggage_beige">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="베이지" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name">베이지</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="luggage" id="luggage_brown" value="브라운" data-price="0" data-image="assets/img/시트 색깔/브라운.jpg">
+                                                            <label for="luggage_brown">
+                                                                <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name">브라운</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <!-- 트렁크 -->
+                                                <li class="opt-chk-item top" data-type="B" style="margin-bottom: 16px;">
+                                                    <div class="opt-tit" style="margin-bottom: 8px; font-weight: 600; color: rgba(0,0,0,0.8); font-size: 14px;">트렁크</div>
+                                                    <ul style="display: flex; flex-direction: column; gap: 8px;">
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="trunk" id="trunk_ivory" value="아이보리" data-price="0" data-image="assets/img/시트 색깔/아이보리.jpg">
+                                                            <label for="trunk_ivory">
+                                                                <img src="assets/img/시트 색깔/아이보리.jpg" alt="아이보리" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name">아이보리</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="trunk" id="trunk_beige" value="베이지" data-price="0" data-image="assets/img/시트 색깔/꼬냑.jpg">
+                                                            <label for="trunk_beige">
+                                                                <img src="assets/img/시트 색깔/꼬냑.jpg" alt="베이지" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name">베이지</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li class="opt-chk-item" data-type="B">
+                                                            <input type="radio" name="trunk" id="trunk_brown" value="브라운" data-price="0" data-image="assets/img/시트 색깔/브라운.jpg">
+                                                            <label for="trunk_brown">
+                                                                <img src="assets/img/시트 색깔/브라운.jpg" alt="브라운" class="option-image">
+                                                                <div class="option-text">
+                                                                    <span class="option-name">브라운</span>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div style="height: 150px;"></div>
                                     </div>
                                 </div>
                             </form>
@@ -1350,9 +1689,101 @@
                                         <h4>추가 옵션</h4>
                                     </div>
                                     <div class="optbx-con">
-                                        <p style="padding: 20px; text-align: center; color: rgba(0,0,0,0.6);">
-                                            추가 옵션을 선택해주세요.
-                                        </p>
+                                        <div class="opt-data clchart top btn-lst" data-opt="additional_option" data-group="추가옵션" data-choice-min="0" data-choice-limit="100" style="display: block;">
+                                            <ul class="con-flex" style="flex-direction: column; gap: 8px;">
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_side_step" id="additional_side_step" value="전동 사이드 스텝" data-price="1200000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_side_step">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="전동 사이드 스텝" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">전동 사이드 스텝</span>
+                                                            <span class="option-price">1,200,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_seat_nappa" id="additional_seat_nappa" value="1,2열 시트 나파가죽 감싸기" data-price="2400000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_seat_nappa">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="1,2열 시트 나파가죽 감싸기" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">1,2열 시트 나파가죽 감싸기</span>
+                                                            <span class="option-price">2,400,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_wood_floor" id="additional_wood_floor" value="승객석 우드플로어" data-price="3000000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_wood_floor">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="승객석 우드플로어" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">승객석 우드플로어</span>
+                                                            <span class="option-price">3,000,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_honeycomb" id="additional_honeycomb" value="허니콤 블라인드" data-price="800000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_honeycomb">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="허니콤 블라인드" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">허니콤 블라인드</span>
+                                                            <span class="option-price">800,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_tinting" id="additional_tinting" value="기본 틴팅" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_tinting">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="기본 틴팅" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">기본 틴팅</span>
+                                                            <span class="option-price">0원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_bed_seat" id="additional_bed_seat" value="3열 침대형 전동시트" data-price="4500000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_bed_seat">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="3열 침대형 전동시트" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">3열 침대형 전동시트</span>
+                                                            <span class="option-price">4,500,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_starlight" id="additional_starlight" value="스타라이트" data-price="0" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_starlight">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="스타라이트" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">스타라이트</span>
+                                                            <span class="option-price">0원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_body_kit" id="additional_body_kit" value="프런트, 리어 GSC 바디킷" data-price="650000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_body_kit">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="프런트, 리어 GSC 바디킷" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">프런트, 리어 GSC 바디킷</span>
+                                                            <span class="option-price">650,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="opt-chk-item top" data-type="B">
+                                                    <input type="checkbox" name="additional_full_trimming" id="additional_full_trimming" value="도어 트렁크 러기지 풀트리밍" data-price="2600000" data-image="assets/img/10월 29일 the lune 카니발7409.jpg">
+                                                    <label for="additional_full_trimming">
+                                                        <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="도어 트렁크 러기지 풀트리밍" class="option-image">
+                                                        <div class="option-text">
+                                                            <span class="option-name">도어 트렁크 러기지 풀트리밍</span>
+                                                            <span class="option-price">2,600,000원</span>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div style="height: 150px;"></div>
                                     </div>
                                 </div>
                             </form>
@@ -2256,6 +2687,199 @@
                         console.log('모든 선택이 초기화되었습니다. (HTML 인라인)');
                     }
                 });
+            }
+        });
+        
+        // 추가 옵션 체크박스 이벤트 리스너 (4페이지)
+        function setupAdditionalOptionsListeners() {
+            const additionalForm = document.getElementById('quoteAdditionalForm');
+            if (!additionalForm) {
+                console.log('추가 옵션 폼을 찾을 수 없음');
+                return;
+            }
+            
+            const checkboxes = additionalForm.querySelectorAll('input[type="checkbox"]');
+            console.log('추가 옵션 체크박스 개수:', checkboxes.length);
+            
+            checkboxes.forEach(function(checkbox) {
+                // 기존 이벤트 리스너 제거
+                const newCheckbox = checkbox.cloneNode(true);
+                checkbox.parentNode.replaceChild(newCheckbox, checkbox);
+                
+                // change 이벤트 리스너 추가
+                newCheckbox.addEventListener('change', function(e) {
+                    e.stopPropagation();
+                    console.log('=== 추가 옵션 체크박스 변경 ===');
+                    console.log('ID:', newCheckbox.id);
+                    console.log('Checked:', newCheckbox.checked);
+                    console.log('Price:', newCheckbox.dataset.price);
+                    
+                    const price = parseInt(newCheckbox.dataset.price) || 0;
+                    const optionKey = '추가옵션_' + newCheckbox.value;
+                    
+                    // selectedOptions 업데이트
+                    if (typeof window.selectedOptions === 'undefined') {
+                        window.selectedOptions = {};
+                    }
+                    
+                    if (newCheckbox.checked) {
+                        window.selectedOptions[optionKey] = {
+                            name: newCheckbox.value,
+                            price: price,
+                            element: newCheckbox
+                        };
+                        console.log('✅ 옵션 추가:', optionKey, price);
+                    } else {
+                        delete window.selectedOptions[optionKey];
+                        console.log('❌ 옵션 제거:', optionKey);
+                    }
+                    
+                    // 모든 페이지의 옵션 합산 (앞 페이지 + 4페이지)
+                    // quote.js의 calculateTotalPrice 함수 호출 (로컬 selectedOptions와 window.selectedOptions 모두 합산)
+                    if (typeof calculateTotalPrice === 'function') {
+                        calculateTotalPrice();
+                        console.log('✅ calculateTotalPrice 호출됨, 총액:', window.totalPrice);
+                    } else if (typeof window.calculateTotalPrice === 'function') {
+                        window.calculateTotalPrice();
+                        console.log('✅ window.calculateTotalPrice 호출됨, 총액:', window.totalPrice);
+                    } else {
+                        // calculateTotalPrice가 없으면 직접 계산
+                        // window.selectedOptions의 모든 옵션 합산
+                        let total = 0;
+                        if (window.selectedOptions) {
+                            Object.values(window.selectedOptions).forEach(function(option) {
+                                total += (option.price || 0);
+                            });
+                            console.log('📋 window.selectedOptions 옵션 개수:', Object.keys(window.selectedOptions).length);
+                        }
+                        window.totalPrice = total;
+                        console.log('💰 총 가격 (직접 계산):', total);
+                    }
+                    
+                    // 최종 가격 확인 및 업데이트
+                    const finalTotal = window.totalPrice || 0;
+                    console.log('💰 최종 총액:', finalTotal);
+                    
+                    // 가격 표시 업데이트
+                    const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
+                    if (quoteTotalPriceEl) {
+                        const formattedPrice = finalTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        quoteTotalPriceEl.textContent = formattedPrice;
+                        console.log('✅ 가격 표시 업데이트:', formattedPrice);
+                    }
+                    
+                    // quote.js의 updatePriceDisplay도 호출 (다른 가격 표시도 업데이트)
+                    if (typeof updatePriceDisplay === 'function') {
+                        updatePriceDisplay();
+                    } else if (typeof window.updatePriceDisplay === 'function') {
+                        window.updatePriceDisplay();
+                    }
+                });
+                
+                // label 클릭 이벤트
+                const label = newCheckbox.closest('label');
+                if (label) {
+                    label.addEventListener('click', function(e) {
+                        if (e.target !== newCheckbox && e.target.tagName !== 'INPUT') {
+                            setTimeout(function() {
+                                newCheckbox.checked = !newCheckbox.checked;
+                                const changeEvent = new Event('change', { bubbles: true });
+                                newCheckbox.dispatchEvent(changeEvent);
+                            }, 10);
+                        }
+                    });
+                }
+                
+                console.log('✅ 추가 옵션 체크박스 이벤트 리스너 설정:', newCheckbox.id);
+            });
+        }
+        
+        // 페이지 로드 시 추가 옵션 이벤트 리스너 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                setupAdditionalOptionsListeners();
+            }, 1000);
+        });
+        
+        // 추가 옵션 페이지로 이동할 때마다 이벤트 리스너 재설정
+        let additionalListenersSetup = false;
+        function checkAndSetupAdditionalListeners() {
+            try {
+                const additionalWrap = document.querySelector('.opt-wrap[data-step="additional"]');
+                if (additionalWrap && additionalWrap.style.display !== 'none' && additionalWrap.style.display !== '') {
+                    if (!additionalListenersSetup) {
+                        setTimeout(function() {
+                            setupAdditionalOptionsListeners();
+                            additionalListenersSetup = true;
+                        }, 300);
+                    }
+                } else {
+                    additionalListenersSetup = false;
+                }
+            } catch(e) {
+                console.error('checkAndSetupAdditionalListeners 오류:', e);
+            }
+        }
+        
+        // DOM 로드 후 MutationObserver 설정 (안전하게)
+        function setupMutationObserver() {
+            try {
+                if (typeof MutationObserver === 'undefined') {
+                    console.log('MutationObserver를 지원하지 않는 브라우저입니다.');
+                    return;
+                }
+                
+                // MutationObserver로 opt-wrap의 display 변경 감지
+                const observer = new MutationObserver(function(mutations) {
+                    try {
+                        mutations.forEach(function(mutation) {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                                checkAndSetupAdditionalListeners();
+                            }
+                        });
+                    } catch(e) {
+                        console.error('MutationObserver 콜백 오류:', e);
+                    }
+                });
+                
+                // 모든 opt-wrap 요소 관찰
+                const optWraps = document.querySelectorAll('.opt-wrap');
+                if (optWraps && optWraps.length > 0) {
+                    optWraps.forEach(function(wrap) {
+                        try {
+                            observer.observe(wrap, {
+                                attributes: true,
+                                attributeFilter: ['style']
+                            });
+                        } catch(e) {
+                            console.error('observer.observe 오류:', e);
+                        }
+                    });
+                }
+            } catch(e) {
+                console.error('MutationObserver 설정 오류:', e);
+            }
+        }
+        
+        // DOMContentLoaded 또는 이미 로드된 경우
+        if (typeof document !== 'undefined') {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(setupMutationObserver, 200);
+                });
+            } else {
+                setTimeout(setupMutationObserver, 200);
+            }
+        }
+        
+        // 페이지 전환 버튼 클릭 시에도 확인
+        document.addEventListener('click', function(e) {
+            try {
+                if (e.target && (e.target.id === 'quoteConversionBtn' || e.target.id === 'quotePrevBtn')) {
+                    setTimeout(checkAndSetupAdditionalListeners, 500);
+                }
+            } catch(err) {
+                console.error('클릭 이벤트 오류:', err);
             }
         });
     </script>

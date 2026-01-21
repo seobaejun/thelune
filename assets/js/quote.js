@@ -251,6 +251,9 @@ function setupEventListeners() {
     setupFormEventListeners('#quoteForm');
     setupFormEventListeners('#quote6SeatForm');
     setupFormEventListeners('#quote9SeatForm');
+    setupFormEventListeners('#quoteConversionForm');
+    setupFormEventListeners('#quoteConversionSelectForm');
+    setupFormEventListeners('#quoteAdditionalForm');
     
     // Add event listeners to buttons
     setupButtonListeners();
@@ -293,6 +296,7 @@ function setupFormEventListeners(formSelector) {
         } else {
             // For checkboxes, use change event
             input.addEventListener('change', function(e) {
+                console.log('Checkbox change event triggered:', input.id, 'checked:', input.checked, 'form:', formSelector);
                 // 비활성화된 옵션은 변경 방지
                 if (input.disabled) {
                     e.preventDefault();
@@ -531,8 +535,14 @@ function handleOptionChange(event) {
         checked: input.checked,
         sectionName: sectionName,
         optionName: optionName,
-        price: price
+        price: price,
+        dataPrice: input.dataset.price
     });
+    
+    // 가격이 0이거나 NaN인 경우 경고
+    if (isNaN(price) || price === 0) {
+        console.warn('가격이 0이거나 유효하지 않음:', input.id, 'data-price:', input.dataset.price);
+    }
     
     if (input.type === 'radio') {
         // For radio buttons, only one selection per section
@@ -541,9 +551,21 @@ function handleOptionChange(event) {
             if (selectedOptions[sectionName]) {
                 delete selectedOptions[sectionName];
             }
+            if (window.selectedOptions && window.selectedOptions[sectionName]) {
+                delete window.selectedOptions[sectionName];
+            }
             
             // Set new selection
             selectedOptions[sectionName] = {
+                name: optionName,
+                price: price,
+                element: input
+            };
+            // window.selectedOptions도 동기화
+            if (typeof window.selectedOptions === 'undefined') {
+                window.selectedOptions = {};
+            }
+            window.selectedOptions[sectionName] = {
                 name: optionName,
                 price: price,
                 element: input
@@ -559,9 +581,22 @@ function handleOptionChange(event) {
                 price: price,
                 element: input
             };
+            // window.selectedOptions도 동기화
+            if (typeof window.selectedOptions === 'undefined') {
+                window.selectedOptions = {};
+            }
+            window.selectedOptions[optionKey] = {
+                name: optionName,
+                price: price,
+                element: input
+            };
             console.log('Option added:', optionKey, price);
         } else {
             delete selectedOptions[optionKey];
+            // window.selectedOptions도 동기화
+            if (window.selectedOptions && window.selectedOptions[optionKey]) {
+                delete window.selectedOptions[optionKey];
+            }
             console.log('Option removed:', optionKey);
         }
     }
@@ -1101,15 +1136,37 @@ function getOptionName(input) {
 function calculateTotalPrice() {
     totalPrice = 0;
     
-    Object.values(selectedOptions).forEach(option => {
-        totalPrice += option.price;
+    // 로컬 selectedOptions와 window.selectedOptions를 모두 합산
+    const allOptions = {};
+    
+    // 로컬 selectedOptions 먼저 추가
+    Object.keys(selectedOptions).forEach(key => {
+        allOptions[key] = selectedOptions[key];
     });
+    
+    // window.selectedOptions도 추가 (중복 제거)
+    if (window.selectedOptions) {
+        Object.keys(window.selectedOptions).forEach(key => {
+            if (!allOptions[key]) {
+                allOptions[key] = window.selectedOptions[key];
+            }
+        });
+    }
+    
+    // 모든 옵션의 가격 합산
+    Object.values(allOptions).forEach(option => {
+        totalPrice += option.price || 0;
+    });
+    
+    // selectedOptions와 window.selectedOptions 동기화
+    selectedOptions = allOptions;
+    window.selectedOptions = allOptions;
     
     // Update global variable
     window.totalPrice = totalPrice;
     
     console.log('Total price calculated:', totalPrice);
-    console.log('Selected options:', selectedOptions);
+    console.log('Selected options count:', Object.keys(allOptions).length);
 }
 
 // Update price display
@@ -3028,10 +3085,17 @@ function showStep(stepName) {
         // 해당 단계의 form에 이벤트 리스너 다시 설정
         const form = optWrap.querySelector('form');
         if (form) {
+            console.log('Form found for step:', stepName, 'form id:', form.id);
             // 기존 리스너 제거를 위해 data-listener-attached 속성 제거
             const inputs = form.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+            console.log('Inputs found:', inputs.length);
             inputs.forEach(input => {
                 input.removeAttribute('data-listener-attached');
+                // label의 click listener도 제거
+                const label = input.closest('label');
+                if (label) {
+                    label.removeAttribute('data-click-listener-attached');
+                }
             });
             setupFormEventListeners(`#${form.id}`);
             
@@ -3080,12 +3144,121 @@ function showStep(stepName) {
                     console.log('현재 선택된 옵션:', selectedOptions);
                 }, 300);
             }
+            
+            // 추가 옵션 단계: 확실하게 작동하도록 직접 처리
+            if (stepName === 'additional') {
+                console.log('=== 추가 옵션 단계: 이벤트 리스너 강제 설정 ===');
+                setTimeout(() => {
+                    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                    console.log('추가 옵션 체크박스 개수:', checkboxes.length);
+                    
+                    checkboxes.forEach((checkbox, index) => {
+                        console.log(`체크박스 ${index + 1}:`, checkbox.id, 'price:', checkbox.dataset.price);
+                        
+                        // 기존 이벤트 리스너 완전히 제거
+                        const newCheckbox = checkbox.cloneNode(true);
+                        const parent = checkbox.parentNode;
+                        parent.replaceChild(newCheckbox, checkbox);
+                        
+                        // change 이벤트 리스너 직접 추가
+                        newCheckbox.addEventListener('change', function(e) {
+                            e.stopPropagation();
+                            console.log('=== 추가 옵션 CHANGE 이벤트 ===');
+                            console.log('ID:', newCheckbox.id);
+                            console.log('Checked:', newCheckbox.checked);
+                            console.log('Price:', newCheckbox.dataset.price);
+                            
+                            if (newCheckbox.disabled) return;
+                            
+                            // 섹션 이름과 옵션 이름 가져오기
+                            const sectionName = getSectionName(newCheckbox);
+                            const optionName = getOptionName(newCheckbox);
+                            const price = parseInt(newCheckbox.dataset.price) || 0;
+                            const optionKey = `${sectionName}_${newCheckbox.value}`;
+                            
+                            console.log('Section:', sectionName, 'Option:', optionName, 'Price:', price, 'Key:', optionKey);
+                            
+                            // selectedOptions 업데이트
+                            if (newCheckbox.checked) {
+                                selectedOptions[optionKey] = {
+                                    name: optionName,
+                                    price: price,
+                                    element: newCheckbox
+                                };
+                                console.log('✅ 옵션 추가됨:', optionKey, price);
+                            } else {
+                                delete selectedOptions[optionKey];
+                                console.log('❌ 옵션 제거됨:', optionKey);
+                            }
+                            
+                            // 가격 계산
+                            totalPrice = 0;
+                            Object.values(selectedOptions).forEach(option => {
+                                totalPrice += option.price;
+                            });
+                            window.totalPrice = totalPrice;
+                            
+                            console.log('💰 총 가격:', totalPrice);
+                            console.log('📋 선택된 옵션:', Object.keys(selectedOptions).length, '개');
+                            
+                            // 가격 표시 업데이트
+                            const formattedPrice = formatPrice(totalPrice);
+                            const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
+                            if (quoteTotalPriceEl) {
+                                quoteTotalPriceEl.textContent = formattedPrice;
+                                console.log('✅ 가격 표시 업데이트:', formattedPrice);
+                            } else {
+                                console.error('❌ quoteTotalPrice 요소를 찾을 수 없음!');
+                            }
+                            
+                            // 다른 가격 표시도 업데이트
+                            updatePriceDisplay();
+                            updateSelectedOptionsDisplay();
+                        });
+                        
+                        // label 클릭 이벤트
+                        const label = newCheckbox.closest('label');
+                        if (label) {
+                            label.addEventListener('click', function(e) {
+                                if (e.target !== newCheckbox && e.target.tagName !== 'INPUT') {
+                                    setTimeout(() => {
+                                        if (!newCheckbox.checked) {
+                                            newCheckbox.checked = true;
+                                        } else {
+                                            newCheckbox.checked = false;
+                                        }
+                                        const changeEvent = new Event('change', { bubbles: true, cancelable: true });
+                                        newCheckbox.dispatchEvent(changeEvent);
+                                    }, 10);
+                                }
+                            });
+                        }
+                        
+                        console.log('✅ 체크박스 이벤트 리스너 설정 완료:', newCheckbox.id);
+                    });
+                    
+                    console.log('=== 추가 옵션 이벤트 리스너 설정 완료 ===');
+                }, 500);
+            }
         }
     }
     
     // 모든 form에 이벤트 리스너 다시 설정 (안전을 위해)
     setTimeout(() => {
         setupFormEventListeners('#quoteForm');
+        if (stepName === 'additional') {
+            console.log('추가 옵션 단계: 이벤트 리스너 재설정');
+            setupFormEventListeners('#quoteAdditionalForm');
+            // 추가 확인: 체크박스들이 제대로 설정되었는지 확인
+            const additionalForm = document.getElementById('quoteAdditionalForm');
+            if (additionalForm) {
+                const checkboxes = additionalForm.querySelectorAll('input[type="checkbox"]');
+                console.log('추가 옵션 체크박스 개수:', checkboxes.length);
+                checkboxes.forEach(cb => {
+                    console.log('체크박스:', cb.id, 'listener attached:', cb.dataset.listenerAttached, 'price:', cb.dataset.price);
+                });
+            }
+        }
     }, 200);
     
     // 스크롤을 해당 섹션으로 이동
