@@ -318,6 +318,11 @@
             margin-bottom: 120px;
         }
         
+        /* 2페이지 (conversion) 하단 여백 추가 */
+        .opt-wrap[data-step="conversion"] {
+            padding-bottom: 100px;
+        }
+        
         .optbx-top {
             margin-bottom: 20px;
         }
@@ -359,6 +364,7 @@
         
         .btn-lst ul {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
             list-style: none;
             margin: 0;
@@ -367,6 +373,59 @@
         
         .opt-chk-item {
             flex: 1;
+            min-width: fit-content;
+        }
+        
+        /* 차종 선택: 2x2 그리드 */
+        ul.vehicle-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+        }
+        
+        ul.vehicle-grid li.opt-chk-item {
+            flex: none !important;
+            width: 100% !important;
+            max-width: none !important;
+            min-width: auto !important;
+        }
+        
+        /* 등급 선택: 2x2 그리드 */
+        ul.trim-level-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+        }
+        
+        ul.trim-level-grid li.opt-chk-item {
+            flex: none !important;
+            width: 100% !important;
+            max-width: none !important;
+            min-width: auto !important;
+        }
+        
+        /* 모델: 가로로 한 줄에 3개 */
+        .trim-bx[data-opt="model_type"] .btn-lst ul.con-flex {
+            flex-wrap: nowrap !important;
+        }
+        
+        .trim-bx[data-opt="model_type"] li.opt-chk-item {
+            flex: 1 !important;
+            min-width: auto !important;
+        }
+        
+        /* 엔진: 2x1 그리드 */
+        ul.engine-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+        }
+        
+        ul.engine-grid li.opt-chk-item {
+            flex: none !important;
+            width: 100% !important;
+            max-width: none !important;
+            min-width: auto !important;
         }
         
         .opt-chk-item input[type="radio"] {
@@ -375,7 +434,9 @@
         
         .opt-chk-item label {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 12px;
             background: #f5f5f5;
             border: 1px solid rgba(0,0,0,0.1);
@@ -384,13 +445,23 @@
             transition: all 0.3s ease;
             color: #1a1a1a;
             font-size: 14px;
-            justify-content: flex-start;
+            text-align: center;
+            min-height: 45px;
+            white-space: nowrap;
+        }
+        
+        .opt-chk-item label span {
+            white-space: nowrap;
         }
         
         .opt-chk-item input[type="radio"]:checked + label {
             background: #1a1a1a;
             border-color: #1a1a1a;
             color: #ffffff;
+        }
+        
+        .opt-chk-item input[type="radio"]:checked + label small {
+            color: rgba(255,255,255,0.8);
         }
         
         .opt-chk-item label:hover {
@@ -1106,70 +1177,125 @@
                         <!-- 옵션 래퍼 -->
                         <div class="opt-wrap" data-category="model_spec" data-step="model-spec" style="display: block;">
                             <form id="quoteForm">
+                                <!-- 모델 -->
+                                <div class="optbx opt-model">
+                                    <div class="optbx-top">
+                                        <h4>모델</h4>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <div class="trim-bx" data-opt="model_type" data-group="모델" data-choice-min="1" data-choice-limit="1" style="display: block;">
+                                            <div class="opt-data btn-lst">
+                                                <ul class="con-flex">
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="model_type" id="model_tl9" value="TL9" data-price="0">
+                                                        <label for="model_tl9"><span>TL9</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="model_type" id="model_tlv9" value="TLV9" data-price="0">
+                                                        <label for="model_tlv9"><span>TLV9</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="model_type" id="model_tlv4" value="TLV4" data-price="0">
+                                                        <label for="model_tlv4"><span>TLV4</span></label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 차종 -->
+                                <div class="optbx opt-vehicle">
+                                    <div class="optbx-top">
+                                        <h4>차종</h4>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <div class="trim-bx" data-opt="vehicle_type" data-group="차종" data-choice-min="1" data-choice-limit="1" style="display: block;">
+                                            <div class="opt-data btn-lst">
+                                                <ul class="con-flex vehicle-grid">
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="vehicle_type" id="vehicle_high_limousine" value="카니발 하이리무진" data-price="0">
+                                                        <label for="vehicle_high_limousine"><span>카니발 하이리무진</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="vehicle_type" id="vehicle_cf9" value="CF9" data-price="0">
+                                                        <label for="vehicle_cf9"><span>CF9</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="vehicle_type" id="vehicle_cl9" value="CL9" data-price="0">
+                                                        <label for="vehicle_cl9"><span>CL9</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="vehicle_type" id="vehicle_ventelier" value="벤터일러" data-price="0">
+                                                        <label for="vehicle_ventelier"><span>벤터일러</span></label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- 트림 -->
                                 <div class="optbx opt-trim">
                                     <div class="optbx-top">
                                         <h4>트림</h4>
                                     </div>
                                     <div class="optbx-con">
-                                        <!-- 모델 -->
-                                        <div class="trim-bx con-flex" data-opt="model_type" data-group="모델" data-choice-min="1" data-choice-limit="1" style="display: block;">
-                                            <div class="con-flex">
-                                                <div class="opt-label">모델</div>
-                                                <div class="opt-data trim-data btn-lst">
-                                                    <ul class="con-flex">
-                                                        <li class="opt-chk-item top" data-type="C">
-                                                            <input type="radio" name="model_type" id="model_tl9" value="TL9" data-price="0">
-                                                            <label for="model_tl9"><span>TL9</span></label>
-                                                        </li>
-                                                        <li class="opt-chk-item top" data-type="C">
-                                                            <input type="radio" name="model_type" id="model_tlv9" value="TLV9" data-price="0">
-                                                            <label for="model_tlv9"><span>TLV9</span></label>
-                                                        </li>
-                                                        <li class="opt-chk-item top" data-type="C">
-                                                            <input type="radio" name="model_type" id="model_tlv4" value="TLV4" data-price="0">
-                                                            <label for="model_tlv4"><span>TLV4</span></label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                        <div class="trim-bx" data-opt="trim_level" data-group="등급" data-choice-min="1" data-choice-limit="1" style="display: block;">
+                                            <div class="opt-data btn-lst">
+                                                <ul class="con-flex trim-level-grid">
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="trim_level" id="trim_level_signature" value="시그니처" data-price="51160000">
+                                                        <label for="trim_level_signature">
+                                                            <span>시그니처</span>
+                                                            <small style="display: block; font-size: 12px; color: #666; margin-top: 4px;">51,160,000원</small>
+                                                        </label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="trim_level" id="trim_level_xline" value="X-LINE" data-price="51220000">
+                                                        <label for="trim_level_xline">
+                                                            <span>X-LINE</span>
+                                                            <small style="display: block; font-size: 12px; color: #666; margin-top: 4px;">51,220,000원</small>
+                                                        </label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="trim_level" id="trim_level_outdoor" value="아웃도어" data-price="46820000">
+                                                        <label for="trim_level_outdoor">
+                                                            <span>아웃도어</span>
+                                                            <small style="display: block; font-size: 12px; color: #666; margin-top: 4px;">46,820,000원</small>
+                                                        </label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="trim_level" id="trim_level_noblesse" value="노블레스" data-price="47810000">
+                                                        <label for="trim_level_noblesse">
+                                                            <span>노블레스</span>
+                                                            <small style="display: block; font-size: 12px; color: #666; margin-top: 4px;">47,810,000원</small>
+                                                        </label>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        <!-- 등급 -->
-                                        <div class="trim-bx con-flex" data-opt="trim_level" data-group="등급" data-choice-min="1" data-choice-limit="1" style="display: block;">
-                                            <div class="con-flex">
-                                                <div class="opt-label">등급</div>
-                                                <div class="opt-data trim-data btn-lst">
-                                                    <ul class="con-flex">
-                                                        <li class="opt-chk-item top" data-type="C">
-                                                            <input type="radio" name="trim_level" id="trim_level_signature" value="시그니처" data-price="51160000">
-                                                            <label for="trim_level_signature"><span>시그니처</span></label>
-                                                        </li>
-                                                        <li class="opt-chk-item top" data-type="C">
-                                                            <input type="radio" name="trim_level" id="trim_level_xline" value="X-LINE" data-price="51220000">
-                                                            <label for="trim_level_xline"><span>X-LINE</span></label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- 엔진 -->
-                                        <div class="trim-bx con-flex" data-opt="trim_engine" data-group="엔진" data-choice-min="1" data-choice-limit="1" style="display: block;">
-                                            <div class="con-flex">
-                                                <div class="opt-label">엔진</div>
-                                                <div class="opt-data trim-data btn-lst">
-                                                    <ul class="con-flex">
-                                                        <li class="opt-chk-item top" data-type="C">
-                                                            <input type="radio" name="trim_engine" id="engine_gasoline" value="가솔린" data-price="0">
-                                                            <label for="engine_gasoline"><span>가솔린</span></label>
-                                                        </li>
-                                                        <li class="opt-chk-item top" data-type="C">
-                                                            <input type="radio" name="trim_engine" id="engine_hybrid" value="하이브리드" data-price="4550000">
-                                                            <label for="engine_hybrid"><span>하이브리드</span></label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                <!-- 엔진 -->
+                                <div class="optbx opt-engine">
+                                    <div class="optbx-top">
+                                        <h4>엔진</h4>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <div class="trim-bx" data-opt="trim_engine" data-group="엔진" data-choice-min="1" data-choice-limit="1" style="display: block;">
+                                            <div class="opt-data btn-lst">
+                                                <ul class="con-flex engine-grid">
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="trim_engine" id="trim_gasoline" value="가솔린" data-price="0">
+                                                        <label for="trim_gasoline"><span>가솔린</span></label>
+                                                    </li>
+                                                    <li class="opt-chk-item top" data-type="C">
+                                                        <input type="radio" name="trim_engine" id="trim_hybrid" value="하이브리드" data-price="0">
+                                                        <label for="trim_hybrid"><span>하이브리드</span></label>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -2587,12 +2713,52 @@
             const conversionConfirmCheckbox = document.getElementById('conversion_package_confirm');
             if (conversionConfirmCheckbox) {
                 conversionConfirmCheckbox.addEventListener('change', function() {
-                    console.log('컨버전 확인 체크박스 변경:', this.checked);
-                    setTimeout(function() {
-                        if (typeof calculatePriceDirectly === 'function') {
-                            calculatePriceDirectly();
+                    console.log('=== 컨버전 확인 체크박스 변경 ===');
+                    console.log('Checked:', this.checked);
+                    
+                    // 전체 페이지의 모든 체크된 옵션을 처음부터 다시 계산
+                    let totalPrice = 0;
+                    let checkedCount = 0;
+                    
+                    // 전체 페이지의 모든 체크된 라디오/체크박스
+                    document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(function(input) {
+                        // 컨버전 개별 옵션과 확인 체크박스는 스킵 (나중에 패키지로 한번에 계산)
+                        const isConversionOption = input.id && (
+                            input.id === 'conversion_roof' || 
+                            input.id === 'conversion_mood' || 
+                            input.id === 'conversion_tv' || 
+                            input.id === 'conversion_soundproof' ||
+                            input.id === 'conversion_package_confirm'
+                        );
+                        
+                        if (isConversionOption) {
+                            console.log('[스킵] 컨버전 옵션:', input.id);
+                            return; // 컨버전 옵션들은 건너뜀
                         }
-                    }, 100);
+                        
+                        const price = parseInt(input.dataset.price) || 0;
+                        totalPrice += price;
+                        checkedCount++;
+                        console.log('[' + checkedCount + '] ' + (input.id || input.name) + ' = ' + price + '원 (누적: ' + totalPrice + '원)');
+                    });
+                    
+                    // 컨버전 패키지 가격 추가 (확인 체크박스가 체크된 경우)
+                    if (this.checked) {
+                        const CONVERSION_PACKAGE_PRICE = 14640000;
+                        totalPrice += CONVERSION_PACKAGE_PRICE;
+                        checkedCount++;
+                        console.log('[패키지] 컨버전 패키지 = ' + CONVERSION_PACKAGE_PRICE + '원 (누적: ' + totalPrice + '원)');
+                    }
+                    
+                    console.log('💰 최종 총액:', totalPrice + '원 (총 ' + checkedCount + '개 옵션)');
+                    
+                    // 예상 견적 금액 업데이트
+                    const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
+                    if (quoteTotalPriceEl) {
+                        const formattedPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        quoteTotalPriceEl.textContent = formattedPrice;
+                        console.log('✅ 가격 표시 업데이트:', formattedPrice);
+                    }
                 });
             }
             
@@ -2769,17 +2935,18 @@
                     
                     // 전체 페이지의 모든 체크된 라디오/체크박스
                     document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(function(input) {
-                        // 컨버전 옵션들은 개별 가격이 0이므로 스킵 (나중에 패키지로 한번에 계산)
+                        // 컨버전 개별 옵션과 확인 체크박스는 스킵 (나중에 패키지로 한번에 계산)
                         const isConversionOption = input.id && (
                             input.id === 'conversion_roof' || 
                             input.id === 'conversion_mood' || 
                             input.id === 'conversion_tv' || 
-                            input.id === 'conversion_soundproof'
+                            input.id === 'conversion_soundproof' ||
+                            input.id === 'conversion_package_confirm'
                         );
                         
                         if (isConversionOption) {
-                            console.log('[스킵] 컨버전 개별 옵션:', input.id);
-                            return; // 컨버전 개별 옵션은 건너뜀
+                            console.log('[스킵] 컨버전 옵션:', input.id);
+                            return; // 컨버전 옵션들은 건너뜀
                         }
                         
                         const price = parseInt(input.dataset.price) || 0;
@@ -2793,6 +2960,7 @@
                     if (conversionConfirm && conversionConfirm.checked) {
                         const CONVERSION_PACKAGE_PRICE = 14640000;
                         totalPrice += CONVERSION_PACKAGE_PRICE;
+                        checkedCount++;
                         console.log('[패키지] 컨버전 패키지 = ' + CONVERSION_PACKAGE_PRICE + '원 (누적: ' + totalPrice + '원)');
                     }
                     
