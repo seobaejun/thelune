@@ -474,15 +474,23 @@ function setupButtonListeners() {
         console.log('9-seat download PDF button listener added');
     }
     
-    // 컨버전 옵션 버튼
+    // 컨버전 옵션 버튼 (기존 리스너 제거 후 재등록)
     const quoteConversionBtn = document.getElementById('quoteConversionBtn');
     if (quoteConversionBtn) {
-        quoteConversionBtn.addEventListener('click', function(e) {
+        // 기존 이벤트 리스너 제거를 위해 클론
+        const newBtn = quoteConversionBtn.cloneNode(true);
+        quoteConversionBtn.parentNode.replaceChild(newBtn, quoteConversionBtn);
+        
+        newBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('컨버전 옵션 버튼 클릭됨');
+            e.stopPropagation();
+            console.log('컨버전 옵션 버튼 클릭됨 - goToNextStep 호출');
+            console.log('현재 currentStep:', currentStep);
             goToNextStep();
         });
         console.log('컨버전 옵션 버튼 listener 추가됨');
+    } else {
+        console.error('quoteConversionBtn을 찾을 수 없습니다.');
     }
     
     // 이전 버튼
@@ -2846,6 +2854,14 @@ function updateModelOptions(modelInput) {
 
 // 현재 단계 추적
 let currentStep = 'model-spec'; // 초기 단계: 모델/사양
+window.currentStep = currentStep; // 전역 접근을 위해 window에 할당
+
+// currentStep을 외부에서 설정할 수 있는 함수
+window.setCurrentStep = function(step) {
+    currentStep = step;
+    window.currentStep = step;
+    console.log('currentStep 업데이트됨:', currentStep);
+};
 
 // 단계 정의
 const steps = ['model-spec', 'conversion', 'conversion-select', 'additional'];
@@ -2860,13 +2876,21 @@ const stepTitles = {
 
 // 다음 단계로 이동
 function goToNextStep() {
+    console.log('goToNextStep 호출 - currentStep:', currentStep);
     const currentIndex = steps.indexOf(currentStep);
+    console.log('현재 인덱스:', currentIndex, 'steps:', steps);
+    
     if (currentIndex < steps.length - 1) {
         const nextStep = steps[currentIndex + 1];
+        console.log('다음 단계로 이동:', nextStep);
         showStep(nextStep);
         currentStep = nextStep;
+        window.currentStep = currentStep; // 전역에도 업데이트
+        console.log('currentStep 업데이트됨:', currentStep);
         updateStepButtons();
         updateProgressBar();
+    } else {
+        console.log('마지막 단계입니다. 더 이상 이동할 수 없습니다.');
     }
 }
 
@@ -2886,28 +2910,57 @@ function goToPrevStep() {
 function showStep(stepName) {
     console.log('showStep called with:', stepName);
     
-    // 모든 단계 숨김 (opt-wrap과 optbx 모두)
-    steps.forEach(step => {
-        const stepElements = document.querySelectorAll(`[data-step="${step}"]`);
-        stepElements.forEach(element => {
-            element.style.display = 'none';
-        });
+    // 모든 opt-wrap 숨김
+    const allOptWraps = document.querySelectorAll('.opt-wrap');
+    console.log('전체 opt-wrap 개수:', allOptWraps.length);
+    allOptWraps.forEach(wrap => {
+        wrap.style.display = 'none';
+        const step = wrap.getAttribute('data-step');
+        console.log('opt-wrap 숨김:', step);
     });
     
-    // 선택한 단계 표시 (opt-wrap과 optbx 모두)
-    const stepElements = document.querySelectorAll(`[data-step="${stepName}"]`);
-    console.log('Found step elements:', stepElements.length);
+    // 선택한 단계의 opt-wrap 표시
+    const optWrap = document.querySelector(`.opt-wrap[data-step="${stepName}"]`);
+    if (optWrap) {
+        optWrap.style.display = 'block';
+        console.log('opt-wrap 표시됨:', stepName, optWrap);
+    } else {
+        console.error('opt-wrap을 찾을 수 없습니다:', stepName);
+        console.log('사용 가능한 opt-wrap들:');
+        document.querySelectorAll('.opt-wrap').forEach(wrap => {
+            const step = wrap.getAttribute('data-step');
+            console.log('- data-step:', step, '요소:', wrap);
+        });
+        // 강제로 찾기 시도
+        const allWraps = document.querySelectorAll('.opt-wrap');
+        for (let i = 0; i < allWraps.length; i++) {
+            const wrap = allWraps[i];
+            if (wrap.getAttribute('data-step') === stepName) {
+                wrap.style.display = 'block';
+                console.log('강제로 opt-wrap 표시:', stepName);
+                break;
+            }
+        }
+    }
     
+    // 추가로 data-step 속성을 가진 모든 요소도 처리
+    steps.forEach(step => {
+        if (step !== stepName) {
+            const stepElements = document.querySelectorAll(`[data-step="${step}"]:not(.opt-wrap)`);
+            stepElements.forEach(element => {
+                element.style.display = 'none';
+            });
+        }
+    });
+    
+    const stepElements = document.querySelectorAll(`[data-step="${stepName}"]:not(.opt-wrap)`);
     stepElements.forEach(stepElement => {
         stepElement.style.display = 'block';
         console.log('Displayed step element:', stepElement, stepElement.className);
     });
     
     // opt-wrap이 있는 경우 그 안의 모든 optbx도 표시
-    const optWrap = document.querySelector(`.opt-wrap[data-step="${stepName}"]`);
     if (optWrap) {
-        optWrap.style.display = 'block';
-        console.log('Displayed opt-wrap:', optWrap);
         
         // 해당 단계의 form에 이벤트 리스너 다시 설정
         const form = optWrap.querySelector('form');
@@ -2988,6 +3041,8 @@ function updateStepButtons() {
     const conversionBtn = document.getElementById('quoteConversionBtn');
     const prevBtn = document.getElementById('quotePrevBtn');
     
+    console.log('updateStepButtons 호출 - currentStep:', currentStep);
+    
     if (currentStep === 'model-spec') {
         // 모델/사양 단계: 컨버전 옵션 버튼 표시
         if (conversionBtn) {
@@ -3028,10 +3083,13 @@ function updateStepButtons() {
 
 // 진행 바 업데이트
 function updateProgressBar() {
+    // currentStep 변수 직접 사용 (window.currentStep이 아닌 실제 currentStep 변수 사용)
     const currentIndex = steps.indexOf(currentStep);
     const stepTitle = stepTitles[currentStep] || '모델/사양';
     const stepNumber = currentIndex + 1;
     const totalSteps = steps.length;
+    
+    console.log('updateProgressBar 호출 - currentStep:', currentStep, 'currentIndex:', currentIndex, 'stepTitle:', stepTitle);
     
     // 제목 업데이트
     const titleElement = document.getElementById('currentStepTitle');

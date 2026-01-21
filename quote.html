@@ -1325,6 +1325,38 @@
                                 </div>
                             </form>
                         </div>
+                        
+                        <!-- 컨버전 옵션 선택 섹션 (3페이지) -->
+                        <div class="opt-wrap" data-category="conversion-select" data-step="conversion-select" style="display: none;">
+                            <form id="quoteConversionSelectForm">
+                                <div class="optbx opt-conversion-select">
+                                    <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h4>컨버전 옵션 선택</h4>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <p style="padding: 20px; text-align: center; color: rgba(0,0,0,0.6);">
+                                            컨버전 옵션을 선택해주세요.
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- 추가 옵션 섹션 (4페이지) -->
+                        <div class="opt-wrap" data-category="additional" data-step="additional" style="display: none;">
+                            <form id="quoteAdditionalForm">
+                                <div class="optbx opt-additional">
+                                    <div class="optbx-top" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h4>추가 옵션</h4>
+                                    </div>
+                                    <div class="optbx-con">
+                                        <p style="padding: 20px; text-align: center; color: rgba(0,0,0,0.6);">
+                                            추가 옵션을 선택해주세요.
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 
                 <!-- 하단 고정 영역: 예상 견적 금액 + 버튼들 (CN모터스 스타일) -->
@@ -1382,137 +1414,294 @@
                 console.log('견적보기 버튼 이벤트 강제 연결 완료');
             }
             
-            // 이전 버튼 클릭 시 이전 페이지로 이동
+            // 이전 버튼 클릭 시 이전 페이지로 이동 (모든 단계에서 작동)
             const quotePrevBtn = document.getElementById('quotePrevBtn');
             if (quotePrevBtn) {
-                quotePrevBtn.addEventListener('click', function(e) {
+                // 기존 이벤트 리스너 제거를 위해 클론
+                const newBtn = quotePrevBtn.cloneNode(true);
+                quotePrevBtn.parentNode.replaceChild(newBtn, quotePrevBtn);
+                
+                newBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('이전 버튼 클릭됨 - 직접 처리');
+                    console.log('이전 버튼 클릭됨');
                     
-                    // 현재 표시된 opt-wrap 확인
-                    const currentWrap = document.querySelector('.opt-wrap[style*="block"]');
-                    if (currentWrap) {
-                        const currentStep = currentWrap.getAttribute('data-step');
-                        console.log('현재 단계:', currentStep);
-                        
-                        // conversion 단계면 model-spec으로, 그 외는 이전 단계로
-                        if (currentStep === 'conversion') {
-                            // 모든 opt-wrap 숨기기
-                            const allOptWraps = document.querySelectorAll('.opt-wrap');
-                            allOptWraps.forEach(function(wrap) {
-                                wrap.style.display = 'none';
+                    // 현재 단계 확인 (여러 방법으로 시도)
+                    let currentStep = 'model-spec';
+                    
+                    // 1. window.currentStep 확인 (가장 확실)
+                    if (typeof window.currentStep !== 'undefined' && window.currentStep) {
+                        currentStep = window.currentStep;
+                        console.log('window.currentStep 사용:', currentStep);
+                    }
+                    // 2. 현재 표시된 opt-wrap 확인
+                    else {
+                        const currentWrap = document.querySelector('.opt-wrap[style*="block"], .opt-wrap[style*="block;"]');
+                        if (currentWrap) {
+                            currentStep = currentWrap.getAttribute('data-step') || 'model-spec';
+                            console.log('현재 표시된 opt-wrap 사용:', currentStep);
+                        } else {
+                            // 모든 opt-wrap 확인
+                            document.querySelectorAll('.opt-wrap').forEach(function(wrap) {
+                                if (wrap.style.display !== 'none' && wrap.style.display !== '') {
+                                    currentStep = wrap.getAttribute('data-step') || 'model-spec';
+                                    console.log('표시된 opt-wrap 발견:', currentStep);
+                                }
                             });
-                            
-                            // model-spec 단계 표시
-                            const modelSpecWrap = document.querySelector('.opt-wrap[data-step="model-spec"]');
-                            if (modelSpecWrap) {
-                                modelSpecWrap.style.display = 'block';
-                                console.log('모델/사양 페이지로 돌아감');
-                                
-                                // quote.js 함수가 있으면 호출
-                                if (typeof showStep === 'function') {
-                                    showStep('model-spec');
-                                } else if (typeof window.showStep === 'function') {
-                                    window.showStep('model-spec');
-                                }
-                                if (typeof currentStep !== 'undefined') {
-                                    currentStep = 'model-spec';
-                                } else if (typeof window.currentStep !== 'undefined') {
-                                    window.currentStep = 'model-spec';
-                                }
-                                if (typeof updateStepButtons === 'function') {
-                                    updateStepButtons();
-                                } else if (typeof window.updateStepButtons === 'function') {
-                                    window.updateStepButtons();
-                                }
-                                if (typeof updateProgressBar === 'function') {
-                                    updateProgressBar();
-                                } else if (typeof window.updateProgressBar === 'function') {
-                                    window.updateProgressBar();
-                                }
-                                
-                                // 가격 재계산
-                                setTimeout(function() {
-                                    if (typeof calculatePriceDirectly === 'function') {
-                                        calculatePriceDirectly();
-                                    }
-                                }, 100);
-                            }
-                        } else if (typeof goToPrevStep === 'function') {
-                            goToPrevStep();
-                        } else if (typeof window.goToPrevStep === 'function') {
-                            window.goToPrevStep();
                         }
-                    } else {
-                        // 현재 표시된 단계가 없으면 model-spec으로
-                        const allOptWraps = document.querySelectorAll('.opt-wrap');
-                        allOptWraps.forEach(function(wrap) {
+                    }
+                    
+                    console.log('최종 현재 단계:', currentStep);
+                    
+                    // 단계 정의
+                    const steps = ['model-spec', 'conversion', 'conversion-select', 'additional'];
+                    const currentIndex = steps.indexOf(currentStep);
+                    console.log('현재 인덱스:', currentIndex);
+                    const prevIndex = currentIndex - 1;
+                    
+                    if (prevIndex >= 0) {
+                        const prevStep = steps[prevIndex];
+                        console.log('이전 단계로 이동:', prevStep, '인덱스:', prevIndex);
+                        
+                        // 모든 opt-wrap 숨기기
+                        document.querySelectorAll('.opt-wrap').forEach(function(wrap) {
                             wrap.style.display = 'none';
                         });
-                        const modelSpecWrap = document.querySelector('.opt-wrap[data-step="model-spec"]');
-                        if (modelSpecWrap) {
-                            modelSpecWrap.style.display = 'block';
+                        
+                        // 이전 단계 표시
+                        const prevWrap = document.querySelector('.opt-wrap[data-step="' + prevStep + '"]');
+                        if (prevWrap) {
+                            prevWrap.style.display = 'block';
+                            console.log('페이지 표시됨:', prevStep);
+                            
+                            // currentStep 업데이트 (quote.js와 동기화)
+                            if (typeof window.setCurrentStep === 'function') {
+                                window.setCurrentStep(prevStep);
+                            } else {
+                                window.currentStep = prevStep;
+                            }
+                            
+                            // quote.js의 currentStep 변수도 직접 업데이트 시도
+                            try {
+                                if (typeof currentStep !== 'undefined') {
+                                    eval('currentStep = "' + prevStep + '"');
+                                }
+                            } catch(e) {
+                                console.log('currentStep 직접 업데이트 실패:', e);
+                            }
+                            
+                            // 상태바 직접 업데이트 (확실하게)
+                            const stepTitles = {
+                                'model-spec': '모델/사양',
+                                'conversion': '컨버전 옵션',
+                                'conversion-select': '컨버전 옵션 선택',
+                                'additional': '추가 옵션'
+                            };
+                            
+                            const stepTitle = stepTitles[prevStep] || prevStep;
+                            const stepNumber = prevIndex + 1;
+                            const totalSteps = 4;
+                            
+                            // 제목 업데이트
+                            const titleElement = document.getElementById('currentStepTitle');
+                            if (titleElement) {
+                                titleElement.textContent = stepTitle;
+                            }
+                            
+                            // 진행률 텍스트 업데이트
+                            const progressElement = document.getElementById('currentStepProgress');
+                            if (progressElement) {
+                                progressElement.textContent = stepNumber + '/' + totalSteps;
+                            }
+                            
+                            // 진행 바 업데이트
+                            const progressBars = document.querySelectorAll('.prog-bar li');
+                            progressBars.forEach(function(bar, index) {
+                                if (index <= prevIndex) {
+                                    bar.classList.add('active');
+                                    bar.style.background = '#1a1a1a';
+                                } else {
+                                    bar.classList.remove('active');
+                                    bar.style.background = 'rgba(0,0,0,0.1)';
+                                }
+                            });
+                            
+                            console.log('상태바 업데이트 완료:', stepTitle, stepNumber + '/' + totalSteps);
+                            
+                            // quote.js 함수 호출 (있으면)
+                            if (typeof showStep === 'function') {
+                                showStep(prevStep);
+                            } else if (typeof window.showStep === 'function') {
+                                window.showStep(prevStep);
+                            }
+                            if (typeof updateStepButtons === 'function') {
+                                updateStepButtons();
+                            } else if (typeof window.updateStepButtons === 'function') {
+                                window.updateStepButtons();
+                            }
+                            if (typeof updateProgressBar === 'function') {
+                                updateProgressBar();
+                            } else if (typeof window.updateProgressBar === 'function') {
+                                window.updateProgressBar();
+                            }
+                        } else {
+                            console.error('이전 단계를 찾을 수 없습니다:', prevStep);
                         }
+                    } else {
+                        console.log('첫 번째 단계입니다.');
                     }
                 });
                 console.log('이전 버튼 이벤트 리스너 추가됨');
             }
             
-            // 컨버전 옵션 버튼 클릭 시 두 번째 페이지(conversion)로 이동
+            // 컨버전 옵션 버튼 클릭 시 다음 페이지로 이동 (모든 단계에서 작동)
             const quoteConversionBtn = document.getElementById('quoteConversionBtn');
             if (quoteConversionBtn) {
-                // 직접 이벤트 리스너 추가 (quote.js와 독립적으로 작동)
-                quoteConversionBtn.addEventListener('click', function(e) {
+                // 기존 이벤트 리스너 제거를 위해 클론
+                const newBtn = quoteConversionBtn.cloneNode(true);
+                quoteConversionBtn.parentNode.replaceChild(newBtn, quoteConversionBtn);
+                
+                newBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('컨버전 옵션 버튼 클릭됨 - 직접 처리');
+                    console.log('컨버전 옵션 버튼 클릭됨');
                     
-                    // 모든 opt-wrap 숨기기
-                    const allOptWraps = document.querySelectorAll('.opt-wrap');
-                    allOptWraps.forEach(function(wrap) {
-                        wrap.style.display = 'none';
-                    });
+                    // 현재 단계 확인 (여러 방법으로 시도)
+                    let currentStep = 'model-spec';
                     
-                    // conversion 단계 표시
-                    const conversionWrap = document.querySelector('.opt-wrap[data-step="conversion"]');
-                    if (conversionWrap) {
-                        conversionWrap.style.display = 'block';
-                        console.log('컨버전 옵션 페이지 표시됨');
+                    // 1. window.currentStep 확인 (가장 확실)
+                    if (typeof window.currentStep !== 'undefined' && window.currentStep) {
+                        currentStep = window.currentStep;
+                        console.log('window.currentStep 사용:', currentStep);
+                    }
+                    // 2. quote.js의 currentStep 변수 확인
+                    else if (typeof currentStep !== 'undefined' && currentStep !== 'model-spec') {
+                        // 이미 currentStep 변수가 있으면 사용
+                        console.log('quote.js currentStep 사용:', currentStep);
+                    }
+                    // 3. 현재 표시된 opt-wrap 확인
+                    else {
+                        const currentWrap = document.querySelector('.opt-wrap[style*="block"], .opt-wrap[style*="block;"]');
+                        if (currentWrap) {
+                            currentStep = currentWrap.getAttribute('data-step') || 'model-spec';
+                            console.log('현재 표시된 opt-wrap 사용:', currentStep);
+                        } else {
+                            // 모든 opt-wrap 확인
+                            document.querySelectorAll('.opt-wrap').forEach(function(wrap) {
+                                if (wrap.style.display !== 'none' && wrap.style.display !== '') {
+                                    currentStep = wrap.getAttribute('data-step') || 'model-spec';
+                                    console.log('표시된 opt-wrap 발견:', currentStep);
+                                }
+                            });
+                        }
+                    }
+                    
+                    console.log('최종 현재 단계:', currentStep);
+                    
+                    // 단계 정의
+                    const steps = ['model-spec', 'conversion', 'conversion-select', 'additional'];
+                    const currentIndex = steps.indexOf(currentStep);
+                    console.log('현재 인덱스:', currentIndex, 'steps:', steps);
+                    const nextIndex = currentIndex + 1;
+                    
+                    if (nextIndex < steps.length) {
+                        const nextStep = steps[nextIndex];
+                        console.log('다음 단계로 이동:', nextStep, '인덱스:', nextIndex);
                         
-                        // quote.js 함수가 있으면 호출 (없어도 작동)
-                        if (typeof showStep === 'function') {
-                            showStep('conversion');
-                        } else if (typeof window.showStep === 'function') {
-                            window.showStep('conversion');
-                        }
-                        if (typeof currentStep !== 'undefined') {
-                            currentStep = 'conversion';
-                        } else if (typeof window.currentStep !== 'undefined') {
-                            window.currentStep = 'conversion';
-                        }
-                        if (typeof updateStepButtons === 'function') {
-                            updateStepButtons();
-                        } else if (typeof window.updateStepButtons === 'function') {
-                            window.updateStepButtons();
-                        }
-                        if (typeof updateProgressBar === 'function') {
-                            updateProgressBar();
-                        } else if (typeof window.updateProgressBar === 'function') {
-                            window.updateProgressBar();
-                        }
+                        // 모든 opt-wrap 숨기기
+                        document.querySelectorAll('.opt-wrap').forEach(function(wrap) {
+                            wrap.style.display = 'none';
+                        });
                         
-                        // 가격 재계산
-                        setTimeout(function() {
-                            if (typeof calculatePriceDirectly === 'function') {
-                                calculatePriceDirectly();
+                        // 다음 단계 표시
+                        const nextWrap = document.querySelector('.opt-wrap[data-step="' + nextStep + '"]');
+                        if (nextWrap) {
+                            nextWrap.style.display = 'block';
+                            console.log('페이지 표시됨:', nextStep);
+                            
+                            // currentStep 업데이트 (quote.js와 동기화)
+                            if (typeof window.setCurrentStep === 'function') {
+                                window.setCurrentStep(nextStep);
+                            } else {
+                                window.currentStep = nextStep;
                             }
-                        }, 100);
+                            
+                            // quote.js의 currentStep 변수도 직접 업데이트 시도
+                            try {
+                                if (typeof currentStep !== 'undefined') {
+                                    // quote.js의 currentStep 변수에 직접 할당 시도
+                                    eval('currentStep = "' + nextStep + '"');
+                                }
+                            } catch(e) {
+                                console.log('currentStep 직접 업데이트 실패:', e);
+                            }
+                            
+                            // quote.js 함수 호출 (있으면)
+                            if (typeof showStep === 'function') {
+                                showStep(nextStep);
+                            } else if (typeof window.showStep === 'function') {
+                                window.showStep(nextStep);
+                            }
+                            if (typeof updateStepButtons === 'function') {
+                                updateStepButtons();
+                            } else if (typeof window.updateStepButtons === 'function') {
+                                window.updateStepButtons();
+                            }
+                            // 상태바 직접 업데이트 (확실하게)
+                            const stepTitles = {
+                                'model-spec': '모델/사양',
+                                'conversion': '컨버전 옵션',
+                                'conversion-select': '컨버전 옵션 선택',
+                                'additional': '추가 옵션'
+                            };
+                            
+                            const stepTitle = stepTitles[nextStep] || nextStep;
+                            const stepNumber = nextIndex + 1;
+                            const totalSteps = 4;
+                            
+                            // 제목 업데이트
+                            const titleElement = document.getElementById('currentStepTitle');
+                            if (titleElement) {
+                                titleElement.textContent = stepTitle;
+                            }
+                            
+                            // 진행률 텍스트 업데이트
+                            const progressElement = document.getElementById('currentStepProgress');
+                            if (progressElement) {
+                                progressElement.textContent = stepNumber + '/' + totalSteps;
+                            }
+                            
+                            // 진행 바 업데이트
+                            const progressBars = document.querySelectorAll('.prog-bar li');
+                            progressBars.forEach(function(bar, index) {
+                                if (index <= nextIndex) {
+                                    bar.classList.add('active');
+                                    bar.style.background = '#1a1a1a';
+                                } else {
+                                    bar.classList.remove('active');
+                                    bar.style.background = 'rgba(0,0,0,0.1)';
+                                }
+                            });
+                            
+                            console.log('상태바 업데이트 완료:', stepTitle, stepNumber + '/' + totalSteps);
+                            
+                            if (typeof updateProgressBar === 'function') {
+                                updateProgressBar();
+                            } else if (typeof window.updateProgressBar === 'function') {
+                                window.updateProgressBar();
+                            }
+                        } else {
+                            console.error('다음 단계를 찾을 수 없습니다:', nextStep);
+                            console.log('사용 가능한 opt-wrap들:');
+                            document.querySelectorAll('.opt-wrap').forEach(function(wrap) {
+                                console.log('- data-step:', wrap.getAttribute('data-step'));
+                            });
+                        }
                     } else {
-                        console.error('컨버전 옵션 섹션을 찾을 수 없습니다.');
+                        console.log('마지막 단계입니다.');
                     }
                 });
-                console.log('컨버전 옵션 버튼 이벤트 리스너 추가됨');
+                console.log('컨버전 옵션 버튼 이벤트 리스너 추가됨 (HTML 인라인)');
             }
         }
         
@@ -1764,6 +1953,7 @@
                 });
                 
                 // 모델, 트림, 유종 초기 선택 상태 확인 및 가격 합산
+                const modelInputs = document.querySelectorAll('input[name="model_type"], input[name="trim_level"], input[name="trim_engine"]');
                 modelInputs.forEach(function(input) {
                     if (input.checked) {
                         const price = parseInt(input.dataset.price) || 0;
