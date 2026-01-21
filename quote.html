@@ -2642,6 +2642,18 @@
                             } else if (typeof window.updateProgressBar === 'function') {
                                 window.updateProgressBar();
                             }
+                            
+                            // 페이지 전환 후 이미지 클릭 이벤트 재설정
+                            setTimeout(function() {
+                                if (typeof setupOptionImageClickEvents === 'function') {
+                                    setupOptionImageClickEvents();
+                                    console.log('✅ 이전 버튼 - 이미지 클릭 이벤트 재설정 완료');
+                                }
+                                if (typeof setupConversionCheckboxProtection === 'function') {
+                                    setupConversionCheckboxProtection();
+                                    console.log('✅ 이전 버튼 - 컨버전 체크박스 보호 재설정 완료');
+                                }
+                            }, 300);
                         } else {
                             console.error('이전 단계를 찾을 수 없습니다:', prevStep);
                         }
@@ -2901,6 +2913,18 @@
                             } else if (typeof window.updateProgressBar === 'function') {
                                 window.updateProgressBar();
                             }
+                            
+                            // 페이지 전환 후 이미지 클릭 이벤트 재설정
+                            setTimeout(function() {
+                                if (typeof setupOptionImageClickEvents === 'function') {
+                                    setupOptionImageClickEvents();
+                                    console.log('✅ 페이지 전환 후 이미지 클릭 이벤트 재설정 완료');
+                                }
+                                if (typeof setupConversionCheckboxProtection === 'function') {
+                                    setupConversionCheckboxProtection();
+                                    console.log('✅ 페이지 전환 후 컨버전 체크박스 보호 재설정 완료');
+                                }
+                            }, 300);
                         } else {
                             console.error('다음 단계를 찾을 수 없습니다:', nextStep);
                             console.log('사용 가능한 opt-wrap들:');
@@ -3089,7 +3113,70 @@
                 };
             }
             
-            // 순정 옵션 이미지 클릭 시 메인 이미지와 박스 이미지 변경
+            // ========== 모든 옵션 이미지 클릭 시 왼쪽 메인 이미지 변경 ==========
+            window.setupOptionImageClickEvents = function() {
+                console.log('=== 모든 옵션 이미지 클릭 이벤트 설정 ===');
+                
+                const mainImage = document.getElementById('mainCarImage');
+                if (!mainImage) {
+                    console.error('❌ mainCarImage를 찾을 수 없습니다');
+                    return;
+                }
+                
+                // 모든 옵션 input 찾기 (라디오, 체크박스)
+                const allOptionInputs = document.querySelectorAll('input[type="radio"][data-image], input[type="checkbox"][data-image]');
+                console.log('이미지가 있는 옵션 개수:', allOptionInputs.length);
+                
+                allOptionInputs.forEach(function(input) {
+                    const imageUrl = input.dataset.image;
+                    if (!imageUrl) return;
+                    
+                    const label = input.nextElementSibling;
+                    if (!label) return;
+                    
+                    // 기존 이벤트 리스너 제거 (중복 방지)
+                    const newLabel = label.cloneNode(true);
+                    label.parentNode.replaceChild(newLabel, label);
+                    
+                    // 새 label에 이벤트 추가
+                    newLabel.addEventListener('click', function(e) {
+                        console.log('옵션 클릭:', input.id, '이미지:', imageUrl);
+                        
+                        // 메인 이미지 변경
+                        mainImage.src = imageUrl;
+                        console.log('✅ 메인 이미지 변경:', imageUrl);
+                    });
+                    
+                    // 옵션 이미지 자체 클릭 시에도 메인 이미지 변경
+                    const optionImage = newLabel.querySelector('.option-image, img');
+                    if (optionImage) {
+                        optionImage.addEventListener('click', function(e) {
+                            e.stopPropagation(); // label 클릭 중복 방지
+                            console.log('옵션 이미지 직접 클릭:', input.id, '이미지:', imageUrl);
+                            
+                            // 메인 이미지 변경
+                            mainImage.src = imageUrl;
+                            console.log('✅ 메인 이미지 변경 (이미지 직접 클릭):', imageUrl);
+                        });
+                    }
+                });
+                
+                console.log('✅ 이미지 클릭 이벤트 설정 완료');
+            };
+            
+            // 초기 실행
+            setupOptionImageClickEvents();
+            
+            // 페이지 전환 시마다 재설정
+            setTimeout(function() {
+                setupOptionImageClickEvents();
+            }, 500);
+            
+            setTimeout(function() {
+                setupOptionImageClickEvents();
+            }, 1500);
+            
+            // ========== 순정 옵션 체크 해제 방지 ==========
             const standardOptionInputs = document.querySelectorAll('.opt-standard input[type="checkbox"]');
             standardOptionInputs.forEach(function(input) {
                 // 순정 옵션은 체크 해제 방지
@@ -3139,28 +3226,80 @@
                         }
                     }
                 });
-                
-                const imageUrl = input.dataset.image;
-                if (imageUrl) {
-                    // 옵션 이미지 클릭 이벤트
-                    const label = input.nextElementSibling;
-                    const optionImage = label ? label.querySelector('.option-image') : null;
-                    if (optionImage) {
-                        optionImage.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            // 메인 이미지 변경
-                            if (mainImage) {
-                                mainImage.src = imageUrl;
-                            }
-                            // 박스 안의 모든 옵션 이미지 변경
-                            const allOptionImages = document.querySelectorAll('.opt-standard .option-image');
-                            allOptionImages.forEach(function(img) {
-                                img.src = imageUrl;
-                            });
-                        });
-                    }
-                }
             });
+            
+            // ========== TLV9, TLV4 컨버전 옵션 체크 해제 방지 ==========
+            function setupConversionCheckboxProtection() {
+                console.log('=== TLV9, TLV4 컨버전 옵션 체크 해제 방지 설정 ===');
+                
+                // TLV9 컨버전 옵션
+                const tlv9ConversionInputs = document.querySelectorAll('.opt-wrap[data-model="tlv9"] .opt-conversion input[type="checkbox"]');
+                console.log('TLV9 컨버전 옵션 개수:', tlv9ConversionInputs.length);
+                
+                tlv9ConversionInputs.forEach(function(input) {
+                    // 체크 해제 방지
+                    input.addEventListener('click', function(e) {
+                        if (!this.checked) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            this.checked = true;
+                            console.log('TLV9 컨버전 옵션 체크 해제 방지:', this.id);
+                            return false;
+                        }
+                    });
+                    
+                    input.addEventListener('change', function(e) {
+                        if (!this.checked) {
+                            this.checked = true;
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('TLV9 컨버전 옵션 체크 해제 방지 (change):', this.id);
+                            return false;
+                        }
+                    });
+                });
+                
+                // TLV4 컨버전 옵션
+                const tlv4ConversionInputs = document.querySelectorAll('.opt-wrap[data-model="tlv4"] .opt-conversion input[type="checkbox"]');
+                console.log('TLV4 컨버전 옵션 개수:', tlv4ConversionInputs.length);
+                
+                tlv4ConversionInputs.forEach(function(input) {
+                    // 체크 해제 방지
+                    input.addEventListener('click', function(e) {
+                        if (!this.checked) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            this.checked = true;
+                            console.log('TLV4 컨버전 옵션 체크 해제 방지:', this.id);
+                            return false;
+                        }
+                    });
+                    
+                    input.addEventListener('change', function(e) {
+                        if (!this.checked) {
+                            this.checked = true;
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('TLV4 컨버전 옵션 체크 해제 방지 (change):', this.id);
+                            return false;
+                        }
+                    });
+                });
+                
+                console.log('✅ 컨버전 옵션 체크 해제 방지 설정 완료');
+            }
+            
+            // 초기 실행
+            setupConversionCheckboxProtection();
+            
+            // 페이지 전환 시마다 재설정
+            setTimeout(function() {
+                setupConversionCheckboxProtection();
+            }, 500);
+            
+            setTimeout(function() {
+                setupConversionCheckboxProtection();
+            }, 1500);
             
             // 모델, 트림, 유종 선택 시 가격 합산 (강제 이벤트 연결)
             function setupPriceCalculation() {
