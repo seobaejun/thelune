@@ -2452,13 +2452,16 @@
                     e.preventDefault();
                     e.stopPropagation();
                     console.log('견적보기 버튼 클릭됨 (강제 연결)');
-                    if (typeof window.showQuote === 'function') {
-                        window.showQuote();
-                    } else if (typeof showQuote === 'function') {
-                        showQuote();
-                    } else {
-                        alert('견적 기능을 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+                    
+                    // 필수 옵션 검증
+                    const validation = validateRequiredOptions();
+                    if (!validation.isValid) {
+                        alert(validation.message);
+                        return;
                     }
+                    
+                    // 견적 데이터 수집 및 견적 완료 페이지로 이동
+                    goToEstimateResultPage();
                 });
                 console.log('견적보기 버튼 이벤트 강제 연결 완료');
             }
@@ -2708,16 +2711,19 @@
                     
                     console.log('최종 현재 단계:', currentStep);
                     
-                    // 4페이지(additional)에서 버튼을 클릭하면 견적보기 모달 열기
+                    // 4페이지(additional)에서 버튼을 클릭하면 필수 옵션 검증 후 견적 완료 페이지로 이동
                     if (currentStep === 'additional') {
                         console.log('4페이지에서 견적내기 완료 버튼 클릭됨');
-                        if (typeof showQuote === 'function') {
-                            showQuote();
-                        } else if (typeof window.showQuote === 'function') {
-                            window.showQuote();
-                        } else {
-                            alert('견적 기능을 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+                        
+                        // 필수 옵션 검증
+                        const validation = validateRequiredOptions();
+                        if (!validation.isValid) {
+                            alert(validation.message);
+                            return;
                         }
+                        
+                        // 견적 데이터 수집 및 견적 완료 페이지로 이동
+                        goToEstimateResultPage();
                         return; // 다음 페이지로 이동하지 않음
                     }
                     
@@ -3085,6 +3091,277 @@
             if (typeof window.updatePriceDisplay === 'function') {
                 window.updatePriceDisplay();
             }
+        }
+        
+        // ========== 필수 옵션 검증 함수 ==========
+        function validateRequiredOptions() {
+            console.log('=== 필수 옵션 검증 시작 ===');
+            
+            // 1. 모델 선택 확인
+            const selectedModel = document.querySelector('input[name="model_type"]:checked');
+            if (!selectedModel) {
+                return {
+                    isValid: false,
+                    message: '모델을 선택해주세요.'
+                };
+            }
+            console.log('✅ 모델 선택됨:', selectedModel.value);
+            
+            // 2. 차종 선택 확인
+            const selectedVehicleType = document.querySelector('input[name="vehicle_type"]:checked');
+            if (!selectedVehicleType) {
+                return {
+                    isValid: false,
+                    message: '차종을 선택해주세요.'
+                };
+            }
+            console.log('✅ 차종 선택됨:', selectedVehicleType.value);
+            
+            // 3. 등급 선택 확인
+            const selectedTrimLevel = document.querySelector('input[name="trim_level"]:checked');
+            if (!selectedTrimLevel) {
+                return {
+                    isValid: false,
+                    message: '등급을 선택해주세요.'
+                };
+            }
+            console.log('✅ 등급 선택됨:', selectedTrimLevel.value);
+            
+            // 4. 엔진 선택 확인
+            const selectedEngine = document.querySelector('input[name="trim_engine"]:checked');
+            if (!selectedEngine) {
+                return {
+                    isValid: false,
+                    message: '엔진을 선택해주세요.'
+                };
+            }
+            console.log('✅ 엔진 선택됨:', selectedEngine.value);
+            
+            console.log('✅ 모든 필수 옵션 검증 완료');
+            return {
+                isValid: true,
+                message: '검증 성공'
+            };
+        }
+        
+        // ========== 견적 완료 페이지로 이동 ==========
+        function goToEstimateResultPage() {
+            console.log('=== 견적 데이터 수집 시작 ===');
+            
+            // 기본 정보 수집
+            const selectedModel = document.querySelector('input[name="model_type"]:checked');
+            const selectedVehicleType = document.querySelector('input[name="vehicle_type"]:checked');
+            const selectedTrimLevel = document.querySelector('input[name="trim_level"]:checked');
+            const selectedEngine = document.querySelector('input[name="trim_engine"]:checked');
+            
+            // 견적 데이터 객체 생성
+            const estimateData = {
+                modelName: selectedModel ? selectedModel.value : '',
+                vehicleType: selectedVehicleType ? selectedVehicleType.value : '',
+                trimLevel: selectedTrimLevel ? selectedTrimLevel.value : '',
+                engine: selectedEngine ? selectedEngine.value : '',
+                totalPrice: window.totalPrice || 0,
+                modelSpec: [],
+                conversion: [],
+                additional: []
+            };
+            
+            // 모델/사양 옵션 수집
+            if (selectedModel) {
+                estimateData.modelSpec.push({
+                    name: '모델: ' + selectedModel.value,
+                    price: parseInt(selectedModel.dataset.price) || 0
+                });
+            }
+            if (selectedVehicleType) {
+                estimateData.modelSpec.push({
+                    name: '차종: ' + selectedVehicleType.value,
+                    price: parseInt(selectedVehicleType.dataset.price) || 0
+                });
+            }
+            if (selectedTrimLevel) {
+                estimateData.modelSpec.push({
+                    name: '등급: ' + selectedTrimLevel.value,
+                    price: parseInt(selectedTrimLevel.dataset.price) || 0
+                });
+            }
+            if (selectedEngine) {
+                estimateData.modelSpec.push({
+                    name: '엔진: ' + selectedEngine.value,
+                    price: parseInt(selectedEngine.dataset.price) || 0
+                });
+            }
+            
+            // 컨버전 옵션 수집 (2페이지 - 체크된 모든 컨버전 옵션)
+            const modelValue = selectedModel.value.toLowerCase();
+            let conversionSelector = '';
+            
+            if (modelValue === 'tl9') {
+                conversionSelector = '.opt-wrap[data-model="tl9"] .opt-conversion input[type="checkbox"]:checked';
+            } else if (modelValue === 'tlv9') {
+                conversionSelector = '.opt-wrap[data-model="tlv9"] .opt-conversion input[type="checkbox"]:checked';
+            } else if (modelValue === 'tlv4') {
+                conversionSelector = '.opt-wrap[data-model="tlv4"] .opt-conversion input[type="checkbox"]:checked';
+            }
+            
+            if (conversionSelector) {
+                const conversionCheckboxes = document.querySelectorAll(conversionSelector);
+                conversionCheckboxes.forEach(function(checkbox) {
+                    // 확인 체크박스는 제외
+                    if (!checkbox.id.includes('confirm')) {
+                        const label = checkbox.nextElementSibling;
+                        let imageSrc = checkbox.dataset.image || '';
+                        let optionName = checkbox.value;
+                        let description = '';
+                        
+                        if (label) {
+                            const img = label.querySelector('img');
+                            if (img) imageSrc = img.src;
+                            
+                            const nameEl = label.querySelector('.option-name');
+                            if (nameEl) optionName = nameEl.textContent.trim();
+                            
+                            const descEl = label.querySelector('.option-desc');
+                            if (descEl) description = descEl.textContent.trim();
+                        }
+                        
+                        estimateData.conversion.push({
+                            name: optionName,
+                            price: parseInt(checkbox.dataset.price) || 0,
+                            image: imageSrc,
+                            description: description
+                        });
+                    }
+                });
+                
+                // 컨버전 패키지 가격 추가
+                const conversionTL9 = document.getElementById('conversion_package_confirm');
+                const conversionTLV9 = document.getElementById('conversion_package_confirm_tlv9');
+                const conversionTLV4 = document.getElementById('conversion_package_confirm_tlv4');
+                
+                if (conversionTL9 && conversionTL9.checked) {
+                    estimateData.conversionPackagePrice = 14640000;
+                }
+                if (conversionTLV9 && conversionTLV9.checked) {
+                    estimateData.conversionPackagePrice = 28640000;
+                }
+                if (conversionTLV4 && conversionTLV4.checked) {
+                    estimateData.conversionPackagePrice = 35640000;
+                }
+            }
+            
+            // 컨버전 선택 옵션 수집 (3페이지 - 라디오 버튼)
+            estimateData.conversionSelect = [];
+            const conversionSelectInputs = document.querySelectorAll('.opt-wrap[data-step="conversion-select"] input[type="radio"]:checked');
+            console.log('컨버전 선택 옵션 체크된 개수:', conversionSelectInputs.length);
+            
+            conversionSelectInputs.forEach(function(radio) {
+                const label = radio.nextElementSibling;
+                let imageSrc = radio.dataset.image || '';
+                let optionName = radio.value;
+                let description = '';
+                let category = '';
+                
+                console.log('라디오 ID:', radio.id, 'Name:', radio.name, 'Value:', radio.value);
+                
+                if (label) {
+                    const img = label.querySelector('img');
+                    if (img) imageSrc = img.src;
+                    
+                    const nameEl = label.querySelector('.option-name');
+                    if (nameEl) {
+                        optionName = nameEl.textContent.trim();
+                        console.log('옵션명 추출:', optionName);
+                    }
+                    
+                    const descEl = label.querySelector('.option-desc');
+                    if (descEl) description = descEl.textContent.trim();
+                }
+                
+                // 카테고리 찾기 (바닥 종류, 커튼, 시트, 도어 등)
+                // 현재 li의 부모 ul을 찾고, 그 부모 li에서 .opt-tit 찾기
+                const currentLi = radio.closest('li.opt-chk-item');
+                console.log('currentLi:', currentLi);
+                
+                if (currentLi) {
+                    const parentUl = currentLi.parentElement;
+                    console.log('parentUl:', parentUl);
+                    
+                    if (parentUl) {
+                        const grandParentLi = parentUl.closest('li.opt-chk-item');
+                        console.log('grandParentLi:', grandParentLi);
+                        
+                        if (grandParentLi) {
+                            const titEl = grandParentLi.querySelector('.opt-tit');
+                            console.log('titEl:', titEl);
+                            
+                            if (titEl) {
+                                category = titEl.textContent.trim();
+                                console.log('✅ 카테고리 찾음:', category);
+                            }
+                        }
+                    }
+                }
+                
+                // 카테고리를 못 찾았을 경우 name 속성으로 추측
+                if (!category) {
+                    const radioName = radio.name;
+                    if (radioName === 'floor_type') category = '바닥 종류';
+                    else if (radioName === 'curtain') category = '커튼';
+                    else if (radioName === 'seat') category = '시트';
+                    else if (radioName === 'door') category = '도어';
+                    else if (radioName === 'ceiling') category = '천장';
+                    console.log('✅ name 속성으로 카테고리 추측:', category);
+                }
+                
+                const fullName = category ? category + ': ' + optionName : optionName;
+                console.log('최종 옵션명:', fullName);
+                
+                estimateData.conversionSelect.push({
+                    name: fullName,
+                    price: parseInt(radio.dataset.price) || 0,
+                    image: imageSrc,
+                    description: description
+                });
+            });
+            
+            // 추가 옵션 수집 (체크된 체크박스만)
+            const additionalCheckboxes = document.querySelectorAll('.opt-additional input[type="checkbox"]:checked');
+            additionalCheckboxes.forEach(function(checkbox) {
+                const price = parseInt(checkbox.dataset.price) || 0;
+                if (price > 0) { // 가격이 있는 옵션만
+                    const label = checkbox.nextElementSibling;
+                    let imageSrc = checkbox.dataset.image || '';
+                    let optionName = checkbox.value;
+                    let description = '';
+                    
+                    if (label) {
+                        const img = label.querySelector('img');
+                        if (img) imageSrc = img.src;
+                        
+                        const nameEl = label.querySelector('.option-name');
+                        if (nameEl) optionName = nameEl.textContent.trim();
+                        
+                        const descEl = label.querySelector('.option-desc');
+                        if (descEl) description = descEl.textContent.trim();
+                    }
+                    
+                    estimateData.additional.push({
+                        name: optionName,
+                        price: price,
+                        image: imageSrc,
+                        description: description
+                    });
+                }
+            });
+            
+            console.log('수집된 견적 데이터:', estimateData);
+            
+            // localStorage에 저장 (URL이 너무 길어질 수 있으므로)
+            localStorage.setItem('quoteEstimateData', JSON.stringify(estimateData));
+            
+            // 견적 완료 페이지로 이동
+            window.location.href = 'quote-result.html';
         }
         
         // 옵션 선택에 따라 이미지 변경 (나중에 구현)

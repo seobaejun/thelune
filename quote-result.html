@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="THE LUNE">
+
+    <!-- Site Title -->
+    <title>견적 완료 - THE LUNE</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* 네비게이션 바 숨기기 */
+        .ak-site_header {
+            display: none !important;
+        }
+
+
+        .estimate-complete-page {
+            max-width: 1400px;
+            margin: 40px auto 40px;
+            padding: 0 30px;
+        }
+
+        /* 헤더 영역 */
+        .estimate-complete-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .estimate-complete-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .estimate-complete-header img {
+            max-width: 200px;
+            margin-top: 20px;
+        }
+
+        /* 차량 이미지 */
+        .estimate-vehicle-image {
+            width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .estimate-vehicle-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* 메인 컨테이너 */
+        .estimate-main-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            position: relative;
+        }
+        
+        .estimate-details {
+            flex: 1;
+            max-width: calc(100% - 430px);
+        }
+        
+        .estimate-summary {
+            flex: 0 0 400px;
+        }
+
+        /* 왼쪽: 견적 상세 */
+        .estimate-details {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .estimate-section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .estimate-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .estimate-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .estimate-section-header h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .estimate-section-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .estimate-option-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .estimate-option-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+            gap: 15px;
+        }
+
+        .estimate-option-item:last-child {
+            border-bottom: none;
+        }
+
+        .estimate-option-content {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .estimate-option-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .estimate-option-text {
+            flex: 1;
+        }
+
+        .estimate-option-name {
+            font-size: 15px;
+            color: #666;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .estimate-option-desc {
+            font-size: 13px;
+            color: #999;
+            display: block;
+        }
+
+        .estimate-option-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .estimate-option-price {
+            font-size: 15px;
+            color: #1a1a1a;
+        }
+
+        /* 오른쪽: 총액 및 액션 */
+        .estimate-summary {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+        }
+
+        .estimate-summary-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        .estimate-summary-card::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .estimate-summary-card::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .estimate-summary-card::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+
+        .estimate-summary-card::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+
+        .estimate-model-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .estimate-total-price {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .estimate-total-label {
+            font-size: 16px;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .estimate-total-amount {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .estimate-total-amount span {
+            font-size: 24px;
+        }
+
+        .estimate-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .estimate-spec-item {
+            text-align: center;
+        }
+
+        .estimate-spec-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .estimate-spec-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .estimate-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .estimate-action-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .estimate-action-btn.primary {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .estimate-action-btn.primary:hover {
+            background: #333;
+        }
+
+        .estimate-action-btn.secondary {
+            background: #fff;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+        }
+
+        .estimate-action-btn.secondary:hover {
+            background: #f5f5f5;
+        }
+
+        .estimate-action-btn.tertiary {
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .estimate-action-btn.tertiary:hover {
+            background: #e0e0e0;
+        }
+
+        .estimate-sub-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .estimate-sub-btn {
+            padding: 12px;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .estimate-sub-btn:hover {
+            background: #f5f5f5;
+            border-color: #1a1a1a;
+            color: #1a1a1a;
+        }
+
+        .estimate-section-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            margin: 20px 0 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+
+        /* 반응형 */
+        @media (max-width: 992px) {
+            .estimate-main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .estimate-summary {
+                position: static;
+            }
+        }
+
+        /* 출력 스타일 */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .estimate-complete-page {
+                max-width: 100%;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .estimate-main-container {
+                display: block !important;
+            }
+
+            .estimate-details {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-bottom: 20px;
+            }
+
+            /* 오른쪽 summary 영역 숨기기 */
+            .estimate-summary {
+                display: none !important;
+            }
+
+            .estimate-action-btn,
+            .estimate-sub-actions {
+                display: none !important;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            .estimate-section {
+                page-break-inside: auto;
+            }
+
+            /* 입력 필드를 일반 텍스트처럼 보이게 */
+            input, textarea {
+                border: 1px solid #333 !important;
+                background: white !important;
+                font-family: 'Noto Sans KR', sans-serif !important;
+                padding: 15px !important;
+            }
+
+            textarea {
+                min-height: 150px !important;
+                overflow: visible !important;
+            }
+
+            /* 출력용 로고 표시 */
+            .print-logo {
+                display: block !important;
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Start Estimate Complete Page -->
+    <div class="estimate-complete-page">
+        <!-- 헤더 -->
+        <div class="estimate-complete-header">
+            <h2>고객님의 견적이 완료되었습니다</h2>
+            <p style="color: #666; font-size: 16px; margin-top: 10px;">선택하신 옵션으로 최고의 차량을 준비하겠습니다.</p>
+        </div>
+
+        <!-- 차량 이미지 -->
+        <div class="estimate-vehicle-image" id="vehicleImageSection">
+            <img src="assets/img/10월 29일 the lune 카니발7409.jpg" alt="THE LUNE 차량" id="vehicleImage">
+        </div>
+
+        <!-- 메인 컨테이너 -->
+        <div class="estimate-main-container">
+            <!-- 왼쪽: 견적 상세 -->
+            <div class="estimate-details">
+                <!-- 고객 정보 입력 -->
+                <div class="estimate-section" style="border-bottom: 2px solid #1a1a1a; padding-bottom: 40px; page-break-before: always;">
+                    <div class="estimate-section-header" style="margin-bottom: 20px;">
+                        <h4>고객 정보</h4>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid #333;">
+                        <tr>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; width: 120px; border: 1px solid #333; color: #000; font-size: 15px;">상호</td>
+                            <td style="padding: 15px; border: 1px solid #333;">
+                                <input type="text" id="companyName" placeholder="" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500;">
+                            </td>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; width: 150px; border: 1px solid #333; color: #000; font-size: 15px;">사업자등록번호</td>
+                            <td style="padding: 15px; border: 1px solid #333;">
+                                <input type="text" id="businessNumber" placeholder="" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; border: 1px solid #333; color: #000; font-size: 15px;">성명</td>
+                            <td style="padding: 15px; border: 1px solid #333;">
+                                <input type="text" id="customerName" placeholder="" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500;">
+                            </td>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; border: 1px solid #333; color: #000; font-size: 15px;">주민등록번호</td>
+                            <td style="padding: 15px; border: 1px solid #333;">
+                                <input type="text" id="residentNumber" placeholder="" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; border: 1px solid #333; color: #000; font-size: 15px;">연락처</td>
+                            <td style="padding: 15px; border: 1px solid #333;">
+                                <input type="tel" id="customerPhone" placeholder="" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500;">
+                            </td>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; border: 1px solid #333; color: #000; font-size: 15px;">이메일</td>
+                            <td style="padding: 15px; border: 1px solid #333;">
+                                <input type="email" id="customerEmail" placeholder="" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; border: 1px solid #333; color: #000; font-size: 15px;">주소</td>
+                            <td colspan="3" style="padding: 15px; border: 1px solid #333;">
+                                <input type="text" id="customerAddress" placeholder="" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; background: #f9f9f9; font-weight: 700; border: 1px solid #333; color: #000; font-size: 15px; vertical-align: top;">메모</td>
+                            <td colspan="3" style="padding: 15px; border: 1px solid #333;">
+                                <textarea id="customerMemo" placeholder="메모 내용을 입력하세요" style="width: 100%; border: none; outline: none; font-size: 15px; color: #000; font-weight: 500; resize: vertical; min-height: 150px; font-family: 'Noto Sans KR', sans-serif;"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 출력용 로고 (화면에서는 숨김, 출력시만 표시) -->
+                <div class="print-logo" style="display: none; text-align: center; margin: 40px 0; padding: 30px 0; border-top: 2px solid #1a1a1a;">
+                    <img src="assets/img/logo.png" alt="THE LUNE" style="max-width: 250px; height: auto;">
+                </div>
+
+                <!-- 모델/사양 -->
+                <div class="estimate-section" id="modelSpecSection">
+                    <div class="estimate-section-header">
+                        <h4>모델/사양</h4>
+                        <div class="estimate-section-price" id="modelSpecPrice">0원</div>
+                    </div>
+                    <ul class="estimate-option-list" id="modelSpecList">
+                        <!-- 동적으로 생성 -->
+                    </ul>
+                </div>
+
+                <!-- 컨버전 옵션 -->
+                <div class="estimate-section" id="conversionSection" style="display: none;">
+                    <div class="estimate-section-header">
+                        <h4>컨버전 옵션</h4>
+                        <div class="estimate-section-price" id="conversionPrice">0원</div>
+                    </div>
+                    <div class="estimate-section-title">컨버전 상세 내용</div>
+                    <ul class="estimate-option-list" id="conversionList">
+                        <!-- 동적으로 생성 -->
+                    </ul>
+                    <div id="conversionPackagePrice" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #1a1a1a; display: none;">
+                        <div class="estimate-option-item" style="border: none;">
+                            <span class="estimate-option-name" style="font-weight: 700; color: #1a1a1a;">컨버전 패키지 총액</span>
+                            <span class="estimate-option-price" style="font-weight: 700; color: #1a1a1a; font-size: 18px;" id="conversionPackagePriceValue">0원</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 컨버전 선택 옵션 -->
+                <div class="estimate-section" id="conversionSelectSection" style="display: none;">
+                    <div class="estimate-section-header">
+                        <h4>컨버전 선택 옵션</h4>
+                        <div class="estimate-section-price" id="conversionSelectPrice">0원</div>
+                    </div>
+                    <ul class="estimate-option-list" id="conversionSelectList">
+                        <!-- 동적으로 생성 -->
+                    </ul>
+                </div>
+
+                <!-- 추가 옵션 -->
+                <div class="estimate-section" id="additionalSection" style="display: none;">
+                    <div class="estimate-section-header">
+                        <h4>추가 옵션</h4>
+                        <div class="estimate-section-price" id="additionalPrice">0원</div>
+                    </div>
+                    <ul class="estimate-option-list" id="additionalList">
+                        <!-- 동적으로 생성 -->
+                    </ul>
+                </div>
+
+                <!-- 총 금액 -->
+                <div class="estimate-section" style="border-top: 3px solid #1a1a1a; padding-top: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 0;">총 견적 금액</h3>
+                        <div style="font-size: 32px; font-weight: 700; color: #1a1a1a;" id="finalTotalPrice">0원</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 오른쪽: 총액 및 액션 -->
+            <div class="estimate-summary">
+                <div class="estimate-summary-card">
+                    <h3 class="estimate-model-name" id="summaryModelName">THE LUNE</h3>
+                    
+                    <div class="estimate-total-price">
+                        <div class="estimate-total-label">견적금액</div>
+                        <div class="estimate-total-amount">
+                            <span id="summaryTotalPrice">0</span><span>원</span>
+                        </div>
+                    </div>
+
+                    <div class="estimate-specs">
+                        <div class="estimate-spec-item">
+                            <div class="estimate-spec-label">차종</div>
+                            <div class="estimate-spec-value" id="summaryVehicleType">-</div>
+                        </div>
+                        <div class="estimate-spec-item">
+                            <div class="estimate-spec-label">등급</div>
+                            <div class="estimate-spec-value" id="summaryTrimLevel">-</div>
+                        </div>
+                        <div class="estimate-spec-item">
+                            <div class="estimate-spec-label">엔진</div>
+                            <div class="estimate-spec-value" id="summaryEngine">-</div>
+                        </div>
+                    </div>
+
+                    <div class="estimate-actions">
+                        <button class="estimate-action-btn primary" onclick="savePDF()">견적서 저장</button>
+                        <button class="estimate-action-btn secondary" onclick="window.print()">견적서 출력</button>
+                    </div>
+                </div>
+
+                <div class="estimate-sub-actions">
+                    <a href="quote.html" class="estimate-sub-btn">뒤로가기</a>
+                    <a href="index.html" class="estimate-sub-btn">홈으로</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Estimate Complete Page -->
+
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // URL에서 견적 데이터 가져오기
+        function loadEstimateData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const estimateData = urlParams.get('data');
+            
+            if (estimateData) {
+                try {
+                    const data = JSON.parse(decodeURIComponent(estimateData));
+                    displayEstimateData(data);
+                } catch (e) {
+                    console.error('견적 데이터 로드 실패:', e);
+                    alert('견적 데이터를 불러올 수 없습니다.');
+                    window.location.href = 'quote.html';
+                }
+            } else {
+                // localStorage에서 가져오기 (대체 방법)
+                const savedData = localStorage.getItem('quoteEstimateData');
+                if (savedData) {
+                    try {
+                        const data = JSON.parse(savedData);
+                        displayEstimateData(data);
+                    } catch (e) {
+                        console.error('견적 데이터 로드 실패:', e);
+                        alert('견적 데이터를 불러올 수 없습니다.');
+                        window.location.href = 'quote.html';
+                    }
+                } else {
+                    alert('견적 데이터가 없습니다.');
+                    window.location.href = 'quote.html';
+                }
+            }
+        }
+
+        // 견적 데이터 표시
+        function displayEstimateData(data) {
+            console.log('견적 데이터:', data);
+            console.log('총 가격:', data.totalPrice);
+
+            // 총액 표시 (원 단위)
+            let totalPrice = data.totalPrice || 0;
+            
+            // 만약 totalPrice가 0이면 다시 계산
+            if (totalPrice === 0) {
+                console.log('가격이 0입니다. 다시 계산합니다.');
+                
+                // 모델/사양 합산
+                if (data.modelSpec) {
+                    data.modelSpec.forEach(opt => {
+                        totalPrice += opt.price || 0;
+                    });
+                }
+                
+                // 컨버전 패키지 가격
+                if (data.conversionPackagePrice) {
+                    totalPrice += data.conversionPackagePrice;
+                }
+                
+                // 컨버전 선택 옵션
+                if (data.conversionSelect) {
+                    data.conversionSelect.forEach(opt => {
+                        totalPrice += opt.price || 0;
+                    });
+                }
+                
+                // 추가 옵션
+                if (data.additional) {
+                    data.additional.forEach(opt => {
+                        totalPrice += opt.price || 0;
+                    });
+                }
+                
+                console.log('재계산된 총 가격:', totalPrice);
+            }
+            
+            document.getElementById('summaryTotalPrice').textContent = totalPrice.toLocaleString();
+            
+            // 하단 총 금액 표시
+            const finalTotalPriceEl = document.getElementById('finalTotalPrice');
+            if (finalTotalPriceEl) {
+                finalTotalPriceEl.textContent = totalPrice.toLocaleString() + '원';
+            }
+
+            // 모델명 표시
+            const modelName = data.modelName || 'THE LUNE';
+            document.getElementById('summaryModelName').textContent = modelName;
+
+            // 스펙 표시 (차종은 가독성을 위해 줄바꿈)
+            const vehicleType = data.vehicleType || '-';
+            const vehicleTypeEl = document.getElementById('summaryVehicleType');
+            if (vehicleType.includes('카니발') && vehicleType.includes('하이리무진')) {
+                vehicleTypeEl.innerHTML = '카니발<br>하이리무진';
+            } else if (vehicleType.includes(' ')) {
+                vehicleTypeEl.innerHTML = vehicleType.replace(' ', '<br>');
+            } else {
+                vehicleTypeEl.textContent = vehicleType;
+            }
+            
+            document.getElementById('summaryTrimLevel').textContent = data.trimLevel || '-';
+            document.getElementById('summaryEngine').textContent = data.engine || '-';
+
+            // 모델/사양 섹션
+            if (data.modelSpec && data.modelSpec.length > 0) {
+                displaySection('modelSpec', data.modelSpec);
+            }
+
+            // 컨버전 옵션 섹션
+            if (data.conversion && data.conversion.length > 0) {
+                document.getElementById('conversionSection').style.display = 'block';
+                displaySection('conversion', data.conversion);
+                
+                // 컨버전 패키지 가격 표시
+                if (data.conversionPackagePrice) {
+                    const packagePriceEl = document.getElementById('conversionPackagePrice');
+                    const packagePriceValueEl = document.getElementById('conversionPackagePriceValue');
+                    if (packagePriceEl && packagePriceValueEl) {
+                        packagePriceEl.style.display = 'block';
+                        packagePriceValueEl.textContent = data.conversionPackagePrice.toLocaleString() + '원';
+                    }
+                }
+            }
+
+            // 컨버전 선택 옵션 섹션
+            console.log('컨버전 선택 옵션 데이터:', data.conversionSelect);
+            if (data.conversionSelect && data.conversionSelect.length > 0) {
+                console.log('✅ 컨버전 선택 옵션 표시:', data.conversionSelect.length + '개');
+                document.getElementById('conversionSelectSection').style.display = 'block';
+                displaySection('conversionSelect', data.conversionSelect);
+            } else {
+                console.log('❌ 컨버전 선택 옵션 없음');
+            }
+
+            // 추가 옵션 섹션
+            if (data.additional && data.additional.length > 0) {
+                document.getElementById('additionalSection').style.display = 'block';
+                displaySection('additional', data.additional);
+            }
+        }
+
+        // 섹션 표시
+        function displaySection(sectionId, options) {
+            const listElement = document.getElementById(sectionId + 'List');
+            const priceElement = document.getElementById(sectionId + 'Price');
+            
+            let sectionTotal = 0;
+            listElement.innerHTML = '';
+
+            options.forEach(option => {
+                console.log('옵션:', option.name, '이미지:', option.image, '설명:', option.description);
+                
+                const li = document.createElement('li');
+                li.className = 'estimate-option-item';
+                
+                // 옵션 컨텐츠 (이미지 + 텍스트)
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'estimate-option-content';
+                
+                // 이미지가 있으면 표시
+                if (option.image && option.image !== '') {
+                    const img = document.createElement('img');
+                    img.className = 'estimate-option-image';
+                    img.src = option.image;
+                    img.alt = option.name;
+                    img.onerror = function() {
+                        console.error('이미지 로드 실패:', option.image);
+                        this.style.display = 'none';
+                    };
+                    contentDiv.appendChild(img);
+                    console.log('✅ 이미지 추가됨:', option.image);
+                } else {
+                    console.log('❌ 이미지 없음:', option.name);
+                }
+                
+                // 텍스트 영역
+                const textDiv = document.createElement('div');
+                textDiv.className = 'estimate-option-text';
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'estimate-option-name';
+                nameSpan.textContent = option.name;
+                textDiv.appendChild(nameSpan);
+                
+                // 설명이 있으면 표시
+                if (option.description) {
+                    const descSpan = document.createElement('span');
+                    descSpan.className = 'estimate-option-desc';
+                    descSpan.textContent = option.description;
+                    textDiv.appendChild(descSpan);
+                }
+                
+                contentDiv.appendChild(textDiv);
+                li.appendChild(contentDiv);
+                
+                // 가격
+                const priceSpan = document.createElement('span');
+                priceSpan.className = 'estimate-option-price';
+                
+                // 컨버전 옵션은 모두 "기본포함"으로 표시, 컨버전 선택과 추가 옵션은 가격 표시
+                if (sectionId === 'conversion') {
+                    priceSpan.textContent = '기본포함';
+                } else {
+                    priceSpan.textContent = option.price > 0 ? option.price.toLocaleString() + '원' : '0원';
+                    sectionTotal += option.price;
+                }
+                
+                li.appendChild(priceSpan);
+                listElement.appendChild(li);
+            });
+
+            if (priceElement) {
+                // 컨버전 옵션은 총액을 별도로 표시하므로 여기서는 0원으로 표시
+                if (sectionId === 'conversion') {
+                    priceElement.textContent = '상세 내역';
+                } else {
+                    priceElement.textContent = sectionTotal.toLocaleString() + '원';
+                }
+            }
+        }
+
+        // 공유하기
+        function shareEstimate() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'THE LUNE 견적서',
+                    text: '나의 THE LUNE 견적서를 확인해보세요!',
+                    url: window.location.href
+                }).catch(err => console.log('공유 실패:', err));
+            } else {
+                // 링크 복사
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('링크가 복사되었습니다!');
+                }).catch(() => {
+                    alert('링크 복사에 실패했습니다.');
+                });
+            }
+        }
+
+        // PDF 저장
+        async function savePDF() {
+            const { jsPDF } = window.jspdf;
+            
+            // 오른쪽 summary 영역 임시로 숨기기
+            const summaryElement = document.querySelector('.estimate-summary');
+            const originalDisplay = summaryElement.style.display;
+            summaryElement.style.display = 'none';
+            
+            // 로고를 출력용으로 표시
+            const printLogo = document.querySelector('.print-logo');
+            const originalLogoDisplay = printLogo.style.display;
+            printLogo.style.display = 'block';
+            
+            // estimate-details 요소 가져오기
+            const element = document.querySelector('.estimate-details');
+            const mainContainer = document.querySelector('.estimate-main-container');
+            
+            // 레이아웃을 전체 너비로 임시 변경
+            const originalContainerDisplay = mainContainer.style.display;
+            const originalElementMaxWidth = element.style.maxWidth;
+            const originalElementFlex = element.style.flex;
+            
+            mainContainer.style.display = 'block';
+            element.style.maxWidth = '100%';
+            element.style.flex = 'none';
+            element.style.width = '100%';
+            
+            try {
+                // html2canvas로 HTML을 이미지로 변환
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    width: element.scrollWidth,
+                    windowWidth: 1200
+                });
+                
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                
+                // PDF 생성
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                const imgWidth = 190; // A4 너비 (210mm - 여백 20mm)
+                const pageHeight = 277; // A4 높이 (297mm - 여백 20mm)
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 10;
+                
+                // 첫 페이지 추가
+                pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // 여러 페이지 처리
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight + 10;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                // 파일명 생성
+                const modelName = document.getElementById('summaryModelName') ? document.getElementById('summaryModelName').textContent : 'THE_LUNE';
+                const today = new Date();
+                const dateStr = today.getFullYear() + 
+                               String(today.getMonth() + 1).padStart(2, '0') + 
+                               String(today.getDate()).padStart(2, '0');
+                const filename = `THE_LUNE_견적서_${modelName}_${dateStr}.pdf`;
+                
+                // PDF 저장
+                pdf.save(filename);
+                
+            } catch (error) {
+                console.error('PDF 생성 오류:', error);
+                alert('PDF 생성 중 오류가 발생했습니다.');
+            } finally {
+                // 원래대로 복원
+                summaryElement.style.display = originalDisplay;
+                printLogo.style.display = originalLogoDisplay;
+                mainContainer.style.display = originalContainerDisplay;
+                element.style.maxWidth = originalElementMaxWidth;
+                element.style.flex = originalElementFlex;
+                element.style.width = '';
+            }
+        }
+
+        // 페이지 로드 시 실행
+        window.addEventListener('DOMContentLoaded', loadEstimateData);
+    </script>
+
+</body>
+
+</html>
+
