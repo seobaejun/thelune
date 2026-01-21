@@ -2107,6 +2107,56 @@
                             nextWrap.style.display = 'block';
                             console.log('페이지 표시됨:', nextStep);
                             
+                            // 4페이지 진입 시 앞 페이지 옵션 복사
+                            if (nextStep === 'additional') {
+                                console.log('=== 4페이지 진입: 앞 페이지 옵션 복사 (HTML 인라인 - 다음 버튼) ===');
+                                
+                                // 약간의 지연 후 복사 (quote.js 로드 대기)
+                                setTimeout(function() {
+                                    // quote.js의 selectedOptions를 window.selectedOptions에 복사
+                                    if (typeof selectedOptions !== 'undefined') {
+                                        console.log('quote.js selectedOptions 개수:', Object.keys(selectedOptions).length);
+                                        console.log('quote.js selectedOptions 키:', Object.keys(selectedOptions));
+                                        console.log('quote.js selectedOptions:', selectedOptions);
+                                        
+                                        // 기존 window.selectedOptions 초기화 후 복사
+                                        window.selectedOptions = {};
+                                        Object.keys(selectedOptions).forEach(function(key) {
+                                            window.selectedOptions[key] = selectedOptions[key];
+                                            console.log('앞 페이지 옵션 복사:', key, '가격:', selectedOptions[key].price);
+                                        });
+                                        
+                                        console.log('복사 후 window.selectedOptions 개수:', Object.keys(window.selectedOptions).length);
+                                        console.log('복사 후 window.selectedOptions:', window.selectedOptions);
+                                    } else {
+                                        console.error('selectedOptions가 정의되지 않음!');
+                                    }
+                                    
+                                    // 가격 계산 및 표시
+                                    if (typeof calculateTotalPrice === 'function') {
+                                        calculateTotalPrice();
+                                        console.log('✅ calculateTotalPrice 호출, 총액:', window.totalPrice);
+                                    } else if (typeof window.calculateTotalPrice === 'function') {
+                                        window.calculateTotalPrice();
+                                        console.log('✅ window.calculateTotalPrice 호출, 총액:', window.totalPrice);
+                                    }
+                                    
+                                    // 가격 표시 업데이트
+                                    const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
+                                    if (quoteTotalPriceEl && window.totalPrice !== undefined) {
+                                        const formattedPrice = window.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                                        quoteTotalPriceEl.textContent = formattedPrice;
+                                        console.log('✅ 4페이지 진입 시 가격 표시 업데이트:', formattedPrice);
+                                    }
+                                    
+                                    if (typeof updatePriceDisplay === 'function') {
+                                        updatePriceDisplay();
+                                    } else if (typeof window.updatePriceDisplay === 'function') {
+                                        window.updatePriceDisplay();
+                                    }
+                                }, 200);
+                            }
+                            
                             // currentStep 업데이트 (quote.js와 동기화)
                             if (typeof window.setCurrentStep === 'function') {
                                 window.setCurrentStep(nextStep);
@@ -2690,8 +2740,10 @@
             }
         });
         
-        // 추가 옵션 체크박스 이벤트 리스너 (4페이지)
+        // 추가 옵션 체크박스 이벤트 리스너 (4페이지) - 간단하게 처리
         function setupAdditionalOptionsListeners() {
+            console.log('=== setupAdditionalOptionsListeners 호출됨 (HTML 인라인) ===');
+            
             const additionalForm = document.getElementById('quoteAdditionalForm');
             if (!additionalForm) {
                 console.log('추가 옵션 폼을 찾을 수 없음');
@@ -2702,95 +2754,62 @@
             console.log('추가 옵션 체크박스 개수:', checkboxes.length);
             
             checkboxes.forEach(function(checkbox) {
-                // 기존 이벤트 리스너 제거
+                // 기존 이벤트 제거
                 const newCheckbox = checkbox.cloneNode(true);
                 checkbox.parentNode.replaceChild(newCheckbox, checkbox);
                 
-                // change 이벤트 리스너 추가
-                newCheckbox.addEventListener('change', function(e) {
-                    e.stopPropagation();
-                    console.log('=== 추가 옵션 체크박스 변경 ===');
-                    console.log('ID:', newCheckbox.id);
-                    console.log('Checked:', newCheckbox.checked);
-                    console.log('Price:', newCheckbox.dataset.price);
+                // change 이벤트 추가 - 간단하게 전체 다시 계산
+                newCheckbox.addEventListener('change', function() {
+                    console.log('=== 4페이지 체크박스 변경 ===');
+                    console.log('ID:', newCheckbox.id, 'Checked:', newCheckbox.checked, 'Price:', newCheckbox.dataset.price);
                     
-                    const price = parseInt(newCheckbox.dataset.price) || 0;
-                    const optionKey = '추가옵션_' + newCheckbox.value;
+                    // 매번 전체 페이지의 모든 체크된 옵션을 처음부터 다시 계산
+                    let totalPrice = 0;
+                    let checkedCount = 0;
                     
-                    // selectedOptions 업데이트
-                    if (typeof window.selectedOptions === 'undefined') {
-                        window.selectedOptions = {};
-                    }
-                    
-                    if (newCheckbox.checked) {
-                        window.selectedOptions[optionKey] = {
-                            name: newCheckbox.value,
-                            price: price,
-                            element: newCheckbox
-                        };
-                        console.log('✅ 옵션 추가:', optionKey, price);
-                    } else {
-                        delete window.selectedOptions[optionKey];
-                        console.log('❌ 옵션 제거:', optionKey);
-                    }
-                    
-                    // 모든 페이지의 옵션 합산 (앞 페이지 + 4페이지)
-                    // quote.js의 calculateTotalPrice 함수 호출 (로컬 selectedOptions와 window.selectedOptions 모두 합산)
-                    if (typeof calculateTotalPrice === 'function') {
-                        calculateTotalPrice();
-                        console.log('✅ calculateTotalPrice 호출됨, 총액:', window.totalPrice);
-                    } else if (typeof window.calculateTotalPrice === 'function') {
-                        window.calculateTotalPrice();
-                        console.log('✅ window.calculateTotalPrice 호출됨, 총액:', window.totalPrice);
-                    } else {
-                        // calculateTotalPrice가 없으면 직접 계산
-                        // window.selectedOptions의 모든 옵션 합산
-                        let total = 0;
-                        if (window.selectedOptions) {
-                            Object.values(window.selectedOptions).forEach(function(option) {
-                                total += (option.price || 0);
-                            });
-                            console.log('📋 window.selectedOptions 옵션 개수:', Object.keys(window.selectedOptions).length);
+                    // 전체 페이지의 모든 체크된 라디오/체크박스
+                    document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(function(input) {
+                        // 컨버전 옵션들은 개별 가격이 0이므로 스킵 (나중에 패키지로 한번에 계산)
+                        const isConversionOption = input.id && (
+                            input.id === 'conversion_roof' || 
+                            input.id === 'conversion_mood' || 
+                            input.id === 'conversion_tv' || 
+                            input.id === 'conversion_soundproof'
+                        );
+                        
+                        if (isConversionOption) {
+                            console.log('[스킵] 컨버전 개별 옵션:', input.id);
+                            return; // 컨버전 개별 옵션은 건너뜀
                         }
-                        window.totalPrice = total;
-                        console.log('💰 총 가격 (직접 계산):', total);
+                        
+                        const price = parseInt(input.dataset.price) || 0;
+                        totalPrice += price;
+                        checkedCount++;
+                        console.log('[' + checkedCount + '] ' + (input.id || input.name) + ' = ' + price + '원 (누적: ' + totalPrice + '원)');
+                    });
+                    
+                    // 컨버전 패키지 가격 추가 (확인 체크박스가 체크된 경우)
+                    const conversionConfirm = document.getElementById('conversion_package_confirm');
+                    if (conversionConfirm && conversionConfirm.checked) {
+                        const CONVERSION_PACKAGE_PRICE = 14640000;
+                        totalPrice += CONVERSION_PACKAGE_PRICE;
+                        console.log('[패키지] 컨버전 패키지 = ' + CONVERSION_PACKAGE_PRICE + '원 (누적: ' + totalPrice + '원)');
                     }
                     
-                    // 최종 가격 확인 및 업데이트
-                    const finalTotal = window.totalPrice || 0;
-                    console.log('💰 최종 총액:', finalTotal);
+                    console.log('💰 최종 총액:', totalPrice + '원 (총 ' + checkedCount + '개 옵션)');
                     
-                    // 가격 표시 업데이트
+                    // 예상 견적 금액 업데이트
                     const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
                     if (quoteTotalPriceEl) {
-                        const formattedPrice = finalTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        const formattedPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                         quoteTotalPriceEl.textContent = formattedPrice;
                         console.log('✅ 가격 표시 업데이트:', formattedPrice);
-                    }
-                    
-                    // quote.js의 updatePriceDisplay도 호출 (다른 가격 표시도 업데이트)
-                    if (typeof updatePriceDisplay === 'function') {
-                        updatePriceDisplay();
-                    } else if (typeof window.updatePriceDisplay === 'function') {
-                        window.updatePriceDisplay();
+                    } else {
+                        console.error('❌ quoteTotalPrice 요소를 찾을 수 없음');
                     }
                 });
                 
-                // label 클릭 이벤트
-                const label = newCheckbox.closest('label');
-                if (label) {
-                    label.addEventListener('click', function(e) {
-                        if (e.target !== newCheckbox && e.target.tagName !== 'INPUT') {
-                            setTimeout(function() {
-                                newCheckbox.checked = !newCheckbox.checked;
-                                const changeEvent = new Event('change', { bubbles: true });
-                                newCheckbox.dispatchEvent(changeEvent);
-                            }, 10);
-                        }
-                    });
-                }
-                
-                console.log('✅ 추가 옵션 체크박스 이벤트 리스너 설정:', newCheckbox.id);
+                console.log('✅ 체크박스 이벤트 설정:', newCheckbox.id);
             });
         }
         
@@ -2811,7 +2830,35 @@
                         setTimeout(function() {
                             setupAdditionalOptionsListeners();
                             additionalListenersSetup = true;
-                        }, 300);
+                            
+                            // 4페이지 진입 시 앞 페이지 옵션들도 합산하여 표시
+                            console.log('=== 4페이지 진입: 앞 페이지 옵션 합산 (HTML 인라인) ===');
+                            
+                            // 모든 페이지의 옵션 합산 (quote.js에서 처리됨)
+                            // quote.js의 showStep에서 이미 selectedOptions를 window.selectedOptions에 복사함
+                            if (typeof calculateTotalPrice === 'function') {
+                                calculateTotalPrice();
+                                console.log('✅ 4페이지 진입 시 calculateTotalPrice 호출, 총액:', window.totalPrice);
+                            } else if (typeof window.calculateTotalPrice === 'function') {
+                                window.calculateTotalPrice();
+                                console.log('✅ 4페이지 진입 시 window.calculateTotalPrice 호출, 총액:', window.totalPrice);
+                            }
+                            
+                            // 가격 표시 업데이트
+                            const quoteTotalPriceEl = document.getElementById('quoteTotalPrice');
+                            if (quoteTotalPriceEl && window.totalPrice !== undefined) {
+                                const formattedPrice = window.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                                quoteTotalPriceEl.textContent = formattedPrice;
+                                console.log('✅ 4페이지 진입 시 가격 표시 업데이트:', formattedPrice);
+                            }
+                            
+                            // quote.js의 updatePriceDisplay도 호출
+                            if (typeof updatePriceDisplay === 'function') {
+                                updatePriceDisplay();
+                            } else if (typeof window.updatePriceDisplay === 'function') {
+                                window.updatePriceDisplay();
+                            }
+                        }, 500);
                     }
                 } else {
                     additionalListenersSetup = false;

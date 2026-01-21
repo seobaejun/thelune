@@ -581,7 +581,7 @@ function handleOptionChange(event) {
                 price: price,
                 element: input
             };
-            // window.selectedOptions도 동기화
+            // window.selectedOptions도 동기화 (기존 옵션 보존)
             if (typeof window.selectedOptions === 'undefined') {
                 window.selectedOptions = {};
             }
@@ -590,14 +590,18 @@ function handleOptionChange(event) {
                 price: price,
                 element: input
             };
-            console.log('Option added:', optionKey, price);
+            console.log('✅ Option added:', optionKey, price);
+            console.log('현재 selectedOptions 개수:', Object.keys(selectedOptions).length);
+            console.log('현재 window.selectedOptions 개수:', Object.keys(window.selectedOptions).length);
         } else {
             delete selectedOptions[optionKey];
             // window.selectedOptions도 동기화
             if (window.selectedOptions && window.selectedOptions[optionKey]) {
                 delete window.selectedOptions[optionKey];
             }
-            console.log('Option removed:', optionKey);
+            console.log('❌ Option removed:', optionKey);
+            console.log('현재 selectedOptions 개수:', Object.keys(selectedOptions).length);
+            console.log('현재 window.selectedOptions 개수:', Object.keys(window.selectedOptions).length);
         }
     }
     
@@ -1139,34 +1143,65 @@ function calculateTotalPrice() {
     // 로컬 selectedOptions와 window.selectedOptions를 모두 합산
     const allOptions = {};
     
-    // 로컬 selectedOptions 먼저 추가
-    Object.keys(selectedOptions).forEach(key => {
-        allOptions[key] = selectedOptions[key];
-    });
+    console.log('=== calculateTotalPrice 시작 ===');
+    console.log('로컬 selectedOptions 개수:', Object.keys(selectedOptions).length);
+    console.log('로컬 selectedOptions:', selectedOptions);
+    console.log('window.selectedOptions 개수:', window.selectedOptions ? Object.keys(window.selectedOptions).length : 0);
+    console.log('window.selectedOptions:', window.selectedOptions);
     
-    // window.selectedOptions도 추가 (중복 제거)
-    if (window.selectedOptions) {
+    // window.selectedOptions를 먼저 추가 (4페이지 옵션 포함, 최신 상태)
+    // window.selectedOptions에는 앞 페이지 옵션 + 4페이지 옵션이 모두 포함되어야 함
+    if (window.selectedOptions && Object.keys(window.selectedOptions).length > 0) {
         Object.keys(window.selectedOptions).forEach(key => {
-            if (!allOptions[key]) {
-                allOptions[key] = window.selectedOptions[key];
-            }
+            allOptions[key] = window.selectedOptions[key];
+            console.log('window 옵션 추가:', key, '가격:', window.selectedOptions[key].price);
         });
+        console.log('window.selectedOptions에서 추가된 옵션 개수:', Object.keys(window.selectedOptions).length);
+    } else {
+        console.log('window.selectedOptions가 비어있음 또는 정의되지 않음');
     }
+    
+    // 로컬 selectedOptions도 추가 (중복 제거, window에 없는 옵션만)
+    // selectedOptions에는 앞 페이지 옵션이 포함되어 있을 수 있음
+    let localAddedCount = 0;
+    Object.keys(selectedOptions).forEach(key => {
+        if (!allOptions[key]) {
+            allOptions[key] = selectedOptions[key];
+            console.log('로컬 옵션 추가 (window에 없음):', key, '가격:', selectedOptions[key].price);
+            localAddedCount++;
+        } else {
+            console.log('중복 옵션 스킵 (window에 이미 있음):', key);
+        }
+    });
+    console.log('selectedOptions에서 추가된 옵션 개수:', localAddedCount);
     
     // 모든 옵션의 가격 합산
     Object.values(allOptions).forEach(option => {
-        totalPrice += option.price || 0;
+        const price = option.price || 0;
+        totalPrice += price;
+        console.log('가격 합산:', option.name, price, '→ 총액:', totalPrice);
     });
     
-    // selectedOptions와 window.selectedOptions 동기화
-    selectedOptions = allOptions;
-    window.selectedOptions = allOptions;
+    // selectedOptions와 window.selectedOptions 동기화 (기존 옵션 보존)
+    // allOptions의 모든 항목을 selectedOptions에 병합 (덮어쓰지 않고 병합)
+    Object.keys(allOptions).forEach(key => {
+        selectedOptions[key] = allOptions[key];
+    });
+    // window.selectedOptions도 동일하게 병합
+    if (!window.selectedOptions) {
+        window.selectedOptions = {};
+    }
+    Object.keys(allOptions).forEach(key => {
+        window.selectedOptions[key] = allOptions[key];
+    });
     
     // Update global variable
     window.totalPrice = totalPrice;
     
-    console.log('Total price calculated:', totalPrice);
-    console.log('Selected options count:', Object.keys(allOptions).length);
+    console.log('=== calculateTotalPrice 완료 ===');
+    console.log('최종 총액:', totalPrice);
+    console.log('합산된 옵션 개수:', Object.keys(allOptions).length);
+    console.log('합산된 옵션 목록:', Object.keys(allOptions));
 }
 
 // Update price display
@@ -3147,8 +3182,35 @@ function showStep(stepName) {
             
             // 추가 옵션 단계: 확실하게 작동하도록 직접 처리
             if (stepName === 'additional') {
-                console.log('=== 추가 옵션 단계: 이벤트 리스너 강제 설정 ===');
+                console.log('=== 4페이지 진입: 앞 페이지 옵션 합산 시작 (즉시) ===');
+                console.log('현재 selectedOptions 개수:', Object.keys(selectedOptions).length);
+                console.log('현재 selectedOptions 키:', Object.keys(selectedOptions));
+                console.log('현재 window.selectedOptions 개수:', window.selectedOptions ? Object.keys(window.selectedOptions).length : 0);
+                console.log('현재 window.selectedOptions 키:', window.selectedOptions ? Object.keys(window.selectedOptions) : []);
+                
+                // selectedOptions의 모든 옵션을 window.selectedOptions에 복사 (덮어쓰기)
+                // 이렇게 하면 앞 페이지 옵션들이 window.selectedOptions에 포함됨
+                window.selectedOptions = {};
+                Object.keys(selectedOptions).forEach(key => {
+                    window.selectedOptions[key] = selectedOptions[key];
+                    console.log('앞 페이지 옵션 복사:', key, '가격:', selectedOptions[key].price);
+                });
+                
+                console.log('복사 후 window.selectedOptions 개수:', Object.keys(window.selectedOptions).length);
+                console.log('복사 후 window.selectedOptions 키:', Object.keys(window.selectedOptions));
+                
+                // 모든 페이지의 옵션 합산
+                calculateTotalPrice();
+                updatePriceDisplay();
+                updateSelectedOptionsDisplay();
+                
+                console.log('✅ 4페이지 진입 시 가격 계산 완료, 총액:', totalPrice);
+                console.log('최종 selectedOptions 개수:', Object.keys(selectedOptions).length);
+                console.log('최종 window.selectedOptions 개수:', Object.keys(window.selectedOptions).length);
+                
+                // 4페이지 이벤트 리스너 설정 (약간의 지연 후)
                 setTimeout(() => {
+                    console.log('=== 추가 옵션 단계: 이벤트 리스너 강제 설정 ===');
                     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                     console.log('추가 옵션 체크박스 개수:', checkboxes.length);
                     
@@ -3191,12 +3253,18 @@ function showStep(stepName) {
                                 console.log('❌ 옵션 제거됨:', optionKey);
                             }
                             
-                            // 가격 계산
-                            totalPrice = 0;
-                            Object.values(selectedOptions).forEach(option => {
-                                totalPrice += option.price;
-                            });
-                            window.totalPrice = totalPrice;
+                            // window.selectedOptions도 동기화
+                            if (!window.selectedOptions) {
+                                window.selectedOptions = {};
+                            }
+                            if (newCheckbox.checked) {
+                                window.selectedOptions[optionKey] = selectedOptions[optionKey];
+                            } else {
+                                delete window.selectedOptions[optionKey];
+                            }
+                            
+                            // 모든 페이지의 옵션 합산 (calculateTotalPrice 사용)
+                            calculateTotalPrice();
                             
                             console.log('💰 총 가격:', totalPrice);
                             console.log('📋 선택된 옵션:', Object.keys(selectedOptions).length, '개');
